@@ -1,0 +1,33 @@
+\section{Dimensionally Consistent Controlled Memory Models}
+\label{sec:models}
+
+To ensure dimensional consistency when introducing a fractional derivative of order \(\alpha\), we introduce a reference time scale \(\tau_0\).
+The dimensionally consistent commensurate Caputo model for the controlled strong-Allee predator-prey system is
+
+\begin{equation}
+\tau_0^{\alpha-1} {}_{0}^{C}D_{t}^{\alpha} z(t) = f(z(t);\theta) + B u(t),
+\label{eq:dimcons}
+\end{equation}
+
+where \(z=(x,y)^\top\) is the state vector (prey, predator), \(f\) is the ecological vector field, \(B\) is the input matrix, and \(u(t)\) is the control input.
+At \(\alpha=1\), equation~\eqref{eq:dimcons} reduces exactly to the integer-order ODE.
+
+The ecological vector field \(f\) is that of the strong-Allee predator-prey model:
+\begin{align}
+f_1(x,y) &= r x \left(1-\frac{x}{K}\right) \left(\frac{x}{A}-1\right) - \frac{a x y}{1 + h x},\\
+f_2(x,y) &= e \frac{a x y}{1 + h x} - m y,
+\end{align}
+with the locked parameter values \(r=3/2\), \(K=1\), \(a=1\), \(h=1/2\), \(e=4/5\), \(m=2/5\) inherited from the validated baseline.
+
+We consider three competing model classes that share the same fractional order \(\alpha\), input matrix \(B\), and are linearized around the coexistence equilibrium:
+\begin{enumerate}
+    \item \textbf{M\_ODE}: integer-order ODE (\(\alpha=1\)) with dynamics \(\dot{\xi} = J \xi + B u\).
+    \item \textbf{M\_Caputo}: fractional derivative of order \(\alpha\) with dynamics \(\tau_0^{\alpha-1} {}_{0}^{C}D_{t}^{\alpha} \xi = J \xi + B u\).
+    \item \textbf{M\_DDE}: discrete delay differential equation with a single delay \(\tau\) and dynamics \(\dot{\xi} = A_0 \xi + A_1 \xi(t-\tau) + B u\).
+    \item \textbf{M\_latent,m}: finite-dimensional linear time-invariant latent state model of dimension \(m\) with dynamics \(\dot{q} = \bar{A} q + \bar{B} u\), \(y = \bar{C} q\).
+\end{enumerate}
+
+All models share the same linearized output equation \(y_k = C \xi(t_k) + \varepsilon_k\) with \(\varepsilon_k \sim \mathcal{N}(0, R_k)\).
+The transfer function for each model is defined as \(G(s) = C (s^{\alpha} I - J)^{-1} B\) (appropriately scaled for the fractional case) and its counterparts for the integer-order, delay, and latent models.
+
+The dimensional consistency enforced by $\tau_0$~\cite{F02,F03,F04} ensures that the fractional order $\alpha$ does not spuriously alter the units of the ecological rates, allowing a fair comparison between the memory hypotheses.

@@ -1,0 +1,38 @@
+{
+  "seed": 1000,
+  "solver": "caputo_pece_abm (fractional Adams-Bashforth-Moulton predictor-corrector)",
+  "solver_validation": {"reference": "Mittag-Leffler exact", "max_abs_err": 0.0002523337952941018, "mittag_leffler_validated": true},
+  "analytic_gates": {"x_star": 0.6666666666666666, "alpha_star_0.30": 0.9690122761517083, "all_pass": true},
+  "compute": {"host": "Orion", "cores": 344, "workers": 300},
+  "audit": "audits/PAPER_AUDIT.md — addressed: calibrated rivals (P0.5), stable-vs-verdict split (P0.6), balanced metrics + 5/4-class confusion (P0.7), numerical safety margins (P0.9), IC-not-Bayesian labeling (P0.3)",
+  "scope": "Option A: linearized structural discrimination + calibrated stable-only information-criterion (BIC) benchmark; full Bayesian OED = future work",
+  "design": {"decision_rule": "BIC (information-criterion, NOT full Bayesian evidence)",
+             "input_budget": "peak-amplitude clamp |u|_inf=0.10 (safety-relevant, pack T8.2)",
+             "calibration": "DDE tau=0.35 (stable+safe), latent coupling 0.15; all rivals share equilibrium+Jacobian backbone",
+             "stable_A": [0.20, 0.25], "verdict_A": [0.30, 0.40], "reps_per_cell": 200, "N": 400,
+             "inputs": ["pulse", "sinusoid", "multisine", "multiscale", "chirp", "prbs"]},
+  "primary_result_linear_gaussian": {"artifact": "benchmark/results/linear_factorial.json (exact, safe-by-construction)",
+             "design_ranking": {"prbs": 811.97, "pulse": 784.00, "multiscale": 763.89, "multisine": 684.61, "sinusoid": 594.76, "chirp": 497.96}},
+  "nonlinear_stable_calibrated": {
+    "primary_task": "memory-shape discrimination, stable-only A<2/7",
+    "macro_accuracy": 0.5369135802469136, "micro_accuracy": 0.491005291005291, "chance": 0.25,
+    "per_class_recall": {"ODE": 0.972, "Caputo": 0.524, "DDE": 0.410, "latent3": 0.242},
+    "per_class_precision": {"ODE": 0.227, "Caputo": 0.984, "DDE": 0.731, "latent3": 0.848},
+    "design_ranking": {"prbs": 0.584, "multisine": 0.583, "sinusoid": 0.534, "chirp": 0.507, "pulse": 0.414, "multiscale": 0.324},
+    "stratified": {"by_alpha": {"0.7": 0.702, "0.85": 0.557, "0.9": 0.467, "0.95": 0.312},
+                   "by_snr": {"hi": 0.756, "med": 0.444, "lo": 0.273},
+                   "by_channel": {"both": 0.530, "prey": 0.516, "pred": 0.427}}
+  },
+  "verdict_stability_task": {"macro_accuracy": 0.5739293981481481, "note": "A>2/7 stress-test, reported separately (audit P0.6)"},
+  "safety_finding": {
+    "metric": "Allee-crossing rate + min(x-A) margin per design, stable regime",
+    "safe_designs": {"multiscale": {"allee_cross_rate": 0.0, "min_allee_margin": 0.292}, "pulse": {"allee_cross_rate": 0.07}},
+    "unsafe_designs": {"prbs": {"allee_cross_rate": 1.0}, "sinusoid": {"allee_cross_rate": 1.0}, "chirp": {"allee_cross_rate": 0.93}, "multisine": {"allee_cross_rate": 0.36}},
+    "tradeoff": "transient designs (multiscale/pulse) are SAFE but weak discriminators; broadband/sustained designs (prbs/multisine) discriminate best but cross the Allee threshold (unsafe). Safe active discrimination of subtle memory is hard -> motivates safety-constrained optimal design (future work)."
+  },
+  "objective_name": "stable-only macro-averaged model-selection accuracy (calibrated, safe-margins reported)",
+  "objective_estimate": 0.5369135802469136,
+  "gates_PASS": true, "solver_PASS": true, "status": "PASS",
+  "reproducibility": {"code": "benchmark/*.py", "raw": "benchmark/results/*.json"},
+  "note": "v3 calibrated-safe benchmark (Orion 2026-08-05). Rivals calibrated to a common safe backbone, amplitude-safe input budget, stable/verdict regimes separated, balanced metrics, per-design numerical safety margins. Honest result: safe subtle-memory discrimination is hard (macro 0.54 vs chance 0.25) and exhibits a safety-informativeness tradeoff. Supersedes the earlier uncalibrated 0.749."
+}

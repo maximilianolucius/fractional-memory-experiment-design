@@ -1,0 +1,58 @@
+\section{Exact Linearization, Transfer Functions, and Channels}
+\label{sec:linearization}
+
+Linearization around the coexistence equilibrium yields exact Jacobian matrices, transfer functions, and input/output channels for each model; the Jacobian and Matignon stability boundary are given analytically (Theorems~T1 and~T2)~\cite{F05,F06,F07}.
+
+The coexistence Jacobian can be written as
+\begin{equation}
+J = \begin{pmatrix} T & -c \\ d & 0 \end{pmatrix},
+\qquad c = \frac{1}{2},
+\qquad d = \frac{2-3A}{10A} > 0,
+\label{eq:jacform}
+\end{equation}
+where the trace \(T(A) = \frac{7A-2}{8A}\) and determinant \(D(A) = \frac{2-3A}{20A}\) match Theorems~T1 and~T2.
+
+The common fractional order changes the temporal symbol \(s \mapsto q_\alpha(s) = \tau_0^{\alpha-1} s^\alpha\) but does not alter the algebraic controllability/observability of the pair $(J,B,C)$~\cite{I05}.
+
+For prey intervention \(B_x = e_1\), the controllability matrix \(\mathcal{C}_x = [B_x, J B_x]\) has determinant \(d>0\).
+For predator intervention \(B_y = e_2\), \(\mathcal{C}_y = [B_y, J B_y]\) has determinant \(c>0\).
+Thus either prey or predator perturbation alone is sufficient to excite both linearized modes.
+
+For prey-only observation \(C_x = e_1^\top\), the observability matrix \(\mathcal{O}_x = [C_x; C_x J]\) has determinant \(-c \neq 0\).
+For predator-only observation \(C_y = e_2^\top\), \(\mathcal{O}_y = [C_y; C_y J]\) has determinant \(-d \neq 0\).
+Hence either species alone observes both linearized states; the statement that both species must be observed for structural observability is false.
+
+The four scalar transfer functions are
+\begin{align}
+G_{x\leftarrow x}(s) &= \frac{q}{\Delta_\alpha(s)}, \\
+G_{y\leftarrow x}(s) &= \frac{d}{\Delta_\alpha(s)}, \\
+G_{x\leftarrow y}(s) &= \frac{-c}{\Delta_\alpha(s)}, \\
+G_{y\leftarrow y}(s) &= \frac{q - T}{\Delta_\alpha(s)},
+\end{align}
+where \(\Delta_\alpha(s) = q^2 - T q + D\) and \(q = q_\alpha(s)\).
+
+For a general channel \(G = C (qI - J)^{-1} B\), the high-frequency expansion is
+\begin{equation}
+G(s) = \frac{CB}{q} + \frac{CJB}{q^2} + O(|q|^{-3}).
+\end{equation}
+If \(CB \neq 0\), the leading decay is \(s^{-\alpha}\). If \(CB = 0\), the leading term may be \(s^{-2\alpha}\) or lower.
+
+For the biological channels:
+\begin{itemize}
+    \item Prey intervention + prey observation: \(CB = 1\),
+    \item Predator intervention + predator observation: \(CB = 1\),
+    \item Cross-species channels: \(CB = 0\).
+\end{itemize}
+Therefore a collocated perturb-and-measure protocol gives the cleanest high-frequency signature of \(\alpha\).
+Cross-species measurements remain useful for interaction parameters and phase coupling.
+
+Latent environmental states are observable exactly when \(C (J + \lambda I)^{-1} g \neq 0\) (see source pack Theorem~T3).
+This condition precisely determines when an environmental covariate is needed: not always, but whenever the latent coupling lies in an output-invisible direction or is nearly invisible in the practical noise metric.
+\begin{figure}[htbp]\centering\includegraphics[width=0.75\textwidth]{fig01_transfer_magnitude}
+\caption{Transfer magnitude $|G(i\omega)|$ on the prey channel for the four memory mechanisms at $A=0.25$.}\label{fig:transfer-mag}\end{figure}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.75\textwidth]{fig02_transfer_phase}
+\caption{Transfer phase $\arg G(i\omega)$; the Caputo mechanism separates in phase from the integer-order, delay, and latent alternatives.}\label{fig:transfer-phase}\end{figure}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.70\textwidth]{fig03_hf_phase}
+\caption{High-frequency Caputo phase converges to $-\alpha\pi/2$ (dotted), a scale-free structural signature.}\label{fig:hf-phase}\end{figure}

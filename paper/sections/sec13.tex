@@ -1,0 +1,10 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This work presented a complete pipeline for discriminating memory mechanisms in ecological systems with memory~\cite{F01,F02,F03,F04,P01}, combining optimal input design under energetic constraints~\cite{O01,O02}, finite-support spectral design~\cite{S03}, Bayesian sequential design~\cite{O05,O06,O07,O09}, and safety constraints derived from an Allee effect~\cite{E03,E04,E05}.  The theoretical contributions include Theorems T11-T13 (optimal input design under energy constraints, finite-support sufficiency, and optimal sampling schedule) and Theorems T16-T17 (existence of a safe and informative perturbation and the fractional inward-pointing rectangle invariant).  These results were specialized to the strong-Allee predator-prey model with fractional (Caputo), delayed (DDE), and latent (finite-dimensional) memory sources.
+
+The reproducible benchmark in Section~\ref{sec:benchmark} demonstrates that the theoretically optimal experiment indeed yields the largest expected information gain and the lowest posterior model confusion while respecting the safety rectangle.  The posterior odds, KL divergences, and safety-violation rates confirm that the Bayesian adaptive design sequentially selects experiments that rapidly discriminate between memory hypotheses.
+
+Limitations of the study include the assumption of Gaussian measurement noise, the deterministic dynamics assumption (neglecting demographic and environmental stochasticity), and the hard safety constraint derived from a strong Allee effect.  Future work will extend the framework to stochastic dynamics, heterogeneous or distributed memory kernels~\cite{K01,K02,K03,F01}, closed-loop implementation on embedded hardware, and application to other ecological motifs where memory effects arise from delayed density dependence or legacy effects.
+
+In summary, the proposed methodology bridges abstract memory-theory concepts with actionable, safety-aware experimental protocols, providing a principled approach for identifying memory mechanisms in ecological and biological systems.

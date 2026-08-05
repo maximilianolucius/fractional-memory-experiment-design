@@ -1,0 +1,102 @@
+[
+  {
+    "file": "00_SOURCE_PROPOSAL.md",
+    "bytes": 18350,
+    "sha256": "306dc00d22bcfe583298a0e3849d48ee6585d33b8a5a04fee022918c1f337343"
+  },
+  {
+    "file": "01_RESEARCH_POSITIONING.md",
+    "bytes": 4202,
+    "sha256": "e63a2752fac50359d4870c96d1fb018610b6f60995ac7582ac5bb47dfec84822"
+  },
+  {
+    "file": "02_MAIN_DRAFT_MATHEMATICAL_AUDIT.md",
+    "bytes": 6601,
+    "sha256": "11a62e48b1364fc15ade21b8e4030f6b47ee6c8ed584c5330544ad1963cfff19"
+  },
+  {
+    "file": "03_DIMENSIONALLY_CONSISTENT_CONTROLLED_MODEL.md",
+    "bytes": 3162,
+    "sha256": "7c1068e941c8ce9e86bc473f4cc6d273d0f6a7edd62fe976f97019efbc00c889"
+  },
+  {
+    "file": "04_EXACT_STRONG_ALLEE_BASELINE.md",
+    "bytes": 3883,
+    "sha256": "fc0df987f01679ace6bf8cea36bb7d75c10a23b6f99d53a2542510887e5953de"
+  },
+  {
+    "file": "05_CONTROLLABILITY_OBSERVABILITY_AND_CHANNELS.md",
+    "bytes": 3407,
+    "sha256": "c8ecdbecd1516af8983b7a867d38db059f5a4ac44b9e2d2ada2f40411b6c3c9a"
+  },
+  {
+    "file": "06_EXACT_MODEL_DISCRIMINATION_THEOREMS.md",
+    "bytes": 4358,
+    "sha256": "a4dc4051eaf910835ecd5bae3fd5cd0ee402ed26bfa6944c4ef63318b34d335e"
+  },
+  {
+    "file": "07_EXPONENTIAL_MIXTURES_AND_IMPOSSIBILITY.md",
+    "bytes": 4871,
+    "sha256": "c858cef670a124ae1ff1f9dc3e325b7f6a636aee18b4f2bb2ac293b57d6e21eb"
+  },
+  {
+    "file": "08_OPTIMAL_INPUT_DESIGN.md",
+    "bytes": 4827,
+    "sha256": "d0547436df285e8996fa10429d35837af21b96235ab4a66006ed671a388bd9c2"
+  },
+  {
+    "file": "09_OPTIMAL_OBSERVATION_DESIGN.md",
+    "bytes": 3397,
+    "sha256": "853b918d908df3f154207082c57ce1d5f3966e2e483c7701a52832632989ce51"
+  },
+  {
+    "file": "10_PARAMETER_IDENTIFIABILITY_AND_FISHER_INFORMATION.md",
+    "bytes": 4037,
+    "sha256": "6a40013fcce98bcf00bc429b0f9cfd5cd9978851d45556ce4b498abdc4379baa"
+  },
+  {
+    "file": "11_SAMPLE_COMPLEXITY.md",
+    "bytes": 2608,
+    "sha256": "e4efad015fbc2bc5612069fa65472b9318ea92ed58d446a46ad5b317a8270da2"
+  },
+  {
+    "file": "12_SAFE_EXPERIMENT_DESIGN.md",
+    "bytes": 4513,
+    "sha256": "0f9ed7374ef62d935cb34e69a20b6734b3363a10587f2fb438a291ddbf1f0672"
+  },
+  {
+    "file": "13_NONLINEAR_BAYESIAN_EXTENSION.md",
+    "bytes": 3649,
+    "sha256": "a6de9d1bfaae40303df856ebb844ad308b5b2e763f74018d5ee517a4bffaed99"
+  },
+  {
+    "file": "14_WORKED_ECOLOGICAL_DESIGNS.md",
+    "bytes": 3753,
+    "sha256": "04b90cbffc7e808a7c5d6737eb9275327b5e12e3114553e15dcd8f3b2a1a3fc4"
+  },
+  {
+    "file": "15_PAPER_BLUEPRINT_AND_CLAIM_MATRIX.md",
+    "bytes": 4133,
+    "sha256": "d4a03f5c76d34327f56c29c0c5c862efbf3d31eaf8c81892c9f3a27191f0d993"
+  },
+  {
+    "file": "16_IMPLEMENTATION_AND_VALIDATION_SPEC.md",
+    "bytes": 3807,
+    "sha256": "a67b4c6e3105778c2a81366a4783ea59fcccc097e0af1365c62b0b02d251f607"
+  },
+  {
+    "file": "17_BIBLIOGRAPHY.md",
+    "bytes": 4059,
+    "sha256": "12b248815b878fc67a18c6795ee20fb1e8b89314c1ad1e84afac91095cd8dbc5"
+  },
+  {
+    "file": "README.md",
+    "bytes": 5725,
+    "sha256": "2b6429bb376e9ea2c6f8a8821316638c2390556cd78a8af3acd709067ae5d7b3"
+  },
+  {
+    "file": "THEOREM_INDEX.md",
+    "bytes": 1894,
+    "sha256": "151e60a879a6580910e9279b2e3000812e186fa70ecf2b885ab970649a1672cb"
+  }
+]

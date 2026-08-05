@@ -1,0 +1,26 @@
+\section{Introduction and Falsifiable Memory Question}
+\label{sec:introduction}
+
+The problem of distinguishing fractional, delayed, and latent ecological memory effects in dynamical systems is fundamental to understanding ecosystem dynamics under perturbation. Fractional derivatives model hereditary and nonlocal dynamics naturally~\cite{F01,F02,F03,F04}, and fractional predator--prey systems form an established literature~\cite{E06,E07,E08,E09}.
+Experiment design for fractional-order identification already exists~\cite{FOED01,FOED02,FOED03,FOED04}, and ecological perturbation experiments are feasible in laboratory microcosms~\cite{E10,E11,E12}.
+However, as we show, this problem is well-posed only when complexity restrictions are imposed on the latent memory component.
+Specifically, we assume a finite maximum latent dimension $m$, which renders the finite-horizon discrimination problem tractable.
+Without such a restriction, the no-free-lunch theorem (Theorem~\ref{thm:T10}) implies that no finite-horizon experiment can distinguish between arbitrary memory hypotheses with guaranteed accuracy, rendering the problem ill-posed.
+
+Our approach centers on a certified predator-prey model with strong Allee effect~\cite{E03,E04,E05,P01}, which serves as a validated ecological nonlinear dynamics and serves as our digital twin.
+We consider three competing memory hypotheses within a unified fractional-order framework:
+\begin{itemize}
+    \item Fractional memory (Caputo derivative of order $\alpha$),
+    \item Delayed memory (discrete delay differential equation),
+    \item Latent memory (finite-dimensional linear time-invariant system of dimension $m$).
+\end{itemize}
+All models share a common fractional order $\alpha$, two input channels (prey and predator), and are linearized around a certified coexistence equilibrium.
+
+The core of our contribution lies in the structural separation of the fractional transfer function $s^{-\alpha}$ from both finite-dimensional rational transfer functions~\cite{I05} (latent memory) and finite-dimensional delay transfer functions~\cite{D01,D02}.
+This separation is established analytically in Theorems~\ref{thm:T4} and~\ref{thm:T5}, which show that the fractional kernel cannot be equivalently represented by any finite-dimensional integer-order latent-state model nor by any finite-delay model under the same input-output channel.
+
+Furthermore, we leverage the finite-horizon exponential approximation of the fractional kernel (Theorem~\ref{thm:T9b}) and the associated $\mathcal{L}^1$ error bound to construct optimal excitation signals that exploit the frequency-band separation between the fractional and approximate integer-order dynamics.
+The finite-horizon impossibility obstacle (Theorem~\ref{thm:T10}) guarantees that, below a certain noise floor, discrimination becomes impossible if the latent dimension is unrestricted--thus justifying our finite-dimensional assumption.
+
+Finally, we formulate the optimal experimental design problem under energy and safety constraints, leveraging the principal-singular-vector solution for pairwise optimal inputs (Theorem~\ref{thm:T11}) and the finite-support property of the optimal frequency-domain design (Theorem~\ref{thm:T12}).
+The resulting experimental protocol is validated through a reproducible simulation benchmark (Section~\ref{sec:benchmark}) and complemented by a prospective microcosm protocol for ecological validation (Section~\ref{sec:prospect}).

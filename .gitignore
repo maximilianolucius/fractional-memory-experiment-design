@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,60 @@
+\section{Certified strong-Allee ecological backbone}
+\label{sec:backbone}
+
+The predator-prey strong-Allee model from the validated literature~\cite{E01,E02,E03,E04,E05,P01} provides a certified ecological nonlinear dynamics that serves as the digital twin for our study.
+
+The model is given by
+\begin{align}
+    f_1(x,y) &= r x \left(1-\frac{x}{K}\right)\left(\frac{x}{A}-1\right)-\frac{axy}{1+hx}, \\
+    f_2(x,y) &= e \frac{axy}{1+hx} - m y,
+\end{align}
+with locked parameters
+\[
+r=\frac{3}{2},\quad K=1,\quad a=1,\quad h=\frac{1}{2},\quad e=\frac{4}{5},\quad m=\frac{2}{5}.
+\]
+
+The coexistence equilibrium is
+\[
+x^* = \frac{2}{3}, \qquad y^*(A) = \frac{2(2-3A)}{9A},
+\]
+which is positive exactly for \(0<A<\frac{2}{3}\).
+
+The Jacobian at coexistence is
+\[
+J(A) = \begin{pmatrix}
+\dfrac{7A-2}{8A} & -\dfrac{1}{2} \\[1.2ex]
+\dfrac{2-3A}{10A} & 0
+\end{pmatrix},
+\]
+with trace \(T(A)=\frac{7A-2}{8A}\) and determinant \(D(A)=\frac{2-3A}{20A}\).
+
+The discriminant factorizes as
+\[
+T(A)^2-4D(A) = \frac{(19A-10)(23A-2)}{320A^2}.
+\]
+
+For a commensurate Caputo system of order $0<\alpha<1$, the coexistence equilibrium is locally asymptotically stable when every eigenvalue $\mu$ of $J$ satisfies the Matignon sector condition~\cite{F05}:
+\[
+|\arg\mu| > \frac{\alpha\pi}{2}.
+\]
+
+In the regime \(\frac{2}{7}<A<\frac{10}{19}\), the eigenvalues are a complex pair with positive real part. The critical order is
+\[
+\alpha^*(A) = \frac{2}{\pi} \arctan\left(\frac{\sqrt{4D(A)-T(A)^2}}{T(A)}\right).
+\]
+
+Stability holds exactly for \(0<\alpha<\alpha^*(A)\).
+
+At the baseline \(A=0.3\), we have
+\[
+J=\begin{pmatrix}1/24 & -1/2 \\ 11/30 & 0\end{pmatrix},\qquad
+T=\frac{1}{24},\qquad D=\frac{11}{60},
+\]
+and the exact critical order is
+\[
+\alpha^*\left(\frac{3}{10}\right) = \frac{2}{\pi}\arctan\sqrt{\frac{2107}{5}} \approx 0.9690122761517084.
+\]
+
+Thus $\alpha=0.9$ is stable and $\alpha=1$ is unstable, reproducing the certified verdict~\cite{P01}.
+
+The baseline \(A=0.3\) is exceptionally informative for distinguishing a stable fractional model from the same integer-order skeleton because the models make opposite local stability predictions. For controlled frequency-response comparisons in which every candidate should remain stable, use \(A\le2/7\); \(A=1/4\) is a convenient exact choice.

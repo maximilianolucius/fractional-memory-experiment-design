@@ -1,0 +1,41 @@
+{
+  "git_commit": "orion-run",
+  "seed": 1000,
+  "solver": "caputo_pece_abm",
+  "solver_tolerances": {
+    "tol": 0.0002523337952941018,
+    "mittag_leffler_validated": true
+  },
+  "design": {
+    "decision_rule": "BIC (information-criterion; NOT full Bayesian evidence)",
+    "reps_per_cell": 200,
+    "N": 400,
+    "stable_A": [
+      0.2,
+      0.25
+    ],
+    "verdict_A": [
+      0.3,
+      0.4
+    ],
+    "inputs": [
+      "pulse",
+      "sinusoid",
+      "multisine",
+      "multiscale",
+      "chirp",
+      "prbs"
+    ]
+  },
+  "primary_task": "memory-shape discrimination, stable-only A<2/7 (audit P0.6)",
+  "objective_name": "stable-only macro-averaged model-selection accuracy",
+  "objective_estimate": 0.5369135802469136,
+  "stable_micro_accuracy": 0.491005291005291,
+  "best_design_stable": "prbs",
+  "verdict_macro_accuracy": 0.5739293981481481,
+  "n_diverged": 0,
+  "gates_PASS": true,
+  "solver_PASS": true,
+  "status": "PASS",
+  "wall_seconds": 0.02594280242919922
+}

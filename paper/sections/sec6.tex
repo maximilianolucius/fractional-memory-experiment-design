@@ -1,0 +1,180 @@
+\section{Finite-Horizon Exponential Approximation and Impossibility Barrier}
+\label{sec:approximation}
+
+Section~\ref{sec:separation} established that a Caputo fractional transfer function is structurally distinct from any finite-dimensional integer-order or finite-delay model. However, structural non-equivalence in the infinite-bandwidth, zero-noise limit does not guarantee practical separability in a finite experiment. This section develops the quantitative tools needed to bridge that gap: an exact representation of fractional memory as a continuum of exponentials, a constructive finite-sum approximation with explicit $L^1$ error bounds~\cite{K01,K03,K04,K05,K06}, and a fundamental impossibility result that either justifies or forces our finite-latent-dimension restriction.
+
+All formulas use nondimensional time; restore physical units with \(t/\tau_0\).
+
+\subsection{Exact positive diffusive representation}
+
+The Caputo fractional integral kernel
+\[
+k_\alpha(t) = \frac{t^{\alpha-1}}{\Gamma(\alpha)}
+\]
+admits an exact integral representation as a weighted continuum of exponential relaxation modes.
+
+\begin{theorem}[Exact positive diffusive representation]
+\label{thm:T8}
+For \(0 < \alpha < 1\),
+\[
+\boxed{
+k_\alpha(t) = \frac{\sin(\pi\alpha)}{\pi}
+\int_0^\infty \lambda^{-\alpha} e^{-\lambda t} \, d\lambda.
+}
+\tag{1}
+\]
+The derivative-memory kernel also satisfies
+\[
+\boxed{
+\frac{t^{-\alpha}}{\Gamma(1-\alpha)}
+= \frac{\sin(\pi\alpha)}{\pi}
+\int_0^\infty \lambda^{\alpha-1} e^{-\lambda t} \, d\lambda.
+}
+\tag{2}
+\]
+\end{theorem}
+
+\begin{proof}
+Apply the integral identity
+\[
+\int_0^\infty \lambda^{\nu-1} e^{-\lambda t} d\lambda = \Gamma(\nu) t^{-\nu}
+\]
+and Euler's reflection formula \(\Gamma(\alpha)\Gamma(1-\alpha) = \pi / \sin(\pi\alpha)\). Set \(\nu = 1-\alpha\) for (1) and \(\nu = \alpha\) for (2).
+\end{proof}
+
+The crucial consequence is that \emph{fractional memory is exactly an infinite continuum of exponential relaxation modes}~\cite{K02,F02,F03,F04}. Any finite-dimensional latent ODE model is precisely a quadrature approximation to this continuum. This observation makes the "fractional versus latent" question rigorous: it asks how many quadrature nodes are needed before the approximation becomes indistinguishable from the true fractional dynamics within the noise budget of the experiment.
+
+\subsection{Uniform approximation at the singular endpoint is impossible}
+
+\begin{theorem}[No uniform approximation at zero]
+\label{thm:T9a}
+No finite exponential sum
+\[
+k_m(t) = \sum_{j=1}^m c_j e^{-\lambda_j t}
+\]
+with finite coefficients can approximate \(k_\alpha\) uniformly on \([0,T]\) when \(0 < \alpha < 1\).
+\end{theorem}
+
+\begin{proof}
+Every finite sum has a finite value \(k_m(0) = \sum_j c_j\). But \(\lim_{t \downarrow 0} k_\alpha(t) = +\infty\). Hence \(\sup_{0 \le t \le T} |k_\alpha(t) - k_m(t)| = \infty\).
+\end{proof}
+
+This result corrects any claim of uniform absolute-error approximation on an interval containing the origin. The fractional kernel is singular at \(t=0\), and no finite sum of exponentials can reproduce this singularity. However, \(L^p\) approximation in the integral sense \emph{is} possible, and that is what the experimental design requires: the output signal is a convolution of the kernel with the input, and convolution integrates out the singularity.
+
+\subsection{Constructive finite \(L^1(0,T)\) approximation}
+
+\begin{theorem}[Constructive \(L^1\) approximation]
+\label{thm:T9b}
+Let \(c_\alpha = \sin(\pi\alpha)/\pi\). Choose \(0 < \ell < L\), divide \([\ell, L]\) into \(m\) equal intervals of width \(h = (L-\ell)/m\), and use left nodes \(\lambda_j = \ell + (j-1)h\). Define
+\[
+k_m(t) = c_\alpha h \sum_{j=1}^m \lambda_j^{-\alpha} e^{-\lambda_j t}.
+\tag{3}
+\]
+Then
+\[
+\boxed{
+\|k_\alpha - k_m\|_{L^1(0,T)}
+\le c_\alpha \left[
+\frac{T \ell^{1-\alpha}}{1-\alpha}
++ \frac{L^{-\alpha}}{\alpha}
++ T h \ell^{-\alpha}
+\right].
+}
+\tag{4}
+\]
+\end{theorem}
+
+\begin{proof}
+Split the integral (1) into three regions: \((0, \ell)\), \([\ell, L]\), and \((L, \infty)\).
+
+\textbf{Low-rate tail} \((0, \ell)\): integrating the density over time,
+\[
+\int_0^T \int_0^\ell \lambda^{-\alpha} e^{-\lambda t} d\lambda dt
+\le T \int_0^\ell \lambda^{-\alpha} d\lambda
+= \frac{T \ell^{1-\alpha}}{1-\alpha}.
+\]
+
+\textbf{High-rate tail} \((L, \infty)\): by Tonelli,
+\[
+\int_0^T \int_L^\infty \lambda^{-\alpha} e^{-\lambda t} d\lambda dt
+= \int_L^\infty \lambda^{-\alpha-1}(1-e^{-\lambda T}) d\lambda
+\le \frac{L^{-\alpha}}{\alpha}.
+\]
+
+\textbf{Middle interval} \([\ell, L]\): since \(\lambda^{-\alpha} e^{-\lambda t}\) is decreasing in \(\lambda\) for fixed \(t\), the gap between left and right Riemann sums is at most
+\[
+h \left( \ell^{-\alpha} e^{-\ell t} - L^{-\alpha} e^{-Lt} \right)
+\le h \ell^{-\alpha}.
+\]
+Integrate over \(t \in [0,T]\), multiply by \(c_\alpha\), and sum the three contributions.
+\end{proof}
+
+\subsection{Explicit parameter choice for tolerance \(\varepsilon\)}
+
+For a given tolerance \(\varepsilon\), it suffices to choose
+\begin{align}
+\ell &= \left( \frac{\varepsilon(1-\alpha)}{3 c_\alpha T} \right)^{1/(1-\alpha)}, \\
+L &= \left( \frac{3 c_\alpha}{\alpha \varepsilon} \right)^{1/\alpha}, \\
+h &\le \frac{\varepsilon \ell^\alpha}{3 c_\alpha T},
+\qquad
+m \ge \frac{L-\ell}{h}.
+\end{align}
+
+This construction is conservative, not complexity-optimal; it is sufficient for an existence theorem. In practice, faster convergence can be achieved with optimized Gauss--Laguerre or adaptive quadrature, but the construction above guarantees polynomial scaling.
+
+\subsection{Output approximation via convolution}
+
+\begin{theorem}[Output approximation]
+\label{thm:T9c}
+For any input \(u \in L^2(0,T)\),
+\[
+\boxed{
+\|(k_\alpha - k_m) * u\|_{L^2(0,T)}
+\le \|k_\alpha - k_m\|_{L^1(0,T)} \, \|u\|_{L^2(0,T)}.
+}
+\tag{5}
+\]
+\end{theorem}
+
+\begin{proof}
+Young's convolution inequality.
+\end{proof}
+
+Theorem~\ref{thm:T9c} is the bridge that converts the kernel approximation error into an output-signal bound: if the \(L^1\) kernel gap can be driven below \(\eta / \|u\|_2\), the output signal difference falls below \(\eta\).
+
+\subsection{Theorem T10 -- the finite-horizon impossibility barrier}
+
+\begin{theorem}[Finite-horizon no-free-lunch]
+\label{thm:T10}
+Fix a horizon \(T\), an input \(u \in L^2(0,T)\), and any tolerance \(\eta > 0\). There exists a finite positive exponential mixture \(k_m\) such that
+\[
+\|(k_\alpha - k_m) * u\|_{L^2(0,T)} < \eta.
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:T9b}, choose \(m\) so that \(\|k_\alpha - k_m\|_1 < \eta / \|u\|_2\) when \(u \neq 0\). Apply Theorem~\ref{thm:T9c}. The zero-input case is trivial.
+\end{proof}
+
+\begin{corollary}[Unrestricted latent dimension destroys robust discrimination]
+\label{cor:unrestricted}
+If the alternative latent-state model class allows arbitrary dimension \(m\), then for every finite experiment \((T, u, \text{noise floor})\), there exists a latent model whose output lies below the noise floor. Therefore any maximin optimal design against an unrestricted latent class achieves \emph{zero robust separation}.
+\end{corollary}
+
+\subsection{Mandatory modeling restriction}
+
+Theorem~\ref{thm:T10} and Corollary~\ref{cor:unrestricted} force the paper to impose at least one of the following restrictions to make discrimination well-posed:
+
+\begin{enumerate}
+    \item A fixed maximum latent dimension \(m\) (the route taken in this paper);
+    \item A lower bound or spacing constraint on latent relaxation rates \(\lambda_j\);
+    \item A complexity penalty or Bayesian prior that shrinks large-\(m\) models;
+    \item A specified experimental bandwidth and horizon that limits the information accessible to the model-selection procedure;
+    \item Auxiliary environmental measurements that constrain the latent mechanism from outside the input--output channel.
+\end{enumerate}
+
+Without such a restriction, ``fractional versus latent'' is \emph{not} a well-posed finite-data contest: with enough latent states, the latent model can mimic any finite-data signature of the fractional kernel to within the noise floor. Our choice is restriction (1): the latent model class \(\mathcal{H}_m\) is parameterized by dimension \(m\) and a complexity budget, making the experiment design finite-dimensional and optimizable.
+
+This restriction is not arbitrary. Ecological models of intermediate complexity, with a modest number of unmeasured slow variables (soil moisture, microbial biomass, nutrient pools), naturally bound the latent dimension to a small integer. The paper's experiments use \(m \le 5\) as a practical bound, consistent with known ecological complexity constraints.
+
+The next section formalizes the optimal experiment design that exploits the finite-horizon bounds developed here to maximize the separation between the fractional model and the best finite-dimensional approximation at a given complexity level.
