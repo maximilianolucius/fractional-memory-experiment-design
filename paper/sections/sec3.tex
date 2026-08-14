@@ -19,15 +19,16 @@ f_2(x,y) &= e \frac{a x y}{1 + h x} - m y,
 \end{align}
 with the locked parameter values \(r=3/2\), \(K=1\), \(a=1\), \(h=1/2\), \(e=4/5\), \(m=2/5\) inherited from the validated baseline.
 
-We consider three competing model classes that share the same fractional order \(\alpha\), input matrix \(B\), and are linearized around the coexistence equilibrium:
+We consider four candidate dynamic-memory mechanisms around a common experimental operating point. The ODE and Caputo mechanisms share the ecological Jacobian $J(A)$ exactly; the retarded-DDE and finite-state latent alternatives are calibrated rival response laws with the same input/observation channels and physical units, but their internal generators $A_0,A_1$ and $\bar A$ are not literally the same Jacobian:
 \begin{enumerate}
-    \item \textbf{M\_ODE}: integer-order ODE (\(\alpha=1\)) with dynamics \(\dot{\xi} = J \xi + B u\).
-    \item \textbf{M\_Caputo}: fractional derivative of order \(\alpha\) with dynamics \(\tau_0^{\alpha-1} {}_{0}^{C}D_{t}^{\alpha} \xi = J \xi + B u\).
-    \item \textbf{M\_DDE}: discrete delay differential equation with a single delay \(\tau\) and dynamics \(\dot{\xi} = A_0 \xi + A_1 \xi(t-\tau) + B u\).
+    \item \textbf{M\_ODE}: integer-order ODE with dynamics \(\dot{\xi} = J \xi + B u\) (memory horizon: none).
+    \item \textbf{M\_Caputo}: fractional derivative of order \(\alpha \in (0,1)\) with dynamics \(\tau_0^{\alpha-1} {}_{0}^{C}D_{t}^{\alpha} \xi = J \xi + B u\); the order \(\alpha\) belongs to this mechanism alone.
+    \item \textbf{M\_DDE}: retarded delay differential equation with finite state dimension and a single discrete delay \(\tau\), \(\dot{\xi} = A_0 \xi(t) + A_1 \xi(t-\tau) + B u\).
     \item \textbf{M\_latent,m}: finite-dimensional linear time-invariant latent state model of dimension \(m\) with dynamics \(\dot{q} = \bar{A} q + \bar{B} u\), \(y = \bar{C} q\).
 \end{enumerate}
+Only \textbf{M\_Caputo} carries a fractional order; the ODE, DDE, and latent mechanisms are integer-order. They are compared through matched input and observation channels and a common observation-noise model. The fractional transfer is \(G_\alpha(s)=C(q_\alpha(s)I-J)^{-1}B\), whereas the DDE and latent classes use their own declared generators. Figure~\ref{fig:model-family} summarizes this distinction.
 
-All models share the same linearized output equation \(y_k = C \xi(t_k) + \varepsilon_k\) with \(\varepsilon_k \sim \mathcal{N}(0, R_k)\).
-The transfer function for each model is defined as \(G(s) = C (s^{\alpha} I - J)^{-1} B\) (appropriately scaled for the fractional case) and its counterparts for the integer-order, delay, and latent models.
+\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig13_model_family}
+\caption{The rival model family. ODE and Caputo dynamics share the ecological Jacobian exactly; retarded-delay and finite-state latent rivals are alternative response laws calibrated at the same experimental operating point and compared through matched input/observation channels and units. The latent class is bounded by a declared complexity budget $m\le m_{\max}$, not by a biological law.}\label{fig:model-family}\end{figure}
 
 The dimensional consistency enforced by $\tau_0$~\cite{F02,F03,F04} ensures that the fractional order $\alpha$ does not spuriously alter the units of the ecological rates, allowing a fair comparison between the memory hypotheses.

@@ -42,15 +42,15 @@ A finite-dimensional integer-order transfer function is rational. If it is stric
 
 Theorem~T4 is an exact statement: in the absence of model uncertainty and measurement noise, full-bandwidth input--output data would structurally distinguish a Caputo model from every finite-dimensional ODE latent model. However, it does \emph{not} guarantee practical distinguishability on a finite bandwidth, finite horizon, or under noise. That is why the remaining sections develop explicit quantitative bounds and optimal input design.
 
-\subsection{Theorem T5 -- Caputo is not equivalent to a finite delay model}
+\subsection{Theorem T5 -- Caputo is not equivalent to a finite retarded delay model}
 
-\begin{theorem}[Structural non-equivalence with finite DDE models]
+\begin{theorem}[Structural non-equivalence with retarded single-delay models]
 \label{thm:T5}
 Let
 \[
 G_\tau(s) = C_\tau(sI - A_0 - A_1 e^{-s\tau})^{-1} B_\tau
 \]
-be a finite-dimensional retarded delay transfer function. Then along \(s = i\omega\),
+be the transfer function of a retarded delay system with finite state dimension, a single discrete delay \(\tau\), no direct feedthrough, and no derivative output. Then along \(s = i\omega\),
 \[
 G_\tau(i\omega) = O(\omega^{-1}),
 \qquad \omega \to \infty,
@@ -60,10 +60,15 @@ Since \(\alpha \neq 1\), the two transfer functions are not identical at high fr
 \end{theorem}
 
 \begin{proof}
-Because \(|e^{-i\omega\tau}| = 1\), the matrix \(A_0 + A_1 e^{-i\omega\tau}\) remains bounded for all \(\omega\). Factor \(i\omega I\) from the delay resolvent; a Neumann expansion yields \(G_\tau(i\omega) = O(\omega^{-1})\). The fractional asymptotic follows from Theorem~T4's expansion \eqref{eq:frac_asymp}. For \(0 < \alpha < 1\), the high-frequency decay rates differ, and no finite-delay model can reproduce the \(s^{-\alpha}\) signature.
+Because \(|e^{-i\omega\tau}| = 1\), the matrix \(A_0 + A_1 e^{-i\omega\tau}\) remains bounded for all \(\omega\). Factor \(i\omega I\) from the delay resolvent; a Neumann expansion yields \(G_\tau(i\omega) = O(\omega^{-1})\). The fractional asymptotic follows from Theorem~T4's expansion \eqref{eq:frac_asymp}. For \(0 < \alpha < 1\), the high-frequency decay rates differ, and no model of the stated retarded single-delay class can reproduce the \(s^{-\alpha}\) signature.
 \end{proof}
 
-Together, Theorem~T4 and Theorem~T5 establish a firm boundary: the fractional memory effect, characterized by the power-law tail \(s^{-\alpha}\), cannot be absorbed into either a finite-dimensional ODE latent description or a finite-delay dynamics. This structural gap is what the experimental design must amplify.
+\begin{remark}[Scope of Theorem~\ref{thm:T5}]
+\label{rem:dde_scope}
+A delay equation is infinite-dimensional as a dynamical system; what is finite in Theorem~\ref{thm:T5} is the state dimension of the underlying ODE skeleton. The theorem covers strictly proper retarded systems with finitely many discrete delays (the proof extends term-by-term to any finite delay set) and no direct feedthrough. It does \emph{not} cover neutral delay equations, distributed delays, derivative outputs, or direct feedthrough; those classes require separate arguments. Throughout the paper, ``DDE model'' means this finite-state retarded class.
+\end{remark}
+
+Together, Theorem~T4 and Theorem~T5 establish a firm boundary: the fractional memory effect, characterized by the power-law tail \(s^{-\alpha}\), cannot be absorbed into either a finite-dimensional integer-order latent description or a retarded finite-state delay dynamics of the class above. This structural gap is what the experimental design must amplify.
 
 \subsection{Quantitative Neumann remainder (Theorem~T6)}
 
@@ -89,21 +94,31 @@ When \(CB > 0\) is real, evaluating \eqref{eq:frac_asymp} along the imaginary ax
 \boxed{\arg G_\alpha(i\omega) \to -\frac{\alpha\pi}{2},\qquad \omega \to \infty.}
 \label{eq:phase}
 \end{equation}
-
 A direct integer-order channel \(G_0(s) = CB/s\) has asymptotic phase \(-\pi/2\). The phase gap \((1-\alpha)\pi/2\) is a scale-free signature of \(\alpha\) that can be measured after gain normalization, subject to actuator bandwidth and measurement noise constraints.
+
+For a cross channel with \(CB = 0\) the leading term of the expansion is instead proportional to \(s^{-2\alpha}\) (or lower), so its asymptotic phase is generally different from \(-\alpha\pi/2\). The signature~\eqref{eq:phase} and the gap \((1-\alpha)\pi/2\) are therefore properties of \emph{collocated} channels and must not be attributed to cross-species measurements; cross channels serve to estimate interaction parameters and their own (different) high-frequency phase, as detailed in Section~\ref{sec:linearization}.
 
 \subsection{Discrimination under finite models}
 
 The structural separation results guarantee that for any finite set of fixed, structurally distinct transfer functions \(\{G_1, \dots, G_M\}\), there exists a separating frequency.
 
-\begin{theorem}[Generic separating frequency]
+\begin{theorem}[Generic separating frequency on a compact band]
 \label{thm:T7}
-Let \(G_1, \dots, G_M\) be scalar analytic transfer functions on a connected domain containing an interval of the imaginary axis, with no two identical. For each pair \(i \ne j\), the zero set of \(G_i(i\omega) - G_j(i\omega)\) has no accumulation point. Consequently, except on a measure-zero discrete exceptional set, any frequency separates every fixed pair.
+Let \(G_1, \dots, G_M\) be scalar functions analytic on a connected open set \(D \subset \mathbb{C}\), and let \(K = \{i\omega : \omega \in [\omega_{\min}, \omega_{\max}]\} \subset D\) be a compact segment of the imaginary axis containing no poles and no branch point. Assume \(G_i - G_j \not\equiv 0\) on \(D\) for every pair \(i \ne j\). Then each zero set
+\[
+Z_{ij} = \{\omega \in [\omega_{\min}, \omega_{\max}] : G_i(i\omega) = G_j(i\omega)\}
+\]
+is finite, hence \(\bigcup_{i<j} Z_{ij}\) is finite, and every frequency outside that union separates all fixed model pairs simultaneously.
 \end{theorem}
 
 \begin{proof}
-A nonzero analytic function has isolated zeros. Take the finite union over all model pairs; the complement of a finite set of isolated points is open and dense.
+For each pair, \(G_i - G_j\) is nonzero and analytic on \(D\), so its zeros are isolated. An infinite subset of the compact set \(K\) would have an accumulation point in \(K\), contradicting the identity theorem. Hence each \(Z_{ij}\) is finite; a finite union over model pairs is finite.
 \end{proof}
+
+\begin{remark}[Why the band must be compact]
+\label{rem:compact_band}
+On an unbounded frequency interval the zeros of a nonzero analytic difference can be countably infinite, accumulating only at infinity; the exceptional set is then infinite and the conclusion fails. Theorem~\ref{thm:T7} is therefore stated on a compact band \(K\) inside a common analytic domain. The statement also concerns a finite collection of \emph{fixed} transfer functions and provides no uniform separation over continuously parameterized rival classes. Panel (a) of Figure~\ref{fig:separation-approx} shows the separation numerically on the design band.
+\end{remark}
 
 The practical interpretation is:
 \begin{enumerate}

@@ -61,7 +61,7 @@ Every finite sum has a finite value \(k_m(0) = \sum_j c_j\). But \(\lim_{t \down
 
 This result corrects any claim of uniform absolute-error approximation on an interval containing the origin. The fractional kernel is singular at \(t=0\), and no finite sum of exponentials can reproduce this singularity. However, \(L^p\) approximation in the integral sense \emph{is} possible, and that is what the experimental design requires: the output signal is a convolution of the kernel with the input, and convolution integrates out the singularity.
 
-\subsection{Constructive finite \(L^1(0,T)\) approximation}
+\subsection{Constructive finite L1 approximation}
 
 \begin{theorem}[Constructive \(L^1\) approximation]
 \label{thm:T9b}
@@ -84,43 +84,9 @@ Then
 \]
 \end{theorem}
 
-\begin{proof}
-Split the integral (1) into three regions: \((0, \ell)\), \([\ell, L]\), and \((L, \infty)\).
-
-\textbf{Low-rate tail} \((0, \ell)\): integrating the density over time,
-\[
-\int_0^T \int_0^\ell \lambda^{-\alpha} e^{-\lambda t} d\lambda dt
-\le T \int_0^\ell \lambda^{-\alpha} d\lambda
-= \frac{T \ell^{1-\alpha}}{1-\alpha}.
-\]
-
-\textbf{High-rate tail} \((L, \infty)\): by Tonelli,
-\[
-\int_0^T \int_L^\infty \lambda^{-\alpha} e^{-\lambda t} d\lambda dt
-= \int_L^\infty \lambda^{-\alpha-1}(1-e^{-\lambda T}) d\lambda
-\le \frac{L^{-\alpha}}{\alpha}.
-\]
-
-\textbf{Middle interval} \([\ell, L]\): since \(\lambda^{-\alpha} e^{-\lambda t}\) is decreasing in \(\lambda\) for fixed \(t\), the gap between left and right Riemann sums is at most
-\[
-h \left( \ell^{-\alpha} e^{-\ell t} - L^{-\alpha} e^{-Lt} \right)
-\le h \ell^{-\alpha}.
-\]
-Integrate over \(t \in [0,T]\), multiply by \(c_\alpha\), and sum the three contributions.
+\begin{proof}[Proof idea]
+Split the integral into head $(0,\ell)$, body $[\ell,L]$, and tail $(L,\infty)$ of the diffusive representation; the head and tail are controlled by the explicit window choices and the body by composite quadrature on a geometric grid. The complete proof, together with the explicit parameter choices achieving a prescribed tolerance $\varepsilon$, is given in the Supplementary Material (Section~S2).
 \end{proof}
-
-\subsection{Explicit parameter choice for tolerance \(\varepsilon\)}
-
-For a given tolerance \(\varepsilon\), it suffices to choose
-\begin{align}
-\ell &= \left( \frac{\varepsilon(1-\alpha)}{3 c_\alpha T} \right)^{1/(1-\alpha)}, \\
-L &= \left( \frac{3 c_\alpha}{\alpha \varepsilon} \right)^{1/\alpha}, \\
-h &\le \frac{\varepsilon \ell^\alpha}{3 c_\alpha T},
-\qquad
-m \ge \frac{L-\ell}{h}.
-\end{align}
-
-This construction is conservative, not complexity-optimal; it is sufficient for an existence theorem. In practice, faster convergence can be achieved with optimized Gauss--Laguerre or adaptive quadrature, but the construction above guarantees polynomial scaling.
 
 \subsection{Output approximation via convolution}
 
@@ -156,10 +122,22 @@ Fix a horizon \(T\), an input \(u \in L^2(0,T)\), and any tolerance \(\eta > 0\)
 By Theorem~\ref{thm:T9b}, choose \(m\) so that \(\|k_\alpha - k_m\|_1 < \eta / \|u\|_2\) when \(u \neq 0\). Apply Theorem~\ref{thm:T9c}. The zero-input case is trivial.
 \end{proof}
 
-\begin{corollary}[Unrestricted latent dimension destroys robust discrimination]
+\begin{corollary}[Unrestricted latent dimension destroys robust discrimination (linearized, fixed input)]
 \label{cor:unrestricted}
-If the alternative latent-state model class allows arbitrary dimension \(m\), then for every finite experiment \((T, u, \text{noise floor})\), there exists a latent model whose output lies below the noise floor. Therefore any maximin optimal design against an unrestricted latent class achieves \emph{zero robust separation}.
+In the linear convolution experiment with a fixed input $u \in L^2(0,T)$ and a fixed noise floor, if the alternative latent-state model class allows arbitrary dimension $m$, then there exists a latent model whose output lies below the noise floor. Therefore any maximin optimal design against an unrestricted latent class achieves \emph{zero robust separation} in this linearized fixed-input sense.
 \end{corollary}
+
+\begin{remark}[Exact scope of Corollary~\ref{cor:unrestricted}]
+\label{rem:nfl_scope}
+The corollary is a \emph{kernel-level} statement: it follows from Theorems~\ref{thm:T9b}--\ref{thm:T9c}, which bound the convolution of the fractional kernel against a fixed input. By itself it does \emph{not} prove that the full nonlinear Caputo predator--prey input--output map can be approximated below any noise floor. Extending the barrier to the nonlinear system requires writing the system in Volterra form $x(t) = x_0 + (k_\alpha * F(x,u))(t)$, a common invariant region on which $F$ is Lipschitz (constant $L$) and bounded (bound $M$), and a continuous-dependence estimate propagating kernel error into state error; a sufficient version is
+\[
+\|x - x_m\|_{L^\infty(0,T)}
+\le
+\frac{M\,\|k_\alpha - k_m\|_{L^1(0,T)}}{1 - L\,\|k_m\|_{L^1(0,T)}},
+\qquad L\,\|k_m\|_{L^1(0,T)} < 1,
+\]
+with more general horizons requiring a Volterra resolvent or fractional Gr\"onwall estimate~\cite{F11}. Until such a state-error theorem is developed and verified for the ecological vector field, Corollary~\ref{cor:unrestricted} is stated and used only as a linearized, fixed-input impossibility result.
+\end{remark}
 
 \subsection{Mandatory modeling restriction}
 
@@ -175,6 +153,246 @@ Theorem~\ref{thm:T10} and Corollary~\ref{cor:unrestricted} force the paper to im
 
 Without such a restriction, ``fractional versus latent'' is \emph{not} a well-posed finite-data contest: with enough latent states, the latent model can mimic any finite-data signature of the fractional kernel to within the noise floor. Our choice is restriction (1): the latent model class \(\mathcal{H}_m\) is parameterized by dimension \(m\) and a complexity budget, making the experiment design finite-dimensional and optimizable.
 
-This restriction is not arbitrary. Ecological models of intermediate complexity, with a modest number of unmeasured slow variables (soil moisture, microbial biomass, nutrient pools), naturally bound the latent dimension to a small integer. The paper's experiments use \(m \le 5\) as a practical bound, consistent with known ecological complexity constraints.
+This restriction is not arbitrary, but neither is it a biological law. The latent-dimension cap $m_{\max}$ used in the experiments ($m \le 5$) is a \emph{declared experimental-model complexity budget}: it renders the discrimination contest finite-dimensional and optimizable, and it is motivated only by the practical observation that intermediate-complexity ecological descriptions tend to involve a small number of unmeasured slow variables. No theorem or dataset establishes $m \le 5$ as a universal ecological bound. The cap is therefore treated as an experimental knob: sensitivity of every reported accuracy and design ranking to several values of $m_{\max}$ must be (and in Section~\ref{sec:benchmark} is) reported, and conclusions are stated relative to the declared budget.
 
-The next section formalizes the optimal experiment design that exploits the finite-horizon bounds developed here to maximize the separation between the fractional model and the best finite-dimensional approximation at a given complexity level.
+\subsection{Frozen latent hierarchy and interval-enclosed approximation error}
+
+We freeze a single latent hierarchy for the finite-budget discrimination problem. Let $T$ be the experiment horizon and $k_\alpha(t)=t^{\alpha-1}/\Gamma(\alpha)$ the fractional kernel. For each budget $m$ define
+\[
+\mathcal K_m
+=
+\left\{
+k_m(t)=\sum_{j=1}^m c_j e^{-\lambda_j t}:\;
+c_j\ge0,\;\lambda_j\in[\ell_m,L_m],\;
+\|k_m\|_{L^1(0,T)}\le M_T
+\right\},
+\]
+with zero-weight padding and genuinely nested running-envelope windows
+\[
+\ell_m=\min_{j\le m}\ell_j^*,\qquad L_m=\max_{j\le m}L_j^*,
+\]
+so $\mathcal K_m\subseteq\mathcal K_{m+1}$. For the atlas budgets $m=4,8,16,32$ these windows are approximately $[0.0206,1.1956]$, $[0.0147,1.5537]$, $[0.00742,1.5537]$, and $[0.00742,2.9913]$, respectively. The declared mass bound is $M_T=\|k_\alpha\|_{L^1(0,T)}+1$. Every constructive competitor used numerically is checked against this mass bound; when a raw left-node mixture exceeds it, its coefficients are rescaled downward before its interval error enclosure is used.  Theorem~\ref{thm:T9b} separately guarantees arbitrarily accurate finite mixtures when the rate window is allowed to expand; no asymptotic claim is inferred solely from the finite numerical table below.
+
+The kernel hierarchy is the adversarial object in the theorem that follows.  Its connection to the full ecological state-space realization is deliberately kept distinct: the theorem is a linear convolution/observation statement.  A window-uniform lift to the full predator--prey realization, including common safety over every $k_m\in\mathcal K_m$, is reserved for the atlas stage.
+
+\begin{definition}[Interval-enclosed constructive error]
+For every stored explicit mixture $\widetilde k_m\in\mathcal K_m$, let $U_m^{\rm IA}$ be the interval-arithmetic upper enclosure produced by the released interval-arithmetic checker.  The singular head $(0,\delta)$ is bounded by the exact component integrals
+\[
+\int_0^\delta |k_\alpha-\widetilde k_m|\,dt
+\le
+\int_0^\delta k_\alpha(t)\,dt+\int_0^\delta \widetilde k_m(t)\,dt,
+\]
+and on every body subinterval $I_r\subset[\delta,T]$ interval arithmetic encloses $k_\alpha(t)-\widetilde k_m(t)$ for all $t\in I_r$, giving
+\[
+\int_{I_r}|k_\alpha-\widetilde k_m|\,dt
+\le |I_r|\,\sup |[k_\alpha-\widetilde k_m](I_r)|.
+\]
+Because the classes are nested, define the best available constructive enclosure at budget $m$ by
+\[
+\widehat E_m^{\rm IA}:=\min_{j\le m}U_j^{\rm IA}.
+\]
+Then $E_m:=\inf_{k\in\mathcal K_m}\|k_\alpha-k\|_{L^1(0,T)}\le \widehat E_m^{\rm IA}$.
+\end{definition}
+
+For $\alpha=0.85$, $T=12$, and $\delta=10^{-4}$, the independently recomputed interval upper enclosures are
+\begin{center}\small
+\begin{tabular}{c|cccccccccc}
+$m$ & 1&2&3&4&6&8&12&16&24&32\\
+\hline
+$\widehat E_m^{\rm IA}$ & 0.925&0.569&0.541&0.352&0.248&0.248&0.236&0.200&0.200&0.134
+\end{tabular}
+\end{center}
+The original \texttt{scipy.integrate.quad} values were high-accuracy numerical estimates, but their returned QUADPACK error estimates are not proof certificates; they are therefore not used as theorem constants.  The interval checker raises the corresponding finite-$m$ bounds by only about $0.15\%$--$1.06\%$ while providing an enclosure by construction.
+
+\subsection{Minimum-error bound for safe memory discrimination}
+
+\begin{theorem}[Testing bound under bounded safe excitation]
+\label{thm:T20}
+Let $S:L^2(0,T)\to\mathbb R^q$ be a bounded linear observation operator and let the two simple observation laws be Gaussian with common positive-definite covariance $R$ and means $S(k*u)$.  Let $\mathcal U_m$ be any admissible common-safe input class satisfying $\|u\|_2\le B_{\mathrm{eff}}$ for all $u\in\mathcal U_m$, and define
+\[
+C_{\mathrm{obs}}:=\frac12\|R^{-1/2}S\|_{L^2\to\mathbb R^q}^2,
+\qquad
+U_m:=C_{\mathrm{obs}}\,(\widehat E_m^{\rm IA})^2B_{\mathrm{eff}}^2.
+\]
+For equal prior probabilities, define the robust binary minimax error
+\[
+P_e^*(m):=
+\inf_{u\in\mathcal U_m}\inf_{\phi}
+\sup_{k\in\mathcal K_m}
+\frac12\left[
+P_{C_\alpha}^u(\phi=1)+P_k^u(\phi=0)
+\right].
+\]
+Then
+\[
+P_e^*(m)\ge \Psi(U_m),
+\]
+where valid choices include
+\[
+\Psi_{\mathrm{Pin}}(x)=\max\!\left\{0,\frac{1-\sqrt{x/2}}{2}\right\},
+\qquad
+\Psi_{\mathrm{BH}}(x)=\frac{1-\sqrt{1-e^{-x}}}{2},
+\]
+and, for the equal-covariance Gaussian two-point reduction,
+\[
+\Psi_{\mathrm{G}}(x)=\Phi(-\sqrt{x/2}).
+\]
+\end{theorem}
+\begin{proof}[Proof idea]
+Young's inequality bounds the mean difference of the two-point Gaussian subproblem by $\widehat E_m^{\rm IA} B_{\mathrm{eff}}$; the Gaussian KL bound, Pinsker / Bretagnolle--Huber, and uniformity of the KL ceiling over the input class complete the argument. Complete proof in the Supplementary Material (Section~S2).
+\end{proof}
+
+The theorem is an observation-model theorem, not an identification of continuous white-noise observation with the point-sampled benchmark.  Under the normalized specialization $\|S\|\le1$ and $R=\sigma^2I$, $C_{\mathrm{obs}}\le1/(2\sigma^2)$.  With the universal peak cap $B_{\mathrm{eff}}=\sqrt{T}\,u_{\max}=0.346$ and $\sigma=0.10$, the interval constants give, for example, $U_{16}\le0.240$ and the Pinsker bound $P_e^*(16)\ge0.327$; at $m=32$, $U_{32}\le0.108$ and $P_e^*(32)\ge0.384$.  These numbers demonstrate non-vacuity for the stated normalized Gaussian experiment.  They are not benchmark error guarantees: the released benchmark uses discrete point samples and a fixed rival set, and remains a separate empirical validation layer.
+
+The universal statement uses only the actuator peak cap and therefore applies to every common-safe subset.  The Strong-Allee-specific tightening of the next subsection supplies the missing theorem-valid, hierarchy-uniform outer bound.
+
+\subsection{Hierarchy-uniform Strong-Allee budget}
+\label{subsec:allee_uniform}
+
+In the ecological realization of the frozen hierarchy, each kernel $k(t)=\sum_j c_j e^{-\lambda_j t}\in\mathcal K_m$ acts through the ODE backbone $J(A)$ on the prey channel,
+\[
+\dot q_j = -\lambda_j q_j + u, \qquad \dot\xi = J\xi + e_1\sum_j c_j q_j,
+\]
+so the prey deviation is $x_k = h_J*(k*u)$ with $h_J(t)=e_1^\top e^{Jt}e_1$.  The state response is linear in the positive mode measure $\sum_j c_j\delta_{\lambda_j}$. The downward-gain functional $d(k)=\max_t[-x_k(t)]_+/\|u_0\|_2$ is sublinear rather than linear; nevertheless, positivity of the mode weights makes its supremum over the whole class reducible to a single-mode extremizer.
+
+\begin{theorem}[Hierarchy-uniform Strong-Allee budget]
+\label{thm:T22}
+For a fixed protocol shape $u_0$ define
+\[
+F(\lambda)=\max_{t\le T}\frac{[-(h_J*(e^{-\lambda\,\cdot\,}u_0))(t)]_+}{\|u_0\|_2},
+\qquad
+w(\lambda)=\frac{1-e^{-\lambda T}}{\lambda}.
+\]
+Then the maximal downward gain of the entire class $\mathcal K_m$ is
+\[
+d_{\mathrm{rob}}(\mathcal K_m,u_0)
+= M_T\max_{\lambda\in[\ell_m,L_m]}\frac{F(\lambda)}{w(\lambda)},
+\]
+and the maximum is attained by the single-mode kernel $k^*(t)=\frac{M_T}{w(\lambda^*)}e^{-\lambda^* t}$ with $\lambda^*\in\arg\max F/w$.  Consequently every common-safe ray $u=c u_0$ satisfies the necessary outer bound
+\[
+\|u\|_2 \;\le\; B_{\mathrm{Allee}}(A,m):=\frac{\rho_\eta}{d_{\mathrm{rob}}(\mathcal K_m,u_0)},
+\qquad \rho_\eta = x^*-(A+\eta),
+\]
+which depends on $A$ and $m$. This is a bound for the declared ray $u=c u_0$; it may be inserted into Theorem~\ref{thm:T20} only when that theorem's admissible input class is restricted to the same protocol ray. It is not an outer-energy bound for arbitrary common-safe waveforms.
+\end{theorem}
+\begin{proof}[Proof idea]
+Linearity of the state response in the positive mode measure bounds the downward gain by a mass-weighted maximum of $F/w$, attained by the single-mode kernel of full mass at the maximizing rate. Complete proof in the Supplementary Material (Section~S2).
+\end{proof}
+
+\begin{corollary}[Protocol-restricted testing bound]
+\label{cor:pulse_testing}
+Let $\mathcal U_m(u_0)$ be the common-safe positive ray $\{c u_0:c\ge0\}$ intersected with the actuator peak cap. Then Theorem~\ref{thm:T20} applies with
+\[
+B_{\rm eff}(A,m;u_0)=\min\left\{B_{\rm Allee}(A,m;u_0),\;u_{\max}\frac{\|u_0\|_2}{\|u_0\|_\infty}\right\}.
+\]
+No claim is made here for the minimax error over unrestricted safe waveform classes.
+\end{corollary}
+
+$F(\lambda)$ depends on the backbone $J(A)$ and the protocol, so $d_{\mathrm{rob}}$ has the exact variational form above. The displayed numerical constants are obtained from high-resolution time/rate grids and cross-resolution checks; unlike the interval enclosure for $\widehat E_m^{\rm IA}$, this maximization is not an outward-rounded interval certificate.  For the pulse protocol, $\alpha=0.85$, $T=12$, the corrected nested-window grid gives lower estimates $d_{\mathrm{rob}}\approx7.31$ at $(A,m)=(0.25,4)$ and $22.20$ at $(0.34,32)$; the machine-readable values are reported in the released validation artifacts.  For the pulse ray, the active budget $B_{\mathrm{eff}}=\min(B_{\mathrm{Allee}},B_{\mathrm{cap}},\sqrt{T}\,u_{\max})$ switches between the sampled values $A=0.15$ and $A=0.20$ for every displayed $m$; this is a numerical bracket, not an interval-certified root enclosure; for $A\ge0.38$ the backbone response weakens near the stability edge and $B_{\mathrm{Allee}}$ increases again, so no monotonicity in $A$ is asserted.  Inserted through Corollary~\ref{cor:pulse_testing}, this couples fractional approximation error, latent complexity, and Strong-Allee common safety over the same latent hierarchy for the declared pulse protocol.  The fixed-rival crossover $A\approx0.32$ of Section~\ref{subsec:safety_scope} remains a locked-set diagnostic; the hierarchy-uniform pulse-ray crossover is bracketed by the sampled values $0.15$ and $0.20$.
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig18_safe_discrimination_atlas}
+\caption{Protocol-restricted safe memory-discrimination atlas. Panels (a)--(b) show the Gaussian two-point lower bound for the declared positive pulse ray, using mass-valid interval enclosures of the constructive kernel error and the hierarchy-uniform Strong-Allee outer budget. Hatched cells in panel (a) lie outside the focal Caputo Matignon-stable regime and are not included in the headline stable-regime interpretation. Panel (c) shows the pulse-ray budget frontier; the Strong-Allee extremal identity of Theorem~\ref{thm:T22} is exact, while the displayed maximization constants and crossover are high-accuracy numerical estimates rather than interval-certified quantities. An inconclusive lower bound is never labeled discriminable.}\label{fig:atlas}\end{figure}
+
+\subsection{A certified ecological prey-response theorem via a backbone-consistent finite-state realization}
+\label{subsec:state_theorem}
+
+The preceding results bound discrimination at the abstract memory-kernel level. A na\"ive ecological lift based on the false factorization $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$ is obstructed by a non-vanishing backbone mismatch. We therefore work directly with the true prey-to-prey transfer of the Caputo linearization,
+\[
+G_\alpha(s)=e_1^\top(s^\alpha I-J(A))^{-1}e_1,
+\qquad
+g_\alpha(t)=e_1^\top t^{\alpha-1}E_{\alpha,\alpha}(J(A)t^\alpha)e_1.
+\]
+For the complex-conjugate eigenvalues $\lambda,\bar\lambda$ of $J(A)$ and $J_{22}=0$,
+\[
+g_\alpha(t)=w_1e_\alpha(t;\lambda)+\overline{w_1}e_\alpha(t;\bar\lambda),
+\qquad
+w_1=\frac{\lambda}{\lambda-\bar\lambda},
+\]
+where $e_\alpha(t;\lambda)=t^{\alpha-1}E_{\alpha,\alpha}(\lambda t^\alpha)$. Pole-aware contour representations and rational/finite-state approximations of Mittag--Leffler responses are established numerical tools~\cite{F02,ML01}; the contribution below is not the Hankel deformation itself, but its use to construct an interval-certified finite-state approximation of the ecological prey channel and to propagate that enclosure into a testing bound.
+
+\begin{lemma}[Pole/branch-cut decomposition]
+\label{lem:polebranch}
+Let $0<\alpha<1$ and $\lambda\in\mathbb C$ satisfy $\alpha\pi/2<|\arg\lambda|<\alpha\pi$. Then, for $t>0$,
+\[
+e_\alpha(t;\lambda)=\frac{s_0}{\alpha\lambda}e^{s_0t}+\int_0^\infty e^{-rt}\varphi_\lambda(r)\,dr,
+\qquad s_0=\lambda^{1/\alpha},
+\]
+with the principal branch and
+\[
+\varphi_\lambda(r)=\frac{1}{\pi}\,
+\frac{r^\alpha\sin(\alpha\pi)}{r^{2\alpha}-2\lambda r^\alpha\cos(\alpha\pi)+\lambda^2}.
+\]
+Within this sector, the Matignon inequality $|\arg\lambda|>\alpha\pi/2$ is equivalent to $\operatorname{Re}s_0<0$; the additional inequality $|\arg\lambda|<\alpha\pi$ guarantees that this principal-sheet pole exists.
+\end{lemma}
+\begin{proof}[Proof idea]
+Deform the Bromwich contour onto the Hankel contour around the negative real axis; the sector hypothesis yields exactly one principal-sheet pole with the stated residue, and the two rays combine into the branch integral with a zero-free denominator. Complete proof in the Supplementary Material (Section~S2).
+\end{proof}
+
+Summing the conjugate pair gives a real decomposition $g_\alpha=p+b$,
+\[
+p(t)=2\operatorname{Re}[Pe^{s_0t}],\qquad
+b(t)=\int_0^\infty e^{-rt}\Phi(r)\,dr,
+\qquad
+\Phi(r)=2\operatorname{Re}[w_1\varphi_\lambda(r)].
+\]
+The pole term is exactly realizable by a stable real two-state integer-order block. The remainder is a generally signed Laplace-mixture density. Thus the earlier factorized-route obstruction is bypassed without asserting that the branch remainder is itself a positive or completely monotone kernel.
+
+\paragraph{Finite-state response class.}
+For each budget $m\ge3$ and nondecreasing rate cutoff $R_m$, let $\mathcal G_m$ denote strictly proper, stable, finite-dimensional real LTI prey-response surrogates of state dimension at most $m$, with all poles in $\{\operatorname{Re}s<0,\ |s|\le\max(R_m,|s_0|)\}$ and impulse response satisfying $\|g\|_{L^1(0,T)}\le M_{\rm state}(A)$, where $M_{\rm state}$ is a certified upper enclosure of $\|g_\alpha\|_{L^1(0,T)}$ plus one. This is a response-level latent-surrogate class; it is not claimed that every member preserves the original predator--prey Jacobian skeleton. The constructive member consists of the exact two-state pole block plus $m-2$ stable first-order modes approximating the branch integral.
+
+\begin{theorem}[Certified ecological prey-response approximation]
+\label{thm:T23}
+At every displayed Matignon-stable cell and for $m\in\{4,8,16,32\}$ there is an explicit $g_m\in\mathcal G_m$ such that
+\[
+\|g_\alpha-g_m\|_{L^1(0,T)}\le \widehat E_m^{\rm state}(A).
+\]
+The enclosure is obtained by adaptive interval subdivision of the explicit branch density on compact rate intervals and the tail bound
+\[
+\int_0^T\left|\int_{R_m}^\infty e^{-rt}\Phi(r)\,dr\right|dt
+\le\frac{2|w_1|\sin(\alpha\pi)}{\pi\kappa\alpha}R_m^{-\alpha},
+\quad
+\kappa=1-2|\lambda||\cos(\alpha\pi)|R_m^{-\alpha}-|\lambda|^2R_m^{-2\alpha}>0.
+\]
+For each finite body interval $[a,b]$, the quadrature error is bounded by the minimum of a monotonicity bound and a second-order Taylor-moment bound, with all compact-interval integrals enclosed by interval arithmetic. No floating-point quadrature error estimate is used as a certificate.
+\end{theorem}
+\begin{proof}
+Use the exact pole/branch decomposition and realize the pole pair exactly. On each rate interval, split the branch error into $(e^{-rt}-e^{-\hat rt})\Phi(r)$ plus the interval-enclosed weight error at $\hat r$. Monotonicity of $w(r)=\int_0^T e^{-rt}dt$ gives the first local bound; Taylor expansion in $r$ with an exact remainder gives the second. The tail follows from $\int_0^T e^{-rt}dt\le1/r$ and the reverse-triangle lower bound on the branch denominator. For convergence, first fix a finite rate cutoff and refine the partition, then let the cutoff grow; a diagonal choice gives $\widehat E_m^{\rm state}\to0$. Once the certified error is below one, the declared mass cap also follows directly from $\|g_m\|_1\le\|g_\alpha\|_1+\|g_m-g_\alpha\|_1$; the released finite-budget constructions additionally pass the explicit mass check.
+\end{proof}
+
+For $\alpha=0.85$ and $T=12$, the certified focal enclosures are
+\begin{center}\small
+\begin{tabular}{c|cccc}
+$m$ & 4 & 8 & 16 & 32\\\hline
+$\widehat E_m^{\rm state}$, $A=0.25$ & 0.5335 & 0.1254 & 0.0274 & 0.0070\\
+$\widehat E_m^{\rm state}$, $A=0.30$ & 0.4706 & 0.0899 & 0.0204 & 0.0067
+\end{tabular}
+\end{center}
+An independent floating-point reconstruction using the Mittag--Leffler series on a transformed time grid agrees with all eight focal enclosures; the observed numerical $L^1$ distances are approximately $19\%$--$38\%$ of the corresponding interval upper bounds.
+
+\begin{corollary}[Prey-response testing bound]
+\label{cor:state_testing}
+Let $S:L^2(0,T)\to\mathbb R^q$ be a bounded linear observation operator on the prey-deviation channel, let the Gaussian covariance be $R$, and set $C_{\rm obs}=\tfrac12\|R^{-1/2}S\|^2$. For any input class with $\|u\|_2\le B_{\rm eff}$, the robust minimax error for testing the fractional prey response against $\mathcal G_m$ satisfies
+\[
+P_e^{*,\rm state}(m)\ge\Psi\!\left(C_{\rm obs}(\widehat E_m^{\rm state})^2B_{\rm eff}^2\right),
+\]
+with the same testing inequalities used in Theorem~\ref{thm:T20}.
+\end{corollary}
+\begin{proof}
+Young's inequality gives $\|(g_\alpha-g_m)*u\|_2\le\widehat E_m^{\rm state}B_{\rm eff}$. Insert this explicit competitor into the equal-covariance Gaussian two-point subproblem and then lower-bound the composite minimax risk by that subproblem.
+\end{proof}
+
+For the declared rectangular pulse and peak cap $\|u\|_\infty\le0.10$, $B_{\rm eff}\le0.10\sqrt{1.44}=0.120$. At $\sigma=0.10$, the resulting Pinsker lower bounds at $(A,m)=(0.25;4,8,16,32)$ are approximately $0.340,0.462,0.492,0.498$, and at $A=0.30$ they are $0.359,0.473,0.494,0.498$. These values use only the physical pulse peak cap and therefore do not depend on a hierarchy-wide ecological safety extremizer.
+
+\begin{remark}[Why the broad mass-only Strong-Allee sandwich is not used]
+\label{rem:r6-safety-scope}
+A mathematically valid outer ray bound can be obtained over a broader mass-only response class by inserting the witness $g(t)=-a e^{-rt}$. That class, however, imposes no independent residue/gain cap and does not require members to retain the exact pole block of the approximation construction. Consequently the witness can use very large residues at large rate while preserving its finite-horizon $L^1$ mass. We therefore do not use that broader class to claim a hierarchy-wide ecological-safety closure. The prey-response testing result above uses the physical actuator/shape cap; the Strong-Allee hierarchy result of Theorem~\ref{thm:T22} remains the paper's ecological-safety result at kernel level.
+\end{remark}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.96\textwidth]{fig19_state_theorem}
+\caption{Certified finite-state approximation of the exact fractional prey response. Panel (a): outward-rounded $L^1(0,T)$ enclosures $\widehat E_m^{\rm state}$ across the Matignon-stable $\alpha=0.85$ cells, compared with the earlier kernel-level enclosures. Panel (b): the corresponding Pinsker testing lower bound for the declared pulse under the physical peak cap $\|u\|_\infty\le0.10$ ($B\le0.120$) and $\sigma=0.10$. The figure intentionally does not use the broad mass-only Strong-Allee witness; see Remark~\ref{rem:r6-safety-scope}.}\label{fig:state-theorem}
+\end{figure}
+
+The next section formalizes optimal experiment design using the finite-horizon bounds developed here.
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig14_separation_approx}
+\caption{Exact separation versus finite-horizon approximation, in one picture. Panel (a): on a compact band the Caputo and finite-latent transfer magnitudes agree only at finitely many frequencies (Theorems~\ref{thm:T4}--\ref{thm:T7}); panel (b): a tuned display of the constructive exponential-sum family of Theorem~\ref{thm:T9b} tracks the singular kernel $k_\alpha$ in $L^1(0,T)$ (here $m=32$); panel (c): the deterministic best-displayed $L^1$ approximation error decreases as the latent-mode budget grows. The green line marks the declared modeling budget $m_{\max}=5$; no statistical noise threshold is asserted in this panel. The theoretical fixed-noise-floor consequence is stated separately in Corollary~\ref{cor:unrestricted}.}\label{fig:separation-approx}\end{figure}

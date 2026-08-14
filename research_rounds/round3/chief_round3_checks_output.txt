@@ -1,0 +1,557 @@
+{
+  "l1_independent_check": [
+    {
+      "m": 1,
+      "reported_grid_error": 0.9256736249854808,
+      "adaptive_error": 0.9232330126366429,
+      "quad_error_est": 6.221004784066101e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0026435496948574
+    },
+    {
+      "m": 2,
+      "reported_grid_error": 0.5695593910101967,
+      "adaptive_error": 0.56711682221183,
+      "quad_error_est": 1.0614055100939038e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0043069940842881
+    },
+    {
+      "m": 3,
+      "reported_grid_error": 0.5414787937755107,
+      "adaptive_error": 0.539036414978523,
+      "quad_error_est": 7.262261499033717e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0045310089061146
+    },
+    {
+      "m": 4,
+      "reported_grid_error": 0.3534095070805898,
+      "adaptive_error": 0.35096752072174037,
+      "quad_error_est": 1.796983962515953e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.006957869930037
+    },
+    {
+      "m": 5,
+      "reported_grid_error": 0.3757693707343253,
+      "adaptive_error": 0.3733268584726844,
+      "quad_error_est": 2.4482567319350122e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0065425570279982
+    },
+    {
+      "m": 6,
+      "reported_grid_error": 0.24889661112296343,
+      "adaptive_error": 0.24645426534232276,
+      "quad_error_est": 2.7262897434773138e-14,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0099099351242644
+    },
+    {
+      "m": 8,
+      "reported_grid_error": 0.2654014883351818,
+      "adaptive_error": 0.262959918860986,
+      "quad_error_est": 2.5787089615962776e-13,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.0092849491465143
+    },
+    {
+      "m": 12,
+      "reported_grid_error": 0.23659673128124992,
+      "adaptive_error": 0.2341544746698318,
+      "quad_error_est": 7.364709575827692e-13,
+      "detected_crossings": 1,
+      "reported_over_adaptive": 1.0104301086488388
+    },
+    {
+      "m": 16,
+      "reported_grid_error": 0.20085259800182073,
+      "adaptive_error": 0.1984103355877266,
+      "quad_error_est": 2.3049372949382776e-15,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.012309149152234
+    },
+    {
+      "m": 24,
+      "reported_grid_error": 0.21427006169018825,
+      "adaptive_error": 0.21182792372739606,
+      "quad_error_est": 2.0261570199409107e-15,
+      "detected_crossings": 0,
+      "reported_over_adaptive": 1.011528876456982
+    },
+    {
+      "m": 32,
+      "reported_grid_error": 0.13466298155669612,
+      "adaptive_error": 0.13222086654063273,
+      "quad_error_est": 1.6527769704819878e-12,
+      "detected_crossings": 2,
+      "reported_over_adaptive": 1.01846996680598
+    }
+  ],
+  "corrected_dictionary_span_kappa": {
+    "sinusoid": {
+      "rank": 21,
+      "basis_cols": 24,
+      "smin_restricted": 0.053176926261534814,
+      "smax_restricted": 1.9936846987543428,
+      "dictionary_condition_nonzero": 246871361191.6093
+    },
+    "multisine": {
+      "rank": 13,
+      "basis_cols": 24,
+      "smin_restricted": 0.14413151406954966,
+      "smax_restricted": 1.978373851678571,
+      "dictionary_condition_nonzero": 142540821834.8742
+    },
+    "chirp": {
+      "rank": 11,
+      "basis_cols": 20,
+      "smin_restricted": 0.09969492835999597,
+      "smax_restricted": 1.9932682647351447,
+      "dictionary_condition_nonzero": 63945871588.22975
+    },
+    "prbs": {
+      "rank": 15,
+      "basis_cols": 24,
+      "smin_restricted": 0.28403544998971025,
+      "smax_restricted": 1.9823571883015156,
+      "dictionary_condition_nonzero": 6.1290713219058235
+    }
+  },
+  "one_sided_transient_bounds_benchmark_rivals": [
+    {
+      "A": 0.2,
+      "family": "pulse",
+      "rho_eta": 0.44666666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -0.505415573021034,
+          "max": 0.8148820998840053,
+          "downward_gain": 0.505415573021034
+        },
+        "Caputo": {
+          "min": -0.2716146524164646,
+          "max": 0.7528542203746376,
+          "downward_gain": 0.2716146524164646
+        },
+        "DDE": {
+          "min": -0.6328558528588323,
+          "max": 0.8700493049391075,
+          "downward_gain": 0.6328558528588323
+        },
+        "latent1": {
+          "min": -0.5613762555759193,
+          "max": 0.8908823075976091,
+          "downward_gain": 0.5613762555759193
+        },
+        "latent3": {
+          "min": -0.6808904041059126,
+          "max": 1.0383075964461708,
+          "downward_gain": 0.6808904041059126
+        }
+      },
+      "robust_downward_gain_sampled": 0.6808904041059126,
+      "positive_ray_allee_outer_sampled": 0.6560037620932422,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.12
+    },
+    {
+      "A": 0.2,
+      "family": "multiscale",
+      "rho_eta": 0.44666666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -0.3700280942586502,
+          "max": 0.4796470151150483,
+          "downward_gain": 0.3700280942586502
+        },
+        "Caputo": {
+          "min": -0.21370834267591438,
+          "max": 0.46853178272087276,
+          "downward_gain": 0.21370834267591438
+        },
+        "DDE": {
+          "min": -0.47136253714861726,
+          "max": 0.5194066066468187,
+          "downward_gain": 0.47136253714861726
+        },
+        "latent1": {
+          "min": -0.4173227382295841,
+          "max": 0.5313391902024006,
+          "downward_gain": 0.4173227382295841
+        },
+        "latent3": {
+          "min": -0.5141899008724694,
+          "max": 0.6548018345718998,
+          "downward_gain": 0.5141899008724694
+        }
+      },
+      "robust_downward_gain_sampled": 0.5141899008724694,
+      "positive_ray_allee_outer_sampled": 0.8686803570213448,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.1549193338482967
+    },
+    {
+      "A": 0.25,
+      "family": "pulse",
+      "rho_eta": 0.3966666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -0.8157722066545405,
+          "max": 0.9974196430464244,
+          "downward_gain": 0.8157722066545405
+        },
+        "Caputo": {
+          "min": -0.41059934106091955,
+          "max": 0.9507954066550366,
+          "downward_gain": 0.41059934106091955
+        },
+        "DDE": {
+          "min": -1.0306493977568962,
+          "max": 1.0477341373569473,
+          "downward_gain": 1.0306493977568962
+        },
+        "latent1": {
+          "min": -0.9367686065769298,
+          "max": 1.0867997983486928,
+          "downward_gain": 0.9367686065769298
+        },
+        "latent3": {
+          "min": -1.1815835989740426,
+          "max": 1.2652124575447314,
+          "downward_gain": 1.1815835989740426
+        }
+      },
+      "robust_downward_gain_sampled": 1.1815835989740426,
+      "positive_ray_allee_outer_sampled": 0.33570766132086494,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.12
+    },
+    {
+      "A": 0.25,
+      "family": "multiscale",
+      "rho_eta": 0.3966666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -0.6632830005298863,
+          "max": 0.653529531128438,
+          "downward_gain": 0.6632830005298863
+        },
+        "Caputo": {
+          "min": -0.3468935152152068,
+          "max": 0.5965593009954312,
+          "downward_gain": 0.3468935152152068
+        },
+        "DDE": {
+          "min": -0.8205941624545043,
+          "max": 0.7095998166981159,
+          "downward_gain": 0.8205941624545043
+        },
+        "latent1": {
+          "min": -0.7459676510031001,
+          "max": 0.7349732120261899,
+          "downward_gain": 0.7459676510031001
+        },
+        "latent3": {
+          "min": -0.8953019584712814,
+          "max": 0.892017711177235,
+          "downward_gain": 0.8953019584712814
+        }
+      },
+      "robust_downward_gain_sampled": 0.8953019584712814,
+      "positive_ray_allee_outer_sampled": 0.4430535004569528,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.1549193338482967
+    },
+    {
+      "A": 0.3,
+      "family": "pulse",
+      "rho_eta": 0.3466666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -1.3829067372740764,
+          "max": 1.1560759660798772,
+          "downward_gain": 1.3829067372740764
+        },
+        "Caputo": {
+          "min": -0.6489203093944711,
+          "max": 1.1239917915245194,
+          "downward_gain": 0.6489203093944711
+        },
+        "DDE": {
+          "min": -1.7757039641782701,
+          "max": 1.2015437282108046,
+          "downward_gain": 1.7757039641782701
+        },
+        "latent1": {
+          "min": -1.6265361740275657,
+          "max": 1.2576648962942047,
+          "downward_gain": 1.6265361740275657
+        },
+        "latent3": {
+          "min": -2.1128263121302107,
+          "max": 1.5041090978819591,
+          "downward_gain": 2.1128263121302107
+        }
+      },
+      "robust_downward_gain_sampled": 2.1128263121302107,
+      "positive_ray_allee_outer_sampled": 0.16407721954065765,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.12
+    },
+    {
+      "A": 0.3,
+      "family": "multiscale",
+      "rho_eta": 0.3466666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -0.991157971673365,
+          "max": 0.8307468305745284,
+          "downward_gain": 0.991157971673365
+        },
+        "Caputo": {
+          "min": -0.4791852325242354,
+          "max": 0.7676702416721654,
+          "downward_gain": 0.4791852325242354
+        },
+        "DDE": {
+          "min": -1.3456759210544373,
+          "max": 0.8846591020790671,
+          "downward_gain": 1.3456759210544373
+        },
+        "latent1": {
+          "min": -1.1788034012444448,
+          "max": 0.9272202818957868,
+          "downward_gain": 1.1788034012444448
+        },
+        "latent3": {
+          "min": -1.5488809020991758,
+          "max": 1.1199072329755047,
+          "downward_gain": 1.5488809020991758
+        }
+      },
+      "robust_downward_gain_sampled": 1.5488809020991758,
+      "positive_ray_allee_outer_sampled": 0.22381750991753743,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.1549193338482967
+    },
+    {
+      "A": 0.32,
+      "family": "pulse",
+      "rho_eta": 0.3266666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -1.7564908138105193,
+          "max": 1.212751986265551,
+          "downward_gain": 1.7564908138105193
+        },
+        "Caputo": {
+          "min": -0.7990180035846857,
+          "max": 1.186654519195459,
+          "downward_gain": 0.7990180035846857
+        },
+        "DDE": {
+          "min": -2.27726363159212,
+          "max": 1.25769393964024,
+          "downward_gain": 2.27726363159212
+        },
+        "latent1": {
+          "min": -2.0816326668430896,
+          "max": 1.330145648564187,
+          "downward_gain": 2.0816326668430896
+        },
+        "latent3": {
+          "min": -2.7305297143048564,
+          "max": 1.637027959546587,
+          "downward_gain": 2.7305297143048564
+        }
+      },
+      "robust_downward_gain_sampled": 2.7305297143048564,
+      "positive_ray_allee_outer_sampled": 0.11963490635363037,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.11963490635363037
+    },
+    {
+      "A": 0.32,
+      "family": "multiscale",
+      "rho_eta": 0.3266666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -1.3875023129432045,
+          "max": 0.8975104615097401,
+          "downward_gain": 1.3875023129432045
+        },
+        "Caputo": {
+          "min": -0.6578343322794759,
+          "max": 0.834922968663973,
+          "downward_gain": 0.6578343322794759
+        },
+        "DDE": {
+          "min": -1.8695167749114334,
+          "max": 0.9500233825600228,
+          "downward_gain": 1.8695167749114334
+        },
+        "latent1": {
+          "min": -1.652102226110953,
+          "max": 1.001141122426291,
+          "downward_gain": 1.652102226110953
+        },
+        "latent3": {
+          "min": -2.1791522353417867,
+          "max": 1.2435203659238423,
+          "downward_gain": 2.1791522353417867
+        }
+      },
+      "robust_downward_gain_sampled": 2.1791522353417867,
+      "positive_ray_allee_outer_sampled": 0.14990539043979684,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.14990539043979684
+    },
+    {
+      "A": 0.34,
+      "family": "pulse",
+      "rho_eta": 0.3066666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -2.28697796670572,
+          "max": 1.2700874383754313,
+          "downward_gain": 2.28697796670572
+        },
+        "Caputo": {
+          "min": -1.0057187854060743,
+          "max": 1.2458097480876276,
+          "downward_gain": 1.0057187854060743
+        },
+        "DDE": {
+          "min": -3.0019275590430285,
+          "max": 1.3377151167119143,
+          "downward_gain": 3.0019275590430285
+        },
+        "latent1": {
+          "min": -2.7283388412002396,
+          "max": 1.4286359867880805,
+          "downward_gain": 2.7283388412002396
+        },
+        "latent3": {
+          "min": -3.6105906015975386,
+          "max": 1.8018964406581925,
+          "downward_gain": 3.6105906015975386
+        }
+      },
+      "robust_downward_gain_sampled": 3.6105906015975386,
+      "positive_ray_allee_outer_sampled": 0.08493531959313778,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.08493531959313778
+    },
+    {
+      "A": 0.34,
+      "family": "multiscale",
+      "rho_eta": 0.3066666666666666,
+      "per_model": {
+        "ODE": {
+          "min": -1.949481621626058,
+          "max": 0.9641821245769147,
+          "downward_gain": 1.949481621626058
+        },
+        "Caputo": {
+          "min": -0.8912804873424253,
+          "max": 0.9009275345284032,
+          "downward_gain": 0.8912804873424253
+        },
+        "DDE": {
+          "min": -2.6260232964828405,
+          "max": 1.104649588618276,
+          "downward_gain": 2.6260232964828405
+        },
+        "latent1": {
+          "min": -2.3300249517113536,
+          "max": 1.1492058052699525,
+          "downward_gain": 2.3300249517113536
+        },
+        "latent3": {
+          "min": -3.0830748869821623,
+          "max": 1.509129491322845,
+          "downward_gain": 3.0830748869821623
+        }
+      },
+      "robust_downward_gain_sampled": 3.0830748869821623,
+      "positive_ray_allee_outer_sampled": 0.09946779689378361,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.09946779689378361
+    },
+    {
+      "A": 0.35,
+      "family": "pulse",
+      "rho_eta": 0.29666666666666663,
+      "per_model": {
+        "ODE": {
+          "min": -2.6407048835143616,
+          "max": 1.3084838768519258,
+          "downward_gain": 2.6407048835143616
+        },
+        "Caputo": {
+          "min": -1.1402587523539511,
+          "max": 1.2741359463881667,
+          "downward_gain": 1.1402587523539511
+        },
+        "DDE": {
+          "min": -3.4690817453086473,
+          "max": 1.3906413522937064,
+          "downward_gain": 3.4690817453086473
+        },
+        "latent1": {
+          "min": -3.159838831633679,
+          "max": 1.4902209286507078,
+          "downward_gain": 3.159838831633679
+        },
+        "latent3": {
+          "min": -4.1799623343571755,
+          "max": 1.9002058436316376,
+          "downward_gain": 4.1799623343571755
+        }
+      },
+      "robust_downward_gain_sampled": 4.1799623343571755,
+      "positive_ray_allee_outer_sampled": 0.07097352629908091,
+      "shape_specific_actuator_energy_cap": 0.12,
+      "effective_sampled": 0.07097352629908091
+    },
+    {
+      "A": 0.35,
+      "family": "multiscale",
+      "rho_eta": 0.29666666666666663,
+      "per_model": {
+        "ODE": {
+          "min": -2.316696203362104,
+          "max": 1.0647407604787968,
+          "downward_gain": 2.316696203362104
+        },
+        "Caputo": {
+          "min": -1.010860576300501,
+          "max": 0.9333839696741983,
+          "downward_gain": 1.010860576300501
+        },
+        "DDE": {
+          "min": -3.0423396019415447,
+          "max": 1.210268971427536,
+          "downward_gain": 3.0423396019415447
+        },
+        "latent1": {
+          "min": -2.7496339154692753,
+          "max": 1.2628506059206772,
+          "downward_gain": 2.7496339154692753
+        },
+        "latent3": {
+          "min": -3.5788848506165762,
+          "max": 1.6480951291665988,
+          "downward_gain": 3.5788848506165762
+        }
+      },
+      "robust_downward_gain_sampled": 3.5788848506165762,
+      "positive_ray_allee_outer_sampled": 0.0828936048656487,
+      "shape_specific_actuator_energy_cap": 0.1549193338482967,
+      "effective_sampled": 0.0828936048656487
+    }
+  ],
+  "scope_note": "Benchmark-rival bounds are numerical diagnostics for the locked five simulators, not certificates for the full K_m hierarchy."
+}

@@ -44,15 +44,12 @@ For the biological channels:
     \item Cross-species channels: \(CB = 0\).
 \end{itemize}
 Therefore a collocated perturb-and-measure protocol gives the cleanest high-frequency signature of \(\alpha\).
-Cross-species measurements remain useful for interaction parameters and phase coupling.
+Cross-species measurements remain useful for interaction parameters; their own high-frequency phase differs from the collocated signature~\eqref{eq:phase} because \(CB=0\) there (Remark~\ref{rem:compact_band} and Section~\ref{sec:design}).
 
-Latent environmental states are observable exactly when \(C (J + \lambda I)^{-1} g \neq 0\) (see source pack Theorem~T3).
+Latent environmental states are observable exactly when \(C (J + \lambda I)^{-1} g \neq 0\) (Popov--Belevitch--Hautus latent-mode condition).
 This condition precisely determines when an environmental covariate is needed: not always, but whenever the latent coupling lies in an output-invisible direction or is nearly invisible in the practical noise metric.
-\begin{figure}[htbp]\centering\includegraphics[width=0.75\textwidth]{fig01_transfer_magnitude}
-\caption{Transfer magnitude $|G(i\omega)|$ on the prey channel for the four memory mechanisms at $A=0.25$.}\label{fig:transfer-mag}\end{figure}
+\begin{figure}[htbp]\centering\includegraphics[width=0.78\textwidth]{fig01_transfer_magnitude}
+\caption{Transfer magnitude $|G(i\omega)|$ on the prey channel for the four memory mechanisms at $A=0.25$. The shaded region is the design band where the optimal inputs of Section~\ref{sec:design} place their energy; inside it the Caputo curve already separates from its rivals, with the $\omega^{-\alpha}$ (Caputo) versus $\omega^{-1}$ (DDE) asymptotics taking over at higher frequency.}\label{fig:transfer-mag}\end{figure}
 
-\begin{figure}[htbp]\centering\includegraphics[width=0.75\textwidth]{fig02_transfer_phase}
-\caption{Transfer phase $\arg G(i\omega)$; the Caputo mechanism separates in phase from the integer-order, delay, and latent alternatives.}\label{fig:transfer-phase}\end{figure}
-
-\begin{figure}[htbp]\centering\includegraphics[width=0.70\textwidth]{fig03_hf_phase}
-\caption{High-frequency Caputo phase converges to $-\alpha\pi/2$ (dotted), a scale-free structural signature.}\label{fig:hf-phase}\end{figure}
+\begin{figure}[htbp]\centering\includegraphics[width=0.95\textwidth]{fig02_phase_2panel}
+\caption{Phase signatures of structural separation. Panel (a): full phase comparison on the prey channel --- the Caputo mechanism separates from the integer-order, delay, and latent alternatives. Panel (b): the scale-free high-frequency signature $\arg G_\alpha(i\omega)\to -\alpha\pi/2$ of Equation~\eqref{eq:phase} for three fractional orders, converging to the dotted asymptotes. This is a collocated-channel property: cross channels ($CB=0$) carry a different asymptotic phase.}\label{fig:transfer-phase}\end{figure}

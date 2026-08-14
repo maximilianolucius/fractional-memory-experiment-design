@@ -1,0 +1,113 @@
+% ---- proof of the linear safety envelope lemma
+\paragraph{Proof of the linear safety envelope (Lemma~\ref{lem:linear_safety}).}
+From~\eqref{eq:state_conv},
+\[
+\|\xi(t)\| \le \int_0^t \|H_\alpha(t - s)\|\,\|u(s)\|\, ds
+\le \|u\|_{L^\infty} \int_0^t \|H_\alpha(\tau)\|\, d\tau
+\le \|u\|_{L^\infty} \,\Gamma_T.
+\]
+Inserting the bound~\eqref{eq:safe_input_bound} yields \(\|\xi(t)\| \le \rho\) for all \(t \in [0, T]\).
+
+% ---- proof of Theorem T17
+\paragraph{Proof of Theorem~\ref{thm:T17}.}
+Suppose for contradiction that some component first contacts a face of \(\mathcal{R}\). Consider the lower face: there is a first time \(t_* > 0\) and a component \(i\) with \(z_i(t_*) = \ell_i\) and \(z_i(t) > \ell_i\) for all \(t \in [0, t_*)\). Since \(z(0) \in \operatorname{int}\mathcal{R}\), we have \(z_i(0) > \ell_i\). On \([0, t_*]\), the component \(z_i\) attains its minimum at the right endpoint \(t_*\). We use the following Caputo endpoint identity, valid for any absolutely continuous \(w\) on \([0,t_*]\):
+\[
+{}^C D_t^\alpha w(t_*)
+= \frac{\alpha}{\Gamma(1-\alpha)} \int_0^{t_*} \frac{w(t_*) - w(s)}{(t_* - s)^{1+\alpha}}\, ds,
+\]
+obtained by integrating the definition \({}^C D_t^\alpha w(t) = \frac{1}{\Gamma(1-\alpha)}\int_0^t (t-s)^{-\alpha} w'(s)\,ds\) by parts; the integrated term vanishes because \((t_* - s)^{-\alpha}(w(t_*) - w(s)) \to 0\) at both endpoints. Applying this with \(w = z_i\), every integrand value satisfies \(z_i(t_*) - z_i(s) = \ell_i - z_i(s) \le 0\), with strict inequality on a set of positive measure (since \(z_i(0) > \ell_i\) and \(z_i\) is continuous). Hence
+\[
+{}^C D_t^\alpha z_i(t_*) < 0.
+\]
+But the dynamics and the strict inward-pointing condition~\eqref{eq:f_lower} give \({}^C D_t^\alpha z_i(t_*) = F_i(t_*, z(t_*)) \ge \eta > 0\), a contradiction. The upper-face case is identical with signs reversed, using that \(z_i\) attains its maximum at \(t_*\). Hence no component can have a first contact with a face, and the solution stays in \(\operatorname{int}\mathcal{R}\).
+
+% ---- face inequalities
+\subsection{Strong-Allee boundary inequalities}
+
+Applying Theorem~\ref{thm:T17} to the controlled strong-Allee predator--prey system from Section~\ref{sec:backbone} with additive controls \(u_x, u_y\) and safety rectangle
+\begin{equation}
+\mathcal{R} = [x_L, x_U] \times [y_L, y_U],
+\label{eq:safe_box}
+\end{equation}
+the four boundary conditions become explicit deterministic inequalities. For brevity we present the four sufficient conditions; each may be tightened by worst-case analysis over parametric uncertainty using interval arithmetic.
+
+\subsubsection*{Lower prey face}
+
+At the lower prey boundary \(x = x_L\), the vector field component is
+\[
+F_x = r x_L \left(1 - \frac{x_L}{K}\right) \left(\frac{x_L}{A} - 1\right)
+- \frac{a x_L y}{1 + h x_L} + b_x u_x.
+\]
+Taking the worst-case prey depletion at the maximum plausible predator abundance \(y_U\), the sufficient inward-pointing condition is
+\begin{equation}
+\boxed{
+r x_L \left(1 - \frac{x_L}{K}\right) \left(\frac{x_L}{A} - 1\right)
+- \frac{a x_L\, y_U}{1 + h x_L} + b_x u_x^{\min} \ge 0 }.
+\label{eq:lower_prey}
+\end{equation}
+
+\subsubsection*{Upper prey face}
+
+At the upper prey boundary \(x = x_U\) with the minimum predator \(y_L\),
+\begin{equation}
+\boxed{
+r x_U \left(1 - \frac{x_U}{K}\right) \left(\frac{x_U}{A} - 1\right)
+- \frac{a x_U\, y_L}{1 + h x_U} + b_x u_x^{\max} \le 0 }.
+\label{eq:upper_prey}
+\end{equation}
+
+\subsubsection*{Lower predator face}
+
+At the lower predator boundary \(y = y_L\),
+\begin{equation}
+\boxed{
+y_L \left(\frac{e a x}{1 + h x} - m\right) + b_y u_y^{\min} \ge 0,\qquad
+\forall x \in [x_L, x_U] }.
+\label{eq:lower_pred}
+\end{equation}
+The parenthesis is the functional response gradient. The inequality must hold for every prey value in of \(x\) in the box, which can be verified by evaluating its minimum over \([x_L, x_U]\) (a one-dimensional check for this monotonic Holling type~II response).
+
+\subsubsection*{Upper predator face}
+
+At the upper predator boundary \(y = y_U\),
+\begin{equation}
+\boxed{
+y_U \left(\frac{e a x}{1 + h x} - m\right) + b_y u_y^{\max} \le 0,\qquad
+\forall x \in [x_L, x_U] }.
+\label{eq:upper_pred}
+\end{equation}
+
+The inequalities~\eqref{eq:lower_prey}--\eqref{eq:upper_pred} are sufficient, not necessary: a vector field can fail the sign condition at a boundary without the trajectory reaching it. They are adequate for design, and numerical verification prior to each experiment is straightforward. For the locked parameters of Section~\ref{sec:backbone} --- \(r = 3/2, K = 1, a = 1, h = 1/2, e = 4/5, m = 2/5\) --- the left-hand sides are rational functions of \(A\).
+
+
+% ---- practical consequences
+\subsection{Practical consequences of the Allee threshold}
+
+The Allee threshold \(A\) introduces two specific warnings that shape any implementable protocol.
+
+\textbf{Negative prey pulses.} Removing prey from a population near the Allee threshold is the most informative perturbation under some model pairs because it probes the nonlinear prey growth function directly and can disentangle the sign of the growth rate. However, a negative prey pulse directly pushes the population toward \(A\). The inequalities~\eqref{eq:lower_prey}--\eqref{eq:upper_pred} require that even at maximum removal, the net prey impulse does not cross the lower bound \(x_L > A\). In practice, this means:
+
+\begin{itemize}
+\item Reserve a certified margin \(\|x(t) - A\| \ge \Delta_{\text{min}} > 0\) at all times.
+\item Pre-emption removal by positive predator pulses when the lower-face condition fails.
+\item Use positive prey nutrients or predator removal perturbations for the harvesting-like signal whenever it is scientifically equivalent.
+\item Adaptive termination: stop the trial automatically if a posterior predictive probability of crossing \(x_L\) exceeds a user-specified safety level \(\beta\) (e.g., \(5\%\)).
+\end{itemize}
+
+\textbf{Cumulative impact.} The linear safety bound of Lemma~\ref{lem:linear_safety} is an instantaneous envelope that does not account for the accumulated distortion of repeated perturbation--recovery cycles. For protocols with many sequential pulses, add the cumulative-integral constraint
+\begin{equation}
+\sum_{k} \|u_k\|\, \Delta t_k \le C_{\max},
+\end{equation}
+where the \(C_{\max}\) is calibrated by numerical simulation of the worst-case admissible trajectory. This guarantee is the robust analogue of the linear impulse bound for repeated perturbation designs.
+
+The safety architecture of this section --- existence guarantee (Theorem~\ref{thm:T16}) plus invariance certificate (Theorem~\ref{thm:T17}) --- formally closes the loop between the information-theoretic optima of Section~\ref{sec:design} and the ecological admissible parameter described in Section~\ref{sec:backbone}. The practical envelope procedure above and its algorithmic counterpart will be exercised numerically in Section~\ref{sec:benchmark}, and its Bayesian extension (for parameter uncertainty on parameters including the Allee threshold itself) is developed in Section~\ref{sec:bayesian}.
+
+% ---- complete proof moved in the Q1 closeout
+\paragraph{Proof of Theorem~\ref{thm:T16} (safe and informative perturbation exists).}
+By continuity of the solution maps and the positive interior margin \(\rho\), there exists \(\varepsilon_s > 0\) such that the state remains in \(\mathcal{S}\) for both models whenever \(\|\varepsilon\| < \varepsilon_s\). The output difference expands as
+\begin{equation}
+\mu_1(u_{\varepsilon}) - \mu_2(u_{\varepsilon})
+= \varepsilon (H_1 - H_2) v + o(\varepsilon).
+\label{eq:output_expansion}
+\end{equation}
+Since the leading vector is nonzero by condition (ii), the difference is nonzero for sufficiently small positive \(\varepsilon\). Under the nonsingular Gaussian noise model of Section~\ref{sec:design}, the Kullback--Leibler divergence is a positive quadratic form in \(\Delta \mu\) (Equation~\ref{eq:kl_pairwise}). Choose \(\varepsilon_0\) below both \(\varepsilon_s\) and the threshold at which the \(o(\varepsilon)\) term dominates the linear term. Then every \(0 < \varepsilon < \varepsilon_0\) is simultaneously safe and informative.

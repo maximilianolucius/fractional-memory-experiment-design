@@ -1,0 +1,66 @@
+{
+  "fig01_transfer_magnitude.pdf": {
+    "same_as_round3": true,
+    "sha256": "eff59d89042d9f951d1b0e799cbd401afebf798e0aacc3797795a513896cf4c9"
+  },
+  "fig02_phase_2panel.pdf": {
+    "same_as_round3": true,
+    "sha256": "727db1eaea547be19867e73c4a87762062ace61a4739fa96025d91be970f8152"
+  },
+  "fig04_waveforms.pdf": {
+    "same_as_round3": true,
+    "sha256": "f23250a379d4cced2c4c107ee59164c7c093643a1cd937a43f5160ebb7c4f1c4"
+  },
+  "fig05_linear_ranking.pdf": {
+    "same_as_round3": true,
+    "sha256": "11aa38bdabe2c80b1cdef4f63ee5dbee1e06827195b06e30b1354342cb218af6"
+  },
+  "fig06_solver_convergence.pdf": {
+    "same_as_round3": true,
+    "sha256": "d66f2bd6b3ac55c7f22e140764339c71250d39f35e5e5766823a20eb7907452c"
+  },
+  "fig07_confusion.pdf": {
+    "same_as_round3": true,
+    "sha256": "d8248425b49c398e8697de3078a4a008eb4df35655ba0e47a116959b3e6db139"
+  },
+  "fig08_accuracy_vs_alpha.pdf": {
+    "same_as_round3": true,
+    "sha256": "e497ffb3be11133faff1be2501710272dc976a77286e83558f65a43a8960698a"
+  },
+  "fig09_accuracy_snr_channel.pdf": {
+    "same_as_round3": true,
+    "sha256": "39cd7ec3508d9bac0032bfb536fc3c114cde1bb4102dbc4810e725119813eb47"
+  },
+  "fig10_safety_tradeoff.pdf": {
+    "same_as_round3": true,
+    "sha256": "769f935630d9744b2be27a9e33144865c0213a1cd690c943ae961bebd94d520c"
+  },
+  "fig11_system_schematic.pdf": {
+    "same_as_round3": true,
+    "sha256": "13088a15bb32071e6cbdcca76a63c07727881fc2c1b6244bcf54488f2ec0c6ba"
+  },
+  "fig12_backbone_regime.pdf": {
+    "same_as_round3": true,
+    "sha256": "30cb01b2f0b27948aeed0c30a33aa1e771e35ac8888bf01d0180e1a6b61b25b3"
+  },
+  "fig13_model_family.pdf": {
+    "same_as_round3": true,
+    "sha256": "1cd79d27d268b3179a9a6b10aa0bd29232d87f6a50fb5ffdc200174e2dc4243f"
+  },
+  "fig14_separation_approx.pdf": {
+    "same_as_round3": true,
+    "sha256": "f968eaddede9c1198391ca10572a96e221148d9dbe7c721cd160eda205f042dc"
+  },
+  "fig15_safety_geometry.pdf": {
+    "same_as_round3": true,
+    "sha256": "a520b99ab12af5142d9e668a71aadf99bdec1dba445abb6eeb8904dffd6db5cb"
+  },
+  "fig16_bayes_workflow.pdf": {
+    "same_as_round3": true,
+    "sha256": "a86eedc7b792f13178e0234573bb9d7467b4f699bc2398dc5a7a0c612f733415"
+  },
+  "fig17_paper_workflow.pdf": {
+    "same_as_round3": true,
+    "sha256": "ddfd842d7c900dc5ce479f5999efad9b7aafe9923268ffee6a472a132f32f7d7"
+  }
+}

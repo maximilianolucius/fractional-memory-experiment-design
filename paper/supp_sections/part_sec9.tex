@@ -1,0 +1,98 @@
+% ---- joint utility (moved from the utility subsection)
+\subsection{Joint model-plus-parameter utility}
+
+If the purpose includes parameter recovery --- that is, if the goal is to refine the within-model parameters and not only to separate models --- the joint utility replaces the model marginal by the joint posterior:
+\begin{equation}
+U_{\mathrm{joint}}(d) = I\bigl((M,\vartheta_M); Y \mid d\bigr).
+\label{eq:bayes_joint}
+\end{equation}
+The objective~\eqref{eq:bayes_joint} can favor designs that are locally informative for within-model parameter estimation but not robust for separating models whose parametric families overlap; the paper therefore reports model-only~\eqref{eq:bayes_utility} and joint~\eqref{eq:bayes_joint} utilities separately, and never as a single commensurable scalar.
+
+% ---- full proof of T18
+\subsection{Complete proofs and remarks}
+\paragraph{Proof of Theorem~\ref{thm:T18}.}
+Bayes' rule applied to the observation model~\eqref{eq:bayes_obs} gives, for a single step, $p(\vartheta_M \mid Y_k, M, d_k) \propto p(\vartheta_M \mid M)\, \mathcal{N}(Y_k; \mu_M(\vartheta_M; d_k), R)$. Independence of the additive noise across steps together with the forward factorization $\prod p(Y_k \mid \vartheta_M, M, d_k)$ yields the product form~\eqref{eq:bayes_posterior}; the model-level update~\eqref{eq:bayes_model_post} follows by integrating out $\vartheta_M$ at each model and reweighting through Bayes. In the linear-Gaussian conjugate case, $\mu_M$ is affine in $\vartheta_M$ and the prior is Gaussian, so the product likelihood is Gaussian in the parameter and the within-model marginal integrates exactly to a Gaussian predictive density with covariance $H_{M} P_{M} H_{M}^{\top} + R$; the pairwise separation of these predictive means is governed by the operator $Q = \Delta H^{*} R^{-1} \Delta H$ of Section~\ref{sec:design}. Outside that conjugate case the product likelihood is generically non-Gaussian in $\vartheta_M$ --- the Gaussianity of~\eqref{eq:bayes_obs} holds only conditionally on the parameter --- and the integral in~\eqref{eq:bayes_model_post} must be evaluated numerically.
+
+\begin{remark}
+Theorem~\ref{thm:T18} mediates the boundary between the analytical layer of Section~\ref{sec:design} and the computational layer of the present section. The closed-form optimal input $u^{*}$ of Theorem~\ref{thm:T11} is recovered exactly when the map $\mu_M$ is linear in the parameter; in any other regime $u^{*}$ is the screening benchmark --- the upper bound that the nested estimator of Section~\ref{subsec:bayes:nested} is calibrated against --- but not the implemented design.
+\end{remark}
+
+\paragraph{Proof of Theorem~\ref{thm:T19}.}
+Write $\mathcal{D}_n = (Y_{1:n}, d_{1:n})$. Since $d_{n+1}$ is a function of $\mathcal{D}_n$, conditioning on $d_{n+1}$ adds no information about $M$ beyond $\mathcal{D}_n$. The chain rule for mutual information gives
+\[
+I(M; Y_{n+1} \mid \mathcal{D}_n, d_{n+1})
+= H(M \mid \mathcal{D}_n) - H(M \mid \mathcal{D}_n, Y_{n+1}, d_{n+1}).
+\]
+Expanding the conditional mutual information as an expectation of log-ratios yields~\eqref{eq:bayes_seq}: for each realized $Y_{n+1}$ the realized posterior $p(M \mid \mathcal{D}_n, Y_{n+1}, d_{n+1})$ is compared, in KL, against the current posterior $p(M \mid \mathcal{D}_n)$, and the comparison is averaged under the prior predictive distribution of $Y_{n+1}$. The upper bound~\eqref{eq:bayes_seq_bound} follows because conditional entropy is nonnegative, so $I(M; Y_{n+1} \mid \mathcal{D}_n, d_{n+1}) \le H(M \mid \mathcal{D}_n) = H(M \mid Y_{1:n})$; the lower bound is the nonnegativity of mutual information. Equality in the upper bound holds exactly when $H(M \mid \mathcal{D}_n, Y_{n+1}, d_{n+1}) = 0$, i.e.\ when a single experiment resolves the model identity almost surely.
+
+\begin{remark}[Expected KL, not KL of the expected posterior]
+\label{rem:tower}
+The identity~\eqref{eq:bayes_seq} is an \emph{expectation of divergences between realized posteriors} and the current posterior. It must not be replaced by the divergence between the expected future posterior $\tilde q(M) = \mathbb{E}_{Y \mid \mathcal{D}_n, d}[p(M \mid \mathcal{D}_n, Y, d)]$ and the current posterior: by the tower property, $\tilde q = p(M \mid \mathcal{D}_n)$ identically, so $D_{\mathrm{KL}}(\tilde q \,\|\, p(M \mid \mathcal{D}_n)) = 0$ for every design and cannot serve as an acquisition function. The averaging in~\eqref{eq:bayes_seq} is over the convex function $p \mapsto D_{\mathrm{KL}}(p \,\|\, p(M \mid \mathcal{D}_n))$, and it is precisely this convexity that makes the quantity positive whenever data can be informative.
+\end{remark}
+
+\begin{remark}[Status of greedy scheduling]
+\label{rem:greedy}
+Maximizing~\eqref{eq:bayes_seq} at every step is the natural myopic policy induced by the bound, and this paper adopts it as the definition of the adaptive schedule~\eqref{eq:bayes_adaptive}. Greedy one-step mutual-information maximization does \emph{not}, by itself, minimize the expected number of experiments needed to drive the posterior past a confidence threshold: such a guarantee requires additional structure (for example adaptive submodularity of the information functional under a declared stopping loss, or a full dynamic-programming solution of the sequential problem). No such result is claimed here; a certified non-myopic schedule is left to future work.
+\end{remark}
+
+\subsection{Nested Monte Carlo estimator and variance reduction}
+\label{subsec:bayes:nested}
+
+The objective~\eqref{eq:bayes_utility} and its sequential variant~\eqref{eq:bayes_seq} have no closed-form evaluation outside the linear-Gaussian regime of Section~\ref{sec:design}. A direct nested Monte Carlo estimator proceeds in five steps:
+\begin{enumerate}
+\item sample models $M^{(r)} \sim p(M)$ from the current model posterior;
+\item sample parameters $\vartheta^{(r)} \sim p(\vartheta \mid M^{(r)})$;
+\item simulate future data $Y^{(r)} \sim p(Y \mid M^{(r)}, \vartheta^{(r)}, d)$ via the nonlinear Caputo solver of Section~\ref{sec:backbone};
+\item estimate each model evidence $p(Y^{(r)} \mid M_j, d)$ by an inner parameter sample for every candidate model $M_j$;
+\item average the log-ratio in Equation~\eqref{eq:bayes_utility} over $r$.
+\end{enumerate}
+Common random numbers are shared across candidate designs to reduce the variance of the design optimizer: only differences in expected utility are then decision-relevant, and correlated noise cancels.
+
+Because nested Monte Carlo is expensive and a single utility evaluation can require an inner ensemble, a strict variance-reduction hierarchy is enforced. Each higher tier is invoked only after the previous tier has been calibrated against a tractable case:
+\begin{enumerate}
+\item \emph{exact linear-Gaussian utility} of Section~\ref{sec:design} for screening and unit tests;
+\item \emph{Laplace approximation} around posterior modes for evidence and reduced-variance estimators;
+\item \emph{importance sampling / sequential Monte Carlo} evidence for posterior multimodality;
+\item \emph{neural ratio or mutual-information lower bounds}, admitted only after calibration against the analytic linear-Gaussian case of Tier~1.
+\end{enumerate}
+The hierarchy is a contract, not a stylistic preference: an estimate at Tier $k$ is admissible only if it recovers Tier $k-1$ within tolerance on a benchmark where the lower tier is exact. The nesting failure modes --- sign bias in the inner evidence at low sample counts, tail sensitivity of the nested log-ratio, and the covariance-smoothing artefact of Laplace approximations at multimodal parameter sets --- are diagnosed against Tier~1 before the estimator is used in a live sequential schedule.
+
+\subsection{Adaptive schedule}
+\label{subsec:bayes:adaptive}
+
+After each data batch $Y_{1:n}$, the model and parameter posteriors update via Equation~\eqref{eq:bayes_posterior}, and the next design is selected by
+\begin{equation}
+d_{n+1}
+= \arg\max_{d \in \mathcal{D}_{\mathrm{safe}}(Y_{1:n})}
+I\bigl(M; Y_{n+1} \mid Y_{1:n}, d\bigr),
+\label{eq:bayes_adaptive}
+\end{equation}
+subject to posterior safety via the chance constraint~\eqref{eq:bayes_chance} (or, where required, the robust constraint~\eqref{eq:bayes_robust_safety}). The safe set $\mathcal{D}_{\mathrm{safe}}(Y_{1:n})$ incorporates the rectangle inequalities~\eqref{eq:lower_prey}--\eqref{eq:upper_pred} of Section~\ref{sec:safety} evaluated over the current credible set of parameters --- in particular over the Allee threshold $A$, which enters as a latent variable when it is unknown. The safe input $u_{\mathrm{safe}}$ of Section~\ref{sec:safety} plays the role of a fixed benchmark inside this optimization: the unconstrained optimal input $u^{*}$ of Theorem~\ref{thm:T11} is used as the screening estimate and the safe projection $\operatorname{sat}_{\rho/\Gamma_T}(u^{*})$ is a feasible warm start.
+
+The adaptive schedule terminates when any of the following conditions is met:
+\begin{itemize}
+\item the posterior model probability exceeds a predeclared threshold $\pi_{\mathrm{stop}}$ (e.g. $\pi_{\mathrm{stop}} = 0.95$);
+\item the expected value of an additional experiment falls below its execution cost, i.e. $I(M; Y_{n+1} \mid Y_{1:n}, d_{n+1}) < c_{\mathrm{exp}}$ relative to a willingness-to-pay;
+\item no safe design attains the minimum information target $D_{\min}$ inside $\mathcal{D}_{\mathrm{safe}}(Y_{1:n})$;
+\item the model set fails posterior predictive checks, signalling out-of-class dynamics and requiring amplification of the model set rather than further experimentation.
+\end{itemize}
+The first two conditions are ordinary stopping rules; the third is the Bayesian counterpart of the safety-for-feasibility trade-off already encountered in Theorem~\ref{thm:T16}; the fourth is diagnostic --- it triggers the robustness axes of Section~\ref{subsec:bayes:robust} rather than any further design iteration.
+
+\subsection{Mandatory robustness axes}
+\label{subsec:bayes:robust}
+
+Every reported ``optimal'' Bayesian design is re-evaluated, not against a single nominal parameter configuration, but against the following axes of the hierarchical specification. The assessment is mandatory: a design that fails any axis is reported as failing rather than only as nominal-optimal.
+\begin{itemize}
+\item \emph{Prior perturbations} for $\alpha$, $\tau$, $m$, and the latent class rates, sampled from a dispersion around each prior;
+\item \emph{Process versus observation noise}: the balance between the unresolved environmental stochasticity and the measurement noise $R$ is varied over the admissible range;
+\item \emph{Memory initialization}: a standard Caputo initial-value problem starting at $t=0$ is determined by point initial data at the lower terminal, not by a DDE-like prehistory function; prior environmental state enters only through the choice of a memory-initialization model (for example an initialized fractional derivative or an exponential-sum state extension), and that model is perturbed within its credible band;
+\item \emph{Intervention-amplitude error}: the realised actuator amplitude deviates from the commanded $u^{*}$ within its actuator tolerance;
+\item \emph{Missing samples}: observation times are dropped uniformly and adversarially to test the schedule's robustness to sampling dropout;
+\item \emph{Solver and exponential-sum truncation error}: the Caputo solver and the exponential-sum approximation of Section~\ref{sec:approximation} are run at multiple grid resolutions to bound the truncation bias;
+\item \emph{Out-of-model functional responses}: the Holling type~II response of Section~\ref{sec:backbone} is replaced by a Beddington--DeAngelis and a ratio-dependent response in the data-generating model, and the design is judged on whether the true model remains rejected under each substrate;
+\item \emph{Correlated environmental forcing}: the white observation noise $R$ is replaced by autocorrelated coloured noise and the utility estimates are recomputed under the generalized likelihood.
+\end{itemize}
+The eight axes are reported as heatmaps over the design space, not as pointwise maxima, because the Bayesian optimum is itself a saddle over the perturbation envelope rather than a fixed point.
+
+% ---- closing loop paragraph
+Theorems~\ref{thm:T16}--\ref{thm:T17} of Section~\ref{sec:safety} and Theorems~\ref{thm:T18}--\ref{thm:T19} of this section together draw the full loop: the linear-Gaussian discrimination certificates of Section~\ref{sec:design} guarantee that informative safe perturbations exist; the safety invariance theorem of Section~\ref{sec:safety} guarantees positive invariance only for rectangles whose strict inward-pointing face conditions are verified; the adaptive Bayesian schedule of Equation~\eqref{eq:bayes_adaptive} chooses the next experiment under posterior safety and terminates at a predeclared confidence threshold; the robustness axes of Section~\ref{subsec:bayes:robust} re-evaluate every reported design against the known axes of model, noise, and numerical departure. The numerical exercise of this loop, on the strong-Allee benchmark of Section~\ref{sec:backbone}, is the subject of Section~\ref{sec:benchmark}.

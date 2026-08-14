@@ -1,0 +1,8 @@
+x*= 0.666666666667, y*= 1.111111111111
+R = [0.333333333333,1.066666666667] x [0.444444444444,2.111111111111]
+lower_prey_min_F1: -0.592063492063
+upper_prey_minus_max_F1: +0.557623188406
+lower_predator_min_F2: -0.076190476190
+upper_predator_minus_max_F2: -0.330434782609
+STRICT_T17_FACE_TEST: FAIL
+Do not label this rectangle invariant/certified under the full +/-0.10 budget.

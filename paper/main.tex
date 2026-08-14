@@ -1,21 +1,24 @@
-\documentclass[11pt]{article}
+\documentclass[9pt]{extarticle}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
-\usepackage{natbib}
+\usepackage[numbers]{natbib}
 
 \title{Safe Active Discrimination of Fractional, Delayed, and Finite Latent Memory in a Strong-Allee Predator--Prey Model}
-\author{Anonymous}
+\author{Ibrahim Alraddadi\\
+Department of Mathematics, Faculty of Science\\
+Islamic University of Madinah, Madinah, Saudi Arabia\\
+\texttt{ialraddadi@iu.edu.sa}}
 \date{\today}
 
 \begin{document}
 
 \maketitle
 \begin{abstract}
-This paper develops a safety-constrained framework for actively discriminating fractional (Caputo), delayed (DDE), and bounded-complexity latent-state memory mechanisms around a certified strong-Allee predator--prey equilibrium. We derive exact linear transfer-function separation on collocated channels, a finite-horizon exponential-approximation obstruction, and computable input and observation designs. A calibrated, stable-only simulation benchmark with information-criterion model selection attains a macro-averaged accuracy of $0.54$ (chance $0.25$) and reveals a safety--informativeness trade-off: transient designs stay within the certified safe set but discriminate weakly, whereas broadband designs discriminate better yet cross the Allee threshold. The principal limitation is that safe active discrimination of subtle memory is intrinsically hard; a full Bayesian sequential-design layer is left to future work~\cite{P01}.
+This paper develops a safety-constrained framework for discriminating Caputo, delayed, and finite-state latent memory mechanisms around a strong-Allee predator--prey equilibrium. We derive exact transfer-function separation, finite-horizon exponential approximation bounds, optimal input/observation designs, and a calibrated simulation benchmark. At the kernel level, a bounded-complexity latent hierarchy yields an explicit testing obstruction under a protocol-restricted Strong-Allee safety budget. We then address the ecological response directly, avoiding a false factorization of the fractional resolvent. On the prey-to-prey channel, the exact Caputo impulse response decomposes into a principal-sheet pole pair, realized exactly by a stable two-state integer-order block, plus a branch-cut Laplace mixture. Interval arithmetic gives finite-state $L^1(0,T)$ approximation enclosures; at $\alpha=0.85$, $T=12$, and $A=0.25$, the enclosure falls from $0.5335$ at $m=4$ to $0.0070$ at $m=32$. Combined with the declared pulse peak cap and Gaussian observation model, these enclosures imply non-vacuous minimax testing-error lower bounds approaching $1/2$ as latent complexity increases. The full-response result is linearized and prey-channel specific; a hierarchy-wide Strong-Allee safety closure for physically constrained full-state latent rivals remains open. The benchmark attains macro-accuracy $0.54$ versus chance $0.25$ and exposes a safety--informativeness trade-off: transient inputs cross the Allee threshold less often but discriminate weakly, whereas broadband inputs are more informative but less safe. A Bayesian sequential-design layer is specified but not executed.
 \end{abstract}
 
 \theoremstyle{plain}
@@ -41,7 +44,6 @@ This paper develops a safety-constrained framework for actively discriminating f
 \input{sections/sec11.tex}
 \input{sections/sec12.tex}
 \input{sections/sec13.tex}
-\input{sections/sec14.tex}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
