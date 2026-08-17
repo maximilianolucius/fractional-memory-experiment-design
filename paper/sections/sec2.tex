@@ -1,66 +1,61 @@
-\section{Certified strong-Allee ecological backbone}
-\label{sec:backbone}
+\section{Ecological Model and Competing Memory Mechanisms}
+\label{sec:model}
 
-The predator-prey strong-Allee model from the validated literature~\cite{E01,E02,E03,E04,E05,P01} provides a certified ecological nonlinear dynamics that serves as the digital twin for our study.
-
-The model is given by
+\subsection{Strong-Allee predator--prey backbone}
+The nonlinear ecological model is
 \begin{align}
-    f_1(x,y) &= r x \left(1-\frac{x}{K}\right)\left(\frac{x}{A}-1\right)-\frac{axy}{1+hx}, \\
-    f_2(x,y) &= e \frac{axy}{1+hx} - m y,
+ f_1(x,y) &= r x\left(1-\frac{x}{K}\right)\left(\frac{x}{A}-1\right)-\frac{axy}{1+hx},\\
+ f_2(x,y) &= e\frac{axy}{1+hx}-my,
 \end{align}
 with locked parameters
 \[
-r=\frac{3}{2},\quad K=1,\quad a=1,\quad h=\frac{1}{2},\quad e=\frac{4}{5},\quad m=\frac{2}{5}.
+r=\frac32,\qquad K=1,\qquad a=1,\qquad h=\frac12,\qquad e=\frac45,\qquad m=\frac25.
 \]
-
-The coexistence equilibrium is
+The coexistence equilibrium and Jacobian are
 \[
-x^* = \frac{2}{3}, \qquad y^*(A) = \frac{2(2-3A)}{9A},
+x^*=\frac23,\qquad y^*(A)=\frac{2(2-3A)}{9A},
 \]
-which is positive exactly for \(0<A<\frac{2}{3}\).
-
-The Jacobian at coexistence is
 \[
-J(A) = \begin{pmatrix}
-\dfrac{7A-2}{8A} & -\dfrac{1}{2} \\[1.2ex]
+J(A)=\begin{pmatrix}
+\dfrac{7A-2}{8A} & -\dfrac12\\[1ex]
 \dfrac{2-3A}{10A} & 0
-\end{pmatrix},
+\end{pmatrix}.
 \]
-with trace \(T(A)=\frac{7A-2}{8A}\) and determinant \(D(A)=\frac{2-3A}{20A}\).
-
-The discriminant factorizes as
+For a commensurate Caputo model, local stability follows the Matignon sector condition~\cite{F05}. In the complex-pair regime $2/7<A<10/19$, the critical order is
 \[
-T(A)^2-4D(A) = \frac{(19A-10)(23A-2)}{320A^2}.
+\alpha^*(A)=\frac{2}{\pi}\arctan\!\left(\frac{\sqrt{4D(A)-T(A)^2}}{T(A)}\right),
 \]
+with $T(A)=\operatorname{tr}J$ and $D(A)=\det J$. At $A=0.30$, $\alpha^*\approx0.969012276$, so the fractional system with $\alpha=0.9$ is stable although the integer-order limit is unstable~\cite{P01}. For most discrimination experiments we use $A\le2/7$, where the common operating point remains in the stable regime.
 
-For a commensurate Caputo system of order $0<\alpha<1$, the coexistence equilibrium is locally asymptotically stable when every eigenvalue $\mu$ of $J$ satisfies the Matignon sector condition~\cite{F05}:
-\[
-|\arg\mu| > \frac{\alpha\pi}{2}.
-\]
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.98\textwidth]{fig11_system_schematic}
+\caption{Ecological and experimental setting. The strong-Allee predator--prey system is perturbed on the prey channel and observed through prey, predator, or both populations. ODE and Caputo models share the exact ecological Jacobian; DDE and latent models are calibrated rival response laws. The dashed rectangle is a numerical benchmark diagnostic region, not an invariant-set certificate.}
+\label{fig:schematic}
+\end{figure}
 
-In the regime \(\frac{2}{7}<A<\frac{10}{19}\), the eigenvalues are a complex pair with positive real part. The critical order is
-\[
-\alpha^*(A) = \frac{2}{\pi} \arctan\left(\frac{\sqrt{4D(A)-T(A)^2}}{T(A)}\right).
-\]
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.94\textwidth]{fig12_backbone_regime}
+\caption{Strong-Allee backbone at $A=0.25$. Left: representative recovery above the threshold and collapse from below $A$. Right: prey growth term $P(x)$ showing the sign change at the Allee threshold. This geometry explains why experiment design must account for state safety, not only actuator amplitude.}
+\label{fig:backbone}
+\end{figure}
 
-Stability holds exactly for \(0<\alpha<\alpha^*(A)\).
+\subsection{Four rival mechanisms}
+Dimensional consistency is enforced with the reference time $\tau_0$~\cite{F02,F03,F04}. Around the operating point, the four candidate mechanisms are
+\begin{align*}
+\text{ODE:}&\quad \dot\xi=J\xi+Bu,\\
+\text{Caputo:}&\quad \tau_0^{\alpha-1}{}^CD_t^\alpha\xi=J\xi+Bu,\\
+\text{DDE:}&\quad \dot\xi=A_0\xi(t)+A_1\xi(t-\tau)+Bu,\\
+\text{latent:}&\quad \dot q=\bar A q+\bar Bu,\qquad y=\bar Cq.
+\end{align*}
+Only the Caputo mechanism carries a fractional order. The finite latent class is restricted by an explicit state-dimension budget $m$.
 
-At the baseline \(A=0.3\), we have
-\[
-J=\begin{pmatrix}1/24 & -1/2 \\ 11/30 & 0\end{pmatrix},\qquad
-T=\frac{1}{24},\qquad D=\frac{11}{60},
-\]
-and the exact critical order is
-\[
-\alpha^*\left(\frac{3}{10}\right) = \frac{2}{\pi}\arctan\sqrt{\frac{2107}{5}} \approx 0.9690122761517084.
-\]
-
-Thus $\alpha=0.9$ is stable and $\alpha=1$ is unstable, reproducing the certified verdict~\cite{P01}.
-
-The baseline \(A=0.3\) is exceptionally informative for distinguishing a stable fractional model from the same integer-order skeleton because the models make opposite local stability predictions. For controlled frequency-response comparisons in which every candidate should remain stable, use \(A\le2/7\); \(A=1/4\) is a convenient exact choice.
-
-\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig11_system_schematic}
-\caption{The object under study. A certified ecological backbone --- prey with a strong Allee threshold, predator with a Holling type~II response, and coexistence equilibrium $z^*$ --- receives bounded perturbations $u(t)$ on the prey channel and is observed through prey, predator, or both channels. The ODE and Caputo mechanisms share the ecological Jacobian $J(A)$ exactly; the retarded-DDE and finite-latent alternatives are calibrated at the same operating point and compared through matched input/observation channels and physical units, without assuming identical internal generators. The latent class carries a declared complexity budget $m\le m_{\max}$. The dashed green rectangle is the benchmark diagnostic rectangle; positive invariance requires the strict inward-pointing hypotheses of Section~\ref{sec:safety} and is not implied by the rectangle definition alone.}\label{fig:schematic}\end{figure}
-
-\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig12_backbone_regime}
-\caption{Ecological backbone at the benchmark baseline $A=0.25$ (stable regime, integer-order skeleton). Left: an illustrative phase portrait with the rigorously established Allee threshold $x=A$ and extinction strip, the benchmark diagnostic rectangle $\mathcal{R}$ around $z^*$, and two numerically integrated trajectories: recovery from above threshold and collapse from below $A$. The plotted rectangle and trajectories are visual diagnostics, not an invariant-set certificate; invariance requires Theorem~\ref{thm:T17}'s strict face conditions. Right: the strong-Allee growth term $P(x)$, whose negative branch below $A$ explains why safety cannot be an afterthought.}\label{fig:backbone}\end{figure}
+\paragraph{Combined fractional-delay stress-test model.}
+To address the interaction of memory and explicit delay directly, the numerical study also uses
+\begin{align}
+\tau_0^{\alpha-1}{}^CD_t^\alpha x(t)
+&=P(x(t);A)-\frac{a x(t)y(t)}{1+h x(t)}+u(t),\\
+\tau_0^{\alpha-1}{}^CD_t^\alpha y(t)
+&=e\frac{a x(t-\tau)y(t)}{1+h x(t-\tau)}-m y(t).
+\label{eq:fdmodel}
+\end{align}
+A constant equilibrium history is used on $[-\tau,0]$. Equation~\eqref{eq:fdmodel} reduces to the pure Caputo model at $\tau=0$ and to the retarded DDE benchmark at $\alpha=1$. It is used as a numerical stress test, not as an additional headline theorem.

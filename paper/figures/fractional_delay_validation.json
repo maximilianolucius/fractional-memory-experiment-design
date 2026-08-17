@@ -1,0 +1,27 @@
+[
+  {
+    "gate": "alpha1_to_dde",
+    "N": 200,
+    "max_abs": 6.750869730676179e-06
+  },
+  {
+    "gate": "alpha1_to_dde",
+    "N": 400,
+    "max_abs": 1.6842965646635122e-06
+  },
+  {
+    "gate": "alpha1_to_dde",
+    "N": 800,
+    "max_abs": 4.1967720487701143e-07
+  },
+  {
+    "gate": "fd_self_convergence",
+    "N": 200,
+    "max_abs_vs_N800": 0.0021763563399258556
+  },
+  {
+    "gate": "fd_self_convergence",
+    "N": 400,
+    "max_abs_vs_N800": 0.000804939518374348
+  }
+]

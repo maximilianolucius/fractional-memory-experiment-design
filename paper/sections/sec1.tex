@@ -1,32 +1,28 @@
-\section{Introduction and Falsifiable Memory Question}
+\section{Introduction}
 \label{sec:introduction}
 
-The problem of distinguishing fractional, delayed, and latent ecological memory effects in dynamical systems is fundamental to understanding ecosystem dynamics under perturbation. Fractional derivatives model hereditary and nonlocal dynamics naturally~\cite{F01,F02,F03,F04}, and fractional predator--prey systems form an established literature~\cite{E06,E07,E08,E09}.
-Experiment design for fractional-order identification already exists~\cite{FOED01,FOED02,FOED03,FOED04}, and ecological perturbation experiments are feasible in laboratory microcosms~\cite{E10,E11,E12}. Safety-constrained information acquisition and safe active model discrimination are also established general problems~\cite{SAFE26A,SAFE26B}. Our novelty claim is therefore deliberately narrower: we study how finite-horizon approximation of fractional memory by bounded-complexity latent responses interacts with a strong-Allee ecological safety barrier and a declared experimental protocol.
+Fractional derivatives are widely used to represent hereditary and nonlocal effects in dynamical systems~\cite{F01,F02,F03,F04}, including predator--prey models~\cite{E06,E07,E08,E09}. The central empirical difficulty is that a fitted fractional order does not by itself identify a fractional mechanism: over finite horizons, delayed feedback and finite-dimensional latent states can reproduce similar trajectories. Experiment design for fractional-order identification already exists~\cite{FOED01,FOED02,FOED03,FOED04}, while safety-constrained information acquisition and safe active model discrimination are established general problems~\cite{SAFE26A,SAFE26B}. We therefore focus on a narrower question:
 
-The finite-horizon problem is meaningful only after the rival complexity is controlled. We impose a finite latent-state budget $m$. Theorem~\ref{thm:T10} shows, in its stated linearized fixed-input scope, that increasing latent complexity can drive the finite-horizon output discrepancy below any prescribed tolerance; without a complexity restriction, a fixed finite experiment cannot provide a uniform separation guarantee against the entire latent hierarchy.
+\begin{quote}
+\emph{Which perturbations and measurements can distinguish fractional memory from delayed or latent alternatives in a strong-Allee ecological system, and when does ecological safety make that discrimination fundamentally difficult?}
+\end{quote}
 
-Our approach centers on a certified predator--prey model with a strong Allee effect~\cite{E03,E04,E05,P01}, which supplies the ecological operating point and safety geometry. We compare four candidate memory mechanisms at a common experimental reference:
-\begin{itemize}
-    \item Fractional memory (Caputo derivative of order $\alpha$ --- the only mechanism carrying a fractional order),
-    \item Integer-order memory (ODE),
-    \item Delayed memory (a strictly proper retarded single-discrete-delay class in the scope of Theorem~\ref{thm:T5}),
-    \item Latent memory (finite-dimensional linear time-invariant response models of dimension $m$).
-\end{itemize}
-The ODE and Caputo mechanisms share the ecological Jacobian $J(A)$ exactly. The DDE and latent alternatives are calibrated rival response laws compared at the same operating point through matched input/observation channels and physical units; their internal generators are not assumed to equal $J(A)$.
+The ecological backbone is the validated strong-Allee predator--prey model used in our previous study~\cite{E03,E04,E05,P01}. The present paper moves from certification of dynamics to \emph{experimental discrimination of memory mechanisms}. The ODE and Caputo mechanisms share the same ecological equilibrium and Jacobian; retarded-delay and finite-state latent models are calibrated rival response laws compared through matched inputs, observations, and physical units.
 
-The structural part separates the Caputo signature from finite-dimensional rational latent responses~\cite{I05} and from the declared strictly proper retarded single-delay class~\cite{D01,D02}. Theorems~\ref{thm:T4} and~\ref{thm:T5} state the exact scope; no claim is made against every possible delay realization.
+\paragraph{Main contributions.}
+The paper is organized around four contributions, rather than around a long sequence of standalone theorems.
+\begin{enumerate}
+    \item \textbf{Structural and finite-horizon separation.} We show that the collocated Caputo transfer has a noninteger high-frequency signature that cannot be exactly reproduced by finite rational latent models or by the declared retarded-delay class. At the same time, finite exponential mixtures approximate the fractional kernel on a finite horizon, creating a complexity-dependent discrimination barrier.
+    \item \textbf{Certified prey-response testing obstruction.} Directly on the linearized ecological prey channel, a pole/branch decomposition yields interval-enclosed finite-state approximations. Under a declared pulse budget and Gaussian observations, the corresponding minimax testing lower bound approaches chance as latent complexity grows.
+    \item \textbf{Numerical validation and a new fractional-delay stress test.} In addition to the calibrated ODE/Caputo/DDE/latent benchmark, we introduce a combined fractional-delay model. It continuously connects the pure Caputo limit ($\tau=0$) to the DDE limit ($\alpha=1$), allowing direct simulation of how fractional order and delay jointly alter phase, transient amplitude, safety margin, and experimental discriminability.
+    \item \textbf{Safety--informativeness trade-off.} Across six input families, broadband excitation improves memory discrimination but increases the rate of crossing the strong-Allee threshold. Transient inputs are safer numerically but less informative, making the constrained experiment-design problem visible rather than merely theoretical.
+\end{enumerate}
 
-Beyond structural separation, we establish a quantitative testing obstruction for a bounded Gaussian observation experiment. Theorems~\ref{thm:T20}--\ref{thm:T22} connect finite-horizon kernel approximation, latent complexity, and a protocol-restricted Strong-Allee safety budget at the kernel level. Theorem~\ref{thm:T21} supplies the matching scope limitation: a one-sided state threshold alone does not control input energy without a physical experiment class. We then work directly with the exact prey-to-prey Caputo transfer, rather than the invalid factorization $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$. Lemma~\ref{lem:polebranch} separates its principal-sheet pole pair from the branch-cut remainder; Theorem~\ref{thm:T23} gives interval-certified finite-state approximation enclosures for this exact prey response, and Corollary~\ref{cor:state_testing} converts them into testing lower bounds under a declared actuator/shape budget. This closes the response-level approximation/testing gap for the linearized prey channel, while a physically constrained hierarchy-wide Strong-Allee safety theorem at full-state level remains open.
+The detailed proofs, secondary analytical results, Bayesian sequential extension, and solver derivations are moved to the Supplementary Material. The main paper retains only the analytical statements required to interpret the numerical results.
 
-Furthermore, we leverage the finite-horizon exponential approximation of the fractional kernel (Theorem~\ref{thm:T9b}) and the associated $L^1$ error bound to construct optimal excitation signals that exploit the frequency-band separation between the fractional and approximate integer-order dynamics.
-The finite-horizon impossibility obstacle (Theorem~\ref{thm:T10}, in its linearized fixed-input scope) shows that sufficiently rich latent approximations can drive the discrepancy below any fixed observational resolution on a finite horizon, which motivates an explicit finite-dimensional complexity budget.
-
-Finally, we formulate the optimal experimental design problem under energy and safety constraints, leveraging the principal-singular-vector solution for pairwise optimal inputs (Theorem~\ref{thm:T11}) and the finite-support property of the optimal frequency-domain design (Theorem~\ref{thm:T12}).
-The resulting experimental protocol is validated through a reproducible simulation benchmark (Section~\ref{sec:benchmark}) and complemented by a prospective microcosm protocol for ecological validation (Section~\ref{sec:prospect}).
-
-\paragraph{Reading the paper in one figure.}
-Figure~\ref{fig:workflow} gives the pipeline at a glance: a certified ecological backbone (Figure~\ref{fig:schematic}), exact structural separation on a compact band (Figure~\ref{fig:separation-approx}, panel a), the finite-horizon approximation barrier (Figure~\ref{fig:separation-approx}, panels b--c), the linear-Gaussian design layer, the safety certificates, the calibrated benchmark with its safety--informativeness trade-off (Figure~\ref{fig:safety-tradeoff}), and the prospective microcosm protocol. Every headline figure is referenced from the section where its claim is proved.
-
-\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig17_paper_workflow}
-\caption{The paper's pipeline. Each box names the section where the layer is developed; the main-text results are the stable-regime macro-accuracy of $0.537$ against chance $0.25$ and the safety--informativeness trade-off of Figure~\ref{fig:safety-tradeoff}. A reader can reconstruct the entire argument from this figure plus the captions of Figures~\ref{fig:schematic}, \ref{fig:separation-approx}, and~\ref{fig:safety-tradeoff}.}\label{fig:workflow}\end{figure}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{fig17_paper_workflow}
+\caption{Paper structure after the Q1-focused restructuring: certified ecological model and rival memory laws, four essential analytical results, numerical validation, dedicated fractional-delay simulations, experiment design and safety analysis, and the large-scale discrimination benchmark. Detailed proofs and secondary theory are placed in the Supplementary Material.}
+\label{fig:workflow}
+\end{figure}

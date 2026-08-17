@@ -1,0 +1,34 @@
+\section{Fractional-delay numerical formulation and validation}
+\label{ssec:fdval}
+
+The main paper introduces the combined fractional-delay model
+\begin{align*}
+\tau_0^{\alpha-1}{}^CD_t^\alpha x(t)
+&=P(x(t);A)-\frac{a x(t)y(t)}{1+h x(t)}+u(t),\\
+\tau_0^{\alpha-1}{}^CD_t^\alpha y(t)
+&=e\frac{a x(t-\tau)y(t)}{1+h x(t-\tau)}-m y(t).
+\end{align*}
+A constant equilibrium history is prescribed on $[-\tau,0]$. The PECE implementation uses the same fractional Adams--Bashforth--Moulton weights as the pure Caputo solver and linearly interpolates the delayed prey history. For every reported $\tau>0$, the delay exceeds the numerical time step, so the delayed state required by the corrector is already available.
+
+Two numerical limits are checked independently. First, at $\tau=0$ the implementation calls the validated pure Caputo solver exactly. Second, at $\alpha=1$ it converges to the independent interpolated-history RK4 DDE implementation. At $A=0.25$, $\tau=0.35$, $T=6$, the maximum absolute discrepancies are
+\begin{center}
+\begin{tabular}{c|ccc}
+$N$ & 200 & 400 & 800\\\hline
+$\max|z_{\rm FD}-z_{\rm DDE}|$ & $6.75\times10^{-6}$ & $1.68\times10^{-6}$ & $4.20\times10^{-7}$
+\end{tabular}
+\end{center}
+For the representative cell $(\alpha,\tau)=(0.85,0.35)$, the max difference from the $N=800$ trajectory decreases from $2.18\times10^{-3}$ at $N=200$ to $8.05\times10^{-4}$ at $N=400$.
+
+The targeted design study uses $A=0.25$, $T=12$, $\alpha\in\{0.75,0.85,0.95\}$, $\tau\in\{0.15,0.30,0.45\}$, and the same six peak-limited inputs as the main benchmark. The resulting mean minimum trajectory distance to the pure Caputo and pure DDE limits, together with numerical Allee-crossing fractions, is
+\begin{center}
+\begin{tabular}{lcc}
+Design & mean minimum bridge distance & Allee-crossing fraction\\\hline
+multisine & 0.1332 & 0.333\\
+PRBS & 0.0909 & 1.000\\
+sinusoid & 0.0894 & 1.000\\
+chirp & 0.0861 & 1.000\\
+pulse & 0.0627 & 0.000\\
+multiscale & 0.0338 & 0.000
+\end{tabular}
+\end{center}
+These quantities are descriptive numerical diagnostics, not certificates.

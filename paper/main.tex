@@ -15,10 +15,10 @@ Islamic University of Madinah, Madinah, Saudi Arabia\\
 \date{\today}
 
 \begin{document}
-
 \maketitle
+
 \begin{abstract}
-This paper develops a safety-constrained framework for discriminating Caputo, delayed, and finite-state latent memory mechanisms around a strong-Allee predator--prey equilibrium. We derive exact transfer-function separation, finite-horizon exponential approximation bounds, optimal input/observation designs, and a calibrated simulation benchmark. At the kernel level, a bounded-complexity latent hierarchy yields an explicit testing obstruction under a protocol-restricted Strong-Allee safety budget. We then address the ecological response directly, avoiding a false factorization of the fractional resolvent. On the prey-to-prey channel, the exact Caputo impulse response decomposes into a principal-sheet pole pair, realized exactly by a stable two-state integer-order block, plus a branch-cut Laplace mixture. Interval arithmetic gives finite-state $L^1(0,T)$ approximation enclosures; at $\alpha=0.85$, $T=12$, and $A=0.25$, the enclosure falls from $0.5335$ at $m=4$ to $0.0070$ at $m=32$. Combined with the declared pulse peak cap and Gaussian observation model, these enclosures imply non-vacuous minimax testing-error lower bounds approaching $1/2$ as latent complexity increases. The full-response result is linearized and prey-channel specific; a hierarchy-wide Strong-Allee safety closure for physically constrained full-state latent rivals remains open. The benchmark attains macro-accuracy $0.54$ versus chance $0.25$ and exposes a safety--informativeness trade-off: transient inputs cross the Allee threshold less often but discriminate weakly, whereas broadband inputs are more informative but less safe. A Bayesian sequential-design layer is specified but not executed.
+We study how controlled ecological experiments can distinguish Caputo memory from integer-order, delayed, and finite latent alternatives in a strong-Allee predator--prey system. The main text is organized around four analytical results and an expanded numerical study. Structurally, the collocated Caputo transfer has a noninteger high-frequency signature that cannot be exactly reproduced by the declared finite latent or retarded-delay classes. Practically, finite exponential mixtures approximate fractional memory over finite horizons, producing a complexity-dependent testing obstruction. Directly on the ecological prey channel, interval arithmetic certifies finite-state approximations whose error decreases from $0.5335$ at $m=4$ to $0.0070$ at $m=32$ for $\alpha=0.85$, $A=0.25$, and $T=12$; under the declared pulse budget, the associated Gaussian testing lower bound approaches chance. We then introduce a combined fractional-delay model that reduces to the pure Caputo case at $\tau=0$ and to the DDE case at $\alpha=1$. New simulations show that delay systematically shifts the predator peak, erodes the Allee safety margin, and creates intermediate responses that are not well represented by either pure limit. Across six perturbation families and a large four-class benchmark, broadband inputs improve discrimination but cross the Allee threshold more frequently, whereas transient inputs are safer numerically but less informative. The results expose a fundamental safety--informativeness trade-off in experimental identification of ecological memory.
 \end{abstract}
 
 \theoremstyle{plain}
@@ -30,7 +30,6 @@ This paper develops a safety-constrained framework for discriminating Caputo, de
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-% Sections
 \input{sections/sec1.tex}
 \input{sections/sec2.tex}
 \input{sections/sec3.tex}
@@ -42,10 +41,7 @@ This paper develops a safety-constrained framework for discriminating Caputo, de
 \input{sections/sec9.tex}
 \input{sections/sec10.tex}
 \input{sections/sec11.tex}
-\input{sections/sec12.tex}
-\input{sections/sec13.tex}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
-
 \end{document}

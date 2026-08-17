@@ -1,0 +1,7 @@
+
+This appendix collects numerical-method validation that supports the benchmark of the main-paper benchmark but is not part of its headline results.
+
+The Caputo solver used throughout is the fractional Adams--Bashforth--Moulton PECE scheme of \texttt{benchmark/core.py}. Its convergence is validated against the exact Mittag--Leffler solution of the scalar test problem $D^\alpha y = \lambda y$, $y(0)=1$, whose solution is $y(t)=E_\alpha(\lambda t^\alpha)$. Figure~\ref{fig:solver-conv} shows the maximum absolute error as a function of the number of time steps on the benchmark grid; the error decreases under refinement and reaches $2.5\times10^{-4}$ at the production resolution, as reported in the main-paper benchmark.
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.62\textwidth]{fig06_solver_convergence}
+\caption{Caputo PECE solver convergence against the exact Mittag--Leffler solution: maximum absolute error versus the number of time steps, on a log--log scale. The monotone decrease under refinement is the numerical gate behind every nonlinear cell of the main-paper benchmark.}\label{fig:solver-conv}\end{figure}

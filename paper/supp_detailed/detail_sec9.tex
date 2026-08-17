@@ -1,0 +1,130 @@
+\section{Nonlinear Bayesian Extension}
+\label{sec:bayesian}
+
+The structural discrimination theory of Sections~\ref{sec:separation}--\ref{sec:design} and the safety-constrained design of Section~\ref{sec:safety} were all developed within the linear-Gaussian regime of Section~\ref{sec:linearization}. The optimality certificates of Theorem~\ref{thm:T11} (energy-optimal input) and Theorem~\ref{thm:T12} (finite multisine support) are exact in that regime, and the invariance certificate of Theorem~\ref{thm:T17} holds for the fully nonlinear Caputo dynamics. What they do not address is the question that closes the design loop: once data begin to arrive, which experiment should be run next, when the model is nonlinear, the noise is not Gaussian, and the parameters --- including the Allee threshold $A$ itself --- are uncertain. This section bridges that gap~\cite{O05,O06,O07,O09}. It states two results that pin the Bayesian layer analytically (Theorem~\ref{thm:T18} for the nonlinear posterior update, Theorem~\ref{thm:T19} for the sequential information bound) and declares the theorem/computation boundary: every reported ``optimal'' Bayesian design is computed, not symbolically derived, and its validity rests on convergence diagnostics rather than a closed form. The computational layer itself --- the nested Monte Carlo estimator with its variance-reduction hierarchy, the adaptive schedule and its stopping rules, and the mandatory robustness axes --- is fully specified in the Supplementary Material (Section~S5); none of it is executed in this paper.
+
+The development is organized around four objects: the model $M \in \{1,\dots,K\}$, the within-model parameter $\vartheta_M$, the design $d$ (the safe input and observation schedule of Sections~\ref{sec:design}--\ref{sec:safety}), and the future data $Y$. No Gaussian or linear approximation is implied at the level of the objectives below; the linear-Gaussian formulae of Section~\ref{sec:design} reappear only as the fast screening tier of the variance-reduction hierarchy.
+
+\subsection{Bayesian model-discrimination utility}
+
+Let $p(M)$ be the prior over models, $p(\vartheta_M \mid M)$ the within-model parameter prior, and $p(Y \mid \vartheta_M, M, d)$ the observation likelihood of model $M$ at design $d$. The exact expected mutual information between model identity and future data is
+\begin{equation}
+U_{\mathrm{MI}}(d)
+= I(M;Y \mid d)
+= \mathbb{E}\!\left[
+\log \frac{p(Y \mid M, d)}{\sum_{j=1}^{K} p(M_j)\, p(Y \mid M_j, d)}
+\right],
+\label{eq:bayes_utility}
+\end{equation}
+where the marginal likelihood of model $j$ integrates out its parameters,
+\begin{equation}
+p(Y \mid M_j, d)
+= \int p(Y \mid \vartheta_{M_j}, M_j, d)\, p(\vartheta_{M_j} \mid M_j)\, d\vartheta_{M_j}.
+\label{eq:bayes_marginal}
+\end{equation}
+Equations~\eqref{eq:bayes_utility}--\eqref{eq:bayes_marginal} are the exact Bayesian model-discrimination objective; the linear-Gaussian quadratic~\eqref{eq:kl_pairwise} is recovered only when the likelihood is Gaussian in the observable and the marginal~\eqref{eq:bayes_marginal} is replaced by its Laplace approximation. A joint model-plus-parameter utility exists and is reported separately from~\eqref{eq:bayes_utility} whenever parameter recovery is also a goal; its definition and the reasons the two objectives must not be merged into a single scalar are given in the Supplementary Material (Section~S5).
+
+\subsection{Robust alternative}
+
+For model pairs with parameter sets $\Theta_i, \Theta_j$, a more adversarial objective protects against alternatives that tune themselves to mimic the focal model:
+\begin{equation}
+U_{\min}(d)
+= \min_{i < j}\, \inf_{\substack{\theta_i \in \Theta_i \\ \theta_j \in \Theta_j}}
+D_{\mathrm{KL}}\!\bigl(
+p_i(Y \mid \theta_i, d)\,\big\|\, p_j(Y \mid \theta_j, d)
+\bigr).
+\label{eq:bayes_robust}
+\end{equation}
+The minimax objective~\eqref{eq:bayes_robust} collapses to zero whenever a pair of parameter sets admits a tuning that realizes likelihood overlap below the noise floor --- which, by the finite-horizon impossibility result of Corollary~\ref{cor:unrestricted}, is exactly the regime in which an unrestricted latent class can mimic the fractional model. The complexity budget $m$ imposed in Section~\ref{sec:approximation} removes this unrestricted-dimension degeneracy, but it does \emph{not} by itself restore positivity of~\eqref{eq:bayes_robust}: the robust separation can still vanish at boundary or degenerate parameter values --- $\alpha \to 1$ collapsing onto the ODE model, $\tau \to 0$ collapsing onto the ODE model, zero latent coupling, or any parameter configuration producing identical sampled outputs. Positivity of~\eqref{eq:bayes_robust} requires, in addition, compact parameter sets and an explicit exclusion of such intersections (or a certified positive minimum distance under the chosen design). Where these exclusions are not enforced, the honest statement is that~\eqref{eq:bayes_robust} may attain zero even with bounded latent dimension.
+
+\subsection{Theorem T18 --- posterior update under nonlinear Gaussian likelihood}
+\label{subsec:bayes:T18}
+
+Equation~\eqref{eq:bayes_utility} defines the design utility, but the schedule that drives it is sequential: after each batch of data, the posterior over models and parameters updates, and the next design is chosen adaptively. The next theorem characterizes the posterior update under a general nonlinear observation map with additive Gaussian noise, which is the regime that bridges the linearized layer of Section~\ref{sec:design} and the fully nonlinear layer demanded by the Bayesian objective.
+
+\begin{theorem}[Nonlinear posterior update under Gaussian noise]
+\label{thm:T18}
+Let model $M$ induce an observation of the form
+\begin{equation}
+Y = \mu_M(\vartheta_M; d) + \varepsilon,\qquad
+\varepsilon \sim \mathcal{N}(0, R),
+\label{eq:bayes_obs}
+\end{equation}
+where $\mu_M$ is a (possibly nonlinear, differentiable) mean map from the parameter and the design to the observation space, and $R \succ 0$ is the noise covariance. Then the joint posterior over model identity and parameter, after data $Y_{1:n}$ collected under designs $d_{1:n}$, factorizes as
+\begin{equation}
+p(M, \vartheta_M \mid Y_{1:n})
+\propto p(M)\, p(\vartheta_M \mid M)
+\prod_{k=1}^{n} \mathcal{N}\!\bigl(Y_k;\, \mu_M(\vartheta_M; d_k),\, R\bigr),
+\label{eq:bayes_posterior}
+\end{equation}
+and the model marginal posterior is
+\begin{equation}
+p(M \mid Y_{1:n})
+= \frac{p(M)\, p(Y_{1:n} \mid M, d_{1:n})}{\sum_{j} p(M_j)\, p(Y_{1:n} \mid M_j, d_{1:n})},
+\label{eq:bayes_model_post}
+\end{equation}
+with $p(Y_{1:n} \mid M, d_{1:n}) = \int \prod_{k} \mathcal{N}(Y_k; \mu_M(\vartheta_M; d_k), R)\, p(\vartheta_M \mid M) d\vartheta_M$. In the special linear-Gaussian conjugate case, where each $\mu_M(\vartheta_M; d_k) = H_{M,k} \vartheta_M + \mu_{M,k}^{0}$ is affine in the parameter and the prior $p(\vartheta_M \mid M)$ is Gaussian, the within-model marginal integrates exactly to a Gaussian predictive density, and the operator governing the leading-order model separation is the predictive-mean difference operator $Q = \Delta H^{*} R^{-1} \Delta H$ of Theorem~\ref{thm:T11}. For a genuinely nonlinear mean map $\mu_M$, the likelihood is Gaussian only conditionally on the parameter, the product likelihood is generically not Gaussian in $\vartheta_M$, and the integral above is computed, not evaluated.
+\end{theorem}
+\begin{proof}[Proof idea]
+Bayes' rule and independence of the additive noise across steps give the product form; the conjugate case integrates exactly. The complete proof is given in the Supplementary Material (Section~S5).
+\end{proof}
+
+\subsection{Safe Bayesian design}
+
+The Bayesian objective~\eqref{eq:bayes_utility} is maximized subject to a safety constraint that extends the deterministic certificate of Section~\ref{sec:safety} to the case where the parameters --- and hence the safe region and the Allee threshold $A$ --- are uncertain. Two interpretations are distinguished and the paper reports which is in force.
+
+The \emph{chance} constraint averages safety over the current posterior:
+\begin{equation}
+\Pr\!\bigl(z(t) \in \mathcal{S}\ \ \forall t \in [0,T] \mid d, Y_{1:n}\bigr) \ge 1 - \delta_s,
+\label{eq:bayes_chance}
+\end{equation}
+where the probability is taken jointly over the current model posterior, parameter posterior, and observation noise. The \emph{robust} constraint, more conservative, requires safety for every parameter in a credible set $\Theta_{\mathrm{adm}}$:
+\begin{equation}
+z(t; \vartheta) \in \mathcal{S}\ \ \forall t \in [0,T],\ \ \forall \vartheta \in \Theta_{\mathrm{adm}}.
+\label{eq:bayes_robust_safety}
+\end{equation}
+The deterministic rectangle inequalities of Section~\ref{sec:safety} reappear here as the worst-case check on $\Theta_{\mathrm{adm}}$ via interval arithmetic over the Allee threshold $A$, the predator growth constants, and the intervention amplitudes. The chance formulation~\eqref{eq:bayes_chance} trades a small bound $\delta_s$ of posterior mass for far larger admissible regions and thus for higher information per experiment; the robust formulation~\eqref{eq:bayes_robust_safety} provides a certificate that no admitted parameter triggers collapse, at the cost of information. The adaptive termination of Section~\ref{sec:safety} extends to the Bayesian layer: a trial halts automatically when the posterior predictive probability of crossing $x_L$ exceeds a predeclared level.
+
+\subsection{Theorem T19 --- Bayesian sequential information bound}
+\label{subsec:bayes:T19}
+
+The adaptive schedule maximizes $U_{\mathrm{MI}}$ over designs drawn from a safe admissible set $\mathcal{D}_{\mathrm{safe}}(Y_{1:n})$ that incorporates the chance constraint~\eqref{eq:bayes_chance} or, where required, the robust constraint~\eqref{eq:bayes_robust_safety}. The next theorem bounds the expected information gain of any single future experiment by the prior-posterior separation, which is the quantity the adaptive schedule actually optimizes.
+
+\begin{theorem}[Bayesian sequential information identity and bound]
+\label{thm:T19}
+Let $p(M \mid Y_{1:n})$ be the model posterior after data $Y_{1:n}$ collected under designs $d_{1:n}$, and let $d_{n+1}$ be any admissible next design. Then the one-step expected information gain admits the expected-KL representation
+\begin{equation}
+I\bigl(M; Y_{n+1} \mid Y_{1:n}, d_{n+1}\bigr)
+=
+\mathbb{E}_{Y_{n+1} \mid Y_{1:n}, d_{n+1}}
+\!\left[
+D_{\mathrm{KL}}\!\bigl(
+p(M \mid Y_{1:n}, Y_{n+1}, d_{n+1})
+\,\big\|\,
+p(M \mid Y_{1:n})
+\bigr)
+\right],
+\label{eq:bayes_seq}
+\end{equation}
+and satisfies
+\begin{equation}
+0 \le I\bigl(M; Y_{n+1} \mid Y_{1:n}, d_{n+1}\bigr)
+\le H\!\bigl(M \mid Y_{1:n}\bigr).
+\label{eq:bayes_seq_bound}
+\end{equation}
+Equality in the upper bound holds if and only if the future observation determines the model identity almost surely conditional on the current data and design, i.e.\ $H(M \mid Y_{1:n}, Y_{n+1}, d_{n+1}) = 0$.
+\end{theorem}
+\begin{proof}[Proof idea]
+The chain rule for mutual information, expansion of the conditional mutual information as an expectation of log-ratios, and nonnegativity of conditional entropy. The complete proof, together with the tower-property caveat (the identity is an expectation of divergences between \emph{realized} posteriors --- replacing it by the divergence of the \emph{expected} posterior yields identically zero) and the honest status of greedy one-step scheduling (myopic, with no certified non-myopic optimality), is given in the Supplementary Material (Section~S5).
+\end{proof}
+
+\subsection{Computational layer and theorem/computation boundary}
+
+Outside the linear-Gaussian regime, the objectives~\eqref{eq:bayes_utility} and~\eqref{eq:bayes_seq} have no closed form. The Supplementary Material (Section~S5) specifies the complete computational layer: a nested Monte Carlo estimator with common random numbers; a four-tier variance-reduction hierarchy (exact linear-Gaussian screening, Laplace, importance sampling / sequential Monte Carlo, calibrated neural bounds) in which each tier is admissible only after recovering the tier below on a case where the latter is exact; the adaptive schedule with its stopping rules; and eight mandatory robustness axes against which every reported design must be re-evaluated. The analytical content of this section is the two theorems and the boundary they draw; the remainder is computation, and the paper is explicit about that boundary:
+\begin{quote}
+The nonlinear Bayesian optimum is computed, not symbolically derived. Its validity is established by convergence diagnostics, independent re-simulation, utility confidence intervals, and recovery on analytically solvable benchmarks.
+\end{quote}
+Figure~\ref{fig:bayes-workflow} summarizes this future operational layer as a loop: current belief $\to$ safe admissible designs $\to$ expected utility via Theorem~\ref{thm:T19} $\to$ execution $\to$ posterior update via Theorem~\ref{thm:T18} $\to$ stopping rule. The loop is specified here; it is not executed in the present benchmark, whose decision rule is BIC (the main-paper benchmark).
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig16_bayes_workflow}
+\caption{The Bayesian sequential safe-design loop specified in this section: current belief, posterior-conditioned safe admissible designs, expected utility via the expected-KL identity of Theorem~\ref{thm:T19}, execution and posterior update via Theorem~\ref{thm:T18}, and an explicit stop/continue decision. The loop is pinned down analytically and left to future work as an executed layer; the present benchmark uses BIC (the main-paper benchmark).}\label{fig:bayes-workflow}\end{figure}

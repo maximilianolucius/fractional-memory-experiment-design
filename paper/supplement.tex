@@ -6,22 +6,10 @@
 \usepackage{graphicx}
 \graphicspath{{figures/}}
 \usepackage[numbers]{natbib}
-\usepackage{xr}
-% Import theorem/equation labels from the main paper without importing its
-% \bibcite entries; the supplement maintains its own bibliography below.
-\makeatletter
-\let\SupplementOriginalBibcite\bibcite
-\renewcommand{\bibcite}[2]{}
-\externaldocument{main}
-\let\bibcite\SupplementOriginalBibcite
-\makeatother
 
 \title{Supplementary Material for:\\
 Safe Active Discrimination of Fractional, Delayed, and Finite Latent Memory in a Strong-Allee Predator--Prey Model}
-\author{Ibrahim Alraddadi\\
-Department of Mathematics, Faculty of Science\\
-Islamic University of Madinah, Madinah, Saudi Arabia\\
-\texttt{ialraddadi@iu.edu.sa}}
+\author{Ibrahim Alraddadi\\Department of Mathematics, Faculty of Science\\Islamic University of Madinah, Madinah, Saudi Arabia}
 \date{\today}
 
 \renewcommand{\thesection}{S\arabic{section}}
@@ -30,14 +18,9 @@ Islamic University of Madinah, Madinah, Saudi Arabia\\
 \renewcommand{\theequation}{S\arabic{equation}}
 
 \begin{document}
-
 \maketitle
 
-\noindent This supplement contains the complete proofs, derivations, computational-layer
-specifications, prospective experimental protocols, and numerical validation material that
-support the main paper. Numbered references of the form ``Theorem 6.5'' or ``Equation (42)''
-resolve to the main paper; objects numbered ``S$n$'' are local to this supplement. Nothing
-in this supplement introduces a claim beyond those stated in the main paper.
+\noindent The main paper was deliberately shortened after external feedback. This supplement preserves the detailed theoretical development, proofs, secondary results, Bayesian extension, and numerical validation that were removed from the main narrative. The main paper contains only the four analytical results directly supporting the experiments.
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -48,67 +31,19 @@ in this supplement introduces a claim beyond those stated in the main paper.
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-\section{Theorem index and proof locations}
-\label{ssec:index}
+\input{supp_detailed/detail_sec2.tex}
+\input{supp_detailed/detail_sec3.tex}
+\input{supp_detailed/detail_sec4.tex}
+\input{supp_detailed/detail_sec5.tex}
+\input{supp_detailed/detail_sec6.tex}
+\input{supp_detailed/detail_sec7.tex}
+\input{supp_detailed/detail_sec8.tex}
+\input{supp_detailed/detail_sec9.tex}
+\input{supp_detailed/fractional_delay_validation.tex}
 
-\input{supp_sections/part_sec14.tex}
-
-\section{Approximation: omitted proofs and explicit parameter choices}
-\label{ssec:approx}
-
-This section contains the complete proof of the constructive $L^1$ approximation theorem
-(Theorem~\ref{thm:T9b} of the main paper) and the explicit parameter choices achieving a
-prescribed tolerance.
-
-\input{supp_sections/part_sec6.tex}
-
-\section{Design: omitted proofs and practical layers}
-\label{ssec:design}
-
-This section contains the complete proofs of the energy-optimal input theorem
-(Theorem~\ref{thm:T11}) and the finite multisine sufficiency theorem (Theorem~\ref{thm:T12}),
-followed by the three practical design layers summarized in the main paper: spacing- and
-cost-constrained observation design with channel selection, the contrast between
-discrimination and parameter-estimation designs, and constrained implementation.
-
-\input{supp_sections/part_sec7.tex}
-
-\section{Safety: omitted proofs, face inequalities, and practical consequences}
-\label{ssec:safety}
-
-This section contains the complete proofs of the linear safety envelope
-(Lemma~\ref{lem:linear_safety}) and the fractional strict inward-pointing rectangle theorem
-(Theorem~\ref{thm:T17}), the derivation of the four Strong-Allee face inequalities used by
-the input-envelope procedure of the main paper, and the practical consequences of operating
-near the Allee threshold.
-
-\input{supp_sections/part_sec8.tex}
-
-\section{The Bayesian sequential layer: proofs, estimator, schedule, and robustness axes}
-\label{ssec:bayes}
-
-This section completes the Bayesian layer of the main paper: the joint model-plus-parameter
-utility, the complete proofs of Theorems~\ref{thm:T18} and~\ref{thm:T19} with their
-scope-limiting remarks, the nested Monte Carlo estimator and its variance-reduction
-hierarchy, the adaptive schedule with stopping rules, and the eight mandatory robustness
-axes. The layer is specified, not executed, in this work.
-
-\input{supp_sections/part_sec9.tex}
-
-\section{Prospective experimental designs A--E and the minimum simulation matrix}
-\label{ssec:designs}
-
-This section specifies in full the five prospective microcosm/digital-twin designs
-summarized in the main paper, and the minimum simulation matrix for prospective validation.
-
-\input{supp_sections/part_sec11.tex}
-
-\section{Numerical validation of the fractional solver}
-\label{ssec:numval}
-
-\input{supp_sections/part_sec15.tex}
+\section{Fractional solver validation}
+\input{supp_detailed/solver_validation.tex}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
-
 \end{document}

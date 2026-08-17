@@ -1,0 +1,38 @@
+[
+  {
+    "design": "multisine",
+    "mean_min_bridge_distance": 0.1332290333783044,
+    "min_allee_margin": -0.21025441183751362,
+    "cross_fraction": 0.3333333333333333
+  },
+  {
+    "design": "prbs",
+    "mean_min_bridge_distance": 0.09088435871537948,
+    "min_allee_margin": -0.28136828515489587,
+    "cross_fraction": 1.0
+  },
+  {
+    "design": "sinusoid",
+    "mean_min_bridge_distance": 0.08940285612058528,
+    "min_allee_margin": -0.277725738660148,
+    "cross_fraction": 1.0
+  },
+  {
+    "design": "chirp",
+    "mean_min_bridge_distance": 0.08608621783449462,
+    "min_allee_margin": -0.2762755645706228,
+    "cross_fraction": 1.0
+  },
+  {
+    "design": "pulse",
+    "mean_min_bridge_distance": 0.0627043638960669,
+    "min_allee_margin": 0.2770031145708548,
+    "cross_fraction": 0.0
+  },
+  {
+    "design": "multiscale",
+    "mean_min_bridge_distance": 0.03382761624892762,
+    "min_allee_margin": 0.3171231304956026,
+    "cross_fraction": 0.0
+  }
+]

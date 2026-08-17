@@ -1,0 +1,169 @@
+\section{Optimal Input and Observation Design}
+\label{sec:design}
+
+The structural separation of Section~\ref{sec:separation} and the finite-horizon impossibility barrier of Section~\ref{sec:approximation} together define the playing field. The fractional model is generically distinguishable from every finite latent or delay model (Theorem~\ref{thm:T7}), but on any finite horizon a sufficiently rich latent model can mimic the fractional output below the noise floor (Corollary~\ref{cor:unrestricted}). The resolution adopted in Section~\ref{sec:approximation} is to bound the latent dimension by a complexity budget \(m\), which makes the discrimination contest a finite-dimensional optimization. This section solves that optimization~\cite{O01,O02,O03,O04,O10,O11,O12}: given a model pair, an energy budget, and a measurement noise covariance, we construct the excitation and the sampling schedule that maximize the pairwise Kullback--Leibler divergence~\cite{S01,S02,S03,S04,S05} under explicit constraints. The construction is exact for the linear-Gaussian regime and supplies the benchmark against which any constrained implementation (box, rate, or cumulative-impact) is measured.
+
+The section is organized around the operator \(\Delta H\) that measures the inter-model output gap. Input design asks how to drive \(\Delta H u\) as large as possible per unit energy; observation design asks where in time and channel to measure so that the realized gap is best converted into information. The two are dual and we develop them in sequence.
+
+\subsection{Pairwise linear-Gaussian formulation}
+
+We work in the linearized regime of Section~\ref{sec:linearization}. Fix two candidate models mapping an input \(u\) to a finite observation vector
+\begin{equation}
+Y_i = H_i u + \varepsilon,
+\qquad \varepsilon \sim \mathcal{N}(0, R),
+\qquad i \in \{1, 2\},
+\label{eq:pairwise_obs}
+\end{equation}
+where \(H_i\) is the (input-to-observation) operator of model \(i\) --- a finite-horizon discretization of the convolution with the channel \(G_i\) of Section~\ref{sec:linearization} --- and \(R\) is the symmetric positive definite measurement noise covariance. Define the inter-model difference operator
+\begin{equation}
+\Delta H := H_1 - H_2.
+\label{eq:def_dH}
+\end{equation}
+Under the Gaussian assumption, the pairwise Kullback--Leibler divergence between the two output distributions induced by a common input \(u\) admits the closed form
+\begin{equation}
+D_{12}(u) = \tfrac{1}{2} \| R^{-1/2} \Delta H u \|^2,
+\label{eq:kl_pairwise}
+\end{equation}
+independent of the mean offset and fully determined by how much the input, filtered through \(\Delta H\), escapes the noise cone defined by \(R\). The design problems that follow are all instances of maximizing~\eqref{eq:kl_pairwise} under constraints on \(u\), and subsequently on the observation locations.
+
+\subsection{Theorem T11 -- energy-constrained optimal input}
+
+The first design question is: under a total energy budget \(\|u\|^2 \le E\), how large can the pairwise divergence be made, and which input achieves it?
+
+\begin{theorem}[Energy-optimal pairwise input]
+\label{thm:T11}
+Consider the pairwise model~\eqref{eq:pairwise_obs} with \(\Delta H\) as in~\eqref{eq:def_dH} and \(R \succ 0\). Define the positive semidefinite information operator
+\begin{equation}
+Q := \Delta H^{\,*} R^{-1} \Delta H.
+\label{eq:def_Q}
+\end{equation}
+Then the maximal pairwise divergence under the energy constraint \(\|u\|^2 \le E\) is
+\begin{equation}
+\boxed{
+D_{12}^{\max} = \frac{E}{2}\, \lambda_{\max}(Q),
+}
+\label{eq:T11_max}
+\end{equation}
+and an optimal input is
+\begin{equation}
+\boxed{
+u^{*} = \sqrt{E}\, v_{\max},
+}
+\label{eq:T11_input}
+\end{equation}
+where \(v_{\max}\) is a unit principal eigenvector (or eigenfunction, in the input-function setting) of \(Q\).
+\end{theorem}
+
+\begin{proof}[Proof idea]
+The divergence is the Rayleigh quotient of the information operator $Q$ under the energy constraint; the maximum is attained on the principal eigenspace. Complete proof in the Supplementary Material (Section~S3).
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:T11} solves the pairwise linear-Gaussian design exactly. The optimal input is the principal eigenfunction of the noise-weighted inter-model operator, not a generic excitation: a pulse, chirp, PRBS, or multisine is optimal only to the extent that it approximates \(v_{\max}\) under additional amplitude, sign, duration, or implementation constraints. The principal eigenfunction concentrates energy precisely where the two transfer functions disagree most strongly relative to the noise floor --- the frequency-domain reading of the same statement is developed in Section~\ref{sec:freq_design} below.
+\end{remark}
+
+\subsection{Frequency-domain reading and the single-frequency optimum}
+\label{sec:freq_design}
+
+For scalar stable LTI models with transfer difference \(\Delta G(i\omega) = G_1(i\omega) - G_2(i\omega)\), white output noise of variance \(\sigma^2\), and an input spectral energy measure \(\xi\) on a measurable frequency set \(\Omega\), the divergence becomes
+\begin{equation}
+D_{12}(\xi) = \frac{1}{2\sigma^2} \int_{\Omega} |\Delta G(i\omega)|^2\, d\xi(\omega),
+\qquad \xi(\Omega) \le E,
+\label{eq:kl_freq}
+\end{equation}
+which is the diagonal form of Theorem~\ref{thm:T11} in the sinusoidal basis. The information operator reduces to the scalar frequency score \(|\Delta G(i\omega)|^2 / (2\sigma^2)\).
+
+\begin{corollary}[Optimal single frequency]
+\label{cor:single_freq}
+Under the setup of~\eqref{eq:kl_freq} with fixed, distinct scalar models and a single-frequency constraint, the optimum is
+\[
+\omega^{*} \in \arg\max_{\omega \in \Omega} |\Delta G(i\omega)|^2,
+\]
+and all available energy is assigned to \(\omega^{*}\). For a real-valued input, use the conjugate pair \(\pm\omega^{*}\), i.e.\ a sinusoid at \(\omega^{*}\).
+\end{corollary}
+
+\begin{remark}
+Corollary~\ref{cor:single_freq} concerns \emph{fixed simple models}. It does \emph{not} imply that a single sinusoid is optimal for parameter estimation or for robust discrimination among several composite (e.g.\ parameter-tunable latent) models: an adaptive latent model can match the fractional response at one frequency by tuning its internal parameters, exactly as anticipated in the discussion following Theorem~\ref{thm:T7}. Robust discrimination requires broadband excitation, developed next.
+\end{remark}
+
+For MIMO channels with frequency-dependent output covariance \(R(\omega)\), the per-frequency score generalizes to
+\begin{equation}
+w_{12}(\omega) = \lambda_{\max}\!\left( \Delta G(i\omega)^{*} R(\omega)^{-1} \Delta G(i\omega) \right),
+\label{eq:mimo_score}
+\end{equation}
+and the optimal excitation at the selected frequency lies in the associated right singular direction. This is the frequency-domain avatar of the principal-eigenfunction prescription of Theorem~\ref{thm:T11}.
+
+\subsection{Theorem T12 -- robust multisine design has finite support}
+
+Discriminating among \(P\) candidate model pairs simultaneously requires broadband excitation. Indexing the pairs by \(p = 1, \dots, P\) and writing the per-pair per-frequency score as
+\begin{equation}
+w_p(\omega) = \frac{1}{2\sigma^2} \left| G_{i_p}(i\omega) - G_{j_p}(i\omega) \right|^2,
+\label{eq:wp}
+\end{equation}
+the robust spectral design is the linear program over nonnegative spectral measures
+\begin{equation}
+\max_{\xi,\, t}\; t
+\qquad\text{s.t.}\qquad
+\int_{\Omega} w_p(\omega)\, d\xi(\omega) \ge t,\;\; p = 1, \dots, P,
+\qquad \xi(\Omega) \le E,\;\; \xi \ge 0.
+\label{eq:robust_LP}
+\end{equation}
+Problem~\eqref{eq:robust_LP} optimizes the worst-case pairwise divergence (a maximin criterion) over an arbitrary continuous spectrum. The next theorem bridges the gap between this continuous ideal and any implementable experiment: an optimal measure \emph{exists} and is supported on finitely many frequencies.
+
+\begin{theorem}[Finite multisine sufficiency]
+\label{thm:T12}
+Assume \(\Omega \subset \mathbb{R}\) is compact and each \(w_p : \Omega \to \mathbb{R}_{\ge 0}\) is continuous. Then problem~\eqref{eq:robust_LP} admits an optimal solution, and there exists an optimal spectral measure \(\xi^{*}\) supported on at most
+\begin{equation}
+\boxed{
+|\operatorname{supp} \xi^{*}| \le P + 1
+}
+\label{eq:T12_support}
+\end{equation}
+frequencies. Consequently, the robust broadband optimum is a multisine with no more than \(P+1\) tones.
+\end{theorem}
+
+\begin{proof}[Proof idea]
+The robust spectral problem is a linear program over spectral measures whose feasible set is determined by $P$ continuous score constraints on a compact band; Carath\'eodory\textquotesingle s theorem bounds the support of an extreme-point solution by $P+1$ atoms. Complete proof in the Supplementary Material (Section~S3).
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:T12} gives the rigorous robust counterpart of the heuristic ``use multiscale excitation'': the rigorous object is a finite multisine whose frequencies and weights solve the linear program~\eqref{eq:robust_LP}. A logarithmic pulse train or chirp is an implementation surrogate, appropriate when fine-grained sinusoidal control is unavailable but a broadband spectral footprint is still desired. The bound \(P+1\) is a worst-case Carath\'eodory guarantee; in many applications the optimum uses substantially fewer tones.
+\end{remark}
+
+The connection back to Section~\ref{sec:separation} is direct. Theorem~\ref{thm:T7} guarantees that almost every frequency separates any \emph{fixed} pair, but a parameter-tunable latent model can close the gap at any single frequency. Theorem~\ref{thm:T12} addresses the fixed-pair version of this tension rigorously: by spreading energy across at most \(P+1\) carefully chosen tones, the design guarantees a uniform lower bound \(t^{*}\) on the divergence of \emph{every fixed} pair simultaneously. Two scope limits must be kept in view. First, \(P\) counts the fixed score functions entering~\eqref{eq:robust_LP}; for a composite rival class indexed by continuous parameters the maximin problem is semi-infinite, and the \(P+1\) support bound applies only after a justified finite reduction or discretization of the parameter set. Second, a finite multisine does not, by itself, prevent a parameter-tunable latent family from fitting all selected frequencies jointly; what it removes is the single-frequency escape route, not adaptivity in general. Together with the complexity bound \(m\) of Section~\ref{sec:approximation} and the exclusions of Remark~\ref{rem:nfl_scope}, this converts the structural separation into a finite, computable discrimination barrier for the model classes of this paper.
+
+\subsection{Theorem T13 -- optimal pairwise sampling schedule}
+
+Input design fixes what is excited; observation design fixes what is measured. Fix the input \(u\) selected above and consider the placement of \(n\) measurements on a finite candidate grid of time--channel pairs \((t, o)\). Assume independent Gaussian measurement noise of variance \(\sigma_o^2(t)\) at each candidate, and define the \emph{normalized separation score}
+\begin{equation}
+s_{12}(t, o) := \frac{\bigl( \mu_1(t, o) - \mu_2(t, o) \bigr)^2}{2\,\sigma_o^2(t)},
+\label{eq:sep_score}
+\end{equation}
+where \(\mu_i(t,o)\) is the noise-free mean response of model \(i\) at time \(t\) on channel \(o\). For a selected schedule \(S\) of independent measurements, Gaussanity makes the divergence additive:
+\begin{equation}
+D_{12}(S) = \sum_{(t,o) \in S} s_{12}(t, o).
+\label{eq:kl_obs}
+\end{equation}
+
+\begin{theorem}[Optimal pairwise sampling schedule]
+\label{thm:T13}
+Suppose exactly \(n\) distinct measurements may be selected from a finite candidate set, the measurements are independent given the model, and there are no coupling constraints. Then the KL-optimal schedule consists of the \(n\) candidates with the largest separation scores \(s_{12}(t, o)\).
+\end{theorem}
+
+\begin{proof}
+The objective~\eqref{eq:kl_obs} is additive over \(S\). If a schedule \(S\) omits a candidate \(c^{\dagger}\) whose score exceeds that of some selected candidate \(c \in S\), then replacing \(c\) by \(c^{\dagger}\) strictly increases \(D_{12}(S)\), contradicting optimality. Hence every optimal schedule is a top-\(n\) set. Uniqueness holds up to ties at the threshold score.
+\end{proof}
+
+\begin{remark}
+If repeated observations at the same candidate are permitted, with iid noise and no saturation, the degenerate optimum places all \(n\) observations at a global score maximum. In practice, spacing constraints, temporal correlation, or biological cost prevent this degeneracy; the spacing-constrained case is addressed in the Supplementary Material (Section~S3).
+\end{remark}
+
+\subsection{Practical layers: spacing, cost, channels, and constrained implementation}
+
+Three practical layers complete the design theory and are developed in full in the Supplementary Material (Section~S3): (i) observation design under a minimum-spacing constraint (dynamic programming) and under per-sample costs and budgets (knapsack relaxation), together with channel selection from the strong-Allee linearization; (ii) the structural contrast between discrimination designs and parameter-estimation designs --- the two objectives are driven by different operators and their optima generically differ; and (iii) constrained implementation of the optimal inputs under box, rate, and cumulative-impact constraints, where the unconstrained optimum of Theorem~\ref{thm:T11} remains the reference upper bound against which any feasible design is scored.
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{fig04_waveforms}
+\caption{The six candidate input designs at the common peak-amplitude budget $\|u\|_\infty=0.10$, grouped by their benchmark safety behavior (the main-paper benchmark): transient families (pulse, multiscale) have the lowest crossing rates in the benchmark but discriminate weakly; sustained/broadband families (sinusoid, multisine, chirp, prbs) are more informative yet cross the Allee threshold much more frequently.}\label{fig:waveforms}\end{figure}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.70\textwidth]{fig05_linear_ranking}
+\caption{Exact linear-Gaussian design ranking by mean minimum pairwise KL divergence over the full factorial under the common peak-amplitude budget; state safety is not imposed in this ranking. Bars are colored by the nonlinear benchmark's safety verdict (the main-paper safety--informativeness figure): the linear optimum and the safe set disagree --- the preview of the trade-off.}\label{fig:linear-ranking}\end{figure}
