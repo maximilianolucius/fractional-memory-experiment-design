@@ -1,29 +1,25 @@
-\documentclass[10pt]{article}
+\documentclass[9pt]{extarticle}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage[hidelinks]{hyperref}
-\usepackage{aims_math_style}
-\numberwithin{equation}{section}
+\usepackage[numbers]{natbib}
+
+\title{Safe Active Discrimination of Fractional, Delayed, and Finite Latent Memory in a Strong-Allee Predator--Prey Model}
+\author{Ibrahim Alraddadi\\
+Department of Mathematics, Faculty of Science\\
+Islamic University of Madinah, Madinah, Saudi Arabia\\
+\texttt{ialraddadi@iu.edu.sa}}
+\date{\today}
 
 \begin{document}
+\maketitle
 
-\AIMSJournalHeader
-\AIMSResearchArticle
-\AIMSTitle{Safe Active Discrimination of Fractional, Delayed, and Finite Latent Memory in a Strong-Allee Predator--Prey Model}
-\AIMSAuthors{Ibrahim Alraddadi$^{1,*}$}
-\AIMSAffiliation{$^{1}$ Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah, Saudi Arabia}
-\AIMSCorrespondence{Email: \href{mailto:ialraddadi@iu.edu.sa}{ialraddadi@iu.edu.sa}}
-
-\begin{AIMSAbstract}
+\begin{abstract}
 We study how controlled ecological experiments can distinguish Caputo memory from integer-order, delayed, and finite latent alternatives in a strong-Allee predator--prey system. The ecological backbone is intentionally inherited from our previously submitted companion paper: the same strong-Allee model, locked parameters, coexistence equilibrium, and Jacobian are reused as the experimental test bed and are explicitly not claimed as new contributions here. The main text is organized around four analytical results and an expanded numerical study. Structurally, the collocated Caputo transfer has a noninteger high-frequency signature that cannot be exactly reproduced by the declared finite latent or retarded-delay classes. Practically, finite exponential mixtures approximate fractional memory over finite horizons, producing a complexity-dependent testing obstruction. Directly on the ecological prey channel, interval arithmetic certifies finite-state approximations whose error decreases from $0.5335$ at $m=4$ to $0.0070$ at $m=32$ for $\alpha=0.85$, $A=0.25$, and $T=12$; under the declared pulse budget, the associated Gaussian testing lower bound approaches chance. We then introduce a combined fractional-delay model that reduces to the pure Caputo case at $\tau=0$ and to the DDE case at $\alpha=1$. New simulations show that delay systematically shifts the predator peak, erodes the Allee safety margin, and creates intermediate responses that are not well represented by either pure limit. Across six perturbation families and a large four-class benchmark, broadband inputs improve discrimination but cross the Allee threshold more frequently, whereas transient inputs are safer numerically but less informative. The results expose a fundamental safety--informativeness trade-off in experimental identification of ecological memory.
-\end{AIMSAbstract}
-
-\AIMSKeywords{fractional-order dynamics; time-delay systems; model discrimination; experimental design; Allee effect; predator--prey dynamics}
-\AIMSMSC{34A08; 34K20; 62K05; 92D25}
+\end{abstract}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -45,15 +41,6 @@ We study how controlled ecological experiments can distinguish Caputo memory fro
 \input{sections/sec9.tex}
 \input{sections/sec10.tex}
 \input{sections/sec11.tex}
-
-\section*{Author contributions}
-The author contributed to the conceptualization, methodology, formal analysis, numerical investigation, visualization, and preparation of the manuscript.
-
-\section*{Use of AI tools declaration}
-AI-assisted tools were used during manuscript preparation for language editing, LaTeX formatting, code and documentation assistance, and structural organization. Responsibility for the scientific content and the final submitted version remains with the author.
-
-\section*{Conflict of interest}
-The author declares no conflict of interest.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}

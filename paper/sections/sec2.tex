@@ -2,6 +2,8 @@
 \label{sec:model}
 
 \subsection{Strong-Allee predator--prey backbone}
+This subsection records the ecological backbone inherited from the previously submitted validated study~\cite{P01}. The model, locked parameterization, coexistence equilibrium, Jacobian, and Matignon stability boundary below are reused inputs rather than new results of the present paper; their derivation and certification belong to Ref.~\cite{P01}. We restate only the formulas needed to define the controlled discrimination experiments.
+
 The nonlinear ecological model is
 \begin{align}
  f_1(x,y) &= r x\left(1-\frac{x}{K}\right)\left(\frac{x}{A}-1\right)-\frac{axy}{1+hx},\\
@@ -27,15 +29,43 @@ For a commensurate Caputo model, local stability follows the Matignon sector con
 \]
 with $T(A)=\operatorname{tr}J$ and $D(A)=\det J$. At $A=0.30$, $\alpha^*\approx0.969012276$, so the fractional system with $\alpha=0.9$ is stable although the integer-order limit is unstable~\cite{P01}. For most discrimination experiments we use $A\le2/7$, where the common operating point remains in the stable regime.
 
+
+\paragraph{Inherited backbone versus new experimental layer.}
+The notation above is intentionally identical to the companion paper because changing the ecological equations would confound the memory-discrimination question with a change of biological mechanism. What changes in the present work is the \emph{response law around the same operating ecology}: the fractional derivative, explicit delay, or finite latent state determines how perturbations propagate through time. This lets all candidates be compared under the same perturbation amplitude, observation horizon, and Allee threshold. Table~\ref{tab:locked-backbone} records the common quantities that are inherited and held fixed unless a numerical sweep explicitly varies $A$ or $\alpha$.
+
+\begin{table}[htbp]
+\centering
+\caption{Locked ecological backbone used by both manuscripts. These values are inherited inputs, not new contributions of the present paper.}
+\label{tab:locked-backbone}
+\small
+\begin{tabular}{lll}
+\hline
+\textbf{Quantity} & \textbf{Value} & \textbf{Role in present experiments}\\
+\hline
+$r$ & $1.5$ & intrinsic prey growth\\
+$K$ & $1$ & prey carrying capacity\\
+$a$ & $1$ & attack-rate scale\\
+$h$ & $0.5$ & Holling-II handling parameter\\
+$e$ & $0.8$ & conversion efficiency\\
+$m$ & $0.4$ & predator mortality\\
+$x^*$ & $2/3$ & common coexistence prey level\\
+$y^*(A)$ & $2(2-3A)/(9A)$ & coexistence predator level\\
+$J(A)$ & Eq. above & ODE/Caputo local ecological generator\\
+\hline
+\end{tabular}
+\end{table}
+
+The strong-Allee threshold plays two roles in the current manuscript. First, it defines a physically meaningful failure event: if an informative perturbation drives prey below $A$, the experiment may leave the local coexistence regime and trigger extinction dynamics. Second, the distance $x^*-A$ acts as a natural safety margin. Consequently, an input can be statistically attractive while being ecologically unacceptable, which is the central tension explored numerically in Sections~\ref{sec:fd}, \ref{sec:design}, and \ref{sec:benchmark}.
+
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.98\textwidth]{fig11_system_schematic}
-\caption{Ecological and experimental setting. The strong-Allee predator--prey system is perturbed on the prey channel and observed through prey, predator, or both populations. ODE and Caputo models share the exact ecological Jacobian; DDE and latent models are calibrated rival response laws. The dashed rectangle is a numerical benchmark diagnostic region, not an invariant-set certificate.}
+\caption{Ecological and experimental setting. The strong-Allee backbone and its parameterization are inherited from the previous validated study~\cite{P01}; the intervention/observation architecture and the competing memory laws are specific to the present work. The system is perturbed on the prey channel and observed through prey, predator, or both populations. ODE and Caputo models share the exact ecological Jacobian; DDE and latent models are calibrated rival response laws. The dashed rectangle is a numerical benchmark diagnostic region, not an invariant-set certificate.}
 \label{fig:schematic}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.94\textwidth]{fig12_backbone_regime}
-\caption{Strong-Allee backbone at $A=0.25$. Left: representative recovery above the threshold and collapse from below $A$. Right: prey growth term $P(x)$ showing the sign change at the Allee threshold. This geometry explains why experiment design must account for state safety, not only actuator amplitude.}
+\caption{Inherited strong-Allee backbone~\cite{P01} at $A=0.25$, shown here only to define the safety geometry for the new experiment-design problem. Left: representative recovery above the threshold and collapse from below $A$. Right: prey growth term $P(x)$ showing the sign change at the Allee threshold.}
 \label{fig:backbone}
 \end{figure}
 

@@ -31,7 +31,7 @@ predator–prey equilibrium:
 
 | Path | Content |
 |---|---|
-| `paper/` | LaTeX sources and compiled PDFs: main manuscript (19 pp, results-driven Q1 restructure of 2026-08-17: 4 essential theorems + 19 figures) and standalone detailed supplement (39 pp). Build: `bash paper/build_all.sh`. |
+| `paper/` | LaTeX sources and compiled PDFs: main manuscript in AIMS Mathematics submission layout (22 pp; 4 essential theorems, 19 figures, 11 evidence tables, explicit companion-paper disclosure) and standalone detailed supplement (29 pp). Build: bash paper/build_all.sh (pre-AIMS 9pt reference sources kept as main_pre_AIMS.tex / supplement_pre_AIMS.tex). |
 | `benchmark/` | Frozen benchmark v3: solver, designs, factorial results, validation (`python3 benchmark/validate_results.py`). |
 | `research_rounds/` | Complete auditable research record, rounds 1–6: results, proofs, theorem/novelty ledgers, per-round audits, and the certified-computation scripts (`round6/compute_round6.py`, `round6/check_round6.py`). |
 | `chief_round4/`, `chief_round5/`, `chief_round6/`, `chief_checks/`, `final_chief_checks/` | Independent audit machinery: interval-enclosure validators, atlas repair, lightweight cross-checks, figure regeneration. |

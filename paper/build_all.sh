@@ -2,7 +2,9 @@
 set -e
 cd "$(dirname "$0")"
 BIBTEX=$(command -v bibtex || true)
-if [ -z "$BIBTEX" ] && [ -x /usr/bin/bibtex.original ]; then BIBTEX=/usr/bin/bibtex.original; fi
+if [ -z "$BIBTEX" ] || [ ! -x "$BIBTEX" ]; then
+  if [ -x /usr/bin/bibtex.original ]; then BIBTEX=/usr/bin/bibtex.original; fi
+fi
 
 build_one() {
   base="$1"

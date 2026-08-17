@@ -1,4 +1,4 @@
-\section{Frequency-Domain and Finite-Horizon Numerical Evidence}
+\section{Frequency-Domain and Finite-Horizon Evidence}
 \label{sec:response}
 
 The structural results are visible before any large benchmark is run. Figure~\ref{fig:transfer-mag} shows transfer magnitudes on the prey channel at $A=0.25$. Figure~\ref{fig:transfer-phase} shows the phase separation and the high-frequency convergence to $-\alpha\pi/2$ on collocated channels.
@@ -14,6 +14,33 @@ The structural results are visible before any large benchmark is run. Figure~\re
 \caption{Phase evidence for the fractional signature. Left: Caputo, ODE, DDE, and finite latent responses across frequency. Right: the Caputo phase converges to the scale-free asymptote $-\alpha\pi/2$.}
 \label{fig:transfer-phase}
 \end{figure}
+
+
+
+\subsection{From exact signatures to finite-horizon ambiguity}
+The two frequency-domain panels should be read together. The noninteger high-frequency decay and phase give a structural signature of Caputo dynamics, but an experiment does not observe an asymptotic half-line of frequencies. It observes a finite bandwidth over a finite time window and with finite noise. A sufficiently flexible latent model can therefore mimic the relevant part of the response without being analytically identical to the fractional transfer. This is why the structural theorem and the finite-horizon impossibility theorem are complementary rather than competing statements.
+
+The ecological prey-response calculation makes the same point directly in the controlled population channel. For $\alpha=0.85$ and $T=12$, Table~\ref{tab:state-approx} reports certified $L^1$ response bounds together with the corresponding Pinsker lower bounds under the declared pulse and $\sigma=0.10$. The approximation improves by almost two orders of magnitude between $m=4$ and $m=32$, and the lower bound correspondingly approaches the equal-prior chance level $1/2$.
+
+\begin{table}[htbp]
+\centering
+\caption{Certified finite-state approximation of the fractional prey response and induced testing lower bound at $\alpha=0.85$, $T=12$, pulse $\|u\|_2\le0.120$, and $\sigma=0.10$.}
+\label{tab:state-approx}
+\small
+\begin{tabular}{ccccc}
+\hline
+& \multicolumn{2}{c}{$A=0.25$} & \multicolumn{2}{c}{$A=0.30$}\\
+$m$ & $\widehat E_m^{\rm state}$ & $P_e^*$ lower bound & $\widehat E_m^{\rm state}$ & $P_e^*$ lower bound\\
+\hline
+4  & 0.5334 & 0.340 & 0.4706 & 0.359\\
+8  & 0.1254 & 0.462 & 0.0898 & 0.473\\
+16 & 0.0273 & 0.492 & 0.0204 & 0.494\\
+32 & 0.0069 & 0.498 & 0.0066 & 0.498\\
+\hline
+\end{tabular}
+\end{table}
+
+The table is deliberately a one-sided statement. A large lower bound on $P_e^*$ proves that the specified experiment cannot reliably distinguish the focal fractional response from at least one rival in the admitted finite-state class; the converse is not claimed. Cells in which the bound is small are therefore \emph{inconclusive}, not automatically discriminable. This interpretation is preserved in the atlas of Figure~\ref{fig:atlas}.
 
 The finite-horizon approximation results then explain why frequency-domain separation does not automatically translate into easy model selection. The safe memory-discrimination atlas in Figure~\ref{fig:atlas} displays the protocol-restricted lower bound on testing error across fractional order, Allee parameter, and latent complexity. Cells outside the focal Matignon-stable regime are explicitly excluded from the headline interpretation.
 

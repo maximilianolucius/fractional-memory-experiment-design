@@ -37,7 +37,11 @@ For every $T<\infty$ and $\varepsilon>0$, there exists a finite positive exponen
 This is the analytical reason for treating latent dimension as an experimental-model complexity budget rather than an unconstrained nuisance parameter.
 
 \subsection{Result III: testing obstruction under a physical input budget}
-Let $S$ be the observation operator, $R$ the Gaussian covariance, and $C_{\rm obs}=\tfrac12\|R^{-1/2}S\|^2$. Young's inequality converts the approximation bound into an observation-space bound.
+Let $S$ be the observation operator and $R$ the Gaussian covariance. Define
+\[
+C_{\rm obs}=\tfrac12\|R^{-1/2}S\|^2.
+\]
+Young's inequality converts the approximation bound into an observation-space bound.
 
 \begin{theorem}[Complexity-dependent testing obstruction]
 \label{thm:T20}
@@ -60,7 +64,7 @@ For the displayed Matignon-stable cells and $m\in\{4,8,16,32\}$, there exists an
 where the bound is obtained by outward-rounded interval subdivision and a rigorous tail estimate. At $\alpha=0.85$, $T=12$, the certified enclosure at $A=0.25$ decreases from $0.5335$ ($m=4$) to $0.0070$ ($m=32$).
 \end{theorem}
 
-For the declared pulse, $\|u\|_\infty\le0.10$ implies $\|u\|_2\le0.120$. At $\sigma=0.10$, the resulting Pinsker testing lower bounds at $A=0.25$ are approximately $0.340,0.462,0.492,0.498$ for $m=4,8,16,32$, respectively. Hence the finite-state rival becomes statistically indistinguishable from the fractional prey response as its allowed complexity grows.
+For the declared pulse, $\|u\|_\infty\le0.10$ implies $\|u\|_2\le0.120$. At $\sigma=0.10$, the resulting Pinsker testing lower bounds at $A=0.25$ are approximately $0.340$, $0.462$, $0.492$, and $0.498$ for $m=4$, $8$, $16$, and $32$, respectively. Hence the finite-state rival becomes statistically indistinguishable from the fractional prey response as its allowed complexity grows.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.90\textwidth]{fig14_separation_approx}

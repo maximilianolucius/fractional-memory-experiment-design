@@ -6,3 +6,29 @@ The numerical results translate into a practical microcosm protocol. A useful fi
 The fractional-delay study adds a concrete diagnostic: delayed feedback should shift the timing of the predator peak, whereas decreasing fractional order primarily modifies the long transient and phase response. A design that records dense observations around the predator peak and continues sufficiently long to resolve the fractional tail is therefore more informative than uniform sparse sampling alone.
 
 A Bayesian sequential layer is specified in the Supplementary Material but is not executed here. The present paper deliberately keeps the main evidence reproducible with deterministic solvers, interval enclosures, and BIC-based simulation benchmarks.
+
+
+\subsection*{A two-stage prospective protocol}
+The numerical results suggest a staged experiment rather than a single maximally informative perturbation. Stage~1 uses a transient input with a low observed crossing rate (pulse or multiscale) to estimate the local response scale and verify that the realized trajectory remains comfortably above the Allee threshold. Stage~2 is conditional: only if the first experiment leaves adequate margin should a more informative multisine-type excitation be applied. This sequencing is not claimed to be Bayes-optimal; it is a practical interpretation of the observed safety--information frontier.
+
+\begin{table}[htbp]
+\centering
+\caption{Prospective microcosm workflow suggested by the simulation results.}
+\label{tab:prospective-protocol}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.10\textwidth}p{0.22\textwidth}p{0.27\textwidth}p{0.25\textwidth}}
+\hline
+\textbf{Stage} & \textbf{Perturbation} & \textbf{Primary measurements} & \textbf{Decision / purpose}\\
+\hline
+0 & no perturbation & baseline prey/predator variability & estimate noise and confirm operating point\\
+1 & pulse or multiscale & dense early prey observations; predator peak timing; minimum prey level & verify local response and available safety margin\\
+2 & multisine if margin permits & both species over the full transient and relaxation tail & maximize separation of memory mechanisms\\
+3 & optional repeat / altered horizon & same channels, replicated under matched conditions & test robustness of the selected mechanism and estimate variability\\
+\hline
+\end{tabular}
+\end{table}
+
+Three measurement features are especially informative. First, the directly actuated prey channel carries the strongest early signal and should be sampled densely immediately after the perturbation. Second, the delayed trophic pathway is expressed through the timing of the predator response, so observations should be concentrated around the anticipated predator peak rather than uniformly diluted over the entire window. Third, fractional memory is most visible in the slower relaxation tail; the observation horizon should therefore extend well beyond the peak. The combined design is naturally nonuniform: dense around the forcing and predator peak, then sparser but longer during relaxation.
+
+The present simulations use dimensionless state variables and a normalized perturbation budget. A physical implementation would first map these quantities to organism counts, biomass, or resource manipulation units and would have to define an operational safety margin above the empirical Allee threshold. That calibration step is application-specific and is intentionally not inferred from simulation alone.

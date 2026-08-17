@@ -3,6 +3,9 @@
 
 A natural robustness question motivates a dedicated numerical study of a mechanism carrying \emph{both} fractional memory and explicit delay. Equation~\eqref{eq:fdmodel} is useful because its boundaries are exactly the two previously studied mechanisms: $\tau=0$ gives the pure Caputo model, while $\alpha=1$ gives the DDE benchmark. The interior of the $(\alpha,\tau)$ plane therefore tests whether the two effects reinforce, compensate, or create ambiguous response signatures.
 
+
+The purpose of this section is not to claim a new general theory of fractional delay equations. It is an application-oriented stress test of the discrimination framework. The same strong-Allee ecology, prey perturbation channel, amplitude budget, and observation variables are kept fixed while two memory coordinates are varied. This isolates a practical concern that is difficult to see in pairwise model comparisons: a real system may contain both a broad hereditary response and a physiologically meaningful delay, so a binary ``fractional versus delay'' interpretation can be misspecified even when each limiting model fits part of the trajectory.
+
 \subsection{Transient trajectories}
 Figure~\ref{fig:fdtraj} fixes $A=0.25$, $\alpha=0.85$, and applies the same prey pulse while increasing $\tau$. The prey response changes moderately, whereas the predator response is visibly shifted and its late transient becomes increasingly delay-sensitive. Importantly, the trajectories remain above the Allee threshold for this pulse experiment.
 
@@ -21,8 +24,54 @@ Figure~\ref{fig:fdbridge} sweeps $\alpha\in[0.70,1]$ and $\tau\in[0,0.5]$. The l
 \label{fig:fdbridge}
 \end{figure}
 
+Table~\ref{tab:fd-bridge-cells} gives representative numerical values from the bridge grid. For fixed $\alpha$, increasing $\tau$ moves the trajectory monotonically farther from the pure Caputo boundary. At the same time, the trajectory remains substantially separated from the pure DDE boundary for the displayed cells. The effect is especially strong near $\alpha=0.95$: the distance to the Caputo limit grows from $0.0299$ at $\tau=0.10$ to $0.2805$ at $\tau=0.50$, while the minimum Allee margin falls from $0.3345$ to $0.2629$. This is a direct numerical example of a region in which explicit delay increases both identifiability and ecological risk.
+
+\begin{table}[htbp]
+\centering
+\caption{Representative cells from the fractional-delay bridge at $A=0.25$ under the pulse experiment. Distances are trajectory $L^2$ distances to the corresponding limiting models.}
+\label{tab:fd-bridge-cells}
+\small
+\begin{tabular}{ccccc}
+\hline
+$\alpha$ & $\tau$ & distance to Caputo & distance to DDE & min. $[x(t)-A]$\\
+\hline
+0.75 & 0.10 & 0.0063 & 0.3426 & 0.3917\\
+0.75 & 0.30 & 0.0182 & 0.6145 & 0.3887\\
+0.75 & 0.50 & 0.0315 & 1.0086 & 0.3850\\
+0.85 & 0.10 & 0.0103 & 0.2900 & 0.3724\\
+0.85 & 0.30 & 0.0334 & 0.5683 & 0.3655\\
+0.85 & 0.50 & 0.0625 & 0.9606 & 0.3566\\
+0.95 & 0.10 & 0.0299 & 0.1645 & 0.3345\\
+0.95 & 0.30 & 0.1142 & 0.4330 & 0.3123\\
+0.95 & 0.50 & 0.2805 & 0.6875 & 0.2629\\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{Which input exposes the combined mechanism?}
 For $\alpha\in\{0.75,0.85,0.95\}$ and $\tau\in\{0.15,0.30,0.45\}$, we score each input by the mean of the minimum trajectory distance to the pure Caputo and pure DDE explanations. Figure~\ref{fig:fddesign} shows that multisine excitation gives the largest bridge-discrimination score, but it crosses the Allee threshold in one third of the tested cells. PRBS, sinusoid, and chirp cross in every tested cell; pulse and multiscale excitation remain above threshold but are less discriminating. This reproduces the global safety--informativeness tension on a model that contains both kinds of memory simultaneously.
+
+
+The complete ranking is reported in Table~\ref{tab:fd-design-ranking}. The score is the mean, over the nine $(\alpha,\tau)$ cells, of the minimum trajectory distance to the pure Caputo and pure DDE limits. This deliberately penalizes inputs that separate the combined response from only one of the two explanations. The second and third columns show that the highest scores are achieved by sustained/broadband perturbations, whereas the two transient families maintain positive Allee margins throughout the tested grid.
+
+\begin{table}[htbp]
+\centering
+\caption{Fractional-delay design stress test at $A=0.25$. The score averages the minimum distance to the Caputo and DDE limits over $\alpha\in\{0.75,0.85,0.95\}$ and $\tau\in\{0.15,0.30,0.45\}$.}
+\label{tab:fd-design-ranking}
+\small
+\begin{tabular}{lccc}
+\hline
+\textbf{Input} & \textbf{mean bridge score} & \textbf{worst Allee margin} & \textbf{crossing fraction}\\
+\hline
+multisine  & 0.1332 & -0.2103 & 0.333\\
+PRBS       & 0.0909 & -0.2814 & 1.000\\
+sinusoid   & 0.0894 & -0.2777 & 1.000\\
+chirp      & 0.0861 & -0.2763 & 1.000\\
+pulse      & 0.0627 &  0.2770 & 0.000\\
+multiscale & 0.0338 &  0.3171 & 0.000\\
+\hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.86\textwidth]{fig22_fractional_delay_design_ranking}
@@ -32,6 +81,30 @@ For $\alpha\in\{0.75,0.85,0.95\}$ and $\tau\in\{0.15,0.30,0.45\}$, we score each
 
 \subsection{Delay sweep}
 The delay sweep in Figure~\ref{fig:fdsweep} makes the mechanism interpretable. Increasing $\tau$ shifts the predator peak later for every tested fractional order and increases its peak amplitude modestly. At the same time the minimum Allee margin decreases, especially near $\alpha=1$. Thus the delay is visible not merely as an additional fitting parameter but as a reproducible shift in response timing and safety margin.
+
+
+For example, at $\alpha=0.85$ the predator peak moves from $t\approx3.81$ at $\tau=0$ to $t\approx4.50$ at $\tau=0.55$, while the minimum Allee margin decreases from $0.3759$ to $0.3548$. At $\alpha=0.95$ the same delay change moves the peak from $t\approx4.16$ to $4.89$ and reduces the Allee margin much more strongly, from $0.3434$ to $0.2384$. Table~\ref{tab:fd-delay-summary} provides the endpoint comparison for all three fractional orders.
+
+\begin{table}[htbp]
+\centering
+\caption{Endpoint summary of the delay sweep under the pulse experiment. Values compare $\tau=0$ with $\tau=0.55$.}
+\label{tab:fd-delay-summary}
+\small
+\begin{tabular}{cccccc}
+\hline
+$\alpha$ & $\tau$ & predator peak time & predator peak & min. Allee margin\\
+\hline
+0.75 & 0    & 3.343 & 1.1634 & 0.3934\\
+0.75 & 0.55 & 4.029 & 1.1681 & 0.3843\\
+0.85 & 0    & 3.814 & 1.1724 & 0.3759\\
+0.85 & 0.55 & 4.500 & 1.1788 & 0.3548\\
+0.95 & 0    & 4.157 & 1.1838 & 0.3434\\
+0.95 & 0.55 & 4.886 & 1.1925 & 0.2384\\
+\hline
+\end{tabular}
+\end{table}
+
+The trend also clarifies why dense observation near the predator peak is useful. Delay is expressed strongly through timing, while fractional memory is expressed over a broader relaxation tail. A sampling scheme that observes only a short window around the initial prey perturbation can therefore miss both signatures: it may not wait long enough for the delayed predator response, and it may not observe long enough to resolve the fractional relaxation.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.98\textwidth]{fig23_fractional_delay_sweep}

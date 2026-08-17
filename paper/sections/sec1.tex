@@ -7,14 +7,37 @@ Fractional derivatives are widely used to represent hereditary and nonlocal effe
 \emph{Which perturbations and measurements can distinguish fractional memory from delayed or latent alternatives in a strong-Allee ecological system, and when does ecological safety make that discrimination fundamentally difficult?}
 \end{quote}
 
-The ecological backbone is the validated strong-Allee predator--prey model used in our previous study~\cite{E03,E04,E05,P01}. The present paper moves from certification of dynamics to \emph{experimental discrimination of memory mechanisms}. The ODE and Caputo mechanisms share the same ecological equilibrium and Jacobian; retarded-delay and finite-state latent models are calibrated rival response laws compared through matched inputs, observations, and physical units.
+The ecological backbone is deliberately inherited from our previous validated study~\cite{E03,E04,E05,P01}, so that the present work can isolate a different scientific question: \emph{experimental discrimination of memory mechanisms}. The previous paper established the equilibrium/stability structure, the Matignon boundary, extinction and boundedness certificates, and the failure of a naive Euler surrogate. None of those results is claimed as a contribution here. In the present paper they serve only to define the operating regime and the ecological safety geometry. The new objects are the competing ODE/Caputo/delay/latent response laws, controlled perturbations and observation channels, finite-horizon discrimination bounds, the combined fractional-delay stress test, and the numerical experiment-design benchmark. The ODE and Caputo mechanisms share the inherited ecological equilibrium and Jacobian; retarded-delay and finite-state latent models are calibrated rival response laws compared through matched inputs, observations, and physical units.
+
+\paragraph{Explicit relationship to the previously submitted paper.}
+Because the two manuscripts belong to the same research sequence, the reuse boundary is stated explicitly rather than left implicit. The present manuscript uses the \emph{same ecological backbone}: the strong-Allee predator--prey equations, the locked ecological parameters, the coexistence equilibrium, and the corresponding Jacobian are inherited from the previously submitted companion paper~\cite{P01}. Those ingredients are not reintroduced as new results and are not part of the novelty claim. They provide a controlled test bed on which a different problem is posed: how to design perturbations and observations that discriminate between alternative memory laws. The distinction is summarized in Table~\ref{tab:paper-relation}.
+
+\begin{table}[htbp]
+\centering
+\caption{Relationship between the previously submitted companion paper and the present manuscript. The ecological backbone is intentionally shared; the research questions, analytical targets, simulations, and headline results are different.}
+\label{tab:paper-relation}
+\footnotesize
+\begin{tabular}{p{0.17\textwidth}p{0.34\textwidth}p{0.34\textwidth}}
+\hline
+\textbf{Aspect} & \textbf{Previously submitted paper~\cite{P01}} & \textbf{Present paper}\\
+\hline
+Scientific question & Certify equilibria, stability, the Matignon boundary, extinction/boundedness, and discretization-induced stability inversion. & Design and evaluate experiments that distinguish Caputo, delayed, integer-order, and finite-latent memory mechanisms.\\
+Shared material & Strong-Allee ecological equations, locked parameters, coexistence equilibrium, and Jacobian. & The same ecological backbone is reused only as the operating and safety test bed.\\
+Primary mathematics & Validated numerics, Krawczyk/interval certificates, Matignon classification, global extinction/boundedness statements. & Structural transfer separation, finite-horizon latent approximation, testing obstruction, and finite-state prey-response approximation.\\
+Primary computation & Certified parameter grid and certificate inventory. & Frequency-response diagnostics, input-design experiments, four-class model-discrimination benchmark, and fractional-delay simulations.\\
+Headline output & Certified dynamical regimes of the Caputo ecological model. & Safety--informativeness limits for active discrimination of competing memory mechanisms.\\
+\hline
+\end{tabular}
+\end{table}
+
+This separation is also important methodologically. A stability certificate answers whether a specified Caputo model is locally or globally consistent with a dynamical regime; it does not answer whether the Caputo mechanism can be distinguished from an observationally similar delay or latent-state mechanism. Conversely, the present discrimination results do not recertify the ecological backbone. They condition on the previously established operating geometry and ask what additional perturbation/measurement information is required to tell the candidate memory laws apart.
 
 \paragraph{Main contributions.}
 The paper is organized around four contributions, rather than around a long sequence of standalone theorems.
 \begin{enumerate}
     \item \textbf{Structural and finite-horizon separation.} We show that the collocated Caputo transfer has a noninteger high-frequency signature that cannot be exactly reproduced by finite rational latent models or by the declared retarded-delay class. At the same time, finite exponential mixtures approximate the fractional kernel on a finite horizon, creating a complexity-dependent discrimination barrier.
     \item \textbf{Certified prey-response testing obstruction.} Directly on the linearized ecological prey channel, a pole/branch decomposition yields interval-enclosed finite-state approximations. Under a declared pulse budget and Gaussian observations, the corresponding minimax testing lower bound approaches chance as latent complexity grows.
-    \item \textbf{Numerical validation and a new fractional-delay stress test.} In addition to the calibrated ODE/Caputo/DDE/latent benchmark, we introduce a combined fractional-delay model. It continuously connects the pure Caputo limit ($\tau=0$) to the DDE limit ($\alpha=1$), allowing direct simulation of how fractional order and delay jointly alter phase, transient amplitude, safety margin, and experimental discriminability.
+    \item \textbf{Numerical validation and a new fractional-delay stress test.} In addition to the calibrated ODE, Caputo, DDE, and latent benchmark, we introduce a combined fractional-delay model. It continuously connects the pure Caputo limit ($\tau=0$) to the DDE limit ($\alpha=1$), allowing direct simulation of how fractional order and delay jointly alter phase, transient amplitude, safety margin, and experimental discriminability.
     \item \textbf{Safety--informativeness trade-off.} Across six input families, broadband excitation improves memory discrimination but increases the rate of crossing the strong-Allee threshold. Transient inputs are safer numerically but less informative, making the constrained experiment-design problem visible rather than merely theoretical.
 \end{enumerate}
 

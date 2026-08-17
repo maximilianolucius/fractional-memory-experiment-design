@@ -1,7 +1,7 @@
 \section{Numerical Methods and Validation}
 \label{sec:numerics}
 
-The computational layer is designed to support the analytical claims rather than replace them. All scripts and machine-readable outputs are released under \texttt{benchmark/} and \texttt{figures/}.
+The computational layer is designed to support the analytical claims rather than replace them. All scripts and machine-readable outputs are released in the accompanying benchmark and figure directories.
 
 \subsection{Solvers}
 ODE and latent-state systems are integrated with fourth-order Runge--Kutta. Retarded DDEs use an interpolated-history RK4 solver. Caputo systems use the fractional Adams--Bashforth--Moulton PECE scheme~\cite{F02}; its scalar implementation is validated against the exact Mittag--Leffler solution.
@@ -21,3 +21,56 @@ Six bounded inputs are compared at the common peak-amplitude budget $\|u\|_\inft
 and the rate of threshold crossing.
 
 For fractional-delay experiments we additionally report (i) trajectory distance to the pure Caputo limit, (ii) trajectory distance to the pure DDE limit, (iii) predator peak time and amplitude, and (iv) a robust bridge-discrimination score defined as the minimum of the distances to the two limiting explanations.
+
+
+\subsection{Validation matrix and numerical resolution}
+The main numerical claims are associated with explicit validation gates rather than a single solver run. Table~\ref{tab:solver-validation} collects the convergence checks used in the released package. The scalar Caputo PECE implementation is compared with an exact Mittag--Leffler solution. The combined fractional-delay implementation is checked independently at the integer-order boundary against the DDE RK4 solver, and an interior fractional-delay cell is subjected to self-convergence. The error decreases monotonically in every reported sequence.
+
+\begin{table}[htbp]
+\centering
+\caption{Numerical validation gates. The Caputo column uses the exact Mittag--Leffler reference; the fractional-delay boundary uses an independent DDE RK4 solution.}
+\label{tab:solver-validation}
+\footnotesize
+\begin{tabular}{p{0.31\textwidth}p{0.12\textwidth}p{0.22\textwidth}p{0.19\textwidth}}
+\hline
+\textbf{Gate} & \shortstack{\textbf{grid}\\\textbf{size}} & \textbf{Reference} & \shortstack{\textbf{max. abs.}\\\textbf{discrepancy}}\\
+\hline
+Caputo PECE & $N=250$ & exact Mittag--Leffler & $8.70\times10^{-4}$\\
+Caputo PECE & $N=500$ & exact Mittag--Leffler & $4.64\times10^{-4}$\\
+Caputo PECE & $N=1000$ & exact Mittag--Leffler & $2.52\times10^{-4}$\\
+Fractional-delay, $\alpha=1$ & $N=200$ & DDE RK4 & $6.75\times10^{-6}$\\
+Fractional-delay, $\alpha=1$ & $N=400$ & DDE RK4 & $1.68\times10^{-6}$\\
+Fractional-delay, $\alpha=1$ & $N=800$ & DDE RK4 & $4.20\times10^{-7}$\\
+Fractional-delay, $(\alpha,\tau)=(0.85,0.35)$ & $N=200$ & $N=800$ & $2.18\times10^{-3}$\\
+Fractional-delay, $(\alpha,\tau)=(0.85,0.35)$ & $N=400$ & $N=800$ & $8.05\times10^{-4}$\\
+\hline
+\end{tabular}
+\end{table}
+
+The validation strategy is deliberately heterogeneous. An agreement between two implementations that share the same discretization can hide a common coding error; therefore the most important boundaries are checked against a mathematically different reference. At $\tau=0$, the fractional-delay code delegates to the already validated Caputo implementation rather than duplicating the same calculation. At $\alpha=1$, by contrast, the memory convolution collapses to an integer-order problem and the output is compared with the separate interpolated-history DDE RK4 path. The two checks test opposite boundaries of the combined model.
+
+\subsection{Experimental grid and reproducibility}
+The benchmark is organized around a small number of interpretable axes rather than unconstrained parameter search. The common peak actuator budget is $\|u\|_\infty\le0.10$. The original four-class stable benchmark varies Allee level, fractional order, SNR, observation channel, and waveform family; each cell is replicated 200 times. The dedicated fractional-delay campaign is smaller and targeted: it uses $A=0.25$, $\alpha\in\{0.75,0.85,0.95\}$, $\tau\in\{0.15,0.30,0.45\}$ for the design comparison, and a denser $(\alpha,\tau)$ grid for the bridge plots. Table~\ref{tab:experiment-grid} summarizes the main numerical axes.
+
+\begin{table}[htbp]
+\centering
+\caption{Main numerical-design axes. The fractional-delay campaign is intentionally targeted and is separate from the larger four-class benchmark.}
+\label{tab:experiment-grid}
+\small
+\begin{tabular}{p{0.25\textwidth}p{0.64\textwidth}}
+\hline
+\textbf{Component} & \textbf{Values / protocol}\\
+\hline
+Peak input budget & $\|u\|_\infty\le0.10$ for all six waveform families\\
+Four-class stable benchmark & ODE, Caputo, retarded DDE, latent-$3$; $A\in\{0.20,0.25\}$; 200 replicates per cell\\
+Fractional orders in benchmark & $\alpha\in\{0.70,0.85,0.90,0.95\}$ where applicable\\
+Observation channels & prey only, predator only, both species\\
+Noise regimes & high, medium, and low SNR\\
+Fractional-delay design grid & $A=0.25$, $\alpha\in\{0.75,0.85,0.95\}$, $\tau\in\{0.15,0.30,0.45\}$\\
+Fractional-delay bridge grid & $\alpha=0.70,0.75,\ldots,1.00$ and $\tau=0,0.10,\ldots,0.50$\\
+Simulation horizon & $T=12$ for the principal trajectory/design comparisons\\
+\hline
+\end{tabular}
+\end{table}
+
+All quantities used in the figures are generated from machine-readable JSON or NPZ outputs. The fractional-delay script writes the solver validation sequence, the design ranking, and the bridge arrays together with the four figures. This separation between simulation generation and paper rendering is useful for audit: plots can be regenerated without rerunning the large four-class benchmark, while the archived benchmark statistics can be checked independently.
