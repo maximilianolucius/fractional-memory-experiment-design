@@ -3,7 +3,8 @@
 Every file to upload, and what it is for. Nothing else from this repository goes to the journal.
 
 **Submission portal:** Editorial Manager. **Review model:** single anonymized.
-**State:** `READY-PENDING-AUTHOR-METADATA` — do not upload until §4 is closed.
+**State:** `READY-PENDING-PREPRINT-DISCLOSURE` — compliance is 14/14 mandatory and the build is
+clean; the one open item is the preprint disclosure in §5.
 
 ---
 
@@ -66,14 +67,11 @@ and must not be uploaded.
 
 ## 5. Blockers — the package must not be uploaded until these are closed
 
-| # | blocker | what it needs |
+| # | blocker | status |
 |---|---|---|
-| B1 | **Funding declaration absent** from `main.tex` | the author states no-funding or supplies funder + grant number; one line goes in, then rebuild |
-| B2 | **Data statement carries `[REPOSITORY]`, `[DOI]`** | upload `public_reproducibility/` to Zenodo, substitute the returned DOI, rebuild |
-| B3 | **Prior public preprint of this work, under different authorship** | decide how to resolve it — see `AUTHOR_METADATA_CONFIRMATION.md` §4. Elsevier requires the preprint to be disclosed and cited; the creator-list discrepancy has to be settled first |
-
-B1 and B2 are one line of LaTeX each once the answers exist. B3 is a question of fact about
-authorship and is not a formatting matter.
+| B1 | Funding declaration | **CLOSED** — author-confirmed no external funding; `Funding` section inserted |
+| B2 | Data statement placeholders | **CLOSED** — deposit published, DOI `10.5281/zenodo.22087770`, cited in the article; zero placeholders remain |
+| B3 | **Prior public preprint of this work, under different authorship** | **OPEN** — see `AUTHOR_METADATA_CONFIRMATION.md` §4. Elsevier requires the preprint to be disclosed and cited at submission; the manuscript does neither, and the creator-list discrepancy determines *how* it should be disclosed |
 
 ## 6. Verification at the moment of writing
 
@@ -92,8 +90,9 @@ figures cited / present          18 / 18
 pages                            44
 ```
 
-## 7. Companion deposit (uploaded to Zenodo, not to CNSNS)
+## 7. Companion deposit (on Zenodo, not uploaded to CNSNS)
 
-`public_reproducibility/` — 50 files, 2.8 MB, `MANIFEST_SHA256.txt` verified 49/49, smoke-tested from
-a clean copy, regenerates the headline figure from its own frozen data. Contents and exclusions are
-documented in `R5_DATA_DEPOSIT_AUDIT.md`. Upload this, take the DOI, close B2.
+Published: **`10.5281/zenodo.22087770`**, open access, CC BY 4.0, creator Alraddadi with ORCID.
+`fmed-reproducibility-2026-08-24.zip`, 303 461 bytes, md5 `877cfd04e5896824dd72a8ab57939648` —
+Zenodo's checksum matches the local file exactly. Contents, exclusions and the verification performed
+are in `R5_DATA_DEPOSIT_AUDIT.md`. The article's data statement cites this DOI.

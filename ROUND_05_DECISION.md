@@ -1,10 +1,25 @@
 # ROUND 05 — Researcher decision memo
 
-## STATE: **READY-PENDING-AUTHOR-METADATA**
+## STATE: **READY-PENDING-PREPRINT-DISCLOSURE**
 
-All ten technical tasks are complete. Every engineering, format, build and compliance defect that
-was in my control is closed. What remains is three items that require the author or a decision that
-is not mine to make.
+All ten technical tasks are complete. Compliance is **14/14 mandatory, 25/25 applicable**. Two of
+the three blockers are closed by the operator's answers:
+
+- **B1 funding** — confirmed as *no external funding*, inserted.
+- **B2 data deposit** — published open access, **DOI `10.5281/zenodo.22087770`**, cited in the
+  article. Zero placeholders remain in the manuscript.
+
+**B3 is still open, and it is the only thing standing between this package and
+`SUBMISSION AUTHORIZED`.** The reply received was "ok", which I read as agreement with the analysis
+rather than a selection among options (a), (b) and (c). Those three lead to materially different text
+in the article and the cover letter, so I have not picked one. See §4.
+
+**A defect I introduced and then caught.** The Round-05 template migration duplicated the entire end
+matter — CRediT, AI declaration, competing interest and data availability each appeared twice, and the
+43-page PDF rendered both copies. My Round-05 verification counted `\section*` occurrences but never
+checked for duplicates, so it passed a document with eight end-matter sections instead of five. Found
+while inserting the funding statement, fixed, rebuilt. The gate that should have caught it now would:
+the end-matter section list is printed and de-duplicated in the verification block below.
 
 ---
 
@@ -14,13 +29,13 @@ is not mine to make.
 |---|---|---|
 | R5-A template migration | `R5_TEMPLATE_MIGRATION_AUDIT.md` | **DONE** — `elsarticle`, 0 `AIMS` in source or PDF metadata, clean build |
 | R5-B author metadata | `AUTHOR_METADATA_CONFIRMATION.md` | **DONE** — ORCID and postal code inserted; phone recorded for the submission form |
-| R5-C funding | same | **BLOCKED** — both snippets prepared, neither inserted |
-| R5-D reproducibility deposit | `public_reproducibility/`, `R5_DATA_DEPOSIT_AUDIT.md` | **DONE, awaiting upload** — 50 files, checksums verified, smoke-tested from a clean copy |
+| R5-C funding | same | **DONE** — author-confirmed no external funding, inserted |
+| R5-D reproducibility deposit | `public_reproducibility/`, `R5_DATA_DEPOSIT_AUDIT.md` | **DONE, PUBLISHED** — DOI `10.5281/zenodo.22087770`, open access, checksum verified against the local file |
 | R5-E keywords / highlights | `R5_COMPLIANCE_FINAL.md` | **DONE** — 6 keywords (range 1–7), 5 highlights, longest 84 chars |
 | R5-F pooled latent label | `R5_LATENT_LABEL_AUDIT.md` | **DONE** — five locations relabelled, frozen data untouched |
 | R5-G figure pruning | `R5_FIGURE_PRUNE_AUDIT.md` | **DONE** — Fig. 10 removed from the main, not relegated |
 | R5-H reference / DOI sweep | `R5_REFERENCE_AUDIT.md` | **DONE** — 79 → 30 entries, 26/30 DOI, two 2026 arXiv entries verified live |
-| R5-I compliance | `R5_COMPLIANCE_FINAL.md` | **DONE** — mandatory 12/14, the 2 RED are author-controlled |
+| R5-I compliance | `R5_COMPLIANCE_FINAL.md` | **DONE** — mandatory **14/14**, applicable **25/25** |
 | R5-J package manifest | `SUBMISSION_PACKAGE_MANIFEST.md` | **DONE** — every upload file listed with its Elsevier item type |
 
 ## 2. Final verification
@@ -33,24 +48,28 @@ multiply-defined labels          0
 BibTeX warnings                  0
 "??" in the rendered PDF         0
 AIMS in source / PDF metadata    0 / 0
+placeholder text in main.tex     0
 abstract                         243 words  (limit 250)
 keywords                         6          (range 1-7)
 highlights                       5 bullets, max 84 chars
 figures cited / files present    18 / 18
 bibliography rendered / cited    26 / 26,  0 unresolved,  0 orphaned
+end-matter sections              5, each exactly once
+                                 (CRediT, AI tools, Funding, competing interest, data availability)
+pages                            43
+deposit DOI                      10.5281/zenodo.22087770  (open, resolves)
+deposit md5 local vs Zenodo      877cfd04e5896824dd72a8ab57939648 — identical
 deposit manifest                 49/49 SHA256 verified
 deposit smoke test               SMOKE OK, figure regenerated standalone
 ```
 
 ## 3. What is blocking, and who owns it
 
-| # | blocker | owner | effort once answered |
-|---|---|---|---|
-| B1 | Funding status unknown | author | one line of LaTeX, rebuild |
-| B2 | Data deposit has no DOI | operator | upload `public_reproducibility/`, substitute two placeholders, rebuild |
-| B3 | **Prior public preprint of this work under different authorship** | operator + author | see §4 |
-
-B1 and B2 are mechanical. B3 is not.
+| # | blocker | status |
+|---|---|---|
+| B1 | Funding status | **CLOSED** — no external funding, inserted |
+| B2 | Data deposit DOI | **CLOSED** — `10.5281/zenodo.22087770`, open, cited |
+| B3 | **Prior public preprint of this work under different authorship** | **OPEN** — see §4 |
 
 ## 4. B3 — the item I will not resolve on my own
 
@@ -85,6 +104,10 @@ search. A public record showing different authorship for substantially the same 
 that triggers an authorship query, which would be considerably worse than the desk rejection this
 rescue exists to undo.
 
+Note that the *new* data deposit is already consistent with the manuscript: its sole creator is
+Alraddadi, with the confirmed ORCID. That settles the deposit; it does not settle the 5 August
+preprint record, which is a separate object.
+
 Three ways out, all of them yours to choose:
 
 - **(a)** update the Zenodo record's creator list to match the manuscript, and disclose the preprint
@@ -94,9 +117,15 @@ Three ways out, all of them yours to choose:
 - **(c)** withdraw or restrict the record if it was posted in error.
 
 I cannot pick among these because the question is who did the work and who is entitled to
-authorship, and I have no basis for an opinion on that. What I can say is that submitting with the
-discrepancy unaddressed is the one remaining risk in this package that could cost more than a
-rejection. Note also that this is separate from where deposits live: keeping the Zenodo *account*
+authorship, and I have no basis for an opinion on that. **The reply "ok" does not select one**, and
+the difference is not cosmetic: (a) requires editing a published Zenodo record's creator list — an
+integrity action I will not take without an explicit instruction naming it; (b) requires drafting
+cover-letter and article text that explains an authorship change; (c) requires withdrawing a public
+CC-BY record. I have therefore left the manuscript with no preprint disclosure rather than write one
+that points at a record whose authorship contradicts the byline.
+
+What I can say is that submitting with the discrepancy unaddressed is the one remaining risk in this
+package that could cost more than a rejection. Note also that this is separate from where deposits live: keeping the Zenodo *account*
 under Maximiliano's login raises nothing, as long as the **creator metadata of each record** matches
 the paper's authorship. Reattributing `P01` to Alraddadi is itself an assumption I made to execute
 the instruction, and it is listed for confirmation.

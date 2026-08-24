@@ -2,7 +2,7 @@
 
 **Target:** *Communications in Nonlinear Science and Numerical Simulation* (Elsevier, ISSN 1007-5704).
 **Gate:** 100% mandatory PASS, ≥99% applicable PASS.
-**Result: mandatory 12/14 PASS, 2 RED. Gate NOT met. Both RED items are author-controlled.**
+**Result: mandatory 14/14 PASS, applicable 25/25 scored PASS. Gate MET.**
 
 ---
 
@@ -34,10 +34,10 @@ the actual submission. This matrix reflects the state as of this round.
 | M10 | Corresponding author: email | ELSEVIER | `ialraddadi@iu.edu.sa`, marked corresponding | **PASS** |
 | M11 | Corresponding author: full postal address | LIVE | Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah **42351**, Saudi Arabia | **PASS** |
 | M12 | Corresponding author: telephone | LIVE | `+966 50 650 8891` — supplied; goes in the Editorial Manager form, deliberately not printed in the PDF | **PASS** |
-| M13 | **Funding declaration** | ELSEVIER | **absent.** Both candidate snippets prepared; neither inserted, because the status is unverified and inventing it would be fabrication | **RED** |
-| M14 | **Research data: Option C — deposit and cite/link, or explain why not** | LIVE | deposit **built, checksummed and tested** (`public_reproducibility/`, 50 files); statement present but carries `[REPOSITORY]`, `[DOI]` placeholders pending upload | **RED** |
+| M13 | Funding declaration | ELSEVIER | author-confirmed **no external funding**; inserted as a `Funding` section | **PASS** |
+| M14 | Research data: Option C — deposit and cite/link | LIVE | deposit **published open access**, DOI `10.5281/zenodo.22087770`, cited in the data statement; zero placeholders remain | **PASS** |
 
-**Mandatory: 12 PASS, 2 RED.**
+**Mandatory: 14 PASS, 0 RED.**
 
 ## 2. Recommended / applicable
 
@@ -57,22 +57,22 @@ the actual submission. This matrix reflects the state as of this round.
 | R12 | Graphical abstract | **not prepared** — optional |
 | R13 | Clean build: 0 errors, 0 undefined, 0 BibTeX warnings | **PASS** — verified from a fresh directory |
 
-**Applicable: 12 mandatory PASS + 11 recommended PASS + 1 n/a + 1 not-prepared-optional, against
-2 mandatory RED.** Of 25 scored items, 23 PASS → **92%**, below the 99% bar because the two RED
-items are mandatory.
+**Applicable: 14 mandatory PASS + 11 recommended PASS + 1 n/a + 1 optional-not-prepared.** Of 25
+scored items, **25 PASS → 100%**.
 
 ## 3. Gate arithmetic
 
-- Mandatory: **12/14 = 86%** → fails the 100% requirement.
-- Applicable: **23/25 = 92%** → fails the ≥99% requirement.
+- Mandatory: **14/14 = 100%** → meets the requirement.
+- Applicable: **25/25 = 100%** → meets the ≥99% requirement.
 
-Both failures reduce to the same two facts, and neither is technical:
+The two items that were RED in this matrix's first version are closed: funding is author-confirmed as
+none, and the data deposit is published open access with a DOI that the article cites.
 
-1. **Funding status is unknown to me.** Elsevier requires a declaration either way. The standard
-   no-funding sentence is one line, but asserting it unverified would put a false statement in the
-   submitted record.
-2. **The data deposit has no DOI yet.** The package is finished, verified and portable; it needs an
-   upload and the identifier that comes back.
+**One item outside this matrix is still open.** The prior public preprint of this work carries a
+different sole creator (see `AUTHOR_METADATA_CONFIRMATION.md` §4). Elsevier requires a preprint to be
+disclosed and cited at submission, and the manuscript currently does neither. That is a policy
+obligation, not a formatting one, and it is why the round decision is not `SUBMISSION AUTHORIZED`
+despite this matrix reading 100%.
 
 ## 4. What changed since the Round-04 matrix
 
@@ -84,8 +84,9 @@ Both failures reduce to the same two facts, and neither is technical:
 | telephone | OPEN | **PASS** — supplied, for the submission form |
 | `elsarticle` | not used, recorded as recommended | **PASS** — migrated |
 | bibliography hygiene | 73 entries un-swept, DOIs partial | **PASS** — pruned to 30, 87% DOI, two 2026 arXiv entries verified against the live records |
-| data statement | "on request" | Option-C deposit built; **RED only on the DOI** |
-| funding | OPEN | still **RED** |
+| data statement | "on request" | **PASS** — open-access deposit, DOI `10.5281/zenodo.22087770`, cited |
+| funding | OPEN | **PASS** — no external funding, confirmed |
 
-Round 04 had 4 open mandatory items; two are now closed by information the operator supplied, one
-by the chief's verification, one by engineering. The two that remain need the author.
+Round 04 had 4 open mandatory items. All four are now closed: two by information the operator
+supplied (phone, funding), one by the chief's verification (keyword range), one by engineering
+(template, deposit). The compliance matrix itself is complete.
