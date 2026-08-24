@@ -1,93 +1,99 @@
 # Current Assignment
 
-**Task:** Desk-rejection rescue — Round 03 proof rigorization, validated safety, and adversarial safe-design search  
+**Task:** Desk-rejection rescue — Round 04 CNSNS submission closure  
 **Status:** IN PROGRESS  
-**Timestamp:** 2026-08-24 14:08 ART  
+**Timestamp:** 2026-08-24 15:28 ART  
 **Branch:** `rescue/aims-desk-rejection`
 
 ## Assigned role
 
 Researcher under Chief review.
 
-## Round-02 status
+## Round-03 status
 
-Round 02 is **accepted as a major scientific advance**, but several Researcher PASS/GREEN labels were reopened by Chief review before manuscript publication.
+Round 03 is **accepted as a major scientific advance**. The adversarial search falsified the paper's previous system-level safety–informativeness conclusion and found substantially better safe piecewise-constant designs at the same amplitude budget.
 
-Read:
+Read first:
 
-- `CHIEF_REVIEW_ROUND_02.md`
-- `ROUND_03_RESEARCHER_ASSIGNMENT.md`
+- `CHIEF_REVIEW_ROUND_03.md`
+- `ROUND_04_RESEARCHER_ASSIGNMENT.md`
 
 ## Chief decisions now in force
 
-### Narrative pivot
+### Scientific narrative
 
-**YES.** The rescued paper will pivot toward the negative safety/informativeness result.
+The rescued manuscript now centers on:
 
-Current permissible headline wording is protocol-bounded:
+> The severe safety–informativeness frontier observed across the six classical waveform families is a parameterisation artifact. A constrained search over previously untested piecewise-constant waveforms finds safe designs that outperform every historical baseline at the same peak-amplitude budget.
 
-> Within the evaluated strong-Allee benchmark, the waveform families that remain non-crossing lose essentially all useful memory-mechanism discrimination at the linear-certificate amplitude, while the most discriminative sustained designs frequently cross the Allee threshold.
+Do **not** universalize this into “waveform design governs safety” or “safety has no information cost.” A Pareto cost remains; what failed was the six-family frontier as a system-level conclusion.
 
-Do **not** claim universal “no safe excitation discriminates” until a theorem or a certified global bound over a declared input class exists.
+### Supporting latent-complexity result
+
+Increasing latent-rival complexity remains a separate finite-horizon obstruction. The response-level error has been carried to `m=128`; keep this as a distinct theoretical/computational result, never as a consequence of bare-kernel error alone.
+
+### Theorem B / T9b
+
+**Chief decision: DEMOTE.**
+
+- The positive-SOE/log-quadrature technique, positivity of weights, and root-exponential order are prior art.
+- Add McLean (2018) prominently and cite the surrounding literature.
+- Retain only the endpoint-inclusive `L¹(0,T)` safe-form estimate and exact `T^α` scaling as a supporting lemma/tool.
+- The boundary constant is open.
+- **FCAA split is withdrawn.**
+
+### Headline safety status
+
+Round-03 safety verification is improved but **not yet a fully rigorous certificate** because the PECE solver-error term is refinement-estimated and the tube source bound is gridded rather than interval-enclosed.
+
+Round 04 must either:
+
+1. obtain genuine rigorous enclosures for the headline `pwc6` and `multiscale` trajectories under all four mechanisms; or
+2. downgrade every unqualified `certified/validated` claim to precise a posteriori verification wording.
+
+No ambiguous final status is allowed.
 
 ### Journal
 
+- **CNSNS is now the sole active target.**
 - Do not resubmit to AIMS Mathematics.
-- **CNSNS remains the provisional primary target.**
-- Do not migrate to `elsarticle` yet; content/theorem status must stabilize first.
-- Final submission must later satisfy **100% mandatory requirements** and **>=99% of the complete applicable checklist**, using instructions/template refreshed within 24 h of submission.
+- Do not pursue the FCAA split.
+- Use the live CNSNS Guide for Authors as source of truth.
+- Final gate: **100% mandatory compliance and >=99% of the complete applicable checklist**, with instructions/template rechecked within 24 h before submission.
 
-### FCAA split
+### Working title
 
-**Deferred.** Keep Lemma B.1 / Theorem B.2 in the main rescue for now. Reconsider a standalone analysis paper only if Round 03 produces a fully rigorous sharp/near-sharp endpoint theorem and preferably a lower/optimality result.
+> **Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator–prey model**
 
-## Mandatory Chief re-openings from Round 02
+The previous “Waveform Design, Not Amplitude, Governs…” title is withdrawn as too universal.
 
-1. **Theorem B.2 exact constant is not yet accepted.** The finite/infinite trapezoidal construction, `d→π/2` limit, endpoint term, and hidden prefactor must be repaired.
-2. **Theorem C′ operator semantics must be fixed.** A fixed-input response quotient cannot support waveform-uniformity; use an induced operator norm or certified impulse-response `L¹` bound.
-3. **`U_NL` is not yet a rigorous numeric certificate** if `M₂`, `Γ_B`, or `Γ_R` are based on sampled/high-accuracy rather than interval/analytic suprema.
-4. **Nonlinear discrimination must be re-derived** so kernel-level, linear response-level, and nonlinear response-level errors are never multiplied or renamed inconsistently.
-5. v4’s “0.259 vs 0.25” result is **EMPIRICAL** until trajectory safety is validated.
-6. The negative result must be attacked by searching for safe informative inputs outside the original six waveform families.
+## Round-04 highest priorities
 
-## Round-03 hard targets
+1. Demote T9b and repair prior-art citations.
+2. Close or explicitly downgrade the headline safety certificate.
+3. Rebuild the stale theory section with response-level semantics and the exact Gaussian bound.
+4. Rewrite abstract to CNSNS limit (<=250 words), Introduction, contributions and conclusion.
+5. Remove the companion-comparison table and use one neutral provenance paragraph.
+6. Build the new headline safety-margin vs macro-accuracy figure including searched PWC designs.
+7. Rebuild the CNSNS compliance matrix from live official instructions.
+8. Remove AIMS-only formatting and complete CNSNS/Elsevier end matter.
+9. Freeze reproducibility artifacts.
+10. Run mock-editor and adversarial-referee gates.
+11. Produce a binary Round-04 submission decision.
 
-1. Publication-grade endpoint positive-SOE theorem.
-2. Exact response-operator semantics and final Gaussian/minimax theorem.
-3. Rigorous nonlinear safety constants.
-4. Validated trajectory safety/crossing labels.
-5. Direct response-level `m=64,128` certification if feasible.
-6. Adversarial safe-design search over new finite-dimensional waveform classes.
-7. Correct nonlinear difference theorem.
-8. Complete `amp=0.100` v4 reproducibility control when the already-running computation finishes.
-9. Execute all mandatory manuscript corrections only after claims stabilize.
-10. Rewrite title/abstract/contributions around the corrected negative result.
-11. Build a provisional CNSNS compliance matrix while preserving the >=99% policy.
+## Required Round-04 outputs
 
-## Required Round-03 outputs
+- `R4_PRIOR_ART_AND_THEOREM_STATUS.md`
+- `R4_HEADLINE_SAFETY_CERTIFICATE.md`
+- `R4_THEORY_SECTION_AUDIT.md`
+- `R4_NARRATIVE_FINAL.md`
+- `R4_FIGURE_AUDIT.md`
+- `CNSNS_COMPLIANCE_MATRIX_FINAL.md`
+- `R4_FORMAT_AND_ENDMATTER_AUDIT.md`
+- `R4_REPRODUCIBILITY_FREEZE.md`
+- `R4_MOCK_EDITOR.md`
+- `R4_MOCK_REFEREES.md`
+- `ROUND_04_DECISION.md`
+- modified `paper/` + final submission-side files
 
-- `R3_THEOREM_B_RIGOROUS.md`
-- `R3_RESPONSE_OPERATOR_AUDIT.md`
-- `R3_THEOREM_C_FINAL.md`
-- `R3_NONLINEAR_CERTIFICATE_CONSTANTS.md`
-- `R3_VALIDATED_SAFETY_REPORT.md`
-- `R3_RESPONSE_CERT_M64_M128.md`
-- `R3_SAFE_DESIGN_ADVERSARIAL_SEARCH.md`
-- `R3_NONLINEAR_DISCRIMINATION_AUDIT.md`
-- `R3_V4_REPRODUCIBILITY_CONTROL.md`
-- modified `paper/` + `R3_MANUSCRIPT_CHANGELOG.md`
-- `R3_TITLE_ABSTRACT_CONTRIBUTIONS.md`
-- `CNSNS_COMPLIANCE_MATRIX_DRAFT.md`
-- updated `RESCUE_CLAIM_EVIDENCE_LEDGER.md`
-- `ROUND_03_DECISION.md`
-- versioned code/raw outputs under `rescue_compute/`
-
-## Computational policy
-
-- Orion: large parallel search/certification/Monte Carlo.
-- Aureus: **32 cores**, use a conservative worker count consistent with current load.
-- Do not restart the already-running `amp=0.100` control.
-- Do not overwrite frozen v3, Round-02 raw data, or historical certificates.
-- Long jobs must checkpoint and be restartable.
-
-**Next Chief action:** review Round-03 theorem/certificate outputs and decide whether the reconstructed manuscript is strong enough to enter final CNSNS formatting/compliance and mock-referee review.
+**Next Chief action:** review Round-04 closure package and authorize submission only if all R4.1–R4.10 gates are GREEN.
