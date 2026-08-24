@@ -13,13 +13,13 @@
 
 \AIMSJournalHeader
 \AIMSResearchArticle
-\AIMSTitle{Waveform Design, Not Amplitude, Governs Safe Memory Discrimination in a Strong-Allee Predator--Prey Model}
+\AIMSTitle{Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator--prey model}
 \AIMSAuthors{Ibrahim Alraddadi$^{1,*}$}
 \AIMSAffiliation{$^{1}$ Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah, Saudi Arabia}
 \AIMSCorrespondence{Email: \href{mailto:ialraddadi@iu.edu.sa}{ialraddadi@iu.edu.sa}}
 
 \begin{AIMSAbstract}
-A fitted fractional order $\alpha$ does not identify a fractional mechanism: on a finite horizon $[0,T]$, delayed feedback or a few hidden states reproduce similar trajectories. We ask when a \emph{safe} controlled experiment can separate these mechanisms in a strong-Allee predator--prey system with coexistence equilibrium $x^*=2/3$, $y^*(A)=2(2-3A)/(9A)$, whose model, locked parameters and Jacobian $J(A)$ are inherited from a previously submitted companion paper and are not claimed as new. Two obstructions are separated. The first is structural and is \emph{not} binding: the collocated Caputo transfer decays as $O(\omega^{-\alpha})$, which no finite rational latent transfer and no strictly proper retarded-delay model reproduces exactly. The second is quantitative and \emph{is} binding: positive exponential mixtures approximate the memory kernel in $L^1(0,T)$ at a root-exponential rate, so that $m(\varepsilon)=O(\log^2(1/\varepsilon))$ hidden states suffice; computed directly at the prey-response level, the $L^1$ surrogate error falls from $1.29$ at $m=4$ to $4.8\cdot10^{-5}$ at $m=128$ and the induced minimax testing error rises to $0.49999$, so at attainable latent orders the finite-state rival is indistinguishable. Against that obstruction we test whether safe excitation must sacrifice information. It must not. In a four-class BIC benchmark over three amplitudes ($2268$ cells, no divergences) reducing amplitude fails as a safety strategy --- PRBS still crosses the Allee threshold in $71\%$ of cells at half amplitude while remaining the most informative design --- and only one of six classical waveform families is safe, scoring macro-accuracy $0.514$ against $0.537$ overall. Searching $163\,840$ candidate waveforms outside those families under a hard margin constraint at the \emph{same} amplitude budget yields piecewise-constant designs that are both safe and far more informative: macro-accuracy $\mathbf{0.803}$ with zero threshold crossings, against $0.514$ for the only safe classical design and $0.763$ for the best classical design of any kind, which crosses in $35.7\%$ of cells. A posteriori validated integration certifies these trajectories, whereas an invariant-ball certificate admits only $\|u\|_\infty\le1.4\cdot10^{-3}$, $70\times$ smaller. The safety--informativeness trade-off reported for classical excitation families is therefore an artifact of the waveform parameterisation, not a property of the system; what survives is the latent-complexity obstruction, since even the best safe design recovers only $0.475$ recall on the finite-latent rival. Safe identification of ecological memory is limited by the declared rival-complexity budget $m$, not by the safety margin.
+Fitting a fractional order $\alpha$ does not identify a fractional mechanism: on a finite horizon, delayed feedback or a few hidden states reproduce similar trajectories. We ask when a controlled experiment can separate these mechanisms in a strong-Allee predator--prey system while keeping the prey above its Allee threshold. Among six classical excitation families the accuracy-leading designs all cross the threshold and the only safe one is the least informative, which suggests an intrinsic safety--informativeness frontier. We show that frontier belongs to the waveform parameterisation, not to the system. Reducing amplitude does not restore safety --- the leading design still crosses in $71\%$ of cells at half amplitude --- whereas a constrained search over $163\,840$ candidate waveforms, at the same peak-amplitude budget and under a hard margin constraint, returns piecewise-constant designs with four-class model-selection accuracy $0.803$ and no observed crossings, against $0.514$ for the only safe classical family and $0.763$ for the best classical design of any kind, which crosses in $36\%$ of cells. Their safety is verified a posteriori by mesh refinement with a rigorous inter-node modulus, and for half of the headline trajectories by a validated enclosure. A Pareto cost nevertheless remains, so safety is not free. A second obstruction survives waveform search: computed at the prey-response level, the finite-state approximation error falls to $5\cdot10^{-5}$ at latent order $128$ and the induced exact minimax testing floor reaches $0.49999$. Identifying ecological memory is limited by the declared rival-complexity budget rather than by the safety margin.
 \end{AIMSAbstract}
 
 \AIMSKeywords{fractional-order dynamics; time-delay systems; model discrimination; experimental design; Allee effect; predator--prey dynamics}
@@ -46,14 +46,17 @@ A fitted fractional order $\alpha$ does not identify a fractional mechanism: on 
 \input{sections/sec10.tex}
 \input{sections/sec11.tex}
 
-\section*{Author contributions}
-The author contributed to the conceptualization, methodology, formal analysis, numerical investigation, visualization, and preparation of the manuscript.
+\section*{CRediT authorship contribution statement}
+\textbf{Ibrahim Alraddadi:} Conceptualization, Methodology, Formal analysis, Software, Investigation, Validation, Data curation, Visualization, Writing -- original draft, Writing -- review \& editing.
 
 \section*{Use of AI tools declaration}
 AI-assisted tools were used during manuscript preparation for language editing, LaTeX formatting, code and documentation assistance, and structural organization. Responsibility for the scientific content and the final submitted version remains with the author.
 
-\section*{Conflict of interest}
-The author declares no conflict of interest.
+\section*{Declaration of competing interest}
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+The source code implementing the solvers, the waveform search, the four-class discrimination benchmark and the trajectory verification, together with the numerical artifacts from which every table and figure in this paper is generated, are available from the author on request.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}

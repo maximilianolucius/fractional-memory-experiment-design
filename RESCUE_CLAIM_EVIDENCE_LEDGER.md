@@ -101,13 +101,40 @@ rescue. It supersedes `CLAIM_EVIDENCE_LEDGER.md` (never created) and absorbs
 
 ---
 
+## Round 04 additions and retractions
+
+| # | Claim | Type | Proof / evidence | General or model-specific | Closest prior-work comparator | Status |
+|---|---|---|---|---|---|---|
+| 48 | **The search advantage is not overfitting.** The search ran at `A=0.25` only; on the fully held-out `A=0.20` cells the searched designs lose `0.060` macro-accuracy on average while the six classical families lose `0.087`. The best searched design still leads out of sample (`0.907` vs `0.837`), and its advantage over the safe classical design is *larger* out of sample (`+0.486`) than in sample (`+0.255`) | control | `R4_MOCK_REFEREES.md` §1.1; `rescue_compute/r3_safe_design_search/r4j_leakage_test.json`, from the 672 Stage-2 cells | model-specific | — | **EMPIRICAL** (answers the strongest referee objection) |
+| 49 | **Validated enclosure for 4 of 8 headline trajectories.** Piecewise-cubic Hermite reference built per element (so the kink in `z'` at each input discontinuity is exact), interval-bounded defect via a second-order Taylor form (order 2.01, `5.87e−09` at `N=12000`), one-sided log-norm Gronwall, self-consistency `e ≤ δ` verified. Rigorous lower bounds on `min x`: `0.441` (pwc6/ODE) and `0.309` (pwc6/latent3) against `A=0.25` | certificate | `rescue_compute/r4b_enclosure.py`, `r4b_enclosure_results.json` | model-specific, per trajectory | R3-D was refinement-based, not an enclosure | **PROVED** for those 4; **FAIL** for DDE ×2 and Caputo ×2 |
+| 50 | The remaining 4 fail for diagnosed reasons, not for lack of effort: the DDE defect stalls at `O(h)` because input discontinuities re-enter through the retarded argument (defect concentrated in 5 elements at `t = jump + τ`, median elsewhere `4.6e−12`); the Caputo defect is capped by the PECE order (`≈1+α`), giving `≈15` after amplification | analysis | `R4_HEADLINE_SAFETY_CERTIFICATE.md` §3 | model-specific | — | **PROVED** (arithmetic on measured defects) |
+| 51 | Interval-evaluating the defect directly loses the cancellation between `zhat'` and `f(zhat)` and gives an `O(h)` bound four orders above the true `O(h^3)` defect; the one-sided constant `μ` (not `‖Df‖`) is what makes the Gronwall amplification finite — `‖Df‖=1.62` would give `~10^9` | analysis | same | **general** (method note) | standard validated-integration practice | **PROVED** |
+| 52 | Lemma B.2 is **prior art as a technique** and is stated as such in the manuscript: demoted to `lem:soe`, attributed to McLean (2018) with Beylkin–Monzón, Jiang et al., Trefethen–Weideman and Stahl cited, removed from every contribution list, FCAA split marked WITHDRAWN | status | `R4_PRIOR_ART_AND_THEOREM_STATUS.md`; 0 occurrences of every forbidden phrasing in `paper/` | — | McLean~(2018) | **CLOSED** (Round-03 blocking item) |
+
+### Round 04 retractions
+
+| retracted | was | now | where |
+|---|---|---|---|
+| the benchmark's latent recall as **evidence for** the latent-complexity obstruction | "even the leading safe design recovers only 0.475 recall against the finite-latent rival" offered in support, in four passages | BIC penalises the higher-dimensional model, so the recall is *consistent with* the obstruction but not evidence for it; the obstruction now rests on the analytical result alone | `sec1`, `sec8`, `sec10`, `sec11`; referee objection 2.5 |
+| "validated integration certifies these trajectories" / "certified margin +0.092" | Round-03 wording | "verified a posteriori"; "verified margins"; the word *rigorous* reserved for the 4 enclosed trajectories | R4-B fallback, applied globally |
+| a sentence asserting no design exceeds `0.55` recall against the latent rival | written during the 2.5 fix, **never shipped** | cell-level check gave `0.945`: the benchmark's `latent3` column is the **pooled** latent class (`latent1`+`latent3`). Sentence removed | `R4_MOCK_REFEREES.md` §3 |
+| Round-03 title "Waveform Design, Not Amplitude, Governs …" | "governs" reads as a general causal claim | chief's title: "Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator--prey model" | `main.tex` |
+
+### Documentation gap inherited from the frozen benchmark
+
+The `latent3` label in every v3/v4 table denotes the **pooled** latent class, not the order-3 model
+alone. The manuscript does not say so. Not fixed this round because it touches the frozen v3
+presentation; flagged in `ROUND_04_DECISION.md` §4.
+
+---
+
 ## Summary counts
 
 | Status | Count | Claims |
 |---|---:|---|
-| `PROVED` | 19 | 1, 2, 3, 5b, 6, 7, 8, 9, 23, 24, 25, 28, 30, 33, 34, 41, 44, 45, 46 |
+| `PROVED` | 22 | 1, 2, 3, 5b, 6, 7, 8, 9, 23, 24, 25, 28, 30, 33, 34, 41, 44, 45, 46, 49 *(4 of 8)*, 50, 51 |
 | `CERTIFIED_NUMERICALLY` | 13 | 5c, 10, 11, 15, 22, 26, 29, 37, 38, 39, 40, 42, 43 |
-| `EMPIRICAL` | 5 | 5, 13 *(scoped)*, 14, 35, 36 |
+| `EMPIRICAL` | 6 | 5, 13 *(scoped)*, 14, 35, 36, 48 |
 | `CONJECTURAL` | 3 | 20, 31, 47 |
 | `REMOVE` | 9 | 4, 16, 17, 18, 19, 21, 27, 32, + Round-01 tightness/floor language |
 | arithmetic finding | 1 | 12 |
