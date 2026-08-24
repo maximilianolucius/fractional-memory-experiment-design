@@ -1,0 +1,24 @@
+nonlinear: 1512 cells, 1512 to run, workers=300
+  0/1512 (402s)
+  100/1512 (507s)
+  200/1512 (538s)
+  300/1512 (564s)
+  400/1512 (579s)
+  500/1512 (597s)
+  600/1512 (607s)
+  700/1512 (612s)
+  800/1512 (618s)
+  900/1512 (623s)
+  1000/1512 (632s)
+  1100/1512 (642s)
+  1200/1512 (740s)
+  1300/1512 (804s)
+  1400/1512 (817s)
+  1500/1512 (832s)
+Traceback (most recent call last):
+  File "/home/ecoventure/fmed_work/src/run_all.py", line 263, in <module>
+    main()
+  File "/home/ecoventure/fmed_work/src/run_all.py", line 237, in main
+    NL = phase_nonlinear(args.workers, args.reps, args.N); mark_stage("nonlinear", {"acc": NL["overall_accuracy"]})
+                                                                                           ~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'overall_accuracy'
