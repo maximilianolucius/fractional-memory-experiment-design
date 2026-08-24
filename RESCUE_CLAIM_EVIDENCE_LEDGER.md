@@ -15,7 +15,9 @@ rescue. It supersedes `CLAIM_EVIDENCE_LEDGER.md` (never created) and absorbs
 | 2 | Rationality criterion: `G_α=R(s^α)` is rational **iff** `α·e∈ℤ` for all effectively present exponents `e` | lemma | `THEOREM_A_AUDIT.md` §2 (Lemma A.0), proof + numerical confirmation | **general** | Not located in the literature in this form | **PROVED** |
 | 3 | With `CB=0` the separation claim **fails**: at `α=1/2`, `tr J=0`, cross channel, `G_α(s)=d/(s+cd)` exactly (occurs at `A=2/7` in this very model) | counterexample | `THEOREM_A_AUDIT.md` §3; verified `2.24e-16` | model-instantiated, general mechanism | — | **PROVED** (negative result) |
 | 4 | For every `T,ε` a finite positive exponential mixture is `ε`-close to `k_α` in `L¹(0,T)` (existence only) — current `thm:T9b` | theorem | diffusive representation + quadrature | general | **Jiang–Zhang (2017)** already give an explicit `N_exp(ε)`; **Chaudhary–Diethelm et al. (2025)** refine it | **REMOVE as contribution** — cite instead |
-| 5 | Complexity law for the `L¹(0,T)` error **including the singular endpoint**, positivity-preserving | theorem/measurement | computation **C-1** (285 cells, Orion) — see `THEOREM_B_COMPLEXITY_LAW.md` | general (kernel-level) | Published rates are uniform on `[δ,T]`, `δ>0`, excluding `t=0` | **pending C-1** → see that file |
+| 5 | Complexity law in `L¹(0,T)` **including the singular endpoint**, positivity-preserving: convergence is sub-exponential and strictly faster than algebraic, so `m(ε)=O(log^κ(1/ε))`, `κ∈[1,2]` | measurement | C-1, 285 cells (Orion): 5 orders × 3 horizons × 19 budgets, `m≤128`; algebraic fit is worst at every `α` | general (kernel-level) | Published rates are uniform on `[δ,T]`, excluding `t=0` | **EMPIRICAL** — exponent **not resolved**; do not state a specific rate |
+| 5b | **Lemma B.1 (scale invariance):** the *relative* `L¹` error of the best `m`-term positive exponential sum depends only on `(m,α)`, **not on `T`** | lemma | 2-line proof (`k_α(λt)=λ^{α−1}k_α(t)`, bijection of approximants); verified to `6e-17` | **general** | Jiang–Zhang's rate carries `log(T/Δt)` because it measures *uniform absolute* error | **PROVED** |
+| 5c | Kernel-level safe error floors: `m=32 → 0.328`, `m=64 → 0.474`, **`m=128 → 0.4997`** (`α=0.85, δ=0.05, σ=0.02, n=120`) | numerical | C-1 `E_m` fed into Theorem D chain | model-specific constants, general chain | — | **CERTIFIED_NUMERICALLY** |
 | 6 | Uniform finite-experiment testing obstruction with explicit constants: `P_e*≥Φ(−(√n/2σ)E_mU)` | theorem | `THEOREM_C_TESTING_OBSTRUCTION.md` §3, derived from scratch; exact two-point Gaussian, no inherited constants | **general** (given the observation model) | Textbook two-point Gaussian testing (Van Trees; Kay); the manuscript's `Ψ`/Pinsker version is weaker | **PROVED** |
 | 7 | The exact Gaussian bound strictly dominates Pinsker (`1/2−0.19947d` vs `1/2−0.25d`; Pinsker vacuous at `d≥2√2`) | analysis | `THEOREM_C_TESTING_OBSTRUCTION.md` §4 table, verified numerically | general | — | **PROVED** |
 | 8 | Any bound routed through `‖k_α−k_m‖_{L²}` is **vacuous for `α≤1/2`** (`k_α∉L²(0,T)`), so the `‖u‖₂≤B` pairing of `thm:T20` is not valid on the asserted range `0<α<1` | defect | `THEOREM_C_TESTING_OBSTRUCTION.md` §1, verified (`L²` diverges at `α=0.30,0.50`; `L¹` finite) | general | — | **PROVED** (defect to fix) |
@@ -40,12 +42,11 @@ rescue. It supersedes `CLAIM_EVIDENCE_LEDGER.md` (never created) and absorbs
 
 | Status | Count | Claims |
 |---|---:|---|
-| `PROVED` | 7 | 1, 2, 3, 6, 7, 8, 9 |
-| `CERTIFIED_NUMERICALLY` | 4 | 10, 11, 15, 22 |
-| `EMPIRICAL` | 2 | 13, 14 |
+| `PROVED` | 8 | 1, 2, 3, 5b, 6, 7, 8, 9 |
+| `CERTIFIED_NUMERICALLY` | 5 | 5c, 10, 11, 15, 22 |
+| `EMPIRICAL` | 3 | 5, 13, 14 |
 | `CONJECTURAL` | 1 | 20 |
 | `REMOVE` | 6 | 4, 16, 17, 18, 19, 21 |
-| pending (C-1) | 1 | 5 |
 | arithmetic finding | 1 | 12 |
 
 **Headline set proposed:** claims **9** (safety ceiling, general chain) + **6** (uniform obstruction

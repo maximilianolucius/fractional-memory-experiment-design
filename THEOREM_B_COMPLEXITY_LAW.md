@@ -4,7 +4,7 @@
 for the norm the literature uses. The manuscript's own constructive bound is *algebraic* and, at the
 values of `m` the paper actually reports, **numerically vacuous** (73 % relative error at `m=48`).
 The genuinely open item is narrow: the same rate in `L¹(0,T)` **including the singular endpoint**,
-with positive weights. This round **measured** that rate (fit `R²=0.995`) but did **not prove** it.
+with positive weights. This round **measured** that rate over 285 cells and additionally **proved** that the relative error is horizon-independent (Lemma B.1); the *exponent* of the law is **not resolved** by the data (§3c).
 
 ---
 
@@ -37,35 +37,63 @@ with **weights kept positive** (the latent rival must be a physically realizable
 hierarchy). Translating a `[δ,T]` uniform rate into an `L¹(0,T)` rate requires bounding the
 contribution of `(0,δ)`, where `k_α` is unbounded — precisely the region the literature excises.
 
-## 3. Measurement (computation C-1, `α=0.85`, `T=12`, Orion + local)
+## 3. Measurement (computation C-1: 285 cells on Orion, `α∈{.30,.50,.70,.85,.95}`, `T∈{1,10,100}`, 19 budgets `m≤128`)
 
-Relative `L¹(0,T)` error of the best positive `m`-term exponential sum (log-scale quadrature window
-optimized, then NNLS weight refinement), normalized by `‖k_α‖_{L¹(0,T)}=8.7416`:
+### 3a. A provable by-product: the relative error is **independent of `T`**
 
-| `m` | 2 | 4 | 8 | 12 | 16 | 24 | 32 | 48 |
-|---|---|---|---|---|---|---|---|---|
-| `ε_rel` | 4.43e-2 | 4.14e-2 | 2.84e-2 | 1.96e-2 | 1.58e-2 | 6.56e-3 | 2.93e-3 | 9.81e-4 |
+> **Lemma B.1 (scale invariance).** For `k_α(t)=t^{α−1}/Γ(α)` and any `λ>0`, the map
+> `(c_j,λ_j) ↦ (λ^{α−1}c_j, λ_j/λ)` is a bijection between `m`-term positive exponential sums on
+> `[0,T]` and on `[0,λT]`, and it scales **both** `‖k_α−k_m‖_{L¹}` and `‖k_α‖_{L¹}` by `λ^α`.
+> Hence the **relative** `L¹` error of the best `m`-term approximant depends only on `(m,α)` — not on `T`.
 
-Law fits (`log ε = a − c·m^β`):
+*Proof.* `k_α(λt)=λ^{α−1}k_α(t)`. Given `k_m(t)=Σc_je^{−λ_jt}`, set `k̃_m(t)=λ^{α−1}Σc_je^{−(λ_j/λ)t}`,
+so `k̃_m(λt)=λ^{α−1}k_m(t)`. Substituting `u=λt`,
+`∫_0^{λT}|k_α−k̃_m| = λ^{α}∫_0^{T}|k_α−k_m|`, while `‖k_α‖_{L¹(0,λT)}=λ^α‖k_α‖_{L¹(0,T)}`. The ratio is
+unchanged; positivity of weights is preserved. ∎
 
-| model | fit | `R²` |
-|---|---|---|
-| **`β=1` (exponential)** | `ε_rel ≈ 5.58e-2 · exp(−0.0865 m)` | **0.9950** |
-| `β=1/2` | `1.88e-1 · exp(−0.715 √m)` | 0.9617 |
-| `β=1/3` | `6.13e-1 · exp(−1.640 m^{1/3})` | 0.9298 |
-| algebraic | `2.19e-1 · m^{−1.172}` | 0.8328 |
+**Verified to machine precision:** at `m=16`, the relative error across `T=1,10,100` agrees to
+`6·10^{-17}` (`α=0.30`), `9·10^{-18}` (`α=0.70`), `1·10^{-16}` (`α=0.95`).
 
-**Measured law.** Exponential in `m` wins decisively, hence
-\[
-m(\varepsilon)\;\gtrsim\;\frac{1}{0.0865}\,\ln\!\frac{5.58\times10^{-2}}{\varepsilon}
-\;=\;O\!\big(\log(1/\varepsilon)\big),
-\]
-i.e. **the same order as the published `[δ,T]` rate, but attained in `L¹(0,T)` with the endpoint
-included and with positive weights.** This is the statement the paper needs.
+**Why this matters.** The published rate (Jiang–Zhang) carries a `log(T/Δt)` factor because it
+measures **uniform absolute** error; in the **relative `L¹`** norm that the output-separation chain
+actually needs, the horizon drops out entirely. This is a small but genuinely useful observation and it
+is *proved*, not fitted.
 
-**Status: MEASURED, NOT PROVED.** A least-squares fit over 9 values of `m` at one `(α,T)` is evidence,
-not a theorem. The full `(α,T,m)` table (5 orders × 3 horizons × 19 budgets) was launched on Orion as
-computation C-1 to test stability of the exponent across the grid.
+### 3b. Measured relative error (`T=10`, identical for all `T` by Lemma B.1)
+
+| `α` | `m=16` | `m=32` | `m=64` | `m=128` |
+|---|---|---|---|---|
+| 0.30 | 9.35e-3 | — | 7.10e-6 | 2.32e-9 |
+| 0.50 | — | — | 7.09e-6 | 3.99e-8 |
+| 0.70 | 4.74e-3 | — | 4.70e-5 | 8.42e-7 |
+| 0.85 | 1.58e-2 | 2.93e-3 | 4.26e-4 | 4.65e-6 |
+| 0.95 | 1.21e-2 | — | 3.01e-4 | 1.14e-6 |
+
+### 3c. **Correction to an earlier statement in this file.** The shape of the law is *not* resolved
+
+An earlier local sweep (`α=0.85`, `m≤48`) fitted `ε ≈ 5.58e-2·exp(−0.0865m)` with `R²=0.995` and this
+file previously reported that as "exponential in `m`". **With the full sweep to `m=128` that claim does
+not hold as a determination of the exponent.** Comparing `log ε = a − c·m^β`:
+
+| `α` | `R²(β=1)` | `R²(β=0.75)` | `R²(β=0.5)` | `R²(β=1/3)` | `R²` algebraic | verdict |
+|---|---|---|---|---|---|---|
+| 0.30 | 0.9937 | **0.9991** | 0.9829 | 0.9580 | 0.8745 | β not resolved |
+| 0.50 | 0.9636 | 0.9912 | **0.9994** | 0.9909 | 0.9367 | β not resolved |
+| 0.70 | 0.9702 | 0.9919 | **0.9942** | 0.9822 | 0.9234 | β not resolved |
+| 0.85 | 0.9906 | **0.9943** | 0.9769 | 0.9514 | 0.8668 | β not resolved |
+| 0.95 | **0.9798** | 0.9466 | 0.8890 | 0.8371 | 0.7072 | β≈1 (only case discriminated) |
+
+**What the data do support, and nothing more:**
+1. Convergence is **sub-exponential but strictly faster than algebraic** — the algebraic fit is the
+   worst model at every `α` (`R²` 0.71–0.94 vs ≥0.95 for every stretched-exponential form).
+2. Therefore `m(ε) = O(log^κ(1/ε))` with `κ∈[1,2]`; the data cannot pin `κ`.
+3. `β=1/2` (root-exponential) is the value expected from classical rational/exponential approximation
+   of algebraic singularities (Stahl; Gonchar–Rakhmanov for `x^α`), and it is the best fit at
+   `α=0.5,0.7`. It is the safest form to *conjecture*, and `κ=2` the safest bound to *assume*.
+
+**Status: MEASURED, and the exponent is UNRESOLVED.** Any manuscript sentence must say
+"polylogarithmic in `1/ε`, consistent with root-exponential convergence" — **never** a specific rate
+on the strength of these fits.
 
 ## 4. The manuscript's own rigorous bound is algebraic — and vacuous
 

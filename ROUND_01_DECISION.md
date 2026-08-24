@@ -34,6 +34,19 @@ What did **not** close:
 *deep*. Theorem D is a composition of four elementary steps whose value is the composition plus
 certified constants — not a new technique.
 
+**Update after computation C-1 completed (285 cells).** Two changes to the above:
+- **Added a proved result:** *Lemma B.1* — the relative `L¹` approximation error is **independent of
+  the horizon `T`** (verified to `6e-17`, proof by scaling). Small, but it is a theorem, and it
+  distinguishes the paper's norm from the published `[δ,T]` uniform-error rates.
+- **Retracted a claim of mine:** an earlier local fit suggested the law was exponential in `m`
+  (`R²=0.995`). With the full sweep to `m=128` the **exponent is not resolved** (all
+  stretched-exponential forms fit with `R²∈[0.95,0.999]`). What the data support is only:
+  sub-exponential, strictly faster than algebraic, `m(ε)=O(log^κ(1/ε))` with `κ∈[1,2]`, root-exponential
+  being the safest conjecture. The manuscript must not state a specific rate.
+- **Strengthened Theorem D:** feeding the measured `E_m` into the chain gives safe-excitation error
+  floors `0.328 (m=32)`, `0.474 (m=64)`, **`0.4997 (m=128)`** — i.e. at 128 latent modes, safe
+  discrimination is impossible to four decimals.
+
 ## 2. Which of A–D should be headline?
 
 | | Result | Role |

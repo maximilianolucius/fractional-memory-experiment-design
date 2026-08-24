@@ -93,6 +93,19 @@ Safe amplitude ceiling at `α=0.85, T=12`:
 At the larger margin `δ=0.20` (`U=0.0375`) the `m=32` floor rises to **0.471** (σ=0.02).
 *(\* interpolated, not certified.)*
 
+**Kernel-level floors from computation C-1** (same constants, `E_m` = measured best `m`-term relative
+`L¹` error × `‖k_α‖_{L¹}`, `α=0.85`, `δ=0.05`, `σ=0.02`, `n=120`):
+
+| `m` | `E_m` (absolute) | `S_max` | `P_e` floor |
+|---:|---:|---:|---:|
+| 32 | 2.56e-2 | 1.62e-3 | 0.3282 |
+| 64 | 3.73e-3 | 2.36e-4 | 0.4742 |
+| **128** | 4.07e-5 | 2.58e-6 | **0.4997** |
+
+At `m=128` the floor is `0.4997` — **indistinguishable from chance (0.5) to four decimals**. This is
+the sharpest available statement of the obstruction: within the certified-safe excitation envelope, a
+128-mode latent hierarchy cannot be separated from fractional memory at all.
+
 **Interpretation.** Few latent modes ⇒ mechanisms separable (floor ≈ 0). At `m=32`, safe excitation
 cannot push the error below ≈45 %, i.e. **essentially chance (50 %)**. Demanding more safety makes it
 worse. This is the quantitative content of the safety–informativeness trade-off that the manuscript
