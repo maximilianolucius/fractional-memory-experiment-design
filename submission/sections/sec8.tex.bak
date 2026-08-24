@@ -1,0 +1,232 @@
+\section{Safety-Constrained Experiment Design}
+\label{sec:safety}
+
+The optimal input of Theorem~\\\\ref{thm:T11} and the optimal schedule of Theorem~\\\\ref{thm:T13} maximize discrimination information under energy and cardinality constraints; they do not, by themselves, guarantee that the experiment respects the ecological integrity of the system. Small-amplitude perturbations near the Allee extinction threshold can trigger irreversible collapse, and any actuator bound under that threshold violates the standing assumption of Section~\\\\ref{sec:backbone} that the state remains within the linear trust region around the coexistence equilibrium \\(z^*\\). This section establishes explicit conditions under which an informative input is simultaneously safe. Two results are central: a general existence theorem proving that a safe and informative perturbation always exists when the equilibrium has positive interior margin (Theorem~\\\\ref{thm:T16}), and a constructive fractional invariance theorem that translates the strong-Allee safety conditions into checkable linear inequalities on the input amplitude and its integral (Theorem~\\\\ref{thm:T17}). Together they close the loop between the structural discrimination theory of Sections~\\\\ref{sec:separation}---\\\\_ref{sec:design} and the biological mandate of Section~\\\\ref{sec:backbone}.
+
+\subsection{The safe set and the safety margin}
+
+Let \(\mathcal{S} \subset \mathbb{R}^n\) be a closed safe region and let the coexistence equilibrium \(z^*\) of Section~\ref{sec:backbone} lie in its interior with margin
+\begin{equation}
+\rho = \operatorname{dist}(z^*, \partial \mathcal{S}) > 0.
+\label{eq:rho_margin}
+\end{equation}
+For the strong-Allee predator--prey ensemble, a minimal safety condition is
+\begin{equation}
+x(t) \ge x_{\min} > A,
+\label{eq:min_prey}
+\end{equation}
+with additional upper-abundance and predator-vigor constraints as required by the basin of attraction described in Section~\ref{sec:backbone}. The Allee threshold \(A\) separates the extinction basin from the coexistence basin, and the validated paper \citep{sasmal2018} proves that trajectories crossing below \(x=A\) enter an extinction funnel that no control budget can reverse. A safe protocol therefore reserves a certified margin above \(A\) and caps cumulative prey removal.
+
+\subsection{Theorem T16 --- existence of a safe and informative perturbation}
+
+\begin{theorem}[Safe and informative perturbation exists]
+\label{thm:T16}
+Consider two locally well-posed Caputo models of order \(\alpha \in (0, 1]\) with the same safe equilibrium \(z^*\) and the same stable linearization \(J\) of Section~\ref{sec:backbone}. Let their input-to-observation operators over a finite horizon \([0, T]\) be \(H_1\) and \(H_2\), and assume:
+\begin{enumerate}
+\item[(i)] the nonlinear solution maps \(\Phi_{u}^{(1)}, \Phi_{u}^{(2)}\) are continuous with respect to the input amplitude on \([0, T]\);
+\item[(ii)] an admissible direction \(v\) exists such that \((H_1 - H_2)v \neq 0\);
+\item[(iii)] \(z^*\) has positive safety margin \(\rho > 0\) as in~\eqref{eq:rho_margin}.
+\end{enumerate}
+Then there exists \(\varepsilon_0 > 0\) such that every perturbation
+\begin{equation}
+u_{\varepsilon} = \varepsilon v, \qquad 0 < \varepsilon < \varepsilon_0,
+\label{eq:scaled_pert}
+\end{equation}
+is safe for both models and yields strictly positive Kullback--Leibler divergence.
+\end{theorem}
+
+\begin{proof}
+By continuity of the solution maps and the positive interior margin \(\rho\), there exists \(\varepsilon_s > 0\) such that the state remains in \(\mathcal{S}\) for both models whenever \(\|\varepsilon\| < \varepsilon_s\). The output difference expands as
+\begin{equation}
+\mu_1(u_{\varepsilon}) - \mu_2(u_{\varepsilon})
+= \varepsilon (H_1 - H_2) v + o(\varepsilon).
+\label{eq:output_expansion}
+\end{equation}
+Since the leading vector is nonzero by condition (ii), the difference is nonzero for sufficiently small positive \(\varepsilon\). Under the nonsingular Gaussian noise model of Section~\ref{sec:design}, the Kullback--Leibler divergence is a positive quadratic form in \(\Delta \mu\) (Equation~\ref{eq:kl_pairwise}). Choose \(\varepsilon_0\) below both \(\varepsilon_s\) and the threshold at which the \(o(\varepsilon)\) term dominates the linear term. Then every \(0 < \varepsilon < \varepsilon_0\) is simultaneously safe and informative.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:T16} guarantees existence, but it does not guarantee that the resulting divergence exceeds an operational minimum \(D_{\min}\) required for a prescribed confidence level. Given a minimal discrimination target \(D_{\min}\), the feasibility condition becomes \(\tfrac{1}{2} \varepsilon^2 \langle v, Q v \rangle \ge D_{\min}\) where \(Q = \Delta H^{*} R^{-1} \Delta H\) is the information operator of Theorem~\ref{thm:T11}, and \(\varepsilon\) must remain below the safety ceiling \(\varepsilon_s\). When the intersection is empty, the experiment is unresolvable under the specified safety budget; the designer must weaken one of the constraints or choose a more informative model pair.
+\end{remark}
+
+\subsection{Linear finite-horizon safety bound}
+
+Theorem~\ref{thm:T16} is qualitative. The next result provides a quantitative, computable bound for the linearized Caputo system. Write the stable linear Caputo dynamics in the representation of Section~\ref{sec:backbone}:
+\begin{equation}
+\tau_0^{\alpha-1}{\,}^C D_t^\alpha \xi = J \xi + B u,\qquad \xi(0) = 0,
+\label{eq:linear_safety_system}
+\end{equation}
+and define the impulse-response matrix
+\begin{equation}
+H_\alpha(t) = \tau_0^{1-\alpha} t^{\alpha-1}
+E_{\alpha, \alpha}\!\left(\tau_0^{1-\alpha} J t^\alpha\right) B,
+\label{eq:impulse_Halpha}
+\end{equation}
+where \(E_{\alpha, \alpha}(\cdot)\) is the two-parameter Mittag-Leffler function \citep{gorenflo2020}. The state response to a bounded input is
+\begin{equation}
+\xi(t) = \int_0^t H_\alpha(t - s)\, u(s)\, ds.
+\label{eq:state_conv}
+\end{equation}
+Define the finite-horizon gain
+\begin{equation}
+\Gamma_T := \sup_{0 \le t \le T} \int_0^t \|H_\alpha(s)\|\, ds,
+\label{eq:GammaT}
+\end{equation}
+where \(\|\cdot\|\) denotes the operator norm induced by the safety metric (typically the Euclidean norm or a weighted norm aligned with the safe-set geometry).
+
+\begin{lemma}[Linear safety envelope]
+\label{lem:linear_safety}
+If the input satisfies the uniform bound
+\begin{equation}
+\|u\|_{L^\infty(0, T)} \le \frac{\rho}{\Gamma_T},
+\label{eq:safe_input_bound}
+\end{equation}
+then \(\sup_{0 \le t \le T} \|\xi(t)\| \le \rho\), and the linearized solution remains within the safety margin of the equilibrium.
+\end{lemma}
+
+\begin{proof}
+From~\eqref{eq:state_conv},
+\[
+\|\xi(t)\| \le \int_0^t \|H_\alpha(t - s)\|\,\|u(s)\|\, ds
+\le \|u\|_{L^\infty} \int_0^t \|H_\alpha(\tau)\|\, d\tau
+\le \|u\|_{L^\infty} \,\Gamma_T.
+\]
+Inserting the bound~\eqref{eq:safe_input_bound} yields \(\|\xi(t)\| \le \rho\) for all \(t \in [0, T]\).
+\end{proof}
+
+The bound~\eqref{eq:safe_input_bound} is conservative (the true nonlinear margin is typically larger than the linear one), but is exact in the linear regime of Section~\ref{sec:linearization} and provides a fast certificate: compute the impulse-response matrix \(H_\alpha(t)\) for the Jacobian \(J(A)\) and input channel \(B\) of Section~\ref{sec:backbone}, evaluate \(\Gamma_T\) numerically, and compare against the selected amplitude. When the fractional order \(\alpha\) is close to \(1\), \(H_\alpha(t)\) approaches the exponential \(e^{Jt}B\) and \(\Gamma_T\) can be bounded by standard matrix-exponential estimates; for fractional \(\alpha < 1\), the slower rational decay of the Mittag-Leffler kernel increases \(\Gamma_T\) and correspondingly tightens the amplitude ceiling.
+
+\subsection{Theorem T17 --- fractional inward-pointing rectangle}
+
+The linear bound of Lemma~\ref{lem:linear_safety} is a local trust-region condition. For nonlinear safety, especially near the Allee threshold \(A\) where the prey dynamics flip sign, a stronger certificate is needed. The next result is a fractional generalization of the inward-pointing rectangle method \citep{halanay1966}: if the vector field points inward on every face of a rectangular box, the box is positively invariant for any Caputo order \(\alpha \in (0, 1)\).
+
+\begin{theorem}[Fractional inward-pointing rectangle invariance]
+\label{thm:T17}
+Consider the Caputo system
+\begin{equation}
+{}^C D_t^\alpha z = F(t, z),\qquad 0 < \alpha < 1,
+\label{eq:system_rect}
+\end{equation}
+with continuous \(F\) locally Lipschitz in \(z\) and uniformly continuous in \(t\). Let
+\begin{equation}
+\mathcal{R} = \prod_{i=1}^n [\ell_i, u_i] \subset \mathbb{R}^n,
+\label{eq:rectangle}
+\end{equation}
+and define the face-normal components of the vector field. Assume that for every \(t \ge 0\) and every boundary point \(z \in \partial \mathcal{R}\),
+\begin{align}
+F_i(t, z) \ge 0 \quad&\text{when}\quad z_i = \ell_i, \label{eq:f_lower} \\
+F_i(t, z) \le 0 \quad&\text{when}\quad z_i = u_i. \label{eq:f_upper}
+\end{align}
+Then \(\mathcal{R}\) is forward invariant under the Cauchy initial-value problem associated with~\eqref{eq:system_rect}: for any \(z(0) \in \mathcal{R}\), the solution satisfies \(z(t) \in \mathcal{R}\) for all future times.
+\end{theorem}
+
+\begin{proof}
+Suppose a component \(i\) exits through the lower face for the first time at \(t_*\): \(z_i(t_*) = \ell_i\) and \(z_i(t) > \ell_i\) for \(t \in [0, t_*)\). The component attains its minimum value at \(t = t_*\) within \([0, t_*]\). Apply the Caputo extremum principle \citep{li2010, diethelm2010}: for a function attaining a local minimum at the endpoint of a compact interval, the Caputo derivative at that endpoint satisfies
+\[
+{}^C D_t^\alpha z_i(t_*)
+\le \frac{(t_*)^{\alpha}}{\Gamma(1 - \alpha)} (z_i(0) - z_i(t_*)).
+\]
+Since \(z_i(t_*) = \ell_i \le z_i(0)\) (as \(z_i(0) \in \mathcal{R}\)), the bound above is non-positive. Condition~\eqref{eq:f_lower} requires \(F_i(t_*, z) \ge 0\), giving the contradiction
+\[
+0 \le F_i(t_*, z) = {}^C D_t^\alpha z_i(t_*) \le 0,
+\]
+with strict negativity of the Mittag-Leffler weight unless \(z_i(0) = \ell_i\). The degenerate case \(z_i(0) = \ell_i\) must be checked separately; if \(z_i(t)\) lifts interior immediately, the same argument applies at any later first contact. If \(z_i(t) \equiv \ell_i\) for all \(t\), the state trivially remains in \(\mathcal{R}\). The upper-face case is identical with the sign reversed and a local maximum. Therefore no component can exit first.
+\end{proof}
+
+The fractional extremum principle invoked in the proof is the generalization of the classical ODE inward-pointing result to Caputo derivatives: the kernel has memory, so the function at \(t_*\) is weighted against its entire past, but the sign of the comparison is the same at the first exit point. The proof is constructive and does not require constructing a Lyapunov function.
+
+\subsection{Strong-Allee boundary inequalities}
+
+Applying Theorem~\\ref{thm:T17} to the controlled strong-Allee predator--prey system from Section~\\ref{sec:backbone} with additive controls \(u_x, u_y\) and safety rectangle
+\begin{equation}
+\mathcal{R} = [x_L, x_U] \times [y_L, y_U],
+\label{eq:safe_box}
+\end{equation}
+the four boundary conditions become explicit deterministic inequalities. For brevity we present the four sufficient conditions; each may be tightened by worst-case analysis over parametric uncertainty using interval arithmetic.
+
+\subsubsection*{Lower prey face}
+
+At the lower prey boundary \(x = x_L\), the vector field component is
+\[
+F_x = r x_L \left(1 - \frac{x_L}{K}\right) \left(\frac{x_L}{A} - 1\right)
+- \frac{a x_L y}{1 + h x_L} + b_x u_x.
+\]
+Taking the worst-case prey depletion at the maximum plausible predator abundance \(y_U\), the sufficient inward-pointing condition is
+\begin{equation}
+\boxed{
+r x_L \left(1 - \frac{x_L}{K}\right) \left(\frac{x_L}{A} - 1\right)
+- \frac{a x_L\, y_U}{1 + h x_L} + b_x u_x^{\min} \ge 0 }.
+\label{eq:lower_prey}
+\end{equation}
+
+\subsubsection*{Upper prey face}
+
+At the upper prey boundary \(x = x_U\) with the minimum predator \(y_L\),
+\begin{equation}
+\boxed{
+r x_U \left(1 - \frac{x_U}{K}\right) \left(\frac{x_U}{A} - 1\right)
+- \frac{a x_U\, y_L}{1 + h x_U} + b_x u_x^{\max} \le 0 }.
+\label{eq:upper_prey}
+\end{equation}
+
+\subsubsection*{Lower predator face}
+
+At the lower predator boundary \(y = y_L\),
+\begin{equation}
+\boxed{
+y_L \left(\frac{e a x}{1 + h x} - m\right) + b_y u_y^{\min} \ge 0,\qquad
+\forall x \in [x_L, x_U] }.
+\label{eq:lower_pred}
+\end{equation}
+The parenthesis is the functional response gradient. The inequality must hold for every prey value in of \(x\) in the box, which can be verified by evaluating its minimum over \([x_L, x_U]\) (a one-dimensional check for this monotonic Holling type~II response).
+
+\subsubsection*{Upper predator face}
+
+At the upper predator boundary \(y = y_U\),
+\begin{equation}
+\boxed{
+y_U \left(\frac{e a x}{1 + h x} - m\right) + b_y u_y^{\max} \le 0,\qquad
+\forall x \in [x_L, x_U] }.
+\label{eq:upper_pred}
+\end{equation}
+
+The inequalities~\eqref{eq:lower_prey}--\eqref{eq:upper_pred} are sufficient, not necessary: a vector field can fail the sign condition at a boundary without the trajectory reaching it. They are adequate for design, and numerical verification prior to each experiment is straightforward. For the locked parameters of Section~\ref{sec:backbone} --- \(r = 3/2, K = 1, a = 1, h = 1/2, e = 4/5, m = 2/5\) --- the left-hand sides are rational functions of \(A\).
+
+\subsection{Input envelope for a discriminative safest experiment}
+
+Combining Theorem~\ref{thm:T16} and Theorem~\ref{thm:T17} with the optimal designs of Theorem~\ref{thm:T11} and Theorem~\ref{thm:T12} yields a complete safety-certified design procedure for the linearized strong-Allee case:
+
+\begin{enumerate}
+\item Compute the unconstrained optimal input \(u^*\) from Theorem~\ref{thm:T11} (or, in the multisine case, from the solution of the linear program~\eqref{eq:robust_LP} following Theorem~\ref{thm:T12}).
+\item Compute the linear safety gain \(\Gamma_T\) from~\eqref{eq:GammaT} using the impulse response~\eqref{eq:impulse_Halpha} and obtain the worst-case amplitude envelope~\eqref{eq:safe_input_bound}.
+\item Project \(u^*\) onto the amplitude envelope: define the safe input
+\begin{equation}
+u_{\text{safe}}(t) = \operatorname{sat}_{\frac{\rho}{\Gamma_T}}\!(u^*(t)),
+\end{equation}
+where \(\operatorname{sat}_M(v) = \min\{1, M/\|v\|\} \, v\) with the relevant norm.
+\item Verify that the projected input satisfies the box boundary conditions~\eqref{eq:lower_prey}--\eqref{eq:upper_pred}. If a boundary fails, the design is infeasible at the chosen amplitude; reduce \(\rho\) (if ecological judgment allows) or increase the box \(\mathcal{R}\).
+\item Execute the experiment with adaptive monitoring: if a single measurement falls below the safety floor, the protocol automatically terminates the trial and records the cause.
+\end{enumerate}
+
+This five-step protocol crystallizes the central claim of this section: an optimally informative input under safety constraints is not a different input from the one designed in Section~\ref{sec:design} --- it is the same input, with its amplitude safely capped and its safety envelope verified before execution.
+
+\subsection{Practical consequences of the Allee threshold}
+
+The Allee threshold \(A\) introduces two specific warnings that shape any implementable protocol.
+
+\textbf{Negative prey pulses.} Removing prey from a population near the Allee threshold is the most informative perturbation under some model pairs because it probes the nonlinear prey growth function directly and can disentangle the sign of the growth rate. However, a negative prey pulse directly pushes the population toward \(A\). The inequalities~\eqref{eq:lower_prey}--\eqref{eq:upper_pred} require that even at maximum removal, the net prey impulse does not cross the lower bound \(x_L > A\). In practice, this means:
+
+\begin{itemize}
+\item Reserve a certified margin \(\|x(t) - A\| \ge \Delta_{\text{min}} > 0\) at all times.
+\item Pre-emption removal by positive predator pulses when the lower-face condition fails.
+\item Use positive prey nutrients or predator removal perturbations for the harvesting-like signal whenever it is scientifically equivalent.
+\item Adaptive termination: stop the trial automatically if a posterior predictive probability of crossing \(x_L\) exceeds a user-specified safety level \(\beta\) (e.g., \(5\%\)).
+\end{itemize}
+
+\textbf{Cumulative impact.} The linear safety bound of Lemma~\ref{lem:linear_safety} is an instantaneous envelope that does not account for the accumulated distortion of repeated perturbation--recovery cycles. For protocols with many sequential pulses, add the cumulative-integral constraint
+\begin{equation}
+\sum_{k} \|u_k\|\, \Delta t_k \le C_{\max},
+\end{equation}
+where the \(C_{\max}\) is calibrated by numerical simulation of the worst-case Salien trajectory. This guarantee is the robust analogue of the linear impulse bound for repeated perturbation designs.
+
+The safety architecture of this section --- existence guarantee (Theorem~\ref{thm:T16}) plus invariance certificate (Theorem~\ref{thm:T17}) --- formally closes the loop between the information-theoretic optima of Section~\ref{sec:design} and the ecological admissible parameter described in Section~\ref{sec:backbone}. The practical envelope procedure above and its algorithmic counterpart will be exercised numerically in Section~\ref{sec:benchmark}, and its Bayesian extension (for parameter uncertainty on parameters including the Allee threshold itself) is developed in Section~\ref{sec:bayesian}.

@@ -1,0 +1,24 @@
+# Benchmark configuration for predator-prey model
+design:
+  t_end: 10.0      # End time for simulation
+  dt: 0.01         # Time step
+  # Design parameters (e.g., input signal)
+  input_type: "chirp"  # or "pulse", "prbs", etc.
+  input_amplitude: 0.1
+  input_frequency_range: [0.1, 10.0]
+
+safety:
+  constraints:
+    min_population: 0.0
+    max_population: 10.0
+    max_control_effort: 1.0
+
+validation:
+  analytic_tests: true
+  solver_refinement: true
+  safety_evaluation: true
+  independent_resimulation: true
+  artifact_generation: true
+
+# Optional: parameters for the model (if not using defaults)
+#

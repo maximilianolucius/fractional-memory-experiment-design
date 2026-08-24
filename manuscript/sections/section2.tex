@@ -1,0 +1,75 @@
+\section{Certified strong-Allee ecological backbone}
+
+We adopt the validated strong-Allee predator--prey model from~\cite[Sec.~4]{source_pack/04_EXACT_STRONG_ALLEE_BASELINE.md} as our certified ecological backbone. The dynamics are
+\begin{align}
+\dot x &= r x\Bigl(1-\frac{x}{K}\Bigr)\Bigl(\frac{x}{A}-1\Bigr)-\frac{a x y}{1+h x},\\
+\dot y &= e\,\frac{a x y}{1+h x}-m y,
+\end{align}
+with the locked parameters
+\[
+r=\frac32,\quad K=1,\quad a=1,\quad h=\frac12,\quad e=\frac45,\quad m=\frac25,
+\]
+and the Allee threshold \(A\in(0,2/3)\) as a bifurcation parameter.
+
+\subsection{Coexistence equilibrium}
+The coexistence equilibrium \((x^*,y^*)\) exists uniquely for \(0<A<2/3\) and is given by
+\begin{equation}
+\label{eq:xstar}
+x^*=\frac{m}{a(e-mh)}=\frac23,
+\end{equation}
+\begin{equation}
+\label{eq:ystar}
+y^*(A)=\frac{2(2-3A)}{9A}.
+\end{equation}
+Thus positive coexistence requires exactly \(0<A<2/3\).
+
+\subsection{Exact Jacobian and stability}
+The Jacobian at coexistence is
+\begin{equation}
+\label{eq:J}
+J(A)=\begin{pmatrix}
+\dfrac{7A-2}{8A} & -\dfrac12 \\[1ex]
+\dfrac{2-3A}{10A} & 0
+\end{pmatrix},
+\end{equation}
+with trace, determinant, and discriminant
+\begin{align}
+T(A)&=\operatorname{tr}J(A)=\frac{7A-2}{8A},\label{eq:trace}\\
+D(A)&=\det J(A)=\frac{2-3A}{20A},\label{eq:det}\\
+T(A)^2-4D(A)&=\frac{(19A-10)(23A-2)}{320A^2}.\label{eq:disc}
+\end{align}
+The eigenvalues are
+\[
+\lambda_{1,2}=\frac{T(A)\pm\sqrt{T(A)^2-4D(A)}}{2}.
+\]
+The eigenvalue type changes at the rational breakpoints
+\[
+A=\frac{2}{23},\quad A=\frac{10}{19},
+\]
+the trace changes sign at \(A=2/7\), and coexistence disappears at \(A=2/3\).
+
+For a commensurate Caputo fractional system of order \(0<\alpha<1\), the Matignon stability condition requires every eigenvalue \(\mu\) of \(J\) to satisfy \(|\arg\mu|>\alpha\pi/2\). In the interval
+\[
+\frac27<A<\frac{10}{19},
+\]
+the eigenvalues are a complex pair with positive real part. The critical fractional order \(\alpha^*(A)\) at which stability is lost is given by
+\begin{equation}
+\label{eq:alpha}
+\alpha^*(A)=\frac{2}{\pi}\arctan\!\Bigl(
+\frac{\sqrt{4D(A)-T(A)^2}}{T(A)}\Bigr).
+\end{equation}
+Stability holds exactly for \(0<\alpha<\alpha^*(A)\).  In particular, for the stress‑test baseline \(A=3/10\),
+\[
+\alpha^*\!\bigl(\tfrac3{10}\bigr)=\frac{2}{\pi}\arctan\sqrt{\frac{2107}{5}}
+\approx0.9690122761517084,
+\]
+so that \(\alpha=0.9\) is stable while \(\alpha=1\) (the integer‑order ODE) is unstable, reproducing the certified verdict.
+
+For the informative baseline \(A=1/4\) the Jacobian becomes
+\[
+J=\begin{pmatrix}-1/8&-1/2\\1/2&0\end{pmatrix},
+\quad T=-\frac18,\quad D=\frac14,
+\]
+and the ODE as well as every \(0<\alpha\le1\) commensurate Caputo version are locally stable.  This choice guarantees that all candidate models remain in the local linear regime under small perturbations, making it ideal for frequency‑response comparisons.
+
+\end{document}

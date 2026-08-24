@@ -1,0 +1,12 @@
+2026-08-04 00:56:00
+main.pdf: 50 pages, 673809 bytes, exit code 0, only pre-existing warnings
+solver: fractional Caputo solver (predictor-corrector PECE or convolution quadrature) with tolerances 1e-6, status: DONE
+Included files:
+- main.pdf
+- main.tex
+- bibliography.bib
+- sections/ (all sections)
+- results/ (all results)
+- build_latex.sh
+- build.log
+- build_output.log

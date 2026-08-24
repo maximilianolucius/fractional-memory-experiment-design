@@ -1,30 +1,29 @@
 \section{Numerical Methods and Validation}
 \label{sec:numerics}
 
-The computational layer is designed to support the analytical claims rather than replace them. All scripts and machine-readable outputs are released in the accompanying benchmark and figure directories.
+The computational layer supports the analytical claims of Section~\ref{sec:analysis}; it does not replace them. All scripts and the machine-readable outputs (JSON/NPZ) behind every figure are released with the paper, so each displayed number can be regenerated from source.
 
 \subsection{Solvers}
-ODE and latent-state systems are integrated with fourth-order Runge--Kutta. Retarded DDEs use an interpolated-history RK4 solver. Caputo systems use the fractional Adams--Bashforth--Moulton PECE scheme~\cite{F02}; its scalar implementation is validated against the exact Mittag--Leffler solution.
+ODE and latent-state systems are integrated by classical fourth-order Runge--Kutta with step $h=T/N$; retarded DDEs by an interpolated-history RK4 variant. Caputo systems use the fractional Adams--Bashforth--Moulton PECE scheme~\cite{F02}; its scalar implementation is validated against the exact Mittag--Leffler solution $E_\alpha(\lambda t^\alpha)$, with maximum errors $8.70\times10^{-4}$, $4.64\times10^{-4}$, $2.52\times10^{-4}$ at $N=250,500,1000$ (Table~\ref{tab:solver-validation}).
 
-For the combined fractional-delay model~\eqref{eq:fdmodel}, we use the same PECE history convolution while evaluating the delayed prey term by interpolation of the already computed trajectory. For $\tau>0$ all reported grids satisfy $\tau\ge h$, so the delayed value required by the corrector lies in known history. The two limiting cases provide strong numerical gates:
+The combined model~\eqref{eq:fdmodel} reuses the PECE history convolution and evaluates the delayed prey value $x(t-\tau)$ by linear interpolation of the already computed trajectory. Reported grids with $\tau>0$ satisfy $\tau\ge h=T/N$, so the corrector never requires unknown history. The model's two boundaries serve as validation gates:
 \begin{itemize}
-    \item $\tau=0$ is delegated exactly to the validated Caputo solver;
-    \item at $\alpha=1$, the fractional-delay solver converges to the independent DDE RK4 solution.
+    \item at $\tau=0$ the code delegates to the validated Caputo solver (no duplicated computation);
+    \item at $\alpha=1$ the output is compared against the independent DDE RK4 solver.
 \end{itemize}
-At $A=0.25$, $\tau=0.35$, the maximum absolute discrepancy between the $\alpha=1$ fractional-delay solver and the DDE solver is $6.75\times10^{-6}$ at $N=200$, $1.68\times10^{-6}$ at $N=400$, and $4.20\times10^{-7}$ at $N=800$. For the representative fractional-delay cell $(\alpha,\tau)=(0.85,0.35)$, the max difference against the $N=800$ solution drops from $2.18\times10^{-3}$ at $N=200$ to $8.05\times10^{-4}$ at $N=400$.
+At $A=0.25$, $\tau=0.35$, the $\alpha=1$ discrepancy against the DDE solver is $6.75\times10^{-6}$ ($N=200$), $1.68\times10^{-6}$ ($N=400$), $4.20\times10^{-7}$ ($N=800$); the error falls by a factor of $\approx4$ per grid doubling. In the interior, at $(\alpha,\tau)=(0.85,0.35)$, self-convergence against the $N=800$ reference improves from $2.18\times10^{-3}$ ($N=200$) to $8.05\times10^{-4}$ ($N=400$).
 
 \subsection{Inputs, observations, and metrics}
-Six bounded inputs are compared at the common peak-amplitude budget $\|u\|_\infty\le0.10$: pulse, multiscale pulse train, sinusoid, multisine, chirp, and pseudorandom binary sequence (PRBS). Observations use prey, predator, or both channels. Numerical safety is reported separately from solver non-divergence using the minimum Allee margin
+Six bounded input families are compared under the common peak budget $\|u\|_\infty\le0.10$: pulse, multiscale pulse train, sinusoid, multisine, chirp, and pseudorandom binary sequence (PRBS); see Figure~\ref{fig:waveforms}. Observation channels: prey, predator, or both. Numerical safety is reported separately from solver survival via the minimum Allee margin
 \[
 \min_t(x(t)-A)
 \]
-and the rate of threshold crossing.
+and the fraction of runs crossing $x=A$.
 
-For fractional-delay experiments we additionally report (i) trajectory distance to the pure Caputo limit, (ii) trajectory distance to the pure DDE limit, (iii) predator peak time and amplitude, and (iv) a robust bridge-discrimination score defined as the minimum of the distances to the two limiting explanations.
-
+Four additional diagnostics apply to the fractional-delay runs: the $L^2$ trajectory distance to the pure Caputo limit ($\tau=0$), the distance to the pure DDE limit ($\alpha=1$), the predator peak time and amplitude, and the bridge score $\min(d_{\rm Caputo},d_{\rm DDE})$, which is small whenever \emph{either} pure mechanism explains the data and large only when neither does.
 
 \subsection{Validation matrix and numerical resolution}
-The main numerical claims are associated with explicit validation gates rather than a single solver run. Table~\ref{tab:solver-validation} collects the convergence checks used in the released package. The scalar Caputo PECE implementation is compared with an exact Mittag--Leffler solution. The combined fractional-delay implementation is checked independently at the integer-order boundary against the DDE RK4 solver, and an interior fractional-delay cell is subjected to self-convergence. The error decreases monotonically in every reported sequence.
+Each numerical claim is tied to an explicit convergence gate rather than to a single solver run; Table~\ref{tab:solver-validation} collects all eight. Three reference types appear: the exact Mittag--Leffler solution (Caputo gates), the independent DDE RK4 solver ($\alpha=1$ boundary), and an $N=800$ self-convergence reference (interior cell). All eight error sequences decrease monotonically in $N$.
 
 \begin{table}[htbp]
 \centering
@@ -47,10 +46,10 @@ Fractional-delay, $(\alpha,\tau)=(0.85,0.35)$ & $N=400$ & $N=800$ & $8.05\times1
 \end{tabular}
 \end{table}
 
-The validation strategy is deliberately heterogeneous. An agreement between two implementations that share the same discretization can hide a common coding error; therefore the most important boundaries are checked against a mathematically different reference. At $\tau=0$, the fractional-delay code delegates to the already validated Caputo implementation rather than duplicating the same calculation. At $\alpha=1$, by contrast, the memory convolution collapses to an integer-order problem and the output is compared with the separate interpolated-history DDE RK4 path. The two checks test opposite boundaries of the combined model.
+The gates are deliberately heterogeneous. Two implementations sharing one discretization can agree while both are wrong; the informative comparisons are against mathematically different references. Hence the choices above: delegation (not duplication) at $\tau=0$, and an independent integer-order solver at $\alpha=1$, where the memory convolution degenerates. The two checks constrain opposite boundaries of~\eqref{eq:fdmodel}.
 
 \subsection{Experimental grid and reproducibility}
-The benchmark is organized around a small number of interpretable axes rather than unconstrained parameter search. The common peak actuator budget is $\|u\|_\infty\le0.10$. The original four-class stable benchmark varies Allee level, fractional order, SNR, observation channel, and waveform family; each cell is replicated 200 times. The dedicated fractional-delay campaign is smaller and targeted: it uses $A=0.25$, $\alpha\in\{0.75,0.85,0.95\}$, $\tau\in\{0.15,0.30,0.45\}$ for the design comparison, and a denser $(\alpha,\tau)$ grid for the bridge plots. Table~\ref{tab:experiment-grid} summarizes the main numerical axes.
+The benchmark uses a small set of interpretable axes (Table~\ref{tab:experiment-grid}), all under the actuator budget $\|u\|_\infty\le0.10$. The four-class stable benchmark sweeps $A\in\{0.20,0.25\}$, $\alpha\in\{0.70,0.85,0.90,0.95\}$, three SNR levels, three observation channels, and six waveforms, at 200 replicates per cell (1512 cells; Section~\ref{sec:benchmark}). The fractional-delay campaign is intentionally smaller: $A=0.25$, $\alpha\in\{0.75,0.85,0.95\}$, $\tau\in\{0.15,0.30,0.45\}$ for the design comparison, and the $7\times6$ grid $\alpha\in\{0.70,\ldots,1.00\}$, $\tau\in\{0,\ldots,0.50\}$ for the bridge maps.
 
 \begin{table}[htbp]
 \centering
@@ -73,4 +72,4 @@ Simulation horizon & $T=12$ for the principal trajectory/design comparisons\\
 \end{tabular}
 \end{table}
 
-All quantities used in the figures are generated from machine-readable JSON or NPZ outputs. The fractional-delay script writes the solver validation sequence, the design ranking, and the bridge arrays together with the four figures. This separation between simulation generation and paper rendering is useful for audit: plots can be regenerated without rerunning the large four-class benchmark, while the archived benchmark statistics can be checked independently.
+Every figure quantity traces to a JSON or NPZ file written by the simulation scripts; the fractional-delay script emits its validation sequence, design ranking, and bridge arrays together with Figures~\ref{fig:fdtraj}--\ref{fig:fdsweep}. Separating simulation output from rendering allows plots to be redrawn without rerunning the archived 1512-cell benchmark, and the archived statistics to be audited without redrawing.

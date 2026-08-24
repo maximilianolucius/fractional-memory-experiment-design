@@ -1,0 +1,29 @@
+{
+  "git_commit": "39ecdbca904cd82b95b0f9224ca0702b2ec71e3f",
+  "config_hash": "b0b5f4f9ea953d8a071f8201ba15dc52",
+  "seed": 0,
+  "solver": "fractional_solver_PECE",
+  "solver_tolerances": {
+    "note": "Fractional Caputo solver PECE implemented with target tolerance 1e-6",
+    "status": "PENDING-VERIFICATION"
+  },
+  "model_versions": {},
+  "design": {
+    "t_end": 10.0,
+    "dt": 0.01,
+    "input_type": "chirp",
+    "input_amplitude": 0.1,
+    "input_frequency_range": [
+      0.1,
+      10.0
+    ]
+  },
+  "safety_constraints": {
+    "min_population": 0.0,
+    "max_population": 10.0,
+    "max_control_effort": 1.0
+  },
+  "objective_estimate": 0.0,
+  "objective_se": 0.0,
+  "status": "PENDING-HUMAN"
+}

@@ -1,33 +1,29 @@
 \section{Experiment Design and Safety}
 \label{sec:design}
 
-The analytical design problem is summarized in the main paper and proved in full in the Supplementary Material. For two Gaussian linearized models with common covariance, the pairwise information criterion can be written
+The design theory itself is classical in outline; we state just enough here to motivate the waveforms, and refer the full development with proofs to the Supplementary Material. For two Gaussian linearized models with common covariance, the pairwise information carried by an input $u$ takes the quadratic form
 \[
-D_{ij}(u)=\frac12\langle u,Q_{ij}u\rangle.
+D_{ij}(u)=\frac12\langle u,Q_{ij}u\rangle,
 \]
-Under an energy constraint, the unconstrained optimum is the leading eigenfunction of $Q_{ij}$; for a finite robust frequency design, an optimum can be represented with finite frequency support. These standard design consequences are used here only to motivate the six implementable waveform families in Figure~\ref{fig:waveforms}.
+so under the energy constraint $\|u\|^2\le E$ the optimum is the leading eigenfunction of $Q_{ij}$, and the robust frequency-domain problem admits an optimum with finite frequency support (both proved in the Supplementary Material). These two facts justify restricting the search to the six implementable waveform families of Figure~\ref{fig:waveforms} instead of an infinite-dimensional input space.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.95\textwidth]{fig04_waveforms}
-\caption{Six candidate perturbations at the common peak-amplitude budget. Transient and broadband designs probe the memory law differently and exhibit markedly different safety behavior in nonlinear simulations.}
+\caption{Six candidate perturbations at the common peak-amplitude budget. Transient and broadband designs interrogate the memory law in different ways --- and behave very differently with respect to safety once the nonlinear simulations run.}
 \label{fig:waveforms}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.68\textwidth]{fig05_linear_ranking}
-\caption{Linear-Gaussian design ranking by mean minimum pairwise KL divergence. This ranking ignores nonlinear state safety and therefore acts as an upper-level information benchmark rather than a final experimental recommendation.}
+\caption{Linear-Gaussian design ranking by mean minimum pairwise KL divergence. Nonlinear state safety is invisible at this level, so the ranking serves as an information benchmark, not as a final experimental recommendation.}
 \label{fig:linear-ranking}
 \end{figure}
 
 \subsection{Strong-Allee safety}
-A one-sided Allee constraint requires
-\[
-x(t)>A+\eta.
-\]
-For the linearized system a sufficient pulse-amplitude envelope follows from the prey impulse gain; for the nonlinear system the strict inward-pointing rectangle theorem and its face inequalities are given in the Supplementary Material. Crucially, state safety alone does not impose a universal bound on input energy without a physical waveform/bandwidth class, because high-frequency inputs may be strongly attenuated by a stable strictly proper channel. This is why all quantitative testing bounds in the main paper are tied to an explicit actuator or protocol class.
+The one-sided Allee constraint requires $x(t)>A+\eta$ for all $t\in[0,T]$. For the linearized system, a sufficient pulse-amplitude envelope follows from the prey impulse gain; for the nonlinear system, the strict inward-pointing rectangle theorem and its four face inequalities are given in the Supplementary Material. One structural point belongs in the main text: state safety alone does \emph{not} bound input energy. A stable strictly proper channel attenuates high frequencies as $O(\omega^{-1})$ or faster, so an oscillatory input of arbitrarily large $\|u\|_2$ can leave the state nearly unmoved. Every quantitative testing bound in this paper is therefore tied to an explicit actuator or protocol class --- here, the declared peak-amplitude pulse budget $\|u\|_\infty\le0.10$, $\|u\|_2\le0.120$.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.92\textwidth]{fig15_safety_geometry}
-\caption{Representative nonlinear safety geometry. A multiscale transient remains above the Allee threshold in the shown run, while PRBS crosses it. The benchmark rectangle is a diagnostic region; rigorous positive invariance requires the strict face conditions stated in the Supplementary Material.}
+\caption{Representative nonlinear safety geometry. In the run shown, a multiscale transient stays above the Allee threshold while PRBS crosses it. The rectangle drawn is a benchmark diagnostic region; rigorous positive invariance requires the strict face conditions stated in the Supplementary Material.}
 \label{fig:safety-geometry}
 \end{figure}

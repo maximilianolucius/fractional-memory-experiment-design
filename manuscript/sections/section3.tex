@@ -1,0 +1,108 @@
+\section{Methodology}
+\label{sec:methodology}
+
+This section details the experimental methodology employed in the PW-2026-005 study to discriminate between fractional, delayed, and latent ecological memory mechanisms in predator-prey systems with strong Allee effects. The experimental design integrates recent advances in fractional-order system identification (2024-2025) and adheres to the dimensional consistency requirements of the Caputo fractional derivative framework.
+
+\subsection{Experimental System}
+We consider the dimensionally consistent Caputo predator-prey model with strong Allee effect:
+\begin{equation}
+\label{eq:system}
+\tau_0^{\alpha-1} {}_0D_t^\alpha \mathbf{z}(t) = \mathbf{f}(\mathbf{z}(t);\boldsymbol{\theta}) + \mathbf{B}\mathbf{u}(t),
+\end{equation}
+where $\mathbf{z}(t) = [x(t), y(t)]^\top$ denotes the prey ($x$) and predator ($y$) populations, $\tau_0$ is a characteristic time scale, $\alpha \in (0,1]$ is the fractional order, ${}_0D_t^\alpha$ denotes the Caputo fractional derivative of order $\alpha$, $\mathbf{f}$ represents the nonlinear dynamics, $\boldsymbol{\theta}$ are model parameters, $\mathbf{B}$ is the input matrix, and $\mathbf{u}(t)$ is the control input. The output equation is $\mathbf{y}(t) = \mathbf{C}\mathbf{z}(t)$.
+
+\subsection{Memory Hypotheses}
+Three competing memory hypotheses are formulated and tested:
+\begin{enumerate}
+    \item \textbf{Fractional Memory}: Memory kernel follows a power-law decay $\frac{t^{\alpha-1}}{\Gamma(\alpha)}$.
+    \item \textbf{Delayed Memory}: Discrete time-delay representation with distributed or discrete delays.
+    \item \textbf{Latent Memory}: Finite-dimensional latent state approximation (e.g., linear compartmental model).
+\end{enumerate}
+
+\subsection{Experimental Protocol}
+The experiment comprises three sequential phases:
+
+\subsubsection{Phase 1: Baseline Characterization}
+\begin{itemize}
+    \item Establish the coexistence equilibrium $(x^*, y^*) = \left(\frac{2}{3}, \frac{2(2-3A)}{9A}\right)$ for Allee threshold $A=0.3$.
+    \item Verify local asymptotic stability for $\alpha < \alpha^*(A) \approx 0.969$ via linearized fractional-order dynamics.
+    \item Apply infinitesimal perturbations to estimate natural decay rates and baseline noise floor.
+\end{itemize}
+
+\subsubsection{Phase 2: Perturbation Experiments}
+We apply three classes of controlled perturbations, each designed to excite distinct memory signatures:
+\begin{enumerate}
+    \item \textbf{Prey Pulses}: Brief increases in prey population ($\Delta x = 0.2$) via transient feeding.
+    \item \textbf{Predator Pulses}: Brief increases in predator population ($\Delta y = 0.15$) via transient predator introduction.
+    \item \textbf{Chirp Signals}: Frequency-swept inputs $u(t) = A \sin(\phi(t))$ with instantaneous frequency $\phi'(t)$ logarithmically increasing from $10^{-3}$ to $10^{1}$ rad/$t_0$ over $T=30\tau_0$, to estimate frequency response.
+\end{enumerate}
+All perturbations are designed to respect safety constraints: $0 < x,y < 10$, $\|\mathbf{u}(t)\| \leq 1.0$, and $x(t) > A$.
+
+\subsubsection{Phase 3: Measurement Protocol}
+\begin{itemize}
+    \item High-frequency sampling immediately post-perturbation ($\Delta t = 0.01\tau_0$) for $t \in [0, 5\tau_0]$.
+    \item Extended monitoring to capture long-term memory effects up to $T = 50\tau_0$ with $\Delta t = 0.1\tau_0$.
+    \item Dual-species monitoring via non-invasive imaging to capture cross-species memory effects.
+    \item Each experimental condition is replicated $n=5$ times to ensure statistical significance.
+\end{itemize}
+
+\subsection{Fractional Memory Signatures}
+Discrimination relies on temporal and frequency-domain signatures:
+
+\subsubsection{Temporal Signature}
+The system's impulse response decay distinguishes memory types:
+\begin{itemize}
+    \item \textbf{Fractional}: Power-law decay $y(t) \sim t^{-\alpha}$.
+    \item \textbf{Delayed}: Exponential decay with time delay $y(t) \sim e^{-(t-\tau)/\tau_d}$.
+    \item \textbf{Latent}: Multi-exponential decay $y(t) \sim \sum_{i=1}^n a_i e^{-t/\tau_i}$.
+\end{itemize}
+
+\subsubsection{Frequency Domain Signature}
+The frequency response $G_\alpha(i\omega)$ yields:
+\begin{itemize}
+    \item \textbf{Fractional}: Constant phase angle $-(1-\alpha)\pi/2$ in intermediate frequencies (Bode phase plateau).
+    \item \textbf{Delayed}: Linear phase shift $-\omega\tau$.
+    \item \textbf{Latent}: Rational function approximation with bounded phase variation.
+\end{itemize}
+
+\subsection{Incorporation of Recent Findings (2024-2025)}
+Recent advances in fractional-order ecological modeling are integrated:
+\begin{itemize}
+    \item Mittag-Leffler kernel fractional derivatives provide superior fit to ecological memory data versus power-law kernels (see \citealp{mittag2024ecological}).
+    \item Distributed-order fractional derivatives capture heterogeneous memory effects (see \citealp{distributed2024fractional}).
+    \item Variable-order fractional derivatives model time-varying memory properties (see \citealp{variable2024fractional}).
+    \item Hybrid fractional-delay models separate long-term memory from immediate feedback (see \citealp{hybrid2025fractional}).
+    \item Distributed delay models can approximate fractional dynamics under commensurate order constraints (see \citealp{distributed2025delay}).
+    \item Fractional-order experiment design under model-accuracy constraints provides minimum-power LMI inputs (Jakowluk \& Świercz, 2025), adapted here for ecological safety constraints.
+\end{itemize}
+
+\subsection{Data Analysis Protocol}
+\begin{enumerate}
+    \item \textbf{Preprocessing}: Detrend and normalize time series; remove outliers via median absolute deviation.
+    \item \textbf{Model Fitting}: Estimate parameters for fractional, delayed, and latent models using:
+          \begin{itemize}
+              \item Fractional order $\alpha$ and parameters via weighted least squares in time domain.
+              \item Delay $\tau$ and gain via nonlinear least squares.
+              \item Latent states via expectation-maximization for linear compartmental models.
+          \end{itemize}
+          Model selection employs:
+          \begin{itemize}
+              \item Akaike Information Criterion (AIC).
+              \item Bayesian Information Criterion (BIC).
+              \item $k$-fold cross-validation error.
+          \end{itemize}
+    \item \textbf{Residual Analysis}: Inspect residual autocorrelation and partial autocorrelation for remaining structure.
+    \item \textbf{Uncertainty Quantification}: Profile likelihood or Markov Chain Monte Carlo (MCMC) sampling for parameter confidence intervals.
+\end{enumerate}
+
+\subsection{Identified Gaps and Future Work}
+Despite the comprehensive design, several gaps warrant further investigation:
+\begin{enumerate}
+    \item \textbf{Non-Stationary Memory}: The current design assumes time-invariant memory properties. Future work should incorporate time-varying fractional orders via sliding-window identification.
+    \item \textbf{Spatial Heterogeneity}: The model assumes well-mixed populations; spatial extensions require reaction-diffusion fractional frameworks.
+    \item \textbf{Experimental Validation of Hybrid Models}: While hybrid fractional-delay models are theoretically promising, dedicated experiments to isolate delay versus fractional components are needed.
+    \item \textbf{Scaling to Multispecies Communities}: Extending the two-species predator-prey framework to multi-trophic layers remains an open challenge.
+\end{itemize}
+Addressing these gaps will require complementary simulation studies (e.g., bifurcation analysis of fractional-order ecological networks) and targeted follow-up experiments.
+
+\endinput

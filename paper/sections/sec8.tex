@@ -1,25 +1,21 @@
 \section{Large-Scale Model-Discrimination Benchmark}
 \label{sec:benchmark}
 
-The calibrated benchmark compares ODE, Caputo, retarded DDE, and finite latent mechanisms at matched operating conditions. The primary stable-regime task uses $A\in\{0.20,0.25\}$; a separate $A>2/7$ task probes the easier stability-verdict problem. The decision rule is BIC, not Bayesian model evidence.
-
+The benchmark compares ODE, Caputo, retarded DDE, and latent-$3$ mechanisms at matched operating conditions. The primary stable-regime task uses $A\in\{0.20,0.25\}$; a separate task at $A>2/7$ addresses the easier stability-verdict question. The decision rule is BIC throughout --- an information criterion, not Bayesian model evidence, and it is reported as such.
 
 \subsection{Benchmark design and decision rule}
-The purpose of the benchmark is not to find a single best-fitting model on one synthetic trajectory. Instead, it asks whether the same qualitative design conclusions survive across changes in memory strength, observation noise, observation channel, and input waveform. For each generated trajectory, each candidate model is fitted under the same observation protocol and compared using the Bayesian information criterion (BIC). The benchmark therefore evaluates a reproducible information-criterion decision rule; it does not report posterior model probabilities or Bayesian evidence.
+The benchmark is not organized around any single synthetic trajectory. It asks whether the qualitative design conclusions survive joint variation of memory strength ($\alpha$), observation noise (three SNR levels), observation channel (three), and waveform (six families). For each generated trajectory, all four candidates are fitted under one observation protocol and compared by BIC; the object under evaluation is a reproducible decision rule.
 
-The stable-regime benchmark contains 1512 factorial cells, with 200 stochastic replicates per cell and no solver divergences. A separate linear-Gaussian factorial contains 1458 cells and is used only as an information-ranking reference. Keeping these two layers separate is important: the linear ranking indicates where the models differ most under local approximations, whereas the nonlinear benchmark includes the strong-Allee geometry and can therefore reverse the practical recommendation when an informative input becomes unsafe.
+Two factorial layers are kept separate. The nonlinear stable-regime benchmark has 1512 cells $\times$ 200 stochastic replicates (302{,}400 trajectories, zero solver divergences); a linear-Gaussian factorial of 1458 cells serves only as an information-ranking reference (Figure~\ref{fig:linear-ranking}). The layers can disagree: the linear ranking measures local operator separation, while the nonlinear layer sees the Allee geometry, and an input that tops the linear ranking is disqualified once its trajectories cross $x=A$ (Table~\ref{tab:benchmark-safety}).
 
-The full-factorial benchmark contains 200 replicates per cell and no solver divergences. In the primary four-class stable task, macro-averaged accuracy is $0.537$ (chance $0.25$). The design ranking is
+Macro-averaged accuracy in the primary four-class stable task is $0.537$ versus chance $0.25$. By input family:
 \[
 \begin{aligned}
 \text{PRBS }(0.584)&\approx\text{ multisine }(0.583)>\text{sinusoid }(0.534),\\
 &>\text{chirp }(0.507)>\text{pulse }(0.414)>\text{multiscale }(0.324).
 \end{aligned}
 \]
-Discrimination degrades sharply as $\alpha\to1$: accuracy falls from approximately $0.70$ at $\alpha=0.70$ to $0.31$ at $\alpha=0.95$. It is also noise-limited: $0.76$ at high SNR, $0.44$ at medium SNR, and $0.27$ at low SNR. Observing both species performs best, although prey-only observation remains structurally sufficient.
-
-
-Table~\ref{tab:benchmark-stratified} shows the main stratified accuracies. The largest degradation is associated with the two mechanisms becoming intrinsically similar ($\alpha\rightarrow1$) and with decreasing SNR. Observation design has a smaller but still meaningful effect: both-species observation gives the highest mean accuracy, prey-only is close behind, and predator-only loses information about the directly actuated state.
+Difficulty is dominated by two axes (Table~\ref{tab:benchmark-stratified}). As $\alpha\to1$ the mechanisms converge and accuracy falls from $0.702$ ($\alpha=0.70$) to $0.312$ ($\alpha=0.95$); across noise, accuracy is $0.756$/$0.444$/$0.273$ at high/medium/low SNR. The channel effect is smaller: both-species observation attains $0.530$, prey-only $0.516$ (the directly actuated channel remains structurally sufficient), predator-only $0.427$.
 
 \begin{table}[htbp]
 \centering
@@ -41,31 +37,30 @@ $\alpha$ & 0.70 & 0.702 & SNR & high & 0.756\\
 \end{tabular}
 \end{table}
 
-The class-wise statistics provide additional interpretation. ODE recall is very high ($0.972$), but ODE precision is only $0.227$: when the excitation is weak, several subtle memory mechanisms are absorbed into the simpler ODE class. Caputo selection shows the opposite pattern, with recall $0.524$ but precision $0.984$; when the benchmark has enough evidence to select Caputo, that decision is rarely a false positive. DDE recall/precision are $0.410/0.731$, and latent-$3$ recall/precision are $0.242/0.848$. Thus the main failure mode is not indiscriminate confusion; it is conservative collapse toward the simpler model when the available excitation does not reveal enough memory structure.
+Class-wise statistics refine the picture (Figure~\ref{fig:confusion}). ODE: recall $0.972$, precision $0.227$ --- under weak excitation the subtler mechanisms are absorbed into the simplest class. Caputo: recall $0.524$, precision $0.984$ --- a Caputo verdict, once issued, is nearly always correct. DDE: $0.410/0.731$; latent-$3$: $0.242/0.848$. The dominant failure mode is therefore conservative collapse toward the simpler explanation when the data underdetermine the memory law, not symmetric confusion among mechanisms.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.56\textwidth]{fig07_confusion}
-\caption{Row-normalized confusion matrix for the stable four-class task. The simplest ODE mechanism is frequently selected under weak excitation, whereas Caputo predictions are highly precise when selected.}
+\caption{Row-normalized confusion matrix for the stable four-class task. Under weak excitation the simplest ODE mechanism absorbs the rest; Caputo predictions, when made, are highly precise.}
 \label{fig:confusion}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.58\textwidth]{fig08_accuracy_vs_alpha}
-\caption{Model-selection accuracy versus fractional order. As $\alpha$ approaches the integer-order limit, the memory mechanisms become increasingly difficult to distinguish.}
+\caption{Model-selection accuracy versus fractional order. The closer $\alpha$ gets to the integer-order limit, the harder the memory mechanisms are to tell apart.}
 \label{fig:acc-alpha}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.82\textwidth]{fig09_accuracy_snr_channel}
-\caption{Accuracy stratified by SNR and observation channel. The benchmark is strongly noise-limited; both-species observation provides the highest average accuracy.}
+\caption{Accuracy stratified by SNR and observation channel. The benchmark is strongly noise-limited; observing both species gives the best average accuracy.}
 \label{fig:acc-snr}
 \end{figure}
 
 \subsection{Safety--informativeness trade-off}
-Numerical state safety is reported separately from information. At the common peak-amplitude budget, multiscale excitation has zero Allee crossings in the stable benchmark but the weakest discrimination. PRBS and sinusoidal excitation have the strongest discrimination among the tested families but cross the Allee threshold in essentially all stable-regime cells. Multisine occupies an intermediate position: high discrimination with a lower, but still non-negligible, crossing rate.
+Numerical state safety is reported on its own axis, never folded into the information score. At the common budget $\|u\|_\infty\le0.10$: multiscale never crosses the threshold (rate $0.000$) and discriminates worst ($0.324$); PRBS and sinusoid discriminate best ($0.584$, $0.534$) and cross at rates $1.000$; multisine matches PRBS in accuracy ($0.583$) at crossing rate $0.357$.
 
-
-Table~\ref{tab:benchmark-safety} reports the archived nonlinear safety statistics. The ranking makes the trade-off concrete. Multiscale excitation is the safest tested family in the stable benchmark and has a positive minimum Allee margin of $0.292$, but it also has the lowest classification accuracy. PRBS reaches the highest accuracy and crosses the threshold in every stable-regime cell. The pulse is a useful compromise: its crossing rate is only $0.071$, but its accuracy remains substantially below the broadband designs. Multisine is the most interesting intermediate design, with nearly the same discrimination as PRBS but a crossing rate of $0.357$ rather than $1.0$.
+Table~\ref{tab:benchmark-safety} gives the frontier. Multiscale retains a positive minimum margin of $0.292$ at the lowest accuracy; the pulse is the practical compromise, crossing at rate $0.071$ with accuracy $0.414$ --- below the broadband designs by $0.17$.
 
 \begin{table}[htbp]
 \centering
@@ -86,10 +81,10 @@ multiscale & 0.324 & 0.000 &  0.2921\\
 \end{tabular}
 \end{table}
 
-This table also explains why the linear-Gaussian information ranking cannot by itself select a final experiment. In the linear calculation the input is judged by separation of response operators. In the nonlinear ecology the same input can move the system into a different basin, at which point the perturbation is no longer a local identification experiment. Safety must therefore be evaluated on the nonlinear state trajectory, not inferred from the linear information score.
+The table also fixes a methodological point: the linear-Gaussian ranking alone cannot select the final experiment. Linear theory scores an input by operator separation; the nonlinear ecology can answer the same input by leaving the coexistence basin, after which no local identification experiment remains. Safety must be evaluated on the nonlinear state trajectory, not extrapolated from the linear information score.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.72\textwidth]{fig10_safety_tradeoff}
-\caption{Headline benchmark trade-off. Broadband/sustained designs move upward in discrimination but also toward larger Allee-crossing rates; transient designs occupy the lower-crossing but less-informative region.}
+\caption{Headline benchmark trade-off. Broadband and sustained designs climb in discrimination but drift toward higher Allee-crossing rates; transient designs stay in the low-crossing, less-informative corner.}
 \label{fig:safety-tradeoff}
 \end{figure}
