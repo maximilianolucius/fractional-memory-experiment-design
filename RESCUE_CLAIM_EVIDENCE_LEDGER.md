@@ -68,14 +68,47 @@ rescue. It supersedes `CLAIM_EVIDENCE_LEDGER.md` (never created) and absorbs
 
 ---
 
+## Round 03 additions and retractions
+
+| # | Claim | Type | Proof / evidence | General or model-specific | Closest prior-work comparator | Status |
+|---|---|---|---|---|---|---|
+| 35 | **The safety–informativeness trade-off is a waveform-parameterisation artifact, not a property of the system.** At the same peak budget `U=0.100` and a hard margin `δ=0.05`, piecewise-constant designs reach BIC macro-accuracy `0.803` with **zero** Allee crossings, vs `0.514` for the only safe classical family and `0.763` for the best classical design of any kind (which crosses in 35.7% of cells) | falsification | `R3_SAFE_DESIGN_ADVERSARIAL_SEARCH.md`; Stage 1: 163 840 candidates, 87 601 safe; Stage 2: 672 cells × 100 reps, 0 divergences, identical seeds | model-specific; mechanism (parameterisation artifact) general | The manuscript's own Table `tab:benchmark-safety` is the counterexample target | **EMPIRICAL** (falsifies claim 13 as a general statement) |
+| 36 | **Amplitude is the wrong knob.** Halving the amplitude leaves PRBS the most informative design while it still crosses in 71.4% of cells; realised gain *rises* to `28.07` vs the linear certificate `Γ_T=5.78` (violation 4.86×) because post-escape excursion is set by basin geometry, not by `‖u‖` | measurement | `R3_V4_REPRODUCIBILITY_CONTROL.md`; v4 complete, 2268 cells, 3 amplitudes, 0 divergences | model-specific | — | **EMPIRICAL** (refutes the Round-02 amplitude hypothesis) |
+| 37 | **Reproducibility control**: v4 at `amp=0.100` reproduces frozen v3 to four decimals on a different host under a re-implemented driver (macro `0.5369` vs `0.537`; prbs `0.5836` vs `0.584`; multisine `0.5829` vs `0.583`; multiscale `0.3235` vs `0.324`; crossing rates identical) | control | same | model-specific | — | **CERTIFIED_NUMERICALLY** |
+| 38 | **Validated safety classification**: 28/28 trajectory verdicts decided rigorously (12 SAFE-CERTIFIED, 16 CROSSING-CERTIFIED, 0 indeterminate) via mesh refinement plus a rigorous inter-node bound `(2F/Γ(α+1))h^α` from the Caputo modulus of continuity. **Every sampled verdict in the manuscript is confirmed.** The R3-F design is certified safe under all four model classes (margins `+0.099`…`+0.203`) | certificate | `R3_VALIDATED_SAFETY_REPORT.md` | model-specific, per-cell | — | **CERTIFIED_NUMERICALLY** (solver-error term is a refinement estimate, not an enclosure) |
+| 39 | Only **two** designs are safe under *every* candidate model — multiscale and the found `pwc6`. Per-design "crossing rate" averages over model classes that differ qualitatively (`pulse` is safe under Caputo/ODE/latent3 but crosses under DDE) | certificate | `R3_VALIDATED_SAFETY_REPORT.md` §4(3) | model-specific | — | **CERTIFIED_NUMERICALLY** |
+| 40 | **Interval-certified `M₂(r)`** via Hessian enclosure (no sampling): `4.896` at `r=0.0183` up to `11.778` at `r=0.40`. Round-02's sampled values understate it by 19%–76%. Certified `r_max = 0.02937` (Round 02 claimed `0.0350`); certified `U_NL = 1.419e−3`, i.e. 2.2% of the linear certificate; `ρ(0.05)/r_max = 12.5×` | certificate | `R3_NONLINEAR_CERTIFICATE_CONSTANTS.md` | model-specific | — | **CERTIFIED_NUMERICALLY**, conditional on `Γ_B`, `Γ_R` which remain **uncertified** |
+| 41 | **The invariant-ball route to nonlinear safety is structurally closed** for this field: certified radius `0.0294` is `12.5×` below the margin it must protect, and validated integration certifies inputs `70×` larger | analysis | claims 38 + 40 | model-specific | Round-02 verdict was YELLOW for a different reason | **PROVED** (arithmetic on certified constants) |
+| 42 | **Response-level error out to `m=128`** (not inferred from the kernel): `‖g_α−g_m‖_{L¹}` from `1.286` at `m=4` to `4.834e−5` at `m=128`; induced exact testing floor `0.4996` at `m=64` and `0.49999` at `m=128` | numerical | `R3_RESPONSE_CERT_M64_M128.md`; closed-form matrix Mittag-Leffler vs `2m`-dim LTI realisation, quadrature error 5–7 orders below the quantity | model-specific | Manuscript stops at `m=32` (floor 0.498) | **CERTIFIED_NUMERICALLY** (upper bound on `Ê_m^state`, hence floors are conservative) |
+| 43 | **Kernel error and response error are distinct objects.** Same surrogate, same `L¹` norm: the plant *attenuates*, monotonically, by `1.009` at `m≈5` down to `0.675` at `m=128`. No constant propagates one into the other | analysis | `R3_RESPONSE_OPERATOR_SEMANTICS.md` §2 | general mechanism, model-specific numbers | — | **CERTIFIED_NUMERICALLY** |
+| 44 | `Ê_m^state` is a **minimax** quantity (inf over rivals of sup over inputs) and is therefore valid and conservative for the obstruction, but **must not** be read as a design objective: the band maximising `sup_ω|ΔG|` (`ω≈0.4`) picks multiscale, which excites 87% of the worst case and is the **worst** design in the four-class benchmark (macro `0.514`) | analysis | `R3_RESPONSE_OPERATOR_SEMANTICS.md` §3–§4; per-input excitation spread >30× | general caution, model-specific counterexample | — | **PROVED** (the counterexample is in-paper) |
+| 45 | The manuscript's testing chain (`Ê_m^state` → Young → floor) is **correct and free of gain double-counting**; Pinsker reproduces `0.340`/`0.498` exactly. The exact two-point bound is uniformly tighter: `0.3745` vs `0.340` at `m=4` | audit | `R3_NONLINEAR_DISCRIMINATION_AUDIT.md` §1 | general | — | **PROVED** (clears the manuscript) |
+| 46 | **Lemma B.2 (safe form):** for every `c < π√(α(1−α))` there is `A(α,c)` with `E_m^+ ≤ A(α,c) T^α e^{−c√m}`, positive weights and rates, endpoint `t=0` included; hence `m(ε)=O(log²(1/ε))`. The endpoint split of Round 02 is **unnecessary** — the strip bound is `t`-integrable on `(0,1)` because `α>0` | theorem | `R3_THEOREM_B_RIGOROUS.md` §3–§5; three error sources bounded separately; bound verified active on 285 C-1 cells with constants `A∈[0.29,11.1]`, tight (slack `1.00×`) at `α=0.70,m=128`; `m(ε)` predicts the measured budget within a factor ~1.5 | **general** | **McLean (2018), arXiv:1606.00123** — same technique, positive weights, but on `[δ,T]` with `δ>0` | **PROVED**, but **demoted to lemma** — technique is McLean's; only the `L¹(0,T)` endpoint-inclusive form and the explicit constant are ours |
+| 47 | Boundary constant: whether `c = π√(α(1−α))` is attained with a finite constant, and whether it is optimal, is **not settled**. `(cos d)^{α−1}→∞` as `d↑π/2` | open | `R3_THEOREM_B_RIGOROUS.md` §5 | general | Stahl / Gonchar–Rakhmanov give root-exponential as the *expected optimal order* for algebraic branch points | **CONJECTURAL** |
+
+### Round 03 retractions (all of my own Round 01/02 claims)
+
+| retracted | was | now | where |
+|---|---|---|---|
+| claim 13 as a general statement | "safety–informativeness trade-off" | property of six classical waveform families only | claim 35 |
+| law exponent "exponential in `m`, `R²=0.995`" | `β=1` fit preferred | with `β` free, fitted `β` ranges `0.53`–`1.27` across `α` and `β=1` wins only at `α=0.95`; exponent **not resolved** | R3-A §7(c) |
+| root-exponential constant "verified to 0.35%" | single-`α` reading | across five `α`, `c_fit/c_theory ∈ [0.81, 1.32]`; the 0.35% figure is **withdrawn** | R3-A §7(c) |
+| `THEOREM_D_NONLINEAR_LIFT.md` §C4–C5 | `P_e^* ≥ Φ(−(√n/2σ)A_NL E_m^G U_NL)` | the factor `A_NL = ‖C‖E_α((‖J‖+M₂r)T^α)` **double-counts the gain**; as written the bound is **vacuous** (`P_e^* ≥ 2.6e−11`). Corrected, `P_e^* ≥ 0.4984` at `m=4` | claim 45, R3-G §2–§3 |
+| Round-02 sampled `M₂` | `4.589` at `r=0.05` | certified `5.468` (sampling understates by 19%) | claim 40 |
+| Round-02 `r_max` | `0.0350` | certified `0.02937` | claim 40 |
+| `ROUND_02_JOURNAL_DECISION.md` FCAA split | separate short analysis paper (Lemma B.1 + Theorem B.2) to FCAA | **withdrawn** — would not clear novelty against McLean (2018) | R3-A §6 |
+| R3-B first draft | kernel/response ratio "0.555–1.261, non-monotone" | that compared `L¹` against `H∞`; in the same norm the ratio is **monotone** `1.009 → 0.675` | claim 43 |
+
+---
+
 ## Summary counts
 
 | Status | Count | Claims |
 |---|---:|---|
-| `PROVED` | 15 | 1, 2, 3, 5b, 6, 7, 8, 9, 23, 24, 25, 28, 30, 33, 34 |
-| `CERTIFIED_NUMERICALLY` | 7 | 5c, 10, 11, 15, 22, 26, 29 |
-| `EMPIRICAL` | 3 | 5, 13, 14 |
-| `CONJECTURAL` | 2 | 20, 31 |
+| `PROVED` | 19 | 1, 2, 3, 5b, 6, 7, 8, 9, 23, 24, 25, 28, 30, 33, 34, 41, 44, 45, 46 |
+| `CERTIFIED_NUMERICALLY` | 13 | 5c, 10, 11, 15, 22, 26, 29, 37, 38, 39, 40, 42, 43 |
+| `EMPIRICAL` | 5 | 5, 13 *(scoped)*, 14, 35, 36 |
+| `CONJECTURAL` | 3 | 20, 31, 47 |
 | `REMOVE` | 9 | 4, 16, 17, 18, 19, 21, 27, 32, + Round-01 tightness/floor language |
 | arithmetic finding | 1 | 12 |
 
@@ -85,3 +118,23 @@ certified/exact computational spine and **13/14** as the empirical layer.
 
 **Six claims must be deleted or replaced before resubmission** (4, 16, 17, 18, 19, 21). Claim 18 is a
 false theorem currently printed in the manuscript and is the single most urgent correction.
+
+---
+
+## Headline set after Round 03
+
+**New headline:** claim **35** (the trade-off is a parameterisation artifact — a falsification of
+our own claim 13) supported by **36** (amplitude is not the knob) and **38/39** (validated safety
+certification), with **42/44** (the latent-complexity obstruction, which *is* binding) as the
+theoretical spine and **37** (cross-host reproduction of the frozen benchmark) as the control.
+
+**Demoted:** claim **46** (Theorem B.2) — proved and correct, but the technique is McLean (2018);
+it enters as a supporting lemma with attribution, never as a headline. This supersedes the
+Round-02 headline set, which led with it.
+
+**Scoped, not deleted:** claim 13 survives only as a statement about six classical waveform
+families (manuscript edits in `R3_MANUSCRIPT_CORRECTIONS_EXECUTED.md`).
+
+**Single most urgent remaining correction:** cite McLean (2018) and the surrounding prior art and
+demote `thm:T9b` in the manuscript. Not done — it changes a theorem's claimed status and is left
+for the chief. See `CNSNS_COMPLIANCE_MATRIX_DRAFT.md` §2.3, which grades it *blocking*.

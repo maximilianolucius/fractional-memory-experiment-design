@@ -1,51 +1,39 @@
-
-agents/
-# Artefactos de build/python
-*.bak
-*.bak_*
-chief_cycle_*.md
-chief_report*.md
-debug_*.py
 # Estado interno de hermes (NO versionar: ruido + credenciales + node_modules)
-extractions/
-fix_*.py
-# Flags/estado del orquestador (viven en disco; no aportan a git y generan churn)
-hermes
 .hermes_home/
-.keys.env
-# Logs y salidas de runtime
-map_*.py
-_math_src/
-orchestrator/
-orchestrator/.cycle
-orchestrator/.digest
+
+# Secretos y config local
 orchestrator/.env
 orchestrator/.env.bak_*
-orchestrator/.handoff*
-orchestrator/.initial_injected
 orchestrator/.keys.env
+.keys.env
+
+# Logs y salidas de runtime
 orchestrator/logs/
-orchestrator/.noprog
-orchestrator/.persona_*
 orchestrator/proxy.log
-orchestrator/proxy_reload.log
 orchestrator/run_serio.log
-orchestrator/STOP
-orchestrator/.turn_idx
 orchestrator/watchdog.log
+orchestrator/proxy_reload.log
+
+# Flags/estado del orquestador (viven en disco; no aportan a git y generan churn)
+orchestrator/STOP
 orchestrator/WATCHDOG_STOP
-paper/bibliography.bib.bak_amp
+orchestrator/.cycle
+orchestrator/.turn_idx
+orchestrator/.noprog
+orchestrator/.digest
+orchestrator/.handoff*
+orchestrator/.persona_*
+orchestrator/.initial_injected
+
+# Artefactos de build/python
 paper/build/
-parse_bib*.py
-*.pyc
 __pycache__/
-.qwen-key
-replace_*.py
-researcher_report_*.md
-research_state.md
+*.pyc
+
 # Scratch de extraccion del pack
-# Secretos y config local
-submission-staging/
-update_citations*.py
-worker_reports/
+_math_src/
+*.bak_*
+paper/bibliography.bib.bak_amp
+.qwen-key
+hermes
 *.zip
