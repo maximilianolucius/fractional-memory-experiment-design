@@ -1,7 +1,7 @@
 \section{Large-Scale Model-Discrimination Benchmark}
 \label{sec:benchmark}
 
-The benchmark compares ODE, Caputo, retarded DDE, and latent-$3$ mechanisms at matched operating conditions. The primary stable-regime task uses $A\in\{0.20,0.25\}$; a separate task at $A>2/7$ addresses the easier stability-verdict question. The decision rule is BIC throughout --- an information criterion, not Bayesian model evidence, and it is reported as such.
+The benchmark compares four candidate mechanisms at matched operating conditions: ODE, Caputo, retarded DDE, and a finite-latent surrogate of state dimension $m=3$. One point of bookkeeping matters for reading every class-wise number below. The candidate hypothesis set contains a single latent member, the $m=3$ surrogate, whereas the data-generating set contains latent generators of \emph{two} orders, $m=1$ and $m=3$. Trajectories from either generator are scored against the one latent hypothesis, so the column labelled \emph{finite-latent} throughout is a \textbf{pooled} class: its recall is measured over data generated at both latent orders, not at $m=3$ alone. The primary stable-regime task uses $A\in\{0.20,0.25\}$; a separate task at $A>2/7$ addresses the easier stability-verdict question. The decision rule is BIC throughout --- an information criterion, not Bayesian model evidence, and it is reported as such.
 
 \subsection{Benchmark design and decision rule}
 The benchmark is not organized around any single synthetic trajectory. It asks whether the qualitative design conclusions survive joint variation of memory strength ($\alpha$), observation noise (three SNR levels), observation channel (three), and waveform (six families). For each generated trajectory, all four candidates are fitted under one observation protocol and compared by BIC; the object under evaluation is a reproducible decision rule.
@@ -37,11 +37,11 @@ $\alpha$ & 0.70 & 0.702 & SNR & high & 0.756\\
 \end{tabular}
 \end{table}
 
-Class-wise statistics refine the picture (Figure~\ref{fig:confusion}). ODE: recall $0.972$, precision $0.227$ --- under weak excitation the subtler mechanisms are absorbed into the simplest class. Caputo: recall $0.524$, precision $0.984$ --- a Caputo verdict, once issued, is nearly always correct. DDE: $0.410/0.731$; latent-$3$: $0.242/0.848$. The dominant failure mode is therefore conservative collapse toward the simpler explanation when the data underdetermine the memory law, not symmetric confusion among mechanisms.
+Class-wise statistics refine the picture (Figure~\ref{fig:confusion}). ODE: recall $0.972$, precision $0.227$ --- under weak excitation the subtler mechanisms are absorbed into the simplest class. Caputo: recall $0.524$, precision $0.984$ --- a Caputo verdict, once issued, is nearly always correct. DDE: $0.410/0.731$; finite-latent (pooled $m\in\{1,3\}$ generators, single $m=3$ hypothesis): $0.242/0.848$. The dominant failure mode is therefore conservative collapse toward the simpler explanation when the data underdetermine the memory law, not symmetric confusion among mechanisms.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.56\textwidth]{fig07_confusion}
-\caption{Row-normalized confusion matrix for the stable four-class task. Under weak excitation the simplest ODE mechanism absorbs the rest; Caputo predictions, when made, are highly precise.}
+\caption{Row-normalized confusion matrix for the stable four-class task. Under weak excitation the simplest ODE mechanism absorbs the rest; Caputo predictions, when made, are highly precise. The finite-latent row pools data generated at latent orders $m=1$ and $m=3$, both scored against the single $m=3$ latent hypothesis.}
 \label{fig:confusion}
 \end{figure}
 
@@ -83,12 +83,6 @@ multiscale & 0.324 & 0.000 &  0.2921\\
 
 The table also fixes a methodological point: the linear-Gaussian ranking alone cannot select the final experiment. Linear theory scores an input by operator separation; the nonlinear ecology can answer the same input by leaving the coexistence basin, after which no local identification experiment remains. Safety must be evaluated on the nonlinear state trajectory, not extrapolated from the linear information score.
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=0.72\textwidth]{fig10_safety_tradeoff}
-\caption{Trade-off across the six classical waveform families. Broadband and sustained designs climb in discrimination but drift toward higher Allee-crossing rates; transient designs stay in the low-crossing, less-informative corner. The frontier shown is specific to these families: the piecewise-constant designs of Section~\ref{subsec:safe-search} lie above and to the left of every point plotted here.}
-\label{fig:safety-tradeoff}
-\end{figure}
-
 \subsection{Amplitude is the wrong knob}
 \label{subsec:amplitude}
 Before accepting the frontier of Table~\ref{tab:benchmark-safety} one must ask whether it is simply a symptom of excessive excitation. It is not. Repeating the entire benchmark at peak amplitudes $0.050$ and $0.063$ alongside the reference $0.100$ ($2268$ cells in total, zero divergences) leaves the ordering of designs unchanged and does not restore safety: PRBS remains the most informative design at every amplitude while still crossing the threshold in $71.4\%$ of cells at half amplitude ($92.9\%$ at $0.063$, $100\%$ at $0.100$). Macro-accuracy falls monotonically with amplitude ($0.457$, $0.471$, $0.537$), so the low-amplitude runs are reported as linear-certificate diagnostics, not as a safe benchmark.
@@ -103,7 +97,7 @@ Validating the six leading candidates with the same BIC classifier, the same $56
 
 \begin{table}[htbp]
 \centering
-\caption{Waveform search validated with the benchmark classifier at $\|u\|_\infty\le0.100$: $56$ cells $\times$ $100$ replicates per design, identical seeds, no divergences. \textsc{pwc}$k$ denotes a $k$-level piecewise-constant input on equal sub-intervals.}
+\caption{Waveform search validated with the benchmark classifier at $\|u\|_\infty\le0.100$: $56$ cells $\times$ $100$ replicates per design, identical seeds, no divergences. \textsc{pwc}$k$ denotes a $k$-level piecewise-constant input on equal sub-intervals. The finite-latent column pools generators of order $m=1$ and $m=3$ against the single $m=3$ hypothesis, as in Table~\ref{tab:benchmark-stratified}.}
 \label{tab:safe-search}
 \small
 \begin{tabular}{lccccccc}

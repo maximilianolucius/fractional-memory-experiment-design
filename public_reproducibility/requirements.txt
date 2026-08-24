@@ -1,0 +1,15 @@
+# Versions used to produce the frozen artifacts in data/.
+# The computations are deterministic; minor version drift should not change
+# the reported numbers, but these are the versions actually used.
+#
+# Workstation (interval certification, response-level computation, enclosure, figures):
+#   Python 3.14.3
+numpy==2.4.4
+scipy==1.17.1
+matplotlib==3.10.9
+mpmath==1.3.0
+#
+# Compute cluster (waveform search, complexity-law sweep, benchmark shards):
+#   Python 3.14.4, numpy 2.5.2, scipy 1.18.0
+# The cross-host reproduction reported in the paper (four-decimal agreement of the
+# frozen benchmark) was obtained across these two different library versions.

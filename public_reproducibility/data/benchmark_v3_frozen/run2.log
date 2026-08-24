@@ -1,0 +1,24 @@
+gates True
+solver True
+linear cells 1458
+nonlinear: 945 cells, 945 to run, 0 cached, workers=300
+  0/945 cells  (77s)
+  50/945 cells  (341s)
+  100/945 cells  (361s)
+  150/945 cells  (371s)
+  200/945 cells  (383s)
+  250/945 cells  (396s)
+  300/945 cells  (402s)
+  350/945 cells  (416s)
+  400/945 cells  (422s)
+  450/945 cells  (435s)
+  500/945 cells  (438s)
+  550/945 cells  (447s)
+  600/945 cells  (454s)
+  650/945 cells  (467s)
+  700/945 cells  (472s)
+  750/945 cells  (483s)
+  800/945 cells  (491s)
+  850/945 cells  (498s)
+  900/945 cells  (506s)
+DONE {"git_commit": "orion-run", "seed": 1000, "solver": "caputo_pece_abm", "solver_tolerances": {"tol": 0.0002523337952941018, "mittag_leffler_validated": true}, "design": {"grid": "full-factorial", "reps_per_cell": 200, "N": 400}, "objective_name": "nonlinear model-selection accuracy of best design", "objective_estimate": 0.7487671957671959, "objective_se": 0.010966485756193137, "best_design": "multiscale", "gates_PASS": true, "solver_PASS": true, "status": "PASS", "wall_seconds": 647.3149435520172}

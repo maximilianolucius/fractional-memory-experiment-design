@@ -1,29 +1,12 @@
-\documentclass[10pt]{article}
+\documentclass[preprint,12pt]{elsarticle}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
-\usepackage[numbers,sort&compress]{natbib}
 \usepackage[hidelinks]{hyperref}
-\usepackage{aims_math_style}
 \numberwithin{equation}{section}
-
-\begin{document}
-
-\AIMSJournalHeader
-\AIMSResearchArticle
-\AIMSTitle{Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator--prey model}
-\AIMSAuthors{Ibrahim Alraddadi$^{1,*}$}
-\AIMSAffiliation{$^{1}$ Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah, Saudi Arabia}
-\AIMSCorrespondence{Email: \href{mailto:ialraddadi@iu.edu.sa}{ialraddadi@iu.edu.sa}}
-
-\begin{AIMSAbstract}
-Fitting a fractional order $\alpha$ does not identify a fractional mechanism: on a finite horizon, delayed feedback or a few hidden states reproduce similar trajectories. We ask when a controlled experiment can separate these mechanisms in a strong-Allee predator--prey system while keeping the prey above its Allee threshold. Among six classical excitation families the accuracy-leading designs all cross the threshold and the only safe one is the least informative, which suggests an intrinsic safety--informativeness frontier. We show that frontier belongs to the waveform parameterisation, not to the system. Reducing amplitude does not restore safety --- the leading design still crosses in $71\%$ of cells at half amplitude --- whereas a constrained search over $163\,840$ candidate waveforms, at the same peak-amplitude budget and under a hard margin constraint, returns piecewise-constant designs with four-class model-selection accuracy $0.803$ and no observed crossings, against $0.514$ for the only safe classical family and $0.763$ for the best classical design of any kind, which crosses in $36\%$ of cells. Their safety is verified a posteriori by mesh refinement with a rigorous inter-node modulus, and for half of the headline trajectories by a validated enclosure. A Pareto cost nevertheless remains, so safety is not free. A second obstruction survives waveform search: computed at the prey-response level, the finite-state approximation error falls to $5\cdot10^{-5}$ at latent order $128$ and the induced exact minimax testing floor reaches $0.49999$. Identifying ecological memory is limited by the declared rival-complexity budget rather than by the safety margin.
-\end{AIMSAbstract}
-
-\AIMSKeywords{fractional-order dynamics; time-delay systems; model discrimination; experimental design; Allee effect; predator--prey dynamics}
-\AIMSMSC{34A08; 34K20; 62K05; 92D25}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -33,6 +16,31 @@ Fitting a fractional order $\alpha$ does not identify a fractional mechanism: on
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+
+\journal{Communications in Nonlinear Science and Numerical Simulation}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator--prey model}
+
+\author[iu]{Ibrahim Alraddadi\corref{cor1}}
+\ead{ialraddadi@iu.edu.sa}
+\ead[url]{https://orcid.org/0000-0002-0094-7937}
+\cortext[cor1]{Corresponding author.}
+\address[iu]{Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah 42351, Saudi Arabia}
+
+\begin{abstract}
+Fitting a fractional order $\alpha$ does not identify a fractional mechanism: on a finite horizon, delayed feedback or a few hidden states reproduce similar trajectories. We ask when a controlled experiment can separate these mechanisms in a strong-Allee predator--prey system while keeping the prey above its Allee threshold. Among six classical excitation families the accuracy-leading designs all cross the threshold and the only safe one is the least informative, which suggests an intrinsic safety--informativeness frontier. We show that frontier belongs to the waveform parameterisation, not to the system. Reducing amplitude does not restore safety --- the leading design still crosses in $71\%$ of cells at half amplitude --- whereas a constrained search over $163\,840$ candidate waveforms, at the same peak-amplitude budget and under a hard margin constraint, returns piecewise-constant designs with four-class model-selection accuracy $0.803$ and no observed crossings, against $0.514$ for the only safe classical family and $0.763$ for the best classical design of any kind, which crosses in $36\%$ of cells. Their safety is verified a posteriori by mesh refinement with a rigorous inter-node modulus, and for half of the headline trajectories by a validated enclosure. A Pareto cost nevertheless remains, so safety is not free. A second obstruction survives waveform search: computed at the prey-response level, the finite-state approximation error falls to $5\cdot10^{-5}$ at latent order $128$ and the induced exact minimax testing floor reaches $0.49999$. Identifying ecological memory is limited by the declared rival-complexity budget rather than by the safety margin.
+\end{abstract}
+
+\begin{keyword}
+fractional-order dynamics \sep time-delay systems \sep model discrimination \sep experimental design \sep Allee effect \sep predator--prey dynamics
+\MSC[2020] 34A08 \sep 34K20 \sep 62K05 \sep 92D25
+\end{keyword}
+
+\end{frontmatter}
 
 \input{sections/sec1.tex}
 \input{sections/sec2.tex}
@@ -56,8 +64,18 @@ AI-assisted tools were used during manuscript preparation for language editing, 
 The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Data availability}
-The source code implementing the solvers, the waveform search, the four-class discrimination benchmark and the trajectory verification, together with the numerical artifacts from which every table and figure in this paper is generated, are available from the author on request.
+The code and research data supporting the findings of this study are available in [REPOSITORY], [DOI].
 
-\bibliographystyle{plain}
+\section*{CRediT authorship contribution statement}
+\textbf{Ibrahim Alraddadi:} Conceptualization, Methodology, Formal analysis, Software, Investigation, Validation, Data curation, Visualization, Writing -- original draft, Writing -- review \& editing.
+\section*{Use of AI tools declaration}
+AI-assisted tools were used during manuscript preparation for language editing, LaTeX formatting, code and documentation assistance, and structural organization. Responsibility for the scientific content and the final submitted version remains with the author.
+\section*{Declaration of competing interest}
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+\section*{Data availability}
+The code and research data supporting the findings of this study are available in [REPOSITORY], [DOI].
+
+\bibliographystyle{elsarticle-num}
 \bibliography{bibliography}
+
 \end{document}
