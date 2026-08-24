@@ -1,63 +1,97 @@
 # Current Assignment
 
-**Task:** Desk-rejection rescue — theorem-first reconstruction and journal-compliance preparation  
+**Task:** Desk-rejection rescue — Round 02 mathematical closure before manuscript rebuild  
 **Status:** IN PROGRESS  
-**Timestamp:** 2026-08-24 10:07 ART  
+**Timestamp:** 2026-08-24 12:34 ART  
 **Branch:** `rescue/aims-desk-rejection`
 
 ## Assigned role
 
 Researcher under Chief review.
 
+## Round-01 status
+
+Round 01 is **accepted with mandatory Chief corrections**. The detailed review is in:
+
+- `CHIEF_REVIEW_ROUND_01.md`
+
+The full Round-02 mandate is:
+
+- `ROUND_02_RESEARCHER_ASSIGNMENT.md`
+
 ## Current objective
 
-Determine whether the desk-rejected manuscript can be upgraded from an ecology-first computational discrimination study into a **general, theorem-first paper** whose central contribution concerns finite-horizon discrimination limits for fractional, delayed, and finite-latent memory mechanisms, preferably including a rigorous safety-constrained information limit.
+Determine whether the rescue can be upgraded from a correct but modest **linearized** safety/information result into a genuinely stronger paper with:
 
-## Source documents
+1. a rigorously separated memory-kernel vs actual input→output approximation layer;
+2. a **nonlinear**, preferably model-family-robust Strong-Allee safety certificate;
+3. an explicit nonlinear safety→separation→Gaussian-testing chain;
+4. a proved endpoint-inclusive positive-exponential-sum complexity bound;
+5. a benchmark rerun in a genuinely lower-amplitude regime, without overwriting frozen v3.
 
-1. `DESK_REJECTION_RECOVERY_PLAN.md` — full rescue strategy and G0–G8 definition of done.
-2. `ROUND_01_RESEARCHER_ASSIGNMENT.md` — mandatory tasks for the current research round.
+## Chief decisions now in force
 
-## Immediate priorities
+### Journal
 
-1. Freeze and audit the rejected baseline.
-2. Build an adversarial novelty matrix against the closest literature.
-3. Reconstruct and stress-test current analytical results.
-4. Attempt stronger Theorems A–D, with special priority on:
-   - explicit latent-complexity versus approximation-error bounds;
-   - a uniform finite-experiment testing obstruction;
-   - a safety-constrained information ceiling.
-5. Audit self-containment and companion-paper provenance.
-6. Produce a claim/evidence ledger and a binary Round 01 rescue decision.
+- **Do not resubmit the current reconstruction to AIMS Mathematics.**
+- Provisional primary fit after Round 02: **Communications in Nonlinear Science and Numerical Simulation (CNSNS)**.
+- *Fractional Calculus and Applied Analysis* is a stretch option only if both the endpoint complexity theorem and nonlinear lift become materially strong.
+- Final journal selection occurs after Round 02.
 
-## Prohibited shortcuts in this round
+### Nonlinear theorem
 
-- Do not begin with cosmetic prose polishing.
-- Do not add figures simply to increase visual content.
-- Do not solve the desk rejection by extending page count.
-- Do not migrate the manuscript to a homemade AIMS-like style.
-- Do not overclaim numerical safety as a theorem.
+- **Attempt the nonlinear Volterra/fractional-Grönwall lift now.**
+- Do not ship the present linearized Theorem D before this attempt.
+- If the lift fails, document the exact obstruction and retain a narrower linearized theorem with corrected language.
+
+### Benchmark
+
+- **Low-amplitude benchmark rerun is authorized.**
+- Frozen v3 must remain immutable.
+- Run a new version at least at peak amplitudes `0.050`, `0.063`, and the `0.100` comparison baseline.
+- Runs below the Round-01 bound are initially labelled **linear-certificate diagnostics**, not nonlinear safety certificates, until `U_NL(δ)` is proved.
+
+## Mandatory Chief corrections inherited from Round 01
+
+1. Finite C-1 fits do **not** determine the asymptotic convergence class; remove unsupported big-O claims.
+2. Separate bare Caputo kernel error `E_m^K` from actual prey-response error `E_m^G`.
+3. Do not feed `m=64,128` C-1 kernel errors into the ecological Theorem D without a proved resolvent bridge.
+4. Replace “all safe inputs” by the precise certified sufficient input class unless equivalence is proved.
+5. A linearized state ball does not certify nonlinear ecological safety.
+6. Prefer robust safety across the declared rival mechanism class; otherwise label the result one-sided.
+
+## Round-02 highest priorities
+
+1. `R2_OPERATOR_BRIDGE.md`
+2. `THEOREM_D_NONLINEAR_LIFT.md`
+3. `THEOREM_B_ENDPOINT_COMPLEXITY_PROOF.md`
+4. `THEOREM_C_PRIME_FINAL.md`
+5. `SAFE_BENCHMARK_V4_REPORT.md`
+6. exact correction package for Theorem 9.3 / OED / Bayesian overclaims
+7. journal decision based on the actual mathematics that survives
 
 ## Journal-compliance policy
 
-Final submission must follow the **then-current official instructions and official TeX template of the selected journal**. Required target:
+The final selected journal submission must follow the **then-current official instructions and official TeX template**:
 
 - **100% compliance with mandatory requirements**;
 - **>=99% compliance with the complete applicable checklist**;
-- instructions and template refreshed again within 24 hours before submission.
+- instructions and template re-downloaded and re-checked within 24 hours before submission.
 
-The existing `aims_math_style.sty` and historical template notes are not the final source of truth.
+No homemade journal-like style is a source of truth.
 
-## Required Round 01 outputs
+## Required Round-02 outputs
 
-- `REJECTED_BASELINE_AUDIT.md`
-- `NOVELTY_MATRIX.md`
-- `THEOREM_A_AUDIT.md`
-- `THEOREM_B_COMPLEXITY_LAW.md`
-- `THEOREM_C_TESTING_OBSTRUCTION.md`
-- `THEOREM_D_SAFETY_INFORMATION.md`
-- `OVERLAP_PROVENANCE_AUDIT.md`
-- `RESCUE_CLAIM_EVIDENCE_LEDGER.md`
-- `ROUND_01_DECISION.md`
+- `ROUND_01_STATUS_CORRECTIONS.md`
+- `R2_OPERATOR_BRIDGE.md`
+- `THEOREM_D_NONLINEAR_LIFT.md`
+- `THEOREM_B_ENDPOINT_COMPLEXITY_PROOF.md`
+- `THEOREM_C_PRIME_FINAL.md`
+- `SAFE_BENCHMARK_V4_REPORT.md`
+- versioned benchmark code/raw outputs
+- `R2_MANDATORY_MANUSCRIPT_CORRECTIONS.md`
+- `ROUND_02_JOURNAL_DECISION.md`
+- updated `RESCUE_CLAIM_EVIDENCE_LEDGER.md`
+- `ROUND_02_DECISION.md`
 
-**Next Chief action:** review those outputs, decide which theorems survive as headline contributions, then launch Round 02 focused on proof completion and manuscript restructuring.
+**Next Chief action:** review Round-02 outputs and decide whether the manuscript has crossed the threshold for a nonlinear theorem-first rebuild, or should be reframed as a narrower applied fractional-dynamics paper.
