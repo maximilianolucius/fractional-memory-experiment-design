@@ -1,6 +1,6 @@
 # R5-D — Curated reproducibility deposit
 
-**Status: BUILT AND VERIFIED. Ready for upload. No DOI yet — that is the remaining blocker.**
+**Status: PUBLISHED. DOI `10.5281/zenodo.22087770`, open access, cited in the article.**
 
 `public_reproducibility/` — 50 files, 2.8 MB.
 
@@ -54,16 +54,30 @@ project) appeared in two docstrings and would have confused an external reader; 
 Scanned for credentials and infrastructure detail: no passwords, tokens, IP addresses or hostnames
 beyond the compute host's name appearing in provenance logs, which is legitimate metadata.
 
-## 5. The remaining blocker
+## 5. Published deposit
 
-The manuscript's data-availability statement reads:
+| | |
+|---|---|
+| DOI | **`10.5281/zenodo.22087770`** |
+| Record | `https://zenodo.org/records/22087770` |
+| Title | Reproducibility package: Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator-prey model |
+| Creator | Alraddadi, Ibrahim — ORCID `0000-0002-0094-7937`, Islamic University of Madinah |
+| Type | Dataset · version 1.0.0 |
+| Access | **open** |
+| Licence | CC BY 4.0 (code inside is MIT, per `LICENSE-CODE.txt`) |
+| File | `fmed-reproducibility-2026-08-24.zip`, 303 461 bytes |
+| md5 | `877cfd04e5896824dd72a8ab57939648` — Zenodo's checksum matches the local file exactly |
 
-> The code and research data supporting the findings of this study are available in
-> [REPOSITORY], [DOI].
+Upload procedure: draft created first, file uploaded, metadata and checksum verified against the
+local copy, and only then published. The published record was re-fetched to confirm it resolves,
+that access is open, and that the creator and ORCID are as intended.
 
-Both placeholders must be substituted before submission — the chief's rule is that the final package
-contains no placeholder text. The upload itself is a single action: the directory is final, checksummed
-and tested. What it needs is a Zenodo deposit and the DOI it returns.
+Access is **open**, not restricted. Elsevier's Option C requires research data to be deposited
+*and* accessible; a restricted record carries a DOI but does not satisfy the data statement.
+
+The article now reads: *"The code and research data supporting the findings of this study are openly
+available in Zenodo at https://doi.org/10.5281/zenodo.22087770."* Zero placeholders remain in the
+manuscript.
 
 **One caution on the deposit, carried over from `AUTHOR_METADATA_CONFIRMATION.md` §4.** There is
 already a public Zenodo record of this work (`10.5281/zenodo.21809908`) whose sole listed creator is
