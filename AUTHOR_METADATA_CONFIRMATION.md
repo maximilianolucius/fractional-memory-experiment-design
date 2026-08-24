@@ -142,6 +142,9 @@ metadata of the record** matches the paper's authorship.
 - [x] Upload `public_reproducibility/` to Zenodo, obtain the DOI — **`10.5281/zenodo.22087770`**
 - [x] Phone number supplied for the submission form
 - [x] Postal address confirmed (Madinah 42351)
-- [ ] **Decide (a) / (b) / (c) on the existing preprint record and its creator list** — still open;
-      an "ok" does not select among the three, and the three lead to different text in the article
-      and the cover letter
+- [x] Decide (a)/(b)/(c) — **(a) selected**
+- [x] Article discloses and cites the preprint (`Preprint disclosure` section + `PREPRINT01`)
+- [ ] **Republish Zenodo record `21809908`** — creator list already changed to Alraddadi in the edit
+      draft; the publish call is blocked locally. Press Publish at
+      `https://zenodo.org/deposit/21809908`, or authorise the API call. Until then the public record
+      still shows Lucius while the article cites Alraddadi. See `R5_PREPRINT_DISCLOSURE.md`
