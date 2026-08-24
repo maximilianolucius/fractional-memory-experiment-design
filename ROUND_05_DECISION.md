@@ -16,7 +16,15 @@ present paper's central claim is the opposite of the preprint's. The Zenodo-side
 Alraddadi with the confirmed ORCID (`PUT` returned HTTP 200, `state: inprogress`), but the republish
 call was refused locally by the tool-permission classifier. The public record therefore still shows
 `Lucius, Maximiliano`, verified independently. One action closes it — see
-`R5_PREPRINT_DISCLOSURE.md` §3.
+`R5_PREPRINT_DISCLOSURE.md` §3. The cover letter required by Case A is drafted
+(`COVER_LETTER_CNSNS.md`).
+
+**A near-loss worth recording.** The B3 sync ran `rsync --delete` against a remote that had advanced
+three commits while the work was in progress, and deleted two chief files —
+`CHIEF_REVIEW_ROUND_05.md` and `FINAL_AUTHORSHIP_DECISION_REQUIRED.md`. They were restored from
+`caa829f` and pushed, with no content of theirs altered. The flow needs a fetch-and-compare before
+`--delete`; that is now the second way this rsync filter has damaged something (the first was the
+public deposit), and both are documented in `HANDOFF.md`.
 
 **A defect I introduced and then caught.** The Round-05 template migration duplicated the entire end
 matter — CRediT, AI declaration, competing interest and data availability each appeared twice, and the

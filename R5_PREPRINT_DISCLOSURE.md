@@ -1,14 +1,28 @@
 # B3 — Preprint disclosure and authorship alignment (option (a))
 
-**Instruction received: option (a)** — align the published preprint record's creator list with the
-manuscript's authorship, and disclose the preprint in the article.
+**Instruction received: option (a)**, which corresponds to the chief's **Case A** in
+`CHIEF_REVIEW_ROUND_05.md` — align the published preprint record's creator list with the manuscript's
+authorship, keep the record public, disclose and cite it in the article, and disclose it in the cover
+letter.
+
+**The chief frames the gate more precisely than my (a)/(b)/(c) did, and the distinction matters.** The
+controlling question is factual:
+
+> Was Maximiliano only the uploader/administrator of the 5-August Zenodo preprint, with Ibrahim
+> Alraddadi as the actual sole scholarly author of that work?
+
+Case A is the correct route **only if the answer is yes.** If Maximiliano made an authorship-qualifying
+contribution, the chief's instruction is explicit: do not resolve it by changing the Zenodo creator or
+by explaining it away in prose — stop, and correct the manuscript's byline and CRediT statement
+instead. Selecting (a) asserts the first answer. That assertion is the operator's to make; I have no
+independent basis for it and have not treated the choice as evidence about the underlying fact.
 
 **Status: half done. The article-side work is complete. The Zenodo republish step is blocked and
 needs you.**
 
 ---
 
-## 1. Article-side — DONE
+## 1. Article-side — DONE (article + cover letter)
 
 **New end-matter section `Preprint disclosure`** in `main.tex`, rendering in the PDF:
 
@@ -25,6 +39,12 @@ needs you.**
 > rewritten accordingly.
 
 **New bibliography entry `PREPRINT01`** citing DOI `10.5281/zenodo.21809908`, author Alraddadi.
+
+**Cover letter** (`COVER_LETTER_CNSNS.md`) §3 discloses the prior dissemination, names the DOI, and
+states that the central conclusion is reversed rather than revised. It carries one bracketed sentence
+asserting that the record's creator metadata has been corrected, with an explicit instruction not to
+include it until the republish has actually happened — sending that claim while the public record
+shows a different creator would be a false statement to an editor.
 
 The disclosure states what changed rather than merely admitting the preprint exists. That is the
 honest version and it is also the defensible one: a referee who finds the preprint will see that the

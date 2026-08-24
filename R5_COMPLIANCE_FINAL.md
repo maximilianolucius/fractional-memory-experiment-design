@@ -68,11 +68,19 @@ scored items, **25 PASS → 100%**.
 The two items that were RED in this matrix's first version are closed: funding is author-confirmed as
 none, and the data deposit is published open access with a DOI that the article cites.
 
-**One item outside this matrix is still open.** The prior public preprint of this work carries a
-different sole creator (see `AUTHOR_METADATA_CONFIRMATION.md` §4). Elsevier requires a preprint to be
-disclosed and cited at submission, and the manuscript currently does neither. That is a policy
-obligation, not a formatting one, and it is why the round decision is not `SUBMISSION AUTHORIZED`
-despite this matrix reading 100%.
+### Preprint disclosure (Elsevier policy, tracked separately)
+
+| item | status |
+|---|---|
+| preprint disclosed in the article | **PASS** — dedicated `Preprint disclosure` section stating that the present paper's central conclusion is the opposite of the preprint's |
+| preprint cited | **PASS** — `PREPRINT01`, DOI `10.5281/zenodo.21809908` |
+| preprint disclosed in the cover letter | **PASS** — `COVER_LETTER_CNSNS.md` §3 |
+| **preprint record's creator list consistent with the byline** | **RED** — the edit is applied to an open draft on record `21809908` but the republish is pending; the public record still shows a different sole creator |
+
+That last row is why the round decision is not `SUBMISSION AUTHORIZED` despite the matrix above
+reading 100%. It is the chief's Case A, executed except for its final step, and it rests on a factual
+claim only the operator can make — that Maximiliano was the uploader of the 5 August record and not an
+authorship-qualifying contributor to it.
 
 ## 4. What changed since the Round-04 matrix
 
