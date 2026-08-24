@@ -1,0 +1,84 @@
+\section{Exact linearization, transfer functions, and channels}
+
+We consider the validated strong-Allee predator--prey model with parameters
+\(r=3/2\), \(K=1\), \(a=1\), \(h=1/2\), \(e=4/5\), \(m=2/5\)~\cite[Sec.~4]{source_pack/04_EXACT_STRONG_ALLEE_BASELINE.md}.
+The dynamics are
+\begin{align}
+\dot x &= r x\Bigl(1-\frac{x}{K}\Bigr)\Bigl(\frac{x}{A}-1\Bigr)-\frac{a x y}{1+h x},\\
+\dot y &= e\,\frac{a x y}{1+h x}-m y,
+\end{align}
+where \(A\in(0,2/3)\) is the Allee threshold.
+
+\subsection{Equilibrium and Jacobian}
+The coexistence equilibrium \((x^*,y^*)\) is given by
+\begin{equation}
+\label{eq:coex}
+x^*=\frac{m}{a(e-mh)}=\frac23,\qquad
+y^*=\frac{1+hx^*}{a}\,r\Bigl(1-\frac{x^*}{K}\Bigr)\Bigl(\frac{x^*}{A}-1\Bigr)
+      =\frac{2(2-3A)}{9A}.
+\end{equation}
+The Jacobian at coexistence is
+\begin{equation}
+\label{eq:jac}
+J(A)=\begin{pmatrix}
+\dfrac{7A-2}{8A} & -\dfrac12 \\[1ex]
+\dfrac{2-3A}{10A} & 0
+\end{pmatrix},
+\end{equation}
+with trace, determinant, and discriminant
+\begin{align}
+T(A)&=\operatorname{tr}J(A)=\frac{7A-2}{8A},\label{eq:trace}\\
+D(A)&=\det J(A)=\frac{2-3A}{20A},\label{eq:det}\\
+T(A)^2-4D(A)&=\frac{(19A-10)(23A-2)}{320A^2}.\label{eq:disc}
+\end{align}
+The Matignon stability bound for a commensurate Caputo system of order
+\(0<\alpha<1\) is
+\begin{equation}
+\label{eq:alpha}
+\alpha^*(A)=\frac{2}{\pi}\arctan\!\Bigl(
+\frac{\sqrt{4D(A)-T(A)^2}}{T(A)}\Bigr),
+\end{equation}
+and the coexistence equilibrium is locally asymptotically stable iff
+\(0<\alpha<\alpha^*(A)\).  For the stress-test baseline \(A=3/10\),
+\(\alpha^*(3/10)\approx0.9690122761517084\).
+
+\subsection{Controllability and observability}
+The pair \((J,B)\) is controllable for either prey actuation
+\(B=e_1\) or predator actuation \(B=e_2\), because
+\(\det\mathcal C_x = \det[B,JB] = \frac{2-3A}{10A}>0\) and
+\(\det\mathcal C_y = \det[B,JB] = \frac12>0\).  
+Similarly, the pair \((C,J)\) is observable for either prey-only
+measurement \(C=e_1^\top\) or predator-only measurement
+\(C=e_2^\top\), since \(\det\mathcal O_x = -\frac12\neq0\) and
+\(\det\mathcal O_y = -\frac{2-3A}{10A}\neq0\).  
+Thus a single‑species actuation and sensing suffice to excite and
+observe both linearized modes.
+
+\subsection{Transfer functions}
+Introduce the fractional temporal symbol
+\(q_\alpha(s)=\tau_0^{-1}(s\tau_0)^\alpha\) with \(\tau_0=1\) (without loss of
+generality) and the characteristic polynomial
+\(\Delta_\alpha(s)=q_\alpha^2 - T q_\alpha + D\).
+The resolvent is
+\[
+(q_\alpha I-J)^{-1}
+=\frac{1}{\Delta_\alpha(s)}
+\begin{pmatrix}
+q_\alpha & \frac12 \\[0.5ex]
+\frac{2-3A}{10A} & q_\alpha-T
+\end{pmatrix}.
+\]
+Hence the four scalar transfer channels are
+\begin{align}
+G_{x\leftarrow x}(s)&=\frac{q_\alpha}{\Delta_\alpha(s)},\label{eq:Gxx}\\
+G_{y\leftarrow x}(s)&=\frac{2-3A}{10A}\,\frac{1}{\Delta_\alpha(s)},\label{eq:Gyx}\\
+G_{x\leftarrow y}(s)&=-\frac12\,\frac{1}{\Delta_\alpha(s)},\label{eq:Gxy}\\
+G_{y\leftarrow y}(s)&=\frac{q_\alpha-T}{\Delta_\alpha(s)}.\label{eq:Gyy}
+\end{align}
+For the collocated channels (\(CB=1\)) the high‑frequency expansion gives
+\(G(s)\sim q_\alpha^{-1}\sim s^{-\alpha}\), whereas the cross‑species
+channels (\(CB=0\)) decay as \(s^{-2\alpha}\) or faster.  
+Thus a collocated perturb‑and‑measure protocol yields the cleanest
+high‑frequency signature of the fractional order \(\alpha\).
+
+\end{document}

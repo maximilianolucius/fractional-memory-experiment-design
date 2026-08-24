@@ -1,26 +1,24 @@
 \section{Frequency-Domain and Finite-Horizon Evidence}
 \label{sec:response}
 
-The structural results are visible before any large benchmark is run. Figure~\ref{fig:transfer-mag} shows transfer magnitudes on the prey channel at $A=0.25$. Figure~\ref{fig:transfer-phase} shows the phase separation and the high-frequency convergence to $-\alpha\pi/2$ on collocated channels.
+The structural results of Section~\ref{sec:analysis} are visible in two frequency-domain plots, computed before any benchmark. Figure~\ref{fig:transfer-mag} compares $|G(i\omega)|$ on the prey channel at $A=0.25$ for the four mechanisms; Figure~\ref{fig:transfer-phase} shows the phase, which on the collocated channel converges to $-\alpha\pi/2\approx-76.5^{\circ}$ for $\alpha=0.85$ --- the scale-free fractional signature of Theorem~\ref{thm:T4}.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.75\textwidth]{fig01_transfer_magnitude}
-\caption{Transfer magnitude on the prey channel for the four memory mechanisms at $A=0.25$. The fractional response separates across the design band and approaches its noninteger high-frequency decay.}
+\caption{$|G(i\omega)|$ on the prey channel at $A=0.25$ for ODE, Caputo ($\alpha=0.85$), DDE ($\tau=0.35$), and latent ($m=3$). The Caputo curve separates over the design band and approaches its $O(\omega^{-\alpha})$ decay.}
 \label{fig:transfer-mag}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.90\textwidth]{fig02_phase_2panel}
-\caption{Phase evidence for the fractional signature. Left: Caputo, ODE, DDE, and finite latent responses across frequency. Right: the Caputo phase converges to the scale-free asymptote $-\alpha\pi/2$.}
+\caption{Phase on the prey channel. Left: the four mechanisms across frequency. Right: convergence of the Caputo phase to the asymptote $-\alpha\pi/2$, independent of scale.}
 \label{fig:transfer-phase}
 \end{figure}
 
-
-
 \subsection{From exact signatures to finite-horizon ambiguity}
-The two frequency-domain panels should be read together. The noninteger high-frequency decay and phase give a structural signature of Caputo dynamics, but an experiment does not observe an asymptotic half-line of frequencies. It observes a finite bandwidth over a finite time window and with finite noise. A sufficiently flexible latent model can therefore mimic the relevant part of the response without being analytically identical to the fractional transfer. This is why the structural theorem and the finite-horizon impossibility theorem are complementary rather than competing statements.
+The two panels must be read jointly with Theorem~\ref{thm:T9b}. The $O(\omega^{-\alpha})$ decay and the $-\alpha\pi/2$ phase identify the Caputo channel asymptotically, but an experiment observes a finite band $[\omega_{\min},\omega_{\max}]$, a finite window $[0,T]$, and noise of level $\sigma$. On that restricted set a latent model with enough modes matches the observable part of the response while remaining analytically distinct --- the coexistence of exact separation (Theorem~\ref{thm:T4}) and finite-horizon mimicry (Theorem~\ref{thm:T9b}) stated in frequency-domain terms.
 
-The ecological prey-response calculation makes the same point directly in the controlled population channel. For $\alpha=0.85$ and $T=12$, Table~\ref{tab:state-approx} reports certified $L^1$ response bounds together with the corresponding Pinsker lower bounds under the declared pulse and $\sigma=0.10$. The approximation improves by almost two orders of magnitude between $m=4$ and $m=32$, and the lower bound correspondingly approaches the equal-prior chance level $1/2$.
+The prey-response computation restates the point in the instrumented channel. Table~\ref{tab:state-approx} lists the certified $L^1$ bounds $\widehat E_m^{\rm state}$ and induced Pinsker bounds at $\alpha=0.85$, $T=12$, $\sigma=0.10$: from $m=4$ to $m=32$ the enclosure shrinks by a factor of $77$ (from $0.5334$ to $0.0069$ at $A=0.25$) and the testing bound rises from $0.340$ to $0.498$, i.e., to within $0.002$ of the equal-prior chance level.
 
 \begin{table}[htbp]
 \centering
@@ -40,12 +38,10 @@ $m$ & $\widehat E_m^{\rm state}$ & $P_e^*$ lower bound & $\widehat E_m^{\rm stat
 \end{tabular}
 \end{table}
 
-The table is deliberately a one-sided statement. A large lower bound on $P_e^*$ proves that the specified experiment cannot reliably distinguish the focal fractional response from at least one rival in the admitted finite-state class; the converse is not claimed. Cells in which the bound is small are therefore \emph{inconclusive}, not automatically discriminable. This interpretation is preserved in the atlas of Figure~\ref{fig:atlas}.
-
-The finite-horizon approximation results then explain why frequency-domain separation does not automatically translate into easy model selection. The safe memory-discrimination atlas in Figure~\ref{fig:atlas} displays the protocol-restricted lower bound on testing error across fractional order, Allee parameter, and latent complexity. Cells outside the focal Matignon-stable regime are explicitly excluded from the headline interpretation.
+The table is one-sided. A large lower bound on $P_e^*$ proves that the specified experiment cannot reliably separate $g_\alpha$ from at least one admitted rival $g_m$; a small bound proves nothing in the converse direction, so such cells are inconclusive rather than certified-easy. Figure~\ref{fig:atlas} applies this reading across $(\alpha,A,m)$: cells outside the focal Matignon-stable regime ($\alpha>\alpha^*(A)$) are hatched and excluded from the headline interpretation.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.92\textwidth]{fig18_safe_discrimination_atlas}
-\caption{Protocol-restricted memory-discrimination atlas. Increasing latent complexity and moving toward weakly separated fractional regimes raise the lower bound on model-selection error. Hatched cells fall outside the focal Caputo stable regime.}
+\caption{Protocol-restricted discrimination atlas over $(\alpha,A,m)$: lower bound on the model-selection error under the declared pulse protocol. The bound increases with latent budget $m$ and toward weakly separated regimes; hatched cells violate the Matignon condition $\alpha<\alpha^*(A)$ and are excluded from stable-regime conclusions.}
 \label{fig:atlas}
 \end{figure}

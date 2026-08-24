@@ -1,15 +1,15 @@
 \section{Analytical Backbone: Four Results Used by the Experiments}
 \label{sec:analysis}
 
-The complete derivations and secondary results are given in the Supplementary Material. Here we retain only the four statements that directly support the numerical study.
+The numerical study rests on four analytical statements. Complete proofs, the secondary theorems (optimal input design, multisine support, safety invariance, the sequential information identity), and the Bayesian layer are in the Supplementary Material; here each statement appears with the minimum context needed to use it in Sections~\ref{sec:response}--\ref{sec:benchmark}.
 
 \subsection{Result I: structural separation}
-For the collocated channel $CB\neq0$, the Caputo transfer
+On the collocated channel ($CB\neq0$) the Caputo transfer is
 \[
 G_\alpha(s)=C\bigl(q_\alpha(s)I-J\bigr)^{-1}B,
 \qquad q_\alpha(s)=\tau_0^{-1}(s\tau_0)^\alpha,
 \]
-has the high-frequency expansion
+with high-frequency expansion
 \[
 G_\alpha(s)=(CB)\tau_0^{1-\alpha}s^{-\alpha}+O(|s|^{-2\alpha}).
 \]
@@ -19,10 +19,10 @@ G_\alpha(s)=(CB)\tau_0^{1-\alpha}s^{-\alpha}+O(|s|^{-2\alpha}).
 For $0<\alpha<1$ and $CB\neq0$, the Caputo transfer cannot equal any finite-dimensional rational latent transfer on a nonempty open subset of a common analytic domain. It also cannot equal a strictly proper finite-state retarded model with finitely many discrete delays, because the latter has $O(\omega^{-1})$ high-frequency decay whereas the Caputo channel has $O(\omega^{-\alpha})$ decay.
 \end{theorem}
 
-The theorem explains why exact discrimination is possible in principle. It does not imply that finite noisy experiments are easy.
+The $O(\omega^{-\alpha})$ signature is thus exactly unreachable for both declared rival classes. The statement concerns exact equality of transfers on open frequency sets; it makes no promise about experiments with finite bandwidth, horizon $T<\infty$, and noise $\sigma>0$. Theorem~\ref{thm:T9b} covers that regime.
 
 \subsection{Result II: finite-horizon latent approximation}
-The Caputo memory kernel admits a diffusive representation and can be approximated on $[0,T]$ by a positive exponential sum. For a constructive $m$-mode approximation $k_m$,
+The Caputo kernel $k_\alpha(t)=t^{\alpha-1}/\Gamma(\alpha)$ admits a diffusive (spectral-mixture) representation; on $[0,T]$ a constructive positive exponential sum $k_m(t)=\sum_{j=1}^m c_je^{-\lambda_jt}$, $c_j\ge0$, achieves
 \[
 \|k_\alpha-k_m\|_{L^1(0,T)}\le \widehat E_m,
 \qquad \widehat E_m\downarrow0
@@ -34,14 +34,14 @@ along an expanding nested rate hierarchy.
 For every $T<\infty$ and $\varepsilon>0$, there exists a finite positive exponential mixture whose $L^1(0,T)$ distance from the Caputo kernel is below $\varepsilon$. Consequently, without a finite complexity restriction on the latent rival, no fixed finite-horizon experiment can guarantee a uniform positive separation from the entire latent hierarchy.
 \end{theorem}
 
-This is the analytical reason for treating latent dimension as an experimental-model complexity budget rather than an unconstrained nuisance parameter.
+Results I and II fix the problem geometry: exact separation (Theorem~\ref{thm:T4}) coexists with $\varepsilon$-approximation at finite $T$ (Theorem~\ref{thm:T9b}). Discrimination is therefore relative to a declared budget $m$; in the benchmark of Section~\ref{sec:benchmark} the latent class is capped at $m=3$, and in the certified computation of Theorem~\ref{thm:T23} the budget runs over $m\in\{4,8,16,32\}$.
 
 \subsection{Result III: testing obstruction under a physical input budget}
-Let $S$ be the observation operator and $R$ the Gaussian covariance. Define
+Let $S$ denote the observation operator, $R\succ0$ the Gaussian noise covariance, and
 \[
 C_{\rm obs}=\tfrac12\|R^{-1/2}S\|^2.
 \]
-Young's inequality converts the approximation bound into an observation-space bound.
+Young's convolution inequality maps the $L^1$ kernel error into an $L^2$ observation-space bound, $\|(k_\alpha-k_m)*u\|_2\le\widehat E_m\|u\|_2$; a two-point Gaussian argument converts that bound into a minimax statement.
 
 \begin{theorem}[Complexity-dependent testing obstruction]
 \label{thm:T20}
@@ -52,8 +52,10 @@ P_e^*(m)\ge \Psi\!\left(C_{\rm obs}\widehat E_m^2 B^2\right),
 where $\Psi$ is any valid equal-covariance Gaussian two-point lower bound (Pinsker is used in the numerical plots). Thus $P_e^*(m)\to1/2$ whenever $\widehat E_m\to0$ and $B$ remains bounded.
 \end{theorem}
 
+Since $\widehat E_m\downarrow0$ while $B$ and $C_{\rm obs}$ stay fixed, $P_e^*(m)\to1/2$: under a capped input budget, a sufficiently rich rival pushes every test toward the equal-prior chance level, independently of the experiment design.
+
 \subsection{Result IV: ecological prey-response approximation}
-The ecological result works with the exact prey-to-prey fractional transfer, avoiding the invalid factorization $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$. A pole/branch decomposition realizes the principal-sheet pole pair exactly with a stable two-state integer-order block and approximates only the branch remainder.
+Results I--III concern the abstract kernel $k_\alpha$. Result IV addresses the measured object itself, the prey-to-prey transfer $g_\alpha$ of the linearization at $(x^*,y^*(A))$. The factorization $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$, though tempting, is false and is not used. Instead $g_\alpha$ is split by contour deformation into its principal-sheet pole pair --- realized \emph{exactly} by a stable two-state integer-order block --- plus a branch-cut remainder, smooth on $(0,\infty)$, which is the only part requiring approximation.
 
 \begin{theorem}[Certified finite-state approximation of the prey response]
 \label{thm:T23}
@@ -64,16 +66,16 @@ For the displayed Matignon-stable cells and $m\in\{4,8,16,32\}$, there exists an
 where the bound is obtained by outward-rounded interval subdivision and a rigorous tail estimate. At $\alpha=0.85$, $T=12$, the certified enclosure at $A=0.25$ decreases from $0.5335$ ($m=4$) to $0.0070$ ($m=32$).
 \end{theorem}
 
-For the declared pulse, $\|u\|_\infty\le0.10$ implies $\|u\|_2\le0.120$. At $\sigma=0.10$, the resulting Pinsker testing lower bounds at $A=0.25$ are approximately $0.340$, $0.462$, $0.492$, and $0.498$ for $m=4$, $8$, $16$, and $32$, respectively. Hence the finite-state rival becomes statistically indistinguishable from the fractional prey response as its allowed complexity grows.
+Every displayed constant is an outward-rounded interval enclosure, not a floating-point estimate. The declared rectangular pulse has support length $1.44$, so $\|u\|_\infty\le0.10$ implies $\|u\|_2\le0.10\sqrt{1.44}=0.120$; combining with $\sigma=0.10$ in Theorem~\ref{thm:T20} gives Pinsker bounds $0.340$, $0.462$, $0.492$, $0.498$ at $A=0.25$ for $m=4,8,16,32$ (Table~\ref{tab:state-approx} adds $A=0.30$). At $m=32$ the gap to the chance level $0.500$ is $0.002$: the surrogate is statistically indistinguishable from the fractional response under this protocol.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.90\textwidth]{fig14_separation_approx}
-\caption{Exact structural separation and finite-horizon approximation are complementary, not contradictory. The Caputo transfer has a distinct noninteger signature, yet increasingly rich finite exponential mixtures track the fractional kernel over a finite horizon.}
+\caption{Compatibility of Theorems~\ref{thm:T4} and~\ref{thm:T9b}: the Caputo transfer keeps its noninteger signature (exact separation), while $m$-mode exponential mixtures reduce the $L^1(0,T)$ kernel error monotonically in $m$ (finite-horizon approximation).}
 \label{fig:separation-approx}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.90\textwidth]{fig19_state_theorem}
-\caption{Certified ecological prey-response approximation and corresponding testing obstruction. Increasing the finite-state budget sharply reduces the interval-enclosed response error and drives the lower bound on testing error toward chance.}
+\caption{Theorem~\ref{thm:T23} in numbers. Left: interval-enclosed $\widehat E_m^{\rm state}$ versus $m$ at $\alpha=0.85$, $T=12$. Right: induced Pinsker lower bound under the pulse cap $\|u\|_2\le0.120$, $\sigma=0.10$, approaching the chance level $1/2$ as $m$ grows.}
 \label{fig:state-theorem}
 \end{figure}
