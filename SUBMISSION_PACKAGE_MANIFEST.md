@@ -3,8 +3,9 @@
 Every file to upload, and what it is for. Nothing else from this repository goes to the journal.
 
 **Submission portal:** Editorial Manager. **Review model:** single anonymized.
-**State:** `READY-PENDING-PREPRINT-DISCLOSURE` — compliance is 14/14 mandatory and the build is
-clean; the one open item is the preprint disclosure in §5.
+**State:** `READY-PENDING-ZENODO-REPUBLISH` — compliance 14/14 mandatory, build clean, preprint
+disclosed in the article. The one open item is republishing the preprint record so its creator list
+matches the byline (§5).
 
 ---
 
@@ -24,7 +25,7 @@ clean; the one open item is the preprint disclosure in §5.
 | `paper/sections/sec9.tex` | Prospective experimental interpretation |
 | `paper/sections/sec10.tex` | Discussion |
 | `paper/sections/sec11.tex` | Conclusion |
-| `paper/bibliography.bib` | 30 entries, all cited by the manuscript or its supplement sources; 26 render |
+| `paper/bibliography.bib` | 31 entries, all cited by the manuscript or its supplement sources; 27 render (includes `PREPRINT01`) |
 
 **Not submitted:** `paper/aims_math_style.sty` (obsolete, unreferenced), `paper/sections/sec14.tex`
 and `sec15.tex` (orphan supplement sources, not `\input` by `main.tex`),
@@ -71,7 +72,7 @@ and must not be uploaded.
 |---|---|---|
 | B1 | Funding declaration | **CLOSED** — author-confirmed no external funding; `Funding` section inserted |
 | B2 | Data statement placeholders | **CLOSED** — deposit published, DOI `10.5281/zenodo.22087770`, cited in the article; zero placeholders remain |
-| B3 | **Prior public preprint of this work, under different authorship** | **OPEN** — see `AUTHOR_METADATA_CONFIRMATION.md` §4. Elsevier requires the preprint to be disclosed and cited at submission; the manuscript does neither, and the creator-list discrepancy determines *how* it should be disclosed |
+| B3 | Prior public preprint under different authorship | **PARTIAL** — the article now has a `Preprint disclosure` section citing DOI `10.5281/zenodo.21809908` and stating how this paper differs. The record's creator list was changed to Alraddadi in an edit draft but the republish is blocked locally, so the public record still shows Lucius. See `R5_PREPRINT_DISCLOSURE.md` §3 |
 
 ## 6. Verification at the moment of writing
 

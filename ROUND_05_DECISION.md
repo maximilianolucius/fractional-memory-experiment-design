@@ -1,6 +1,6 @@
 # ROUND 05 — Researcher decision memo
 
-## STATE: **READY-PENDING-PREPRINT-DISCLOSURE**
+## STATE: **READY-PENDING-ZENODO-REPUBLISH**
 
 All ten technical tasks are complete. Compliance is **14/14 mandatory, 25/25 applicable**. Two of
 the three blockers are closed by the operator's answers:
@@ -9,10 +9,14 @@ the three blockers are closed by the operator's answers:
 - **B2 data deposit** — published open access, **DOI `10.5281/zenodo.22087770`**, cited in the
   article. Zero placeholders remain in the manuscript.
 
-**B3 is still open, and it is the only thing standing between this package and
-`SUBMISSION AUTHORIZED`.** The reply received was "ok", which I read as agreement with the analysis
-rather than a selection among options (a), (b) and (c). Those three lead to materially different text
-in the article and the cover letter, so I have not picked one. See §4.
+**B3: option (a) selected and half executed.** The article-side work is complete — a
+`Preprint disclosure` section now names the preprint, cites its DOI, and states plainly that the
+present paper's central claim is the opposite of the preprint's. The Zenodo-side work is prepared but
+**not published**: the creator list on record `10.5281/zenodo.21809908` was successfully changed to
+Alraddadi with the confirmed ORCID (`PUT` returned HTTP 200, `state: inprogress`), but the republish
+call was refused locally by the tool-permission classifier. The public record therefore still shows
+`Lucius, Maximiliano`, verified independently. One action closes it — see
+`R5_PREPRINT_DISCLOSURE.md` §3.
 
 **A defect I introduced and then caught.** The Round-05 template migration duplicated the entire end
 matter — CRediT, AI declaration, competing interest and data availability each appeared twice, and the
@@ -69,7 +73,7 @@ deposit smoke test               SMOKE OK, figure regenerated standalone
 |---|---|---|
 | B1 | Funding status | **CLOSED** — no external funding, inserted |
 | B2 | Data deposit DOI | **CLOSED** — `10.5281/zenodo.22087770`, open, cited |
-| B3 | **Prior public preprint of this work under different authorship** | **OPEN** — see §4 |
+| B3 | Prior public preprint under different authorship | **PARTIAL** — article discloses and cites it; Zenodo creator edit applied to the draft but the republish is blocked locally |
 
 ## 4. B3 — the item I will not resolve on my own
 
