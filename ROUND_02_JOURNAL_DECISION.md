@@ -1,5 +1,12 @@
 # ROUND_02_JOURNAL_DECISION — Task R2-H
 
+> **WITHDRAWN (Round 04, chief decision).** The FCAA split proposed in this document is
+> **formally withdrawn**. R3-A established that the positive-SOE / log-quadrature construction is
+> prior art (McLean 2018), so a standalone analysis paper built on it would not clear novelty.
+> `thm:T9b` has been demoted to a supporting lemma in the manuscript and removed from every
+> contribution list. **CNSNS is the sole active target.** See `R4_PRIOR_ART_AND_THEOREM_STATUS.md`.
+
+
 **Outcome-map classification: `H3′` — a hybrid the map does not name.**
 - Nonlinear lift (`R2-C`): **YELLOW** — a one-sided nonlinear theorem is proved but is operationally
   vacuous (`U_NL` = 2.5 % of the linear certificate). *Not* the GREEN of `H1`/`H2`.

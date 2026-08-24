@@ -1,0 +1,50 @@
+{
+ "SEARCH#2_pwc6": {
+  "in_sample_A025": 0.923125,
+  "held_out_A020": 0.8668750000000001
+ },
+ "SEARCH#1_pwc6": {
+  "in_sample_A025": 0.936875,
+  "held_out_A020": 0.8129166666666667
+ },
+ "SEARCH#0_pwc6": {
+  "in_sample_A025": 0.94625,
+  "held_out_A020": 0.8947916666666667
+ },
+ "SEARCH#3_pwc6": {
+  "in_sample_A025": 0.8183333333333334,
+  "held_out_A020": 0.9066666666666667
+ },
+ "SEARCH#4_pwc6": {
+  "in_sample_A025": 0.9139583333333334,
+  "held_out_A020": 0.7654166666666666
+ },
+ "SEARCH#5_pwc8": {
+  "in_sample_A025": 0.8797916666666666,
+  "held_out_A020": 0.8104166666666667
+ },
+ "HIST_multiscale": {
+  "in_sample_A025": 0.6916666666666667,
+  "held_out_A020": 0.42083333333333334
+ },
+ "HIST_pulse": {
+  "in_sample_A025": 0.8447916666666666,
+  "held_out_A020": 0.49916666666666665
+ },
+ "HIST_prbs": {
+  "in_sample_A025": 0.7722916666666666,
+  "held_out_A020": 0.8364583333333333
+ },
+ "HIST_multisine": {
+  "in_sample_A025": 0.8258333333333333,
+  "held_out_A020": 0.835
+ },
+ "HIST_sinusoid": {
+  "in_sample_A025": 0.7395833333333334,
+  "held_out_A020": 0.7566666666666666
+ },
+ "HIST_chirp": {
+  "in_sample_A025": 0.7420833333333333,
+  "held_out_A020": 0.7475
+ }
+}

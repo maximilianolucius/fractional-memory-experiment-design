@@ -1,81 +1,99 @@
-\section{Analytical Backbone: Four Results Used by the Experiments}
+\section{Analytical Backbone: What Is Proved, What Is Borrowed, What Is Computed}
 \label{sec:analysis}
 
-The numerical study rests on four analytical statements. Complete proofs, the secondary theorems (optimal input design, multisine support, safety invariance, the sequential information identity), and the Bayesian layer are in the Supplementary Material; here each statement appears with the minimum context needed to use it in Sections~\ref{sec:response}--\ref{sec:benchmark}.
+This section fixes the mathematics the experiments rest on. Each item is labelled by status: \emph{foundation} (standard, restated for self-containment, no priority claimed), \emph{borrowed tool} (prior art, attributed), \emph{proved here}, or \emph{computed} --- and, for computed quantities, whether the number is an interval enclosure or a high-accuracy floating-point evaluation. Three error objects recur and are never interchanged: the memory-kernel error, the induced response-operator error, and the fixed-input discrepancy (Section~\ref{subsec:semantics}).
 
-\subsection{Result I: structural separation}
-On the collocated channel ($CB\neq0$) the Caputo transfer is
-\[
-G_\alpha(s)=C\bigl(q_\alpha(s)I-J\bigr)^{-1}B,
-\qquad q_\alpha(s)=\tau_0^{-1}(s\tau_0)^\alpha,
-\]
-with high-frequency expansion
-\[
-G_\alpha(s)=(CB)\tau_0^{1-\alpha}s^{-\alpha}+O(|s|^{-2\alpha}).
-\]
+\subsection{Result I: exact structural separation (foundation)}
+The collocated Caputo transfer of the linearisation at $(x^*,y^*(A))$ carries an $O(\omega^{-\alpha})$ high-frequency signature. No finite rational latent transfer (integer-order rolloff) and no strictly proper retarded-delay model ($O(\omega^{-1})$) reproduces it exactly on an open frequency set. The mechanism --- a branch point of $s^\alpha$ at the origin against the meromorphy of the rival classes --- is classical fractional-systems material~\cite{F02,F03,F08}; no novelty is claimed for it. It is stated because it delimits what the later results can and cannot mean.
 
 \begin{theorem}[Structural separation]
 \label{thm:T4}
-For $0<\alpha<1$ and $CB\neq0$, the Caputo transfer cannot equal any finite-dimensional rational latent transfer on a nonempty open subset of a common analytic domain. It also cannot equal a strictly proper finite-state retarded model with finitely many discrete delays, because the latter has $O(\omega^{-1})$ high-frequency decay whereas the Caputo channel has $O(\omega^{-\alpha})$ decay.
+Let $CB\neq0$ and $\alpha\in(0,1)$ with $\alpha\notin\mathbb{Q}$ in the sense that no effectively present exponent of $s^\alpha$ is an integer multiple of $1/\alpha$. Then $G_\alpha$ is not meromorphic in any neighbourhood of $s=0$, hence differs from every finite rational transfer and from every strictly proper retarded-delay transfer.
 \end{theorem}
 
-The $O(\omega^{-\alpha})$ signature is thus exactly unreachable for both declared rival classes. The statement concerns exact equality of transfers on open frequency sets; it makes no promise about experiments with finite bandwidth, horizon $T<\infty$, and noise $\sigma>0$. Theorem~\ref{thm:T9b} covers that regime.
+The statement concerns exact equality of transfers on open frequency sets. It promises nothing about experiments with finite bandwidth, finite horizon $T<\infty$ and noise $\sigma>0$. That regime is governed by Lemma~\ref{lem:soe} and its corollary.
 
-\subsection{Result II: finite-horizon latent approximation}
-The Caputo kernel $k_\alpha(t)=t^{\alpha-1}/\Gamma(\alpha)$ admits a diffusive (spectral-mixture) representation; on $[0,T]$ a constructive positive exponential sum $k_m(t)=\sum_{j=1}^m c_je^{-\lambda_jt}$, $c_j\ge0$, achieves
-\[
-\|k_\alpha-k_m\|_{L^1(0,T)}\le \widehat E_m,
-\qquad \widehat E_m\downarrow0
-\]
-along an expanding nested rate hierarchy.
+\subsection{Result II: positive exponential-sum approximation (borrowed tool)}
+\label{subsec:soe}
+The Caputo kernel $k_\alpha(t)=t^{\alpha-1}/\Gamma(\alpha)$ has the Stieltjes representation $k_\alpha(t)=c_\alpha\int_0^\infty\lambda^{-\alpha}e^{-\lambda t}\,d\lambda$ with $c_\alpha=\sin(\pi\alpha)/\pi$. Discretising it by the trapezoidal rule on a logarithmic grid $\lambda_k=e^{kh}$ and truncating produces an exponential sum with \emph{positive} weights and rates.
 
-\begin{theorem}[Finite-horizon approximation and complexity barrier]
-\label{thm:T9b}
-For every $T<\infty$ and $\varepsilon>0$, there exists a finite positive exponential mixture whose $L^1(0,T)$ distance from the Caputo kernel is below $\varepsilon$. Consequently, without a finite complexity restriction on the latent rival, no fixed finite-horizon experiment can guarantee a uniform positive separation from the entire latent hierarchy.
-\end{theorem}
+\begin{quote}
+\textbf{Attribution.} This construction is prior art. Positive exponential-sum approximation of $t^{-\beta}$ by quadrature of an integral representation, including the positivity of the weights and the root-exponential order in the number of terms, is due to McLean~\cite{K07}, building on the exponential-sum approximation theory of Beylkin and Monz\'on~\cite{K03,K04}; the same construction underlies the fast Caputo evaluation of Jiang et al.~\cite{K05}. The quadrature estimate we invoke is the analytic-strip trapezoidal bound~\cite{K08}, and root-exponential order is the expected optimal order for an algebraic branch point~\cite{K09}. We claim no new approximation method, no new rate law, and no priority for positive weights.
+\end{quote}
 
-Results I and II fix the problem geometry: exact separation (Theorem~\ref{thm:T4}) coexists with $\varepsilon$-approximation at finite $T$ (Theorem~\ref{thm:T9b}). Discrimination is therefore relative to a declared budget $m$; in the benchmark of Section~\ref{sec:benchmark} the latent class is capped at $m=3$, and in the certified computation of Theorem~\ref{thm:T23} the budget runs over $m\in\{4,8,16,32\}$.
+What we add is narrow and technical: the published estimates are stated on a compact interval $[\delta,T]$ with $\delta>0$, excluding the singularity at the origin, whereas the discrimination argument of Section~\ref{subsec:testing} needs the convolution norm $L^1(0,T)$ \emph{including} $t=0$. The strip bound is $t$-integrable there because $\alpha>0$, so no excision is required.
 
-\subsection{Result III: testing obstruction under a physical input budget}
-Let $S$ denote the observation operator, $R\succ0$ the Gaussian noise covariance, and
-\[
-C_{\rm obs}=\tfrac12\|R^{-1/2}S\|^2.
-\]
-Young's convolution inequality maps the $L^1$ kernel error into an $L^2$ observation-space bound, $\|(k_\alpha-k_m)*u\|_2\le\widehat E_m\|u\|_2$; a two-point Gaussian argument converts that bound into a minimax statement.
+\begin{lemma}[Endpoint-inclusive $L^1$ estimate and exact horizon scaling]
+\label{lem:soe}
+Let $E_m^+(\alpha,T)$ denote the least $L^1(0,T)$ error of an $m$-term exponential sum with positive weights and rates. Then
+\begin{equation}
+E_m^+(\alpha,T)=T^\alpha E_m^+(\alpha,1),
+\label{eq:scaling}
+\end{equation}
+and for every $c<\pi\sqrt{\alpha(1-\alpha)}$ there exists $A(\alpha,c)<\infty$ with
+\begin{equation}
+E_m^+(\alpha,T)\le A(\alpha,c)\,T^\alpha e^{-c\sqrt m}\qquad(m\ge1).
+\label{eq:rootexp}
+\end{equation}
+Consequently $m(\varepsilon)=O(\log^2(1/\varepsilon))$ terms suffice for accuracy $\varepsilon$.
+\end{lemma}
 
-\begin{theorem}[Complexity-dependent testing obstruction]
+\begin{proof}
+Equation~\eqref{eq:scaling} is exact: substituting $t=Ts$ and using $k_\alpha(Ts)=T^{\alpha-1}k_\alpha(s)$ turns the $L^1(0,T)$ error into $T^\alpha$ times the $L^1(0,1)$ error, and $(c_j,\lambda_j)\mapsto(T^{1-\alpha}c_j,T\lambda_j)$ is a bijection of the admissible positive mixtures. For~\eqref{eq:rootexp} put $\lambda=e^x$, so $k_\alpha(t)=c_\alpha\int_{\mathbb R}g(x,t)\,dx$ with $g(x,t)=e^{(1-\alpha)x}e^{-te^x}$. For $|\operatorname{Im}x|\le d<\pi/2$ one has $|g|\le e^{(1-\alpha)x}e^{-te^x\cos d}$, whence the strip norm obeys $N(g(\cdot,t),d)\le2(\cos d)^{\alpha-1}\Gamma(1-\alpha)t^{\alpha-1}$. Integrating the trapezoidal estimate of~\cite{K08} over $t\in(0,1)$ and using $\int_0^1t^{\alpha-1}dt=1/\alpha$ together with $c_\alpha\Gamma(1-\alpha)=1/\Gamma(\alpha)$ bounds the discretisation error by $2\Gamma(\alpha+1)^{-1}(\cos d)^{\alpha-1}e^{-2\pi d/h}(1-e^{-2\pi d/h})^{-1}$; the truncation tails contribute $O(e^{-\alpha M_+h})$ and $O(e^{-(1-\alpha)M_-h})$. Equalising the three exponents gives $m\approx2\pi d\,h^{-2}[\alpha(1-\alpha)]^{-1}$ and exponent $\sqrt{2\pi d\,\alpha(1-\alpha)m}$, which tends to $\pi\sqrt{\alpha(1-\alpha)m}$ as $d\uparrow\pi/2$ while $(\cos d)^{\alpha-1}\to\infty$. Hence any $c$ strictly below the limit is attained with a finite constant.
+\end{proof}
+
+The quantifier order in~\eqref{eq:rootexp} is not cosmetic: the constant diverges as $c$ approaches $\pi\sqrt{\alpha(1-\alpha)}$, so the boundary rate is \emph{not} established, and whether it is attained or optimal is open. Equation~\eqref{eq:scaling} is verified to machine precision over a 285-cell sweep ($\alpha\in\{0.30,\dots,0.95\}$, $T\in\{1,10,100\}$, $m\le128$): the measured ratio $E(T)/E(1)$ equals $T^\alpha$ to all printed digits, and the relative error is $T$-invariant. Over the same sweep, \eqref{eq:rootexp} holds at $c=\pi\sqrt{\alpha(1-\alpha)}$ with constants between $0.29$ and $11.1$, and is attained to within a factor $1.00$ at $\alpha=0.70$, $m=128$.
+
+\begin{corollary}[Finite-horizon closure of the latent hierarchy]
+\label{cor:closure}
+For every $T<\infty$ and $\varepsilon>0$ some finite positive exponential mixture lies within $\varepsilon$ of $k_\alpha$ in $L^1(0,T)$. Hence, absent a declared bound on the latent dimension, no fixed finite-horizon experiment can guarantee a uniform positive separation from the whole latent hierarchy: discrimination is meaningful only relative to a budget $m$.
+\end{corollary}
+
+Results I and II together fix the geometry: exact separation (Theorem~\ref{thm:T4}) coexists with $\varepsilon$-approximation at finite $T$ (Corollary~\ref{cor:closure}). In the benchmark of Section~\ref{sec:benchmark} the latent class is capped at $m=3$; in the response-level computation of Section~\ref{subsec:state} the budget runs to $m=128$.
+
+\subsection{Semantics: three error objects that must not be conflated}
+\label{subsec:semantics}
+Write $G_\alpha(s)=C(s^\alpha I-J)^{-1}B$ for the exact prey-to-prey transfer and $G_m$ for a strictly proper finite-state surrogate. Three distinct quantities appear below.
+\begin{itemize}
+\item[(O1)] \emph{Memory-kernel error} $E_m=\|k_\alpha-k_m\|_{L^1(0,T)}$: a statement about the fractional operator alone, independent of $J$, $B$, $C$. This is the object of Lemma~\ref{lem:soe}.
+\item[(O2)] \emph{Induced response-operator error} $\widehat E_m^{\rm state}=\inf_{\mathcal G_m}\|g_\alpha-g_m\|_{L^1(0,T)}$, the $L^1$ distance between impulse responses, i.e.\ the $L^\infty\!\to\!L^\infty$ operator norm of the difference of input--output maps. It is a \emph{minimax} quantity: an infimum over rivals of a supremum over inputs.
+\item[(O3)] \emph{Fixed-input discrepancy} $\|(g_\alpha-g_m)*u\|/\|u\|$ for one specific $u$.
+\end{itemize}
+By construction $\text{(O3)}\le\text{(O2)}$ for every admissible $u$. There is no inequality in either direction between (O1) and (O2), and no constant relating them: computed from the same surrogate family, the plant \emph{attenuates} the kernel error monotonically, by a factor $1.009$ at $m\approx5$ falling to $0.675$ at $m=128$. Kernel-level numbers are therefore never propagated into response-level claims anywhere in this paper.
+
+Two consequences are used later. First, because (O2) is a supremum over inputs, the testing bound of Section~\ref{subsec:testing} is valid uniformly over the admissible input class, and conservative. Second, and for the same reason, $\widehat E_m^{\rm state}$ is an \emph{obstruction certificate and not a design objective}: the frequency band that maximises $|G_\alpha-G_m|$ (here $\omega\approx0.4$) selects the multiscale waveform, which excites $87\%$ of the worst case at $m=32$ and is nonetheless the \emph{least} informative design in the four-class benchmark (Table~\ref{tab:safe-search}). Maximising one pairwise discrepancy does not maximise multi-class accuracy.
+
+\subsection{Result III: testing obstruction at the response-operator level (proved here)}
+\label{subsec:testing}
+Fix the observation model: the prey channel is sampled at $n$ times in $(0,T]$ and corrupted by additive Gaussian noise with common covariance $\sigma^2I$ under both hypotheses. The two hypotheses are ``the response is $g_\alpha$'' and ``the response is $g_m$'', with means $\mu_\alpha$, $\mu_m$ obtained by convolving the respective response kernels with the same admissible input $u$. Because the covariance is common and known, the minimax error of the two-point test is available in closed form and no inequality is needed.
+
+\begin{theorem}[Exact two-point obstruction under a response-operator budget]
 \label{thm:T20}
-If the admissible experiment class satisfies $\|u\|_2\le B$, then the composite minimax error for testing the fractional response against a latent hierarchy containing an explicit competitor with error $\widehat E_m$ obeys
-\[
-P_e^*(m)\ge \Psi\!\left(C_{\rm obs}\widehat E_m^2 B^2\right),
-\]
-where $\Psi$ is any valid equal-covariance Gaussian two-point lower bound (Pinsker is used in the numerical plots). Thus $P_e^*(m)\to1/2$ whenever $\widehat E_m\to0$ and $B$ remains bounded.
+Let $\|u\|_2\le B$ and let $d=\|\mu_\alpha-\mu_m\|_2/\sigma$. Then the minimax error of any test between the two hypotheses satisfies
+\begin{equation}
+P_e^*=\Phi\!\left(-\tfrac{d}{2}\right),\qquad
+d\le\frac{\widehat E_m^{\rm state}B}{\sigma},
+\label{eq:exact2pt}
+\end{equation}
+by Young's inequality $\|(g_\alpha-g_m)*u\|_2\le\|g_\alpha-g_m\|_{L^1}\|u\|_2$. Hence
+\begin{equation}
+P_e^*\ \ge\ \Phi\!\left(-\frac{\widehat E_m^{\rm state}B}{2\sigma}\right)\ \longrightarrow\ \tfrac12
+\quad\text{as }\widehat E_m^{\rm state}\to0\text{ with }B,\sigma\text{ fixed.}
+\label{eq:floor}
+\end{equation}
 \end{theorem}
 
-Since $\widehat E_m\downarrow0$ while $B$ and $C_{\rm obs}$ stay fixed, $P_e^*(m)\to1/2$: under a capped input budget, a sufficiently rich rival pushes every test toward the equal-prior chance level, independently of the experiment design.
+Three points of hygiene. The bound is routed through the $L^1$ norm of the response kernel, never through $\|k_\alpha-k_m\|_{L^2}$, which is infinite for $\alpha\le1/2$ and would make any such statement vacuous on part of the declared range. The exact bound~\eqref{eq:exact2pt} is the primary statement; the Pinsker bound $\tfrac12(1-\sqrt{{\rm KL}/2})$ is reported alongside in Table~\ref{tab:state-approx} only for comparability with the literature, and is uniformly looser --- by $0.034$ at $m=4$.
 
-\subsection{Result IV: ecological prey-response approximation}
-Results I--III concern the abstract kernel $k_\alpha$. Result IV addresses the measured object itself, the prey-to-prey transfer $g_\alpha$ of the linearization at $(x^*,y^*(A))$. The factorization $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$, though tempting, is false and is not used. Instead $g_\alpha$ is split by contour deformation into its principal-sheet pole pair --- realized \emph{exactly} by a stable two-state integer-order block --- plus a branch-cut remainder, smooth on $(0,\infty)$, which is the only part requiring approximation.
+\subsection{Result IV: finite-state prey-response approximation (computed)}
+\label{subsec:state}
+Results I--III concern operators. Result IV addresses the measured object, the prey-to-prey response $g_\alpha$. The factorisation $(s^\alpha I-J)^{-1}=(sI-J)^{-1}s^{-\alpha}$ is false and is not used. Instead $g_\alpha$ is split by contour deformation into its principal-sheet pole pair --- realised \emph{exactly} by a stable two-state integer-order block --- plus a branch-cut remainder, smooth on $(0,\infty)$, which is the only part requiring approximation.
 
 \begin{theorem}[Certified finite-state approximation of the prey response]
 \label{thm:T23}
-For the displayed Matignon-stable cells and $m\in\{4,8,16,32\}$, there exists an explicit stable finite-state prey-response surrogate $g_m$ such that
-\[
-\|g_\alpha-g_m\|_{L^1(0,T)}\le \widehat E_m^{\rm state},
-\]
-where the bound is obtained by outward-rounded interval subdivision and a rigorous tail estimate. At $\alpha=0.85$, $T=12$, the certified enclosure at $A=0.25$ decreases from $0.5335$ ($m=4$) to $0.0070$ ($m=32$).
+For the displayed Matignon-stable cells and $m\in\{4,8,16,32\}$ there exists an explicit stable finite-state surrogate $g_m$ with $\|g_\alpha-g_m\|_{L^1(0,T)}\le\widehat E_m^{\rm state}$, the bound being an outward-rounded interval enclosure over the admissible pole region and $L^1$ mass cap.
 \end{theorem}
 
-Every displayed constant is an outward-rounded interval enclosure, not a floating-point estimate. The declared rectangular pulse has support length $1.44$, so $\|u\|_\infty\le0.10$ implies $\|u\|_2\le0.10\sqrt{1.44}=0.120$; combining with $\sigma=0.10$ in Theorem~\ref{thm:T20} gives Pinsker bounds $0.340$, $0.462$, $0.492$, $0.498$ at $A=0.25$ for $m=4,8,16,32$ (Table~\ref{tab:state-approx} adds $A=0.30$). At $m=32$ the gap to the chance level $0.500$ is $0.002$: the surrogate is statistically indistinguishable from the fractional response under this protocol.
+The values of $\widehat E_m^{\rm state}$ for $m\le32$ (Table~\ref{tab:state-approx}) are \textbf{interval enclosures}. Table~\ref{tab:state-approx-large} continues the computation to $m=64$ and $m=128$ using one explicit positive-SOE surrogate rather than the optimised class; those numbers are \textbf{high-accuracy floating-point evaluations with a two-mesh quadrature-error estimate}, not enclosures, and because that surrogate is one admissible element rather than the infimum they are upper bounds on $\widehat E_m^{\rm state}$ --- so the floors they induce through~\eqref{eq:floor} are valid and conservative. The distinction is maintained wherever these numbers are used.
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=0.90\textwidth]{fig14_separation_approx}
-\caption{Compatibility of Theorems~\ref{thm:T4} and~\ref{thm:T9b}: the Caputo transfer keeps its noninteger signature (exact separation), while $m$-mode exponential mixtures reduce the $L^1(0,T)$ kernel error monotonically in $m$ (finite-horizon approximation).}
-\label{fig:separation-approx}
-\end{figure}
-
-\begin{figure}[htbp]\centering
-\includegraphics[width=0.90\textwidth]{fig19_state_theorem}
-\caption{Theorem~\ref{thm:T23} in numbers. Left: interval-enclosed $\widehat E_m^{\rm state}$ versus $m$ at $\alpha=0.85$, $T=12$. Right: induced Pinsker lower bound under the pulse cap $\|u\|_2\le0.120$, $\sigma=0.10$, approaching the chance level $1/2$ as $m$ grows.}
-\label{fig:state-theorem}
-\end{figure}
+Combining Theorem~\ref{thm:T20} with the computed values gives the operative conclusion: the testing floor rises from $0.374$ at $m=4$ to $0.4996$ at $m=64$ and $0.49999$ at $m=128$. At attainable latent orders the finite-state rival is indistinguishable from the fractional model under the declared protocol, for \emph{every} input in the budget. This is the obstruction that the waveform search of Section~\ref{subsec:safe-search} does not remove, and it is separate from the safety question entirely.
