@@ -1,99 +1,112 @@
 # Current Assignment
 
-**Task:** Desk-rejection rescue — Round 04 CNSNS submission closure  
+**Task:** Desk-rejection rescue — Round 05 final CNSNS submission closure  
 **Status:** IN PROGRESS  
-**Timestamp:** 2026-08-24 15:28 ART  
+**Timestamp:** 2026-08-24 17:18 ART  
 **Branch:** `rescue/aims-desk-rejection`
 
 ## Assigned role
 
 Researcher under Chief review.
 
-## Round-03 status
+## Round-04 status
 
-Round 03 is **accepted as a major scientific advance**. The adversarial search falsified the paper's previous system-level safety–informativeness conclusion and found substantially better safe piecewise-constant designs at the same amplitude budget.
+Round 04 is **scientifically accepted**. The remaining blockers are submission engineering, author metadata and persistent data deposition.
 
 Read first:
 
-- `CHIEF_REVIEW_ROUND_03.md`
-- `ROUND_04_RESEARCHER_ASSIGNMENT.md`
+- `CHIEF_REVIEW_ROUND_04.md`
+- `ROUND_05_SUBMISSION_CLOSURE.md`
+- `ROUND_04_DECISION.md`
+- `CNSNS_COMPLIANCE_MATRIX_FINAL.md`
 
 ## Chief decisions now in force
 
-### Scientific narrative
+### Science
 
-The rescued manuscript now centers on:
+No new open-ended mathematics is required for this submission.
 
-> The severe safety–informativeness frontier observed across the six classical waveform families is a parameterisation artifact. A constrained search over previously untested piecewise-constant waveforms finds safe designs that outperform every historical baseline at the same peak-amplitude budget.
+The final scientific message is:
 
-Do **not** universalize this into “waveform design governs safety” or “safety has no information cost.” A Pareto cost remains; what failed was the six-family frontier as a system-level conclusion.
+> A severe safety-information frontier appears when design is restricted to the six classical waveform families, but it is not intrinsic to the system. Expanding the waveform class finds safe, substantially more informative piecewise-constant inputs, while increasing latent-rival complexity remains a separate finite-horizon identifiability obstruction.
 
-### Supporting latent-complexity result
-
-Increasing latent-rival complexity remains a separate finite-horizon obstruction. The response-level error has been carried to `m=128`; keep this as a distinct theoretical/computational result, never as a consequence of bare-kernel error alone.
-
-### Theorem B / T9b
-
-**Chief decision: DEMOTE.**
-
-- The positive-SOE/log-quadrature technique, positivity of weights, and root-exponential order are prior art.
-- Add McLean (2018) prominently and cite the surrounding literature.
-- Retain only the endpoint-inclusive `L¹(0,T)` safe-form estimate and exact `T^α` scaling as a supporting lemma/tool.
-- The boundary constant is open.
-- **FCAA split is withdrawn.**
-
-### Headline safety status
-
-Round-03 safety verification is improved but **not yet a fully rigorous certificate** because the PECE solver-error term is refinement-estimated and the tube source bound is gridded rather than interval-enclosed.
-
-Round 04 must either:
-
-1. obtain genuine rigorous enclosures for the headline `pwc6` and `multiscale` trajectories under all four mechanisms; or
-2. downgrade every unqualified `certified/validated` claim to precise a posteriori verification wording.
-
-No ambiguous final status is allowed.
+Keep all scope restrictions and the Round-04 safety downgrade.
 
 ### Journal
 
-- **CNSNS is now the sole active target.**
-- Do not resubmit to AIMS Mathematics.
-- Do not pursue the FCAA split.
-- Use the live CNSNS Guide for Authors as source of truth.
-- Final gate: **100% mandatory compliance and >=99% of the complete applicable checklist**, with instructions/template rechecked within 24 h before submission.
+- **CNSNS is the sole active target.**
+- AIMS Mathematics is not a target.
+- FCAA split is withdrawn.
 
-### Working title
+### Template
 
-> **Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator–prey model**
+**AUTHORIZED AND REQUIRED:** remove all AIMS branding and migrate the final submission source to the current Elsevier/CNSNS LaTeX format. No `aims_math_style.sty` or `\AIMS*` macros may remain in the submission package.
 
-The previous “Waveform Design, Not Amplitude, Governs…” title is withdrawn as too universal.
+### Journal rules newly verified by Chief
 
-## Round-04 highest priorities
+The current CNSNS Guide for Authors states:
 
-1. Demote T9b and repair prior-art citations.
-2. Close or explicitly downgrade the headline safety certificate.
-3. Rebuild the stale theory section with response-level semantics and the exact Gaussian bound.
-4. Rewrite abstract to CNSNS limit (<=250 words), Introduction, contributions and conclusion.
-5. Remove the companion-comparison table and use one neutral provenance paragraph.
-6. Build the new headline safety-margin vs macro-accuracy figure including searched PWC designs.
-7. Rebuild the CNSNS compliance matrix from live official instructions.
-8. Remove AIMS-only formatting and complete CNSNS/Elsevier end matter.
-9. Freeze reproducibility artifacts.
-10. Run mock-editor and adversarial-referee gates.
-11. Produce a binary Round-04 submission decision.
+- abstract <=250 words;
+- **1–7 keywords** — the manuscript's 6 keywords are compliant;
+- highlights required: 3–5 bullets, <=85 characters each including spaces, separate editable file;
+- editable source files required;
+- research-data policy **Option C**: deposit and cite/link the data, or explain why sharing is impossible;
+- corresponding author submission checklist requires full contact details including **email, full postal address and phone numbers**.
 
-## Required Round-04 outputs
+### Corresponding author
 
-- `R4_PRIOR_ART_AND_THEOREM_STATUS.md`
-- `R4_HEADLINE_SAFETY_CERTIFICATE.md`
-- `R4_THEORY_SECTION_AUDIT.md`
-- `R4_NARRATIVE_FINAL.md`
-- `R4_FIGURE_AUDIT.md`
-- `CNSNS_COMPLIANCE_MATRIX_FINAL.md`
-- `R4_FORMAT_AND_ENDMATTER_AUDIT.md`
-- `R4_REPRODUCIBILITY_FREEZE.md`
-- `R4_MOCK_EDITOR.md`
-- `R4_MOCK_REFEREES.md`
-- `ROUND_04_DECISION.md`
-- modified `paper/` + final submission-side files
+Public academic records strongly support:
 
-**Next Chief action:** review Round-04 closure package and authorize submission only if all R4.1–R4.10 gates are GREEN.
+- Ibrahim Alraddadi
+- Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah 42351, Saudi Arabia
+- `ialraddadi@iu.edu.sa`
+- ORCID `0000-0002-0094-7937`
+
+Insert affiliation/postal code and ORCID, but obtain author confirmation before metadata freeze. **Do not invent the phone number.**
+
+### Funding
+
+Funding status must be explicitly confirmed by the author. Do not infer “no funding.”
+
+### Data availability
+
+Chief decision: **curated persistent deposit**, not “available on request.” Prepare `public_reproducibility/` containing only publication-facing code/data/artifacts, then deposit it in Zenodo or another persistent repository and cite the DOI/identifier in the manuscript. Internal rescue/review documents are excluded from the curated data package.
+
+### Visuals
+
+- Keep `fig24_safe_design_frontier` as the headline figure.
+- Remove old Fig. 10 from the main manuscript; move to supplement only if it adds unique context.
+
+### Benchmark label
+
+Fix the undocumented pooled latent label (`latent1 + latent3`) in manuscript tables/captions/prose without changing frozen raw data.
+
+## Round-05 priorities
+
+1. Current Elsevier/CNSNS LaTeX migration; zero AIMS branding.
+2. Add public-record author affiliation/postal code + ORCID; create author-confirmation checklist for phone/funding.
+3. Build curated `public_reproducibility/` deposit staging area.
+4. Change data statement from “on request” to persistent-repository wording with DOI placeholder until deposit exists.
+5. Mark keyword rule PASS (1–7; six supplied).
+6. Fix pooled latent-class documentation.
+7. Remove/relegate redundant Fig. 10.
+8. Full DOI/reference sweep.
+9. Rebuild final CNSNS compliance matrix.
+10. Clean build + submission package manifest.
+11. Produce binary Round-05 decision.
+
+## Hard authorization gate
+
+Final submission requires:
+
+- **100% mandatory requirements PASS**;
+- **>=99% applicable checklist PASS**;
+- author-confirmed phone number;
+- author-confirmed funding statement;
+- persistent data-deposit identifier/DOI;
+- live CNSNS Guide/checklist rechecked within 24 hours before submission;
+- clean build and zero AIMS branding.
+
+Until phone, funding and deposit DOI are resolved, the strongest permissible status is **READY-PENDING-AUTHOR-METADATA**.
+
+**Next Chief action:** review the Round-05 closure package; authorize submission only when every hard gate is green.
