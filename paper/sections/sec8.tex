@@ -57,10 +57,10 @@ Class-wise statistics refine the picture (Figure~\ref{fig:confusion}). ODE: reca
 \label{fig:acc-snr}
 \end{figure}
 
-\subsection{Safety--informativeness trade-off}
+\subsection{The trade-off within classical waveform families}
 Numerical state safety is reported on its own axis, never folded into the information score. At the common budget $\|u\|_\infty\le0.10$: multiscale never crosses the threshold (rate $0.000$) and discriminates worst ($0.324$); PRBS and sinusoid discriminate best ($0.584$, $0.534$) and cross at rates $1.000$; multisine matches PRBS in accuracy ($0.583$) at crossing rate $0.357$.
 
-Table~\ref{tab:benchmark-safety} gives the frontier. Multiscale retains a positive minimum margin of $0.292$ at the lowest accuracy; the pulse is the practical compromise, crossing at rate $0.071$ with accuracy $0.414$ --- below the broadband designs by $0.17$.
+Table~\ref{tab:benchmark-safety} gives the frontier \emph{within the six classical families of Section~\ref{sec:design}}. Section~\ref{subsec:safe-search} shows that this frontier is a property of that parameterisation and not of the system. Multiscale retains a positive minimum margin of $0.292$ at the lowest accuracy; the pulse is the practical compromise, crossing at rate $0.071$ with accuracy $0.414$ --- below the broadband designs by $0.17$.
 
 \begin{table}[htbp]
 \centering
@@ -85,6 +85,45 @@ The table also fixes a methodological point: the linear-Gaussian ranking alone c
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=0.72\textwidth]{fig10_safety_tradeoff}
-\caption{Headline benchmark trade-off. Broadband and sustained designs climb in discrimination but drift toward higher Allee-crossing rates; transient designs stay in the low-crossing, less-informative corner.}
+\caption{Trade-off across the six classical waveform families. Broadband and sustained designs climb in discrimination but drift toward higher Allee-crossing rates; transient designs stay in the low-crossing, less-informative corner. The frontier shown is specific to these families: the piecewise-constant designs of Section~\ref{subsec:safe-search} lie above and to the left of every point plotted here.}
 \label{fig:safety-tradeoff}
 \end{figure}
+
+\subsection{Amplitude is the wrong knob}
+\label{subsec:amplitude}
+Before accepting the frontier of Table~\ref{tab:benchmark-safety} one must ask whether it is simply a symptom of excessive excitation. It is not. Repeating the entire benchmark at peak amplitudes $0.050$ and $0.063$ alongside the reference $0.100$ ($2268$ cells in total, zero divergences) leaves the ordering of designs unchanged and does not restore safety: PRBS remains the most informative design at every amplitude while still crossing the threshold in $71.4\%$ of cells at half amplitude ($92.9\%$ at $0.063$, $100\%$ at $0.100$). Macro-accuracy falls monotonically with amplitude ($0.457$, $0.471$, $0.537$), so the low-amplitude runs are reported as linear-certificate diagnostics, not as a safe benchmark.
+
+The realised response gain $\max_t|z(t)-z^*|/\|u\|_\infty$ makes the mechanism explicit. For the crossing designs this gain \emph{increases} as the amplitude decreases, reaching $28.07$ at amplitude $0.050$ against the linear certificate $\Gamma_T=5.78$, a violation by a factor of $4.86$; for the two designs that never cross it stays between $1.47$ and $2.06$ and is essentially amplitude-independent, as a linear response must be. Once a trajectory leaves the Allee basin, $\max_t|z-z^*|$ is set by the basin geometry rather than by the input, so the ratio scales like $1/\|u\|_\infty$. The linear certificate therefore cannot be used to justify safety for any crossing design at any of the three amplitudes, and shrinking the input does not convert an unsafe design into a safe one.
+
+\subsection{Waveform search: the frontier is a parameterisation artifact}
+\label{subsec:safe-search}
+If amplitude is not the knob, the waveform shape may be. We therefore searched for inputs that are safe \emph{and} informative outside the six classical families, at the same peak-amplitude budget $\|u\|_\infty\le0.100$ and under the hard constraint that the minimum Allee margin over all four candidate models be at least $\delta=0.05$. The search covers piecewise-constant inputs with $4$, $6$ and $8$ levels, free multisines with $3$--$6$ harmonics, and pulse trains with $2$--$4$ pulses, scored by the minimax pairwise separation $J(u)=\min_{a\neq b}\|\mu_a(u)-\mu_b(u)\|/\sigma$ over the four classes; $163\,840$ candidates were evaluated by Sobol sampling with Nelder--Mead refinement of the per-family best, and $87\,601$ of them ($53.5\%$) satisfy the safety constraint. Re-scored under the same objective, exactly one of the six classical designs is safe at this amplitude (multiscale, $J=1.45$) and it is the least informative of the six; the best safe candidate found reaches $J=6.23$, a factor of $4.3$ higher, and every one of the twelve best safe candidates is piecewise constant --- a class the six families do not contain.
+
+Validating the six leading candidates with the same BIC classifier, the same $56$-cell grid and the same replicate seeds as Table~\ref{tab:benchmark-safety} confirms the surrogate (Table~\ref{tab:safe-search}). All six are safe, with zero crossings and certified margins between $+0.067$ and $+0.176$, and five of the six outrank the best classical design of \emph{any} kind, safe or not. The leading design attains macro-accuracy $0.803$ against $0.514$ for the only safe classical design and $0.763$ for multisine, which crosses in $35.7\%$ of cells. The gain is concentrated exactly where the safe classical design fails: Caputo recall rises from $0.404$ to $0.911$ and DDE recall from $0.445$ to $0.853$.
+
+\begin{table}[htbp]
+\centering
+\caption{Waveform search validated with the benchmark classifier at $\|u\|_\infty\le0.100$: $56$ cells $\times$ $100$ replicates per design, identical seeds, no divergences. \textsc{pwc}$k$ denotes a $k$-level piecewise-constant input on equal sub-intervals.}
+\label{tab:safe-search}
+\small
+\begin{tabular}{lccccccc}
+\hline
+design & family & macro & micro & crossing rate & min.\ margin & Caputo & DDE\\
+\hline
+S0 & \textsc{pwc}6 & \textbf{0.803} & 0.787 & 0.000 & $+0.092$ & 0.911 & 0.853\\
+S3 & \textsc{pwc}6 & 0.783 & 0.753 & 0.000 & $+0.122$ & 0.910 & 0.927\\
+S2 & \textsc{pwc}6 & 0.783 & 0.765 & 0.000 & $+0.096$ & 0.875 & 0.816\\
+S1 & \textsc{pwc}6 & 0.780 & 0.744 & 0.000 & $+0.109$ & 0.838 & 0.897\\
+S5 & \textsc{pwc}8 & 0.769 & 0.727 & 0.000 & $+0.176$ & 0.844 & 0.926\\
+multisine & classical & 0.763 & 0.725 & 0.357 & $-0.240$ & 0.844 & 0.902\\
+S4 & \textsc{pwc}6 & 0.750 & 0.720 & 0.000 & $+0.067$ & 0.766 & 0.743\\
+prbs & classical & 0.711 & 0.713 & 1.000 & $-0.314$ & 0.802 & 0.521\\
+sinusoid & classical & 0.685 & 0.687 & 1.000 & $-0.306$ & 0.844 & 0.549\\
+chirp & classical & 0.683 & 0.684 & 0.929 & $-0.301$ & 0.832 & 0.547\\
+pulse & classical & 0.621 & 0.552 & 0.071 & $-0.121$ & 0.528 & 0.647\\
+multiscale & classical & 0.514 & 0.444 & 0.000 & $+0.292$ & 0.404 & 0.445\\
+\hline
+\end{tabular}
+\end{table}
+
+Two qualifications are required. The search establishes \emph{existence} of safe designs above the classical frontier, not global optimality: it is a Sobol-plus-local-refinement search, and no certified global bound over the piecewise-constant class is claimed. And the constraint is active --- the refined optimum sits at the declared margin $\delta=0.05$, while multiscale sits at $0.292$ --- so a stricter margin buys a lower objective and the trade-off is relocated rather than abolished. What does not survive is the reading of Table~\ref{tab:benchmark-safety} as a property of the ecology: the accessible frontier lies well above it, and the residual obstruction is the latent one, since even the leading design recovers only $0.475$ recall against the finite-latent rival.

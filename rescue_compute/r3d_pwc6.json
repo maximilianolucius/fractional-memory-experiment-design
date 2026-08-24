@@ -1,0 +1,118 @@
+[
+ {
+  "design": "pwc6_found",
+  "model": "Caputo",
+  "min_x_computed": 0.454312740603602,
+  "solver_err": 8.658447883264087e-05,
+  "F_bound": 0.21258674844555506,
+  "internode_bound": 0.0012672245806337472,
+  "certified_lower": 0.4529589315441356,
+  "certified_upper": 0.45439932508243464,
+  "margin_computed": 0.204312740603602,
+  "margin_certified": 0.20295893154413558,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.45457686143938253
+   ],
+   [
+    6000,
+    0.45439932508243464
+   ],
+   [
+    12000,
+    0.454312740603602
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "ODE",
+  "min_x_computed": 0.4456512574604427,
+  "solver_err": 3.389998264385907e-05,
+  "F_bound": 0.24104495162921477,
+  "internode_bound": 0.001436863256885664,
+  "certified_lower": 0.44418049422091316,
+  "certified_upper": 0.44568515744308657,
+  "margin_computed": 0.1956512574604427,
+  "margin_certified": 0.19418049422091316,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.44575293852498205
+   ],
+   [
+    6000,
+    0.44568515744308657
+   ],
+   [
+    12000,
+    0.4456512574604427
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "DDE",
+  "min_x_computed": 0.41567961305142404,
+  "solver_err": 9.450842632480194e-05,
+  "F_bound": 0.32246205660870875,
+  "internode_bound": 0.0019221886944703899,
+  "certified_lower": 0.4136629159306288,
+  "certified_upper": 0.41577412147774884,
+  "margin_computed": 0.16567961305142404,
+  "margin_certified": 0.16366291593062882,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.41596291510118844
+   ],
+   [
+    6000,
+    0.41577412147774884
+   ],
+   [
+    12000,
+    0.41567961305142404
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "latent3",
+  "min_x_computed": 0.3513495355068319,
+  "solver_err": 8.809309977242386e-05,
+  "F_bound": 0.38046046264831407,
+  "internode_bound": 0.002267915821435633,
+  "certified_lower": 0.3489935265856238,
+  "certified_upper": 0.3514376286066043,
+  "margin_computed": 0.1013495355068319,
+  "margin_certified": 0.09899352658562383,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.3516139569720303
+   ],
+   [
+    6000,
+    0.3514376286066043
+   ],
+   [
+    12000,
+    0.3513495355068319
+   ]
+  ]
+ }
+]

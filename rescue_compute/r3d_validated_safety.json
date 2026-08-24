@@ -1,0 +1,814 @@
+[
+ {
+  "design": "pulse",
+  "model": "Caputo",
+  "min_x_computed": 0.624938968588023,
+  "solver_err": 7.83036099549772e-06,
+  "F_bound": 0.13927791691017366,
+  "internode_bound": 0.0008302323693202291,
+  "certified_lower": 0.6241009058577073,
+  "certified_upper": 0.6249467989490185,
+  "margin_computed": 0.374938968588023,
+  "margin_certified": 0.3741009058577073,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.6249608876413724
+   ],
+   [
+    6000,
+    0.6249467989490185
+   ],
+   [
+    12000,
+    0.624938968588023
+   ]
+  ]
+ },
+ {
+  "design": "pulse",
+  "model": "ODE",
+  "min_x_computed": 0.5596495556018535,
+  "solver_err": 4.875839398899018e-09,
+  "F_bound": 0.20088656502750019,
+  "internode_bound": 0.0011974800639425777,
+  "certified_lower": 0.5584520706620715,
+  "certified_upper": 0.5596495604776929,
+  "margin_computed": 0.3096495556018535,
+  "margin_certified": 0.3084520706620715,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.5596495070903648
+   ],
+   [
+    6000,
+    0.5596495507260141
+   ],
+   [
+    12000,
+    0.5596495556018535
+   ]
+  ]
+ },
+ {
+  "design": "pulse",
+  "model": "DDE",
+  "min_x_computed": 0.13160149400200527,
+  "solver_err": 8.04612437851071e-05,
+  "F_bound": 0.42723120609345244,
+  "internode_bound": 0.0025467151171658336,
+  "certified_lower": 0.12897431764105433,
+  "certified_upper": 0.13168195524579038,
+  "margin_computed": -0.11839850599799473,
+  "margin_certified": -0.12102568235894567,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.13135973857248276
+   ],
+   [
+    6000,
+    0.13152103275822016
+   ],
+   [
+    12000,
+    0.13160149400200527
+   ]
+  ]
+ },
+ {
+  "design": "pulse",
+  "model": "latent3",
+  "min_x_computed": 0.31769192998125245,
+  "solver_err": 5.315941051187156e-05,
+  "F_bound": 0.3268113749797358,
+  "internode_bound": 0.0019481148784356095,
+  "certified_lower": 0.315690655692305,
+  "certified_upper": 0.3177450893917643,
+  "margin_computed": 0.06769192998125245,
+  "margin_certified": 0.06569065569230498,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.31753206850390553
+   ],
+   [
+    6000,
+    0.3176387705707406
+   ],
+   [
+    12000,
+    0.31769192998125245
+   ]
+  ]
+ },
+ {
+  "design": "multisine",
+  "model": "Caputo",
+  "min_x_computed": 0.5697507267348442,
+  "solver_err": 2.232382023714674e-05,
+  "F_bound": 0.16267262458611093,
+  "internode_bound": 0.0009696876685825976,
+  "certified_lower": 0.5687587152460244,
+  "certified_upper": 0.5697730505550813,
+  "margin_computed": 0.31975072673484417,
+  "margin_certified": 0.3187587152460244,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.5698134351983692
+   ],
+   [
+    6000,
+    0.5697730505550813
+   ],
+   [
+    12000,
+    0.5697507267348442
+   ]
+  ]
+ },
+ {
+  "design": "multisine",
+  "model": "ODE",
+  "min_x_computed": 0.04936440098742303,
+  "solver_err": 8.034920970234616e-08,
+  "F_bound": 0.5306935081614585,
+  "internode_bound": 0.003163451453311966,
+  "certified_lower": 0.04620086918490136,
+  "certified_upper": 0.04936448133663273,
+  "margin_computed": -0.20063559901257697,
+  "margin_certified": -0.20379913081509865,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.04936467392615692
+   ],
+   [
+    6000,
+    0.04936448133663273
+   ],
+   [
+    12000,
+    0.04936440098742303
+   ]
+  ]
+ },
+ {
+  "design": "multisine",
+  "model": "DDE",
+  "min_x_computed": 0.009512595764214574,
+  "solver_err": 7.638283878140528e-08,
+  "F_bound": 0.6115212301599379,
+  "internode_bound": 0.00364526359288348,
+  "certified_lower": 0.005867255788492313,
+  "certified_upper": 0.009512672147053355,
+  "margin_computed": -0.24048740423578543,
+  "margin_certified": -0.24413274421150769,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.009512814023131118
+   ],
+   [
+    6000,
+    0.009512672147053355
+   ],
+   [
+    12000,
+    0.009512595764214574
+   ]
+  ]
+ },
+ {
+  "design": "multisine",
+  "model": "latent3",
+  "min_x_computed": 0.026413490659900254,
+  "solver_err": 4.006897989447533e-08,
+  "F_bound": 0.5963635795131436,
+  "internode_bound": 0.0035549091957974544,
+  "certified_lower": 0.022858541395122906,
+  "certified_upper": 0.026413530728880148,
+  "margin_computed": -0.22358650934009974,
+  "margin_certified": -0.22714145860487708,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.02641369100643693
+   ],
+   [
+    6000,
+    0.026413530728880148
+   ],
+   [
+    12000,
+    0.026413490659900254
+   ]
+  ]
+ },
+ {
+  "design": "sinusoid",
+  "model": "Caputo",
+  "min_x_computed": -0.002805103266191136,
+  "solver_err": 2.8887579493650124e-05,
+  "F_bound": 0.636740229028708,
+  "internode_bound": 0.00379559344880893,
+  "certified_lower": -0.006629584294493717,
+  "certified_upper": -0.002776215686697486,
+  "margin_computed": -0.25280510326619116,
+  "margin_certified": -0.25662958429449373,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.002723238822628738
+   ],
+   [
+    6000,
+    -0.002776215686697486
+   ],
+   [
+    12000,
+    -0.002805103266191136
+   ]
+  ]
+ },
+ {
+  "design": "sinusoid",
+  "model": "ODE",
+  "min_x_computed": -0.03670196312103368,
+  "solver_err": 2.3034819607303803e-09,
+  "F_bound": 0.7533120830738316,
+  "internode_bound": 0.0044904755143007164,
+  "certified_lower": -0.041192440938816355,
+  "certified_upper": -0.03670196081755172,
+  "margin_computed": -0.2867019631210337,
+  "margin_certified": -0.29119244093881635,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.036701919038216534
+   ],
+   [
+    6000,
+    -0.03670196081755172
+   ],
+   [
+    12000,
+    -0.03670196312103368
+   ]
+  ]
+ },
+ {
+  "design": "sinusoid",
+  "model": "DDE",
+  "min_x_computed": -0.036795757747890276,
+  "solver_err": 1.5917188157799078e-08,
+  "F_bound": 0.7588513373726713,
+  "internode_bound": 0.0045234948781942685,
+  "certified_lower": -0.041319268543272704,
+  "certified_upper": -0.03679574183070212,
+  "margin_computed": -0.2867957577478903,
+  "margin_certified": -0.2913192685432727,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.03679574183070212
+   ],
+   [
+    6000,
+    -0.03679574715757861
+   ],
+   [
+    12000,
+    -0.036795757747890276
+   ]
+  ]
+ },
+ {
+  "design": "sinusoid",
+  "model": "latent3",
+  "min_x_computed": -0.05578134069130549,
+  "solver_err": 2.9077952892753167e-09,
+  "F_bound": 0.8554220022219525,
+  "internode_bound": 0.005099150327840012,
+  "certified_lower": -0.060880493926940796,
+  "certified_upper": -0.0557813377835102,
+  "margin_computed": -0.30578134069130547,
+  "margin_certified": -0.3108804939269408,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.05578133247735718
+   ],
+   [
+    6000,
+    -0.0557813377835102
+   ],
+   [
+    12000,
+    -0.05578134069130549
+   ]
+  ]
+ },
+ {
+  "design": "multiscale",
+  "model": "Caputo",
+  "min_x_computed": 0.6191502094774486,
+  "solver_err": 7.187492594462608e-05,
+  "F_bound": 0.12759212852341978,
+  "internode_bound": 0.0007605736610702582,
+  "certified_lower": 0.6183177608904337,
+  "certified_upper": 0.6192220844033932,
+  "margin_computed": 0.3691502094774486,
+  "margin_certified": 0.36831776089043367,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.6192220844033932
+   ],
+   [
+    6000,
+    0.6192154243508865
+   ],
+   [
+    12000,
+    0.6191502094774486
+   ]
+  ]
+ },
+ {
+  "design": "multiscale",
+  "model": "ODE",
+  "min_x_computed": 0.5676496769494074,
+  "solver_err": 0.00015387917044340504,
+  "F_bound": 0.15931091643264314,
+  "internode_bound": 0.0009496486057711059,
+  "certified_lower": 0.5665461491731929,
+  "certified_upper": 0.5678035561198508,
+  "margin_computed": 0.3176496769494074,
+  "margin_certified": 0.3165461491731929,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.5677969746047601
+   ],
+   [
+    6000,
+    0.5678002653623054
+   ],
+   [
+    12000,
+    0.5676496769494074
+   ]
+  ]
+ },
+ {
+  "design": "multiscale",
+  "model": "DDE",
+  "min_x_computed": 0.5408486801527108,
+  "solver_err": 0.0002517609381593733,
+  "F_bound": 0.215899384933071,
+  "internode_bound": 0.0012869711284048543,
+  "certified_lower": 0.5393099480861466,
+  "certified_upper": 0.5411004410908702,
+  "margin_computed": 0.2908486801527108,
+  "margin_certified": 0.28930994808614663,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.5411004410908702
+   ],
+   [
+    6000,
+    0.5410629505981717
+   ],
+   [
+    12000,
+    0.5408486801527108
+   ]
+  ]
+ },
+ {
+  "design": "multiscale",
+  "model": "latent3",
+  "min_x_computed": 0.5531091997174562,
+  "solver_err": 0.00022993043341590358,
+  "F_bound": 0.1721351664768233,
+  "internode_bound": 0.0010260936570408022,
+  "certified_lower": 0.5518531756269995,
+  "certified_upper": 0.5533391301508721,
+  "margin_computed": 0.3031091997174562,
+  "margin_certified": 0.30185317562699954,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.5533391301508721
+   ],
+   [
+    6000,
+    0.5532835466512729
+   ],
+   [
+    12000,
+    0.5531091997174562
+   ]
+  ]
+ },
+ {
+  "design": "chirp",
+  "model": "Caputo",
+  "min_x_computed": 0.024892712972339075,
+  "solver_err": 0.00011058183271004524,
+  "F_bound": 0.582032804020813,
+  "internode_bound": 0.0034694837819548036,
+  "certified_lower": 0.021312647357674228,
+  "certified_upper": 0.02500329480504912,
+  "margin_computed": -0.22510728702766092,
+  "margin_certified": -0.22868735264232576,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.02520497151547699
+   ],
+   [
+    6000,
+    0.02500329480504912
+   ],
+   [
+    12000,
+    0.024892712972339075
+   ]
+  ]
+ },
+ {
+  "design": "chirp",
+  "model": "ODE",
+  "min_x_computed": -0.035692852143021085,
+  "solver_err": 4.342422740832852e-10,
+  "F_bound": 0.7605091358261064,
+  "internode_bound": 0.004533376975574706,
+  "certified_lower": -0.04022622955283806,
+  "certified_upper": -0.03569285170877881,
+  "margin_computed": -0.2856928521430211,
+  "margin_certified": -0.29022622955283806,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.03569284218894268
+   ],
+   [
+    6000,
+    -0.03569285257726336
+   ],
+   [
+    12000,
+    -0.035692852143021085
+   ]
+  ]
+ },
+ {
+  "design": "chirp",
+  "model": "DDE",
+  "min_x_computed": -0.03746512880120432,
+  "solver_err": 1.0127719843322502e-09,
+  "F_bound": 0.7722199752047859,
+  "internode_bound": 0.004603185012195188,
+  "certified_lower": -0.04206831482617149,
+  "certified_upper": -0.037465127788432334,
+  "margin_computed": -0.28746512880120434,
+  "margin_certified": -0.29206831482617146,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.03746511744013224
+   ],
+   [
+    6000,
+    -0.037465127788432334
+   ],
+   [
+    12000,
+    -0.03746512880120432
+   ]
+  ]
+ },
+ {
+  "design": "chirp",
+  "model": "latent3",
+  "min_x_computed": -0.05122988989521346,
+  "solver_err": 2.415673772127036e-10,
+  "F_bound": 0.8573453800446917,
+  "internode_bound": 0.005110615537560952,
+  "certified_lower": -0.05634050567434179,
+  "certified_upper": -0.05122988965364608,
+  "margin_computed": -0.3012298898952135,
+  "margin_certified": -0.3063405056743418,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.05122987855703976
+   ],
+   [
+    6000,
+    -0.05122989013678084
+   ],
+   [
+    12000,
+    -0.05122988989521346
+   ]
+  ]
+ },
+ {
+  "design": "prbs",
+  "model": "Caputo",
+  "min_x_computed": -0.008846902798413075,
+  "solver_err": 8.157846532950291e-05,
+  "F_bound": 0.6308706731665464,
+  "internode_bound": 0.003760605165106764,
+  "certified_lower": -0.012689086428849342,
+  "certified_upper": -0.008765324333083573,
+  "margin_computed": -0.25884690279841305,
+  "margin_certified": -0.26268908642884936,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.008610070387155834
+   ],
+   [
+    6000,
+    -0.008765324333083573
+   ],
+   [
+    12000,
+    -0.008846902798413075
+   ]
+  ]
+ },
+ {
+  "design": "prbs",
+  "model": "ODE",
+  "min_x_computed": -0.040730456232632925,
+  "solver_err": 1.0469998693279914e-05,
+  "F_bound": 0.7354987565419291,
+  "internode_bound": 0.004384290696059972,
+  "certified_lower": -0.04512521692738618,
+  "certified_upper": -0.040719986233939645,
+  "margin_computed": -0.29073045623263294,
+  "margin_certified": -0.2951252169273862,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.040698979071599625
+   ],
+   [
+    6000,
+    -0.040719986233939645
+   ],
+   [
+    12000,
+    -0.040730456232632925
+   ]
+  ]
+ },
+ {
+  "design": "prbs",
+  "model": "DDE",
+  "min_x_computed": -0.04016746102066935,
+  "solver_err": 8.950106434174598e-06,
+  "F_bound": 0.7361643855716661,
+  "internode_bound": 0.004388258494966695,
+  "certified_lower": -0.044564669622070216,
+  "certified_upper": -0.040158510914235175,
+  "margin_computed": -0.29016746102066937,
+  "margin_certified": -0.29456466962207023,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.040140562973905565
+   ],
+   [
+    6000,
+    -0.040158510914235175
+   ],
+   [
+    12000,
+    -0.04016746102066935
+   ]
+  ]
+ },
+ {
+  "design": "prbs",
+  "model": "latent3",
+  "min_x_computed": -0.06427486079885783,
+  "solver_err": 1.2608961500529259e-05,
+  "F_bound": 0.8367314329652169,
+  "internode_bound": 0.004987736286459918,
+  "certified_lower": -0.06927520604681828,
+  "certified_upper": -0.0642622518373573,
+  "margin_computed": -0.3142748607988578,
+  "margin_certified": -0.31927520604681825,
+  "verdict": "CROSSING-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    -0.06423698668147547
+   ],
+   [
+    6000,
+    -0.0642622518373573
+   ],
+   [
+    12000,
+    -0.06427486079885783
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "Caputo",
+  "min_x_computed": 0.454312740603602,
+  "solver_err": 8.658447883264087e-05,
+  "F_bound": 0.21258674844555506,
+  "internode_bound": 0.0012672245806337472,
+  "certified_lower": 0.4529589315441356,
+  "certified_upper": 0.45439932508243464,
+  "margin_computed": 0.204312740603602,
+  "margin_certified": 0.20295893154413558,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.45457686143938253
+   ],
+   [
+    6000,
+    0.45439932508243464
+   ],
+   [
+    12000,
+    0.454312740603602
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "ODE",
+  "min_x_computed": 0.4456512574604427,
+  "solver_err": 3.389998264385907e-05,
+  "F_bound": 0.24104495162921477,
+  "internode_bound": 0.001436863256885664,
+  "certified_lower": 0.44418049422091316,
+  "certified_upper": 0.44568515744308657,
+  "margin_computed": 0.1956512574604427,
+  "margin_certified": 0.19418049422091316,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.44575293852498205
+   ],
+   [
+    6000,
+    0.44568515744308657
+   ],
+   [
+    12000,
+    0.4456512574604427
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "DDE",
+  "min_x_computed": 0.41567961305142404,
+  "solver_err": 9.450842632480194e-05,
+  "F_bound": 0.32246205660870875,
+  "internode_bound": 0.0019221886944703899,
+  "certified_lower": 0.4136629159306288,
+  "certified_upper": 0.41577412147774884,
+  "margin_computed": 0.16567961305142404,
+  "margin_certified": 0.16366291593062882,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.41596291510118844
+   ],
+   [
+    6000,
+    0.41577412147774884
+   ],
+   [
+    12000,
+    0.41567961305142404
+   ]
+  ]
+ },
+ {
+  "design": "pwc6_found",
+  "model": "latent3",
+  "min_x_computed": 0.3513495355068319,
+  "solver_err": 8.809309977242386e-05,
+  "F_bound": 0.38046046264831407,
+  "internode_bound": 0.002267915821435633,
+  "certified_lower": 0.3489935265856238,
+  "certified_upper": 0.3514376286066043,
+  "margin_computed": 0.1013495355068319,
+  "margin_certified": 0.09899352658562383,
+  "verdict": "SAFE-CERTIFIED",
+  "N_final": 12000,
+  "h": 0.001,
+  "mesh": [
+   [
+    3000,
+    0.3516139569720303
+   ],
+   [
+    6000,
+    0.3514376286066043
+   ],
+   [
+    12000,
+    0.3513495355068319
+   ]
+  ]
+ }
+]
