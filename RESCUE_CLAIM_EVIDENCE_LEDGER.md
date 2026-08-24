@@ -38,18 +38,48 @@ rescue. It supersedes `CLAIM_EVIDENCE_LEDGER.md` (never created) and absorbs
 
 ---
 
+## Round-02 additions and revisions
+
+| # | Claim | Type | Proof / evidence | General or model-specific | Closest comparator | Status |
+|---|---|---|---|---|---|---|
+| 23 | **Theorem B.2** (endpoint-inclusive positive-SOE law): `ε_rel ≤ A(α)e^{−c(α)√m}`, `c(α)=π√(α(1−α))`, all weights positive, valid for every `T` | theorem | `THEOREM_B_ENDPOINT_COMPLEXITY_PROOF.md` §2 (10 steps; trapezoid-in-strip estimate cited from Trefethen–Weideman 2014); constant confirmed to **0.35 %** at `α=1/2` by C-1 | **general** | Jiang–Zhang (2017) `O(log(1/ε)log(T/Δt))` on `[δ,T]`; Chaudhary–Diethelm et al. (2025) on `[δ,T]` — **endpoint excluded in both** | **PROVED** |
+| 24 | `m(ε)=O(log²(1/ε))` for the endpoint-inclusive problem | corollary | Theorem B.2 (not from any fit) | general | — | **PROVED** |
+| 25 | **Proposition B.1** (kernel→response bridge): `‖C(ξ_F−ξ_m)‖_∞ ≤ C_res E_m^K U`, `C_res=‖C‖E_α(‖J‖T^α)(‖J‖Γ_T+‖B‖)` | theorem | `R2_OPERATOR_BRIDGE.md` §B2, via fractional Grönwall (Ye–Gao–Ding 2007); naive Neumann route shown to fail (`‖J‖‖K_α‖₁=4.95>1`) | general | — | **PROVED** |
+| 26 | The bridge constant is **large**: `C_res≈2352` at `α=0.85,T=12` ⇒ kernel proximity is a weak proxy for response indistinguishability | numerical | `R2_OPERATOR_BRIDGE.md` §B2 table (`E_α(‖J‖T^α)`: 294/550/771) | model-specific | — | **CERTIFIED_NUMERICALLY** |
+| 27 | Ecological error floors at `m=64,128` (`0.4742`, `0.4997`) | previously claimed | **withdrawn** — computed from `E_m^K` without a bridge; after bridging they are `0.0000`, `0.0482` | — | — | **REMOVE** (retracted) |
+| 28 | **Theorem D-NL** (one-sided nonlinear safety ceiling): full nonlinear trajectory stays above `A+δ` for `‖u‖_∞≤U_NL(δ)`, with the testing floor `Φ(−(√n/2σ)A_NL E_m^G U_NL)` | theorem | `THEOREM_D_NONLINEAR_LIFT.md` §C5; constants `M₂(r)∈[4.59,6.71]`, `Γ_B=5.7815`, `Γ_R=6.2225` | general chain; **reference-model only**, single channel | `SAFE26A` (LQ/regret) | **PROVED** (scope-limited) |
+| 29 | `U_NL(0.05)=1.6·10^{-3}` = **2.5 %** of the linear certificate; certifiable radius `0.035` vs ecological margin `0.367` ⇒ the nonlinear certificate is operationally vacuous | numerical | same, §C2; weighted-norm search over `w∈[0.1,2]` does not improve it | model-specific | — | **CERTIFIED_NUMERICALLY** |
+| 30 | **No inward-pointing rectangle exists** around the coexistence equilibrium of this field (predator faces carry no control and `e a x/(1+hx)−m` vanishes at `x*`, interior to any such rectangle) | theorem (negative) | `THEOREM_D_NONLINEAR_LIFT.md` §C3; exhaustive 24³ geometry search finds none at any `δ` | **general for this field class** | contradicts the applicability of `source_pack` `T17`/§4 | **PROVED** (negative) |
+| 31 | Robust (hierarchy-uniform) nonlinear safety | target | not proved; blocked by claim 30 | — | — | **CONJECTURAL** (declared open) |
+| 32 | Theorem C′ "tight to first order in `d`" | previously claimed | **withdrawn**: only the final Gaussian step is exact; Young and `‖·‖₂≤√n‖·‖_∞` slack is unquantified (up to `√n≈11` at `n=120`) | — | — | **REMOVE** (retracted) |
+| 33 | Manuscript defect: `sec14.tex`/`sec15.tex` are orphans; `sec14` makes 20 theorem references, states 0 theorems, and **14 of its labels do not exist** in the compiled paper | audit finding | `R2_MANDATORY_MANUSCRIPT_CORRECTIONS.md` item 8 | model-specific | — | **PROVED** (arithmetic) |
+| 34 | Manuscript status: the **Bayesian layer is absent** from the compiled paper, so the false Theorem 9.3 and the greedy-MI claim are **no longer present** | audit finding | `grep` over `sec1–sec11`: 4 theorems only (`T4,T9b,T20,T23`) | model-specific | — | **PROVED** (supersedes Round-01 urgency call) |
+
+### Revisions to Round-01 rows
+
+- **claim 5** → now reads: *over `m≤128`, stretched-exponential fits outperform a single algebraic fit
+  for the tested orders; the asymptotic class remains unresolved by C-1* (**EMPIRICAL**). The asymptotic
+  statement is carried by claim 24 instead (**PROVED**).
+- **claim 5c** (kernel-level floors) → valid **only** for the abstract convolution-kernel model; the
+  ecological reading is removed (see claim 27).
+- **claim 5b** (Lemma B.1) → unchanged, **PROVED**.
+- **claims 9/10** (linear safety ceiling and its constants) → unchanged and valid, but must now be
+  labelled **linear certificate**; the nonlinear counterpart is claim 28.
+
+---
+
 ## Summary counts
 
 | Status | Count | Claims |
 |---|---:|---|
-| `PROVED` | 8 | 1, 2, 3, 5b, 6, 7, 8, 9 |
-| `CERTIFIED_NUMERICALLY` | 5 | 5c, 10, 11, 15, 22 |
+| `PROVED` | 15 | 1, 2, 3, 5b, 6, 7, 8, 9, 23, 24, 25, 28, 30, 33, 34 |
+| `CERTIFIED_NUMERICALLY` | 7 | 5c, 10, 11, 15, 22, 26, 29 |
 | `EMPIRICAL` | 3 | 5, 13, 14 |
-| `CONJECTURAL` | 1 | 20 |
-| `REMOVE` | 6 | 4, 16, 17, 18, 19, 21 |
+| `CONJECTURAL` | 2 | 20, 31 |
+| `REMOVE` | 9 | 4, 16, 17, 18, 19, 21, 27, 32, + Round-01 tightness/floor language |
 | arithmetic finding | 1 | 12 |
 
-**Headline set proposed:** claims **9** (safety ceiling, general chain) + **6** (uniform obstruction
+**Headline set after Round 02:** Theorem B.2 (claim 23, proved, general) + Theorem C′ (claim 6) + the **linear** safety ceiling (claim 9) with the nonlinear one (claim 28) declared scope-limited. Theorem A′ (claim 1) supporting. *Round-01 headline set, superseded:* claims **9** (safety ceiling, general chain) + **6** (uniform obstruction
 with explicit constants) + **1** (structural separation, upgraded), with **11** and **15** as the
 certified/exact computational spine and **13/14** as the empirical layer.
 
