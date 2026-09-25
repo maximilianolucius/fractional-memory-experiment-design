@@ -38,23 +38,23 @@ $m$ & $\widehat E_m^{\rm state}$ & $P_e^*$ (exact) & $P_e^*$ (Pinsker) & $\wideh
 \end{tabular}
 \end{table}
 
-Because Table~\ref{tab:state-approx} stops at $m=32$ it shows only part of the obstruction. Table~\ref{tab:state-approx-large} continues it to $m=128$ using an explicit positive-weight exponential-sum surrogate constructed as in Lemma~\ref{lem:soe} rather than the interval-optimised class $\mathcal G_m$. Because that surrogate is one admissible element and not the infimum, its error exceeds $\widehat E_m^{\rm state}$ --- by factors $2.4$ at $m=4$ and $3.3$ at $m=32$ where the two overlap --- so the induced floors are valid and conservative. They reach $0.4996$ at $m=64$ and $0.49999$ at $m=128$: at attainable latent orders the finite-state rival is indistinguishable from the fractional model under this protocol, and no experiment restricted to the declared budget can separate them.
+Because Table~\ref{tab:state-approx} stops at $m=32$ it shows only part of the obstruction. Table~\ref{tab:state-approx-large} continues it to $m=128$ using an explicit positive-weight exponential-sum surrogate constructed as in Lemma~\ref{lem:soe} rather than the interval-optimised class $\mathcal G_m$. Because that surrogate is one admissible element and not the infimum, its error exceeds $\widehat E_m^{\rm state}$ --- by factors $2.4$ at $m=4$ and $3.3$ at $m=32$ where the two overlap --- so the induced floors are valid and conservative. Every entry is interval-certified (Section~\ref{subsec:state}). The certified floors exceed $0.4996$ at $m=64$ and $0.49998$ at $m=128$: at attainable latent orders the finite-state rival is indistinguishable from the fractional model under this protocol, and no experiment restricted to the declared budget can separate them.
 
 \begin{table}[htbp]
 \centering
-\caption{Prey-response $L^1$ error of an explicit positive-weight exponential-sum surrogate (not the certified infimum, hence an upper bound on $\widehat E_m^{\rm state}$) and the induced exact testing floor, $\alpha=0.85$, $A=0.25$, $T=12$, $\|u\|_2\le0.120$, $\sigma=0.10$.}
+\caption{Interval-certified prey-response $L^1$ error of an explicit positive-weight exponential-sum surrogate (one admissible element, hence an upper bound on $\widehat E_m^{\rm state}$) and the induced certified lower bound on the exact testing error, $\alpha=0.85$, $A=0.25$, $T=12$, $\|u\|_2\le0.120$, $\sigma=0.10$. All $m$ surrogate poles are certified by interval Newton; bounds are Arb upper (resp.\ lower) endpoints at 256-bit precision.}
 \label{tab:state-approx-large}
 \small
-\begin{tabular}{cccc}
+\begin{tabular}{ccc}
 \hline
-$m$ & $\|g_\alpha-g_m\|_{L^1(0,T)}$ & quadrature error & $P_e^*$ (exact)\\
+$m$ & certified $\|g_\alpha-g_m\|_{L^1(0,T)}\le$ & certified $P_e^*\ge$\\
 \hline
-4   & $1.29\cdot10^{0}$   & $2.1\cdot10^{-7}$ & 0.2202\\
-8   & $4.98\cdot10^{-1}$  & $1.0\cdot10^{-7}$ & 0.3827\\
-16  & $1.30\cdot10^{-1}$  & $7.6\cdot10^{-9}$ & 0.4689\\
-32  & $2.31\cdot10^{-2}$  & $3.0\cdot10^{-8}$ & 0.4945\\
-64  & $1.58\cdot10^{-3}$  & $2.1\cdot10^{-8}$ & 0.4996\\
-128 & $4.83\cdot10^{-5}$  & $6.3\cdot10^{-9}$ & 0.49999\\
+4   & $1.2861\cdot10^{0}$   & 0.2201\\
+8   & $4.9751\cdot10^{-1}$  & 0.3826\\
+16  & $1.3017\cdot10^{-1}$  & 0.4688\\
+32  & $2.3114\cdot10^{-2}$  & 0.4944\\
+64  & $1.5778\cdot10^{-3}$  & 0.49962\\
+128 & $4.8891\cdot10^{-5}$  & 0.499988\\
 \hline
 \end{tabular}
 \end{table}

@@ -1,0 +1,8 @@
+selfcheck: {'g_alpha_scalar_vs_matrix_maxabs': np.float64(2.6617597015388128e-14), 'g_m_scalar_vs_matrix_maxabs_m16': 1.887379141862766e-15}
+m=  4  roots=4  E_upper=1.286030822  (near0 6.49e-11, first 1.286030e+00, second 5.38e-07)  floor>=0.2201702092  [10.0s, 55297 intervals]
+m=  8  roots=8  E_upper=0.4975068184  (near0 6.40e-11, first 4.975063e-01, second 5.48e-07)  floor>=0.3826592272  [10.1s, 55297 intervals]
+m= 16  roots=16  E_upper=0.1301656873  (near0 6.42e-11, first 1.301651e-01, second 5.47e-07)  floor>=0.4688744873  [10.5s, 55297 intervals]
+m= 32  roots=32  E_upper=0.02311313301  (near0 6.53e-11, first 2.311258e-02, second 5.51e-07)  floor>=0.4944676937  [11.8s, 55297 intervals]
+m= 64  roots=64  E_upper=0.001577778946  (near0 6.62e-11, first 1.577227e-03, second 5.51e-07)  floor>=0.4996223344  [15.0s, 55297 intervals]
+m=128  roots=128  E_upper=4.889029734e-5  (near0 6.99e-11, first 4.833874e-05, second 5.51e-07)  floor>=0.4999882974  [30.7s, 55297 intervals]
+DONE
