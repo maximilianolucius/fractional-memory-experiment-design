@@ -42,7 +42,7 @@ undefined references / citations           0
 BibTeX warnings                            0
 placeholder text in the source             0
 AIMS branding in source or PDF metadata    0
-abstract                                   243 words   (CNSNS limit 250)
+abstract                                   244 words   (CNSNS limit 250)
 keywords                                   6           (CNSNS range 1-7)
 highlights                                 5 bullets, max 84 chars
 figures cited / supplied                   18 / 18

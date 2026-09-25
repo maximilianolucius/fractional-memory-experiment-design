@@ -35,8 +35,8 @@ held-out Allee threshold while the classical families, never optimised at all, l
 
 The second result survives the first and does not yield to input design. Computed directly at the
 prey-response level rather than inferred from the memory kernel, finite-state surrogates reach an
-`L¹` error of `5·10⁻⁵` at latent order 128, and the exact two-point minimax testing floor they induce
-reaches 0.49999 — uniformly over every admissible input, since the surrogate error is an operator
+`L¹` error interval-certified below `4.9·10⁻⁵` at latent order 128, and the exact two-point minimax
+testing floor they induce exceeds 0.49998 — uniformly over every admissible input, since the surrogate error is an operator
 norm. Identifying ecological memory is therefore limited by the declared rival-complexity budget
 rather than by the safety margin.
 
