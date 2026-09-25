@@ -9,6 +9,31 @@ matches the byline (§5).
 
 ---
 
+---
+
+## 0. The assembled package
+
+This file lists what to upload. **The files themselves are assembled and build-tested in
+`submission_cnsns/`**, plus `submission_cnsns/cnsns-submission-2026-08-24.zip` containing the same
+tree.
+
+```
+submission_cnsns/
+  manuscript/           main.tex, sections/sec1-sec11.tex, bibliography.bib
+  manuscript.pdf        44 pp, built from the source above
+  figures/              the 18 cited figures, one PDF each
+  highlights.txt        5 bullets, longest 84 chars
+  cover_letter.md       paste into the portal's cover-letter field
+  README_UPLOAD.md      Elsevier item type per file, portal-only fields, and the open item
+```
+
+Verified by copying `manuscript/` and `figures/` into an empty directory and compiling there:
+**exit 0, 0 LaTeX errors, 0 undefined references, 0 BibTeX warnings, 44 pages** — nothing in the
+package depends on the development tree.
+
+Deliberately excluded: `aims_math_style.sty`, `sections/sec14.tex` and `sec15.tex` (orphan supplement
+sources), `bibliography_unused.bib`, `backup_preR3/`, and `fig10_safety_tradeoff.pdf` (withdrawn).
+
 ## 1. Manuscript source (Elsevier item type: *Manuscript*)
 
 | file | purpose |

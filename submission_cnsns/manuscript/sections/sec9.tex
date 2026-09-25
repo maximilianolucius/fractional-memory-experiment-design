@@ -1,0 +1,33 @@
+\section{Prospective Experimental Interpretation}
+\label{sec:prospect}
+
+Laboratory predator--prey microcosms provide the controlled perturbation setting the simulations presume~\cite{E10,E11,E12}, and the numerical results translate into specific protocol constraints. A first experiment should operate in a stable strong-Allee regime ($A\le2/7$), apply a bounded prey perturbation ($\|u\|_\infty\le0.10$ in normalized units), observe both populations where instrumentation allows (accuracy $0.530$ versus $0.516$ prey-only; Table~\ref{tab:benchmark-stratified}), and postpone broadband excitation until a transient probe has established the available margin.
+
+The fractional-delay study adds one operational diagnostic. Delay moves the predator peak time (by up to $+0.73$ time units over $\tau\in[0,0.55]$; Table~\ref{tab:fd-delay-summary}); fractional order reshapes the long transient and phase. A scheme sampling densely around the predicted peak ($t\approx3.3$--$4.9$ on the tested grid) and recording through the relaxation tail resolves both signatures; uniform sparse sampling can miss both.
+
+A Bayesian sequential layer is specified in the Supplementary Material and deliberately not executed; the evidence in the main text is limited to deterministic solvers, interval enclosures, and BIC benchmarks, all rerunnable from the released scripts.
+
+\subsection*{A two-stage prospective protocol}
+The observed frontier (Tables~\ref{tab:benchmark-safety} and~\ref{tab:fd-design-ranking}) argues against applying the most informative perturbation first. Stage~1 uses a transient input with low observed crossing rate (pulse, $0.071$; multiscale, $0.000$) to estimate the local response scale and verify a comfortable margin above $A$. Stage~2 is conditional: multisine-type excitation (accuracy $0.583$, crossing rate $0.357$) is applied only if Stage~1 leaves adequate margin. No Bayes-optimality is claimed for this sequencing; it is a direct reading of the frontier, summarized in Table~\ref{tab:prospective-protocol}.
+
+\begin{table}[htbp]
+\centering
+\caption{Prospective microcosm workflow suggested by the simulation results.}
+\label{tab:prospective-protocol}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.10\textwidth}p{0.22\textwidth}p{0.27\textwidth}p{0.25\textwidth}}
+\hline
+\textbf{Stage} & \textbf{Perturbation} & \textbf{Primary measurements} & \textbf{Decision / purpose}\\
+\hline
+0 & no perturbation & baseline prey/predator variability & estimate noise and confirm operating point\\
+1 & pulse or multiscale & dense early prey observations; predator peak timing; minimum prey level & verify local response and available safety margin\\
+2 & multisine if margin permits & both species over the full transient and relaxation tail & maximize separation of memory mechanisms\\
+3 & optional repeat / altered horizon & same channels, replicated under matched conditions & test robustness of the selected mechanism and estimate variability\\
+\hline
+\end{tabular}
+\end{table}
+
+Three measurement priorities follow from the simulations. (i) The actuated prey channel carries the strongest early signal: sample densely immediately after the perturbation. (ii) The delayed pathway is expressed in predator-peak timing: concentrate observations near the anticipated peak rather than uniformly. (iii) Fractional memory dominates the slow relaxation tail: extend the horizon well past the peak. The resulting design is nonuniform --- dense around the forcing and the peak, sparser but longer through relaxation.
+
+On units: the simulations are dimensionless with a normalized budget. A physical implementation must map state and input to organism counts, biomass, or resource-manipulation units and must fix an operational margin above the \emph{empirical} Allee threshold. This calibration is application-specific and is not inferred from simulation here.

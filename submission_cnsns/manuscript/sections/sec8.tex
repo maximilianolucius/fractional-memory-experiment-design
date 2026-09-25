@@ -1,0 +1,133 @@
+\section{Large-Scale Model-Discrimination Benchmark}
+\label{sec:benchmark}
+
+The benchmark compares four candidate mechanisms at matched operating conditions: ODE, Caputo, retarded DDE, and a finite-latent surrogate of state dimension $m=3$. One point of bookkeeping matters for reading every class-wise number below. The candidate hypothesis set contains a single latent member, the $m=3$ surrogate, whereas the data-generating set contains latent generators of \emph{two} orders, $m=1$ and $m=3$. Trajectories from either generator are scored against the one latent hypothesis, so the column labelled \emph{finite-latent} throughout is a \textbf{pooled} class: its recall is measured over data generated at both latent orders, not at $m=3$ alone. The primary stable-regime task uses $A\in\{0.20,0.25\}$; a separate task at $A>2/7$ addresses the easier stability-verdict question. The decision rule is BIC throughout --- an information criterion, not Bayesian model evidence, and it is reported as such.
+
+\subsection{Benchmark design and decision rule}
+The benchmark is not organized around any single synthetic trajectory. It asks whether the qualitative design conclusions survive joint variation of memory strength ($\alpha$), observation noise (three SNR levels), observation channel (three), and waveform (six families). For each generated trajectory, all four candidates are fitted under one observation protocol and compared by BIC; the object under evaluation is a reproducible decision rule.
+
+Two factorial layers are kept separate. The nonlinear stable-regime benchmark has 1512 cells $\times$ 200 stochastic replicates (302{,}400 trajectories, zero solver divergences); a linear-Gaussian factorial of 1458 cells serves only as an information-ranking reference (Figure~\ref{fig:linear-ranking}). The layers can disagree: the linear ranking measures local operator separation, while the nonlinear layer sees the Allee geometry, and an input that tops the linear ranking is disqualified once its trajectories cross $x=A$ (Table~\ref{tab:benchmark-safety}).
+
+Macro-averaged accuracy in the primary four-class stable task is $0.537$ versus chance $0.25$. By input family:
+\[
+\begin{aligned}
+\text{PRBS }(0.584)&\approx\text{ multisine }(0.583)>\text{sinusoid }(0.534),\\
+&>\text{chirp }(0.507)>\text{pulse }(0.414)>\text{multiscale }(0.324).
+\end{aligned}
+\]
+Difficulty is dominated by two axes (Table~\ref{tab:benchmark-stratified}). As $\alpha\to1$ the mechanisms converge and accuracy falls from $0.702$ ($\alpha=0.70$) to $0.312$ ($\alpha=0.95$); across noise, accuracy is $0.756$/$0.444$/$0.273$ at high/medium/low SNR. The channel effect is smaller: both-species observation attains $0.530$, prey-only $0.516$ (the directly actuated channel remains structurally sufficient), predator-only $0.427$.
+
+\begin{table}[htbp]
+\centering
+\caption{Stable-regime four-class BIC accuracy stratified by fractional order, SNR, and observation channel.}
+\label{tab:benchmark-stratified}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llc@{\quad}llc}
+\hline
+\textbf{Axis} & \textbf{level} & \textbf{accuracy} & \textbf{Axis} & \textbf{level} & \textbf{accuracy}\\
+\hline
+$\alpha$ & 0.70 & 0.702 & SNR & high & 0.756\\
+          & 0.85 & 0.557 &     & medium & 0.444\\
+          & 0.90 & 0.467 &     & low & 0.273\\
+          & 0.95 & 0.312 & channel & prey & 0.516\\
+          &      &       &         & predator & 0.427\\
+          &      &       &         & both & 0.530\\
+\hline
+\end{tabular}
+\end{table}
+
+Class-wise statistics refine the picture (Figure~\ref{fig:confusion}). ODE: recall $0.972$, precision $0.227$ --- under weak excitation the subtler mechanisms are absorbed into the simplest class. Caputo: recall $0.524$, precision $0.984$ --- a Caputo verdict, once issued, is nearly always correct. DDE: $0.410/0.731$; finite-latent (pooled $m\in\{1,3\}$ generators, single $m=3$ hypothesis): $0.242/0.848$. The dominant failure mode is therefore conservative collapse toward the simpler explanation when the data underdetermine the memory law, not symmetric confusion among mechanisms.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.56\textwidth]{fig07_confusion}
+\caption{Row-normalized confusion matrix for the stable four-class task. Under weak excitation the simplest ODE mechanism absorbs the rest; Caputo predictions, when made, are highly precise. The finite-latent row pools data generated at latent orders $m=1$ and $m=3$, both scored against the single $m=3$ latent hypothesis.}
+\label{fig:confusion}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.58\textwidth]{fig08_accuracy_vs_alpha}
+\caption{Model-selection accuracy versus fractional order. The closer $\alpha$ gets to the integer-order limit, the harder the memory mechanisms are to tell apart.}
+\label{fig:acc-alpha}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.82\textwidth]{fig09_accuracy_snr_channel}
+\caption{Accuracy stratified by SNR and observation channel. The benchmark is strongly noise-limited; observing both species gives the best average accuracy.}
+\label{fig:acc-snr}
+\end{figure}
+
+\subsection{The trade-off within classical waveform families}
+Numerical state safety is reported on its own axis, never folded into the information score. At the common budget $\|u\|_\infty\le0.10$: multiscale never crosses the threshold (rate $0.000$) and discriminates worst ($0.324$); PRBS and sinusoid discriminate best ($0.584$, $0.534$) and cross at rates $1.000$; multisine matches PRBS in accuracy ($0.583$) at crossing rate $0.357$.
+
+Table~\ref{tab:benchmark-safety} gives the frontier \emph{within the six classical families of Section~\ref{sec:design}}. Section~\ref{subsec:safe-search} shows that this frontier is a property of that parameterisation and not of the system. Multiscale retains a positive minimum margin of $0.292$ at the lowest accuracy; the pulse is the practical compromise, crossing at rate $0.071$ with accuracy $0.414$ --- below the broadband designs by $0.17$.
+
+\begin{table}[htbp]
+\centering
+\caption{Nonlinear stable-benchmark trade-off at the common peak-amplitude budget. Safety values are numerical benchmark diagnostics, not invariant-set certificates.}
+\label{tab:benchmark-safety}
+\footnotesize
+\begin{tabular}{lccc}
+\hline
+\textbf{Input} & \shortstack{\textbf{macro}\\\textbf{accuracy}} & \shortstack{\textbf{Allee}\\\textbf{crossing rate}} & \shortstack{\textbf{minimum}\\\textbf{Allee margin}}\\
+\hline
+PRBS       & 0.584 & 1.000 & -0.3139\\
+multisine  & 0.583 & 0.357 & -0.2405\\
+sinusoid   & 0.534 & 1.000 & -0.3058\\
+chirp      & 0.507 & 0.929 & -0.3012\\
+pulse      & 0.414 & 0.071 & -0.1207\\
+multiscale & 0.324 & 0.000 &  0.2921\\
+\hline
+\end{tabular}
+\end{table}
+
+The table also fixes a methodological point: the linear-Gaussian ranking alone cannot select the final experiment. Linear theory scores an input by operator separation; the nonlinear ecology can answer the same input by leaving the coexistence basin, after which no local identification experiment remains. Safety must be evaluated on the nonlinear state trajectory, not extrapolated from the linear information score.
+
+\subsection{Amplitude is the wrong knob}
+\label{subsec:amplitude}
+Before accepting the frontier of Table~\ref{tab:benchmark-safety} one must ask whether it is simply a symptom of excessive excitation. It is not. Repeating the entire benchmark at peak amplitudes $0.050$ and $0.063$ alongside the reference $0.100$ ($2268$ cells in total, zero divergences) leaves the ordering of designs unchanged and does not restore safety: PRBS remains the most informative design at every amplitude while still crossing the threshold in $71.4\%$ of cells at half amplitude ($92.9\%$ at $0.063$, $100\%$ at $0.100$). Macro-accuracy falls monotonically with amplitude ($0.457$, $0.471$, $0.537$), so the low-amplitude runs are reported as linear-certificate diagnostics, not as a safe benchmark.
+
+The realised response gain $\max_t|z(t)-z^*|/\|u\|_\infty$ makes the mechanism explicit. For the crossing designs this gain \emph{increases} as the amplitude decreases, reaching $28.07$ at amplitude $0.050$ against the linear certificate $\Gamma_T=5.78$, a violation by a factor of $4.86$; for the two designs that never cross it stays between $1.47$ and $2.06$ and is essentially amplitude-independent, as a linear response must be. Once a trajectory leaves the Allee basin, $\max_t|z-z^*|$ is set by the basin geometry rather than by the input, so the ratio scales like $1/\|u\|_\infty$. The linear certificate therefore cannot be used to justify safety for any crossing design at any of the three amplitudes, and shrinking the input does not convert an unsafe design into a safe one.
+
+\subsection{Waveform search: the frontier is a parameterisation artifact}
+\label{subsec:safe-search}
+If amplitude is not the knob, the waveform shape may be. We therefore searched for inputs that are safe \emph{and} informative outside the six classical families, at the same peak-amplitude budget $\|u\|_\infty\le0.100$ and under the hard constraint that the minimum Allee margin over all four candidate models be at least $\delta=0.05$. The search covers piecewise-constant inputs with $4$, $6$ and $8$ levels, free multisines with $3$--$6$ harmonics, and pulse trains with $2$--$4$ pulses, scored by the minimax pairwise separation $J(u)=\min_{a\neq b}\|\mu_a(u)-\mu_b(u)\|/\sigma$ over the four classes; $163\,840$ candidates were evaluated by Sobol sampling with Nelder--Mead refinement of the per-family best, and $87\,601$ of them ($53.5\%$) satisfy the safety constraint. Re-scored under the same objective, exactly one of the six classical designs is safe at this amplitude (multiscale, $J=1.45$) and it is the least informative of the six; the best safe candidate found reaches $J=6.23$, a factor of $4.3$ higher, and every one of the twelve best safe candidates is piecewise constant --- a class the six families do not contain.
+
+Validating the six leading candidates with the same BIC classifier, the same $56$-cell grid and the same replicate seeds as Table~\ref{tab:benchmark-safety} confirms the surrogate (Table~\ref{tab:safe-search}). All six are safe, with zero observed crossings and verified margins between $+0.067$ and $+0.176$, and five of the six outrank the best classical design of \emph{any} kind, safe or not. The leading design attains macro-accuracy $0.803$ against $0.514$ for the only safe classical design and $0.763$ for multisine, which crosses in $35.7\%$ of cells. The gain is concentrated exactly where the safe classical design fails: Caputo recall rises from $0.404$ to $0.911$ and DDE recall from $0.445$ to $0.853$.
+
+\begin{table}[htbp]
+\centering
+\caption{Waveform search validated with the benchmark classifier at $\|u\|_\infty\le0.100$: $56$ cells $\times$ $100$ replicates per design, identical seeds, no divergences. \textsc{pwc}$k$ denotes a $k$-level piecewise-constant input on equal sub-intervals. The finite-latent column pools generators of order $m=1$ and $m=3$ against the single $m=3$ hypothesis, as in Table~\ref{tab:benchmark-stratified}.}
+\label{tab:safe-search}
+\small
+\begin{tabular}{lccccccc}
+\hline
+design & family & macro & micro & crossing rate & min.\ margin & Caputo & DDE\\
+\hline
+S0 & \textsc{pwc}6 & \textbf{0.803} & 0.787 & 0.000 & $+0.092$ & 0.911 & 0.853\\
+S3 & \textsc{pwc}6 & 0.783 & 0.753 & 0.000 & $+0.122$ & 0.910 & 0.927\\
+S2 & \textsc{pwc}6 & 0.783 & 0.765 & 0.000 & $+0.096$ & 0.875 & 0.816\\
+S1 & \textsc{pwc}6 & 0.780 & 0.744 & 0.000 & $+0.109$ & 0.838 & 0.897\\
+S5 & \textsc{pwc}8 & 0.769 & 0.727 & 0.000 & $+0.176$ & 0.844 & 0.926\\
+multisine & classical & 0.763 & 0.725 & 0.357 & $-0.240$ & 0.844 & 0.902\\
+S4 & \textsc{pwc}6 & 0.750 & 0.720 & 0.000 & $+0.067$ & 0.766 & 0.743\\
+prbs & classical & 0.711 & 0.713 & 1.000 & $-0.314$ & 0.802 & 0.521\\
+sinusoid & classical & 0.685 & 0.687 & 1.000 & $-0.306$ & 0.844 & 0.549\\
+chirp & classical & 0.683 & 0.684 & 0.929 & $-0.301$ & 0.832 & 0.547\\
+pulse & classical & 0.621 & 0.552 & 0.071 & $-0.121$ & 0.528 & 0.647\\
+multiscale & classical & 0.514 & 0.444 & 0.000 & $+0.292$ & 0.404 & 0.445\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{fig24_safe_design_frontier}
+\caption{The safety--informativeness plane at the common peak-amplitude budget $\|u\|_\infty\le0.100$. (a) Each point is one design: minimum Allee margin over the four candidate mechanisms against four-class BIC macro-accuracy ($56$ cells $\times$ $100$ replicates, identical seeds). Circles are the six classical waveform families, filled where no crossing occurs; squares are the leading designs returned by the constrained search over piecewise-constant, free-multisine and pulse-train inputs. Of the twelve designs, only multiscale and the searched \textsc{pwc}6 design are safe under \emph{all four} mechanisms. The searched designs occupy a region of the plane that the classical families do not reach. (b) Per-class recall of the safe classical design against the leading searched design; the gain is concentrated on the Caputo and delayed mechanisms, which the safe classical design barely distinguishes from chance. The search establishes \emph{existence} of such designs --- Sobol sampling with local refinement over the stated families, at a single amplitude and a single $\alpha$ --- and is not a certified global optimum.}
+\label{fig:safe-frontier}
+\end{figure}
+
+Safety status of these trajectories is stated exactly. Each is verified a posteriori: the solver output is refined until the minimum prey value stabilises, and the gap between mesh nodes is closed by a rigorous modulus-of-continuity bound derived from the Caputo mild solution, so no crossing can hide between samples. For the two headline designs under the integer-order and finite-latent mechanisms --- four trajectories in total --- a stronger statement holds: a validated enclosure built from a piecewise-cubic reference, an interval-bounded defect and a one-sided Gronwall estimate gives self-consistent error bounds of $4.6\cdot10^{-3}$ and $4.2\cdot10^{-2}$, hence rigorous lower bounds of $0.441$ and $0.309$ on the prey minimum against the threshold $A=0.25$. The delayed and Caputo mechanisms are verified but not enclosed: the delayed defect stalls at first order because input discontinuities re-enter through the retarded argument, and the fractional defect is limited by the solver's own order. The word \emph{rigorous} is used below only for the four enclosed trajectories.
+
+A design found by search on one operating point could simply be overfitted to it. The validation grid answers this without extra computation, because the search was run at $A=0.25$ only while the grid also contains $A=0.20$, which is therefore fully held out. Splitting the $672$ validation cells accordingly, the searched designs lose on average $0.060$ macro-accuracy moving to the held-out threshold, while the six classical families --- which were never optimised at all --- lose on average $0.087$. The best searched design still leads the best classical design on held-out cells ($0.907$ against $0.837$), and its advantage over the safe classical design is larger out of sample ($+0.486$) than in sample ($+0.255$), because multiscale itself degrades sharply at the lower threshold. There is thus no evidence that the search advantage is an artifact of selecting and evaluating at the same operating point.
+
+Two qualifications are required. The search establishes \emph{existence} of safe designs above the classical frontier, not global optimality: it is a Sobol-plus-local-refinement search, and no certified global bound over the piecewise-constant class is claimed. And the constraint is active --- the refined optimum sits at the declared margin $\delta=0.05$, while multiscale sits at $0.292$ --- so a stricter margin buys a lower objective and the trade-off is relocated rather than abolished. What does not survive is the reading of Table~\ref{tab:benchmark-safety} as a property of the ecology: the accessible frontier lies well above it. The residual obstruction is the latent one, on the independent grounds of Section~\ref{subsec:state}; the leading design's $0.475$ recall against the finite-latent rival is consistent with that obstruction, but since BIC penalises the higher-dimensional model it cannot be read as evidence for it.
