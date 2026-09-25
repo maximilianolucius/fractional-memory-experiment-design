@@ -1,0 +1,5 @@
+Safe-informative trade-off in classical waveforms is a parameterisation artifact
+Searched piecewise-constant designs: 0.803 accuracy, no Allee crossings, same budget
+Halving input amplitude does not buy safety: 71% crossings, gain 4.9x over bound
+Latent complexity, not safety, is the binding limit: testing floor 0.49999 at m=128
+Frozen four-class benchmark reproduces to four decimals on an independent host

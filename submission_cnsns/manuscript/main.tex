@@ -1,0 +1,78 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage[hidelinks]{hyperref}
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\journal{Communications in Nonlinear Science and Numerical Simulation}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Safe discrimination of fractional, delayed, and latent memory beyond classical waveforms in a strong-Allee predator--prey model}
+
+\author[iu]{Ibrahim Alraddadi\corref{cor1}}
+\ead{ialraddadi@iu.edu.sa}
+\ead[url]{https://orcid.org/0000-0002-0094-7937}
+\cortext[cor1]{Corresponding author.}
+\address[iu]{Department of Mathematics, Faculty of Science, Islamic University of Madinah, Madinah 42351, Saudi Arabia}
+
+\begin{abstract}
+Fitting a fractional order $\alpha$ does not identify a fractional mechanism: on a finite horizon, delayed feedback or a few hidden states reproduce similar trajectories. We ask when a controlled experiment can separate these mechanisms in a strong-Allee predator--prey system while keeping the prey above its Allee threshold. Among six classical excitation families the accuracy-leading designs all cross the threshold and the only safe one is the least informative, which suggests an intrinsic safety--informativeness frontier. We show that frontier belongs to the waveform parameterisation, not to the system. Reducing amplitude does not restore safety --- the leading design still crosses in $71\%$ of cells at half amplitude --- whereas a constrained search over $163\,840$ candidate waveforms, at the same peak-amplitude budget and under a hard margin constraint, returns piecewise-constant designs with four-class model-selection accuracy $0.803$ and no observed crossings, against $0.514$ for the only safe classical family and $0.763$ for the best classical design of any kind, which crosses in $36\%$ of cells. Their safety is verified a posteriori by mesh refinement with a rigorous inter-node modulus, and for half of the headline trajectories by a validated enclosure. A Pareto cost nevertheless remains, so safety is not free. A second obstruction survives waveform search: computed at the prey-response level, the finite-state approximation error falls to $5\cdot10^{-5}$ at latent order $128$ and the induced exact minimax testing floor reaches $0.49999$. Identifying ecological memory is limited by the declared rival-complexity budget rather than by the safety margin.
+\end{abstract}
+
+\begin{keyword}
+fractional-order dynamics \sep time-delay systems \sep model discrimination \sep experimental design \sep Allee effect \sep predator--prey dynamics
+\MSC[2020] 34A08 \sep 34K20 \sep 62K05 \sep 92D25
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/sec1.tex}
+\input{sections/sec2.tex}
+\input{sections/sec3.tex}
+\input{sections/sec4.tex}
+\input{sections/sec5.tex}
+\input{sections/sec6.tex}
+\input{sections/sec7.tex}
+\input{sections/sec8.tex}
+\input{sections/sec9.tex}
+\input{sections/sec10.tex}
+\input{sections/sec11.tex}
+
+\section*{CRediT authorship contribution statement}
+\textbf{Ibrahim Alraddadi:} Conceptualization, Methodology, Formal analysis, Software, Investigation, Validation, Data curation, Visualization, Writing -- original draft, Writing -- review \& editing.
+
+\section*{Use of AI tools declaration}
+AI-assisted tools were used during manuscript preparation for language editing, LaTeX formatting, code and documentation assistance, and structural organization. Responsibility for the scientific content and the final submitted version remains with the author.
+
+\section*{Funding}
+This research received no external funding.
+
+\section*{Preprint disclosure}
+An earlier version of this work was posted as a preprint under the title \emph{Safe Active Discrimination of Fractional, Delayed, and Finite Latent Memory in a Strong-Allee Predator--Prey Model}~\cite{PREPRINT01}. The present manuscript is a substantially different paper rather than a revision. Its central claim is the opposite of the preprint's: the preprint concluded that safe identification of ecological memory is constrained by an intrinsic safety--informativeness trade-off, whereas the constrained waveform search reported here (Section~\ref{subsec:safe-search}) falsifies that conclusion by exhibiting safe designs that outperform every classical baseline at the same amplitude budget. The finite-horizon approximation result presented as a contribution in the preprint is demoted here to a supporting lemma and attributed to prior work~\cite{K07}, the response-level analysis and the validated safety verification are new, and the title, abstract and contribution list have been rewritten accordingly.
+
+\section*{Declaration of competing interest}
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+The code and research data supporting the findings of this study are openly available in Zenodo at \url{https://doi.org/10.5281/zenodo.22087770}.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{bibliography}
+
+\end{document}
