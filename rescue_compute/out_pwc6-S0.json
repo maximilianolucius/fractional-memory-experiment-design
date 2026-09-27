@@ -1,0 +1,242 @@
+{
+ "meta": {
+  "r": 1.0,
+  "K": 150.0,
+  "A": 37.5,
+  "a": 100.0,
+  "h": 0.16666666666666666,
+  "e": 0.0022083333333333334,
+  "mu": 1.25,
+  "x_star": 100.0,
+  "y_star": 0.09814814814814814,
+  "trJ": 0.30188679245283045,
+  "detJ": 0.03930817610062895,
+  "alpha_star": 0.44909393069186854,
+  "alpha": 0.4,
+  "tau": 0.35,
+  "T": 12.0,
+  "N": 400,
+  "amp": 8.0,
+  "snr_db": {
+   "hi": 20.0,
+   "med": 10.0
+  },
+  "tsamp": [
+   0.5,
+   1.0,
+   1.5,
+   2.0,
+   2.5,
+   3.0,
+   3.5,
+   4.0,
+   4.5,
+   5.0,
+   5.5,
+   6.0,
+   6.5,
+   7.0,
+   7.5,
+   8.0,
+   8.5,
+   9.0,
+   9.5,
+   10.0,
+   10.5,
+   11.0,
+   11.5,
+   12.0
+  ]
+ },
+ "designs": {
+  "pwc6-S0": {
+   "design": "pwc6-S0",
+   "cells": [
+    {
+     "true": "ODE",
+     "snr": "hi",
+     "ch": "prey",
+     "conf": {
+      "ODE": 92,
+      "Caputo": 5,
+      "DDE": 0,
+      "latent3": 3
+     }
+    },
+    {
+     "true": "ODE",
+     "snr": "hi",
+     "ch": "both",
+     "conf": {
+      "ODE": 97,
+      "Caputo": 1,
+      "DDE": 0,
+      "latent3": 2
+     }
+    },
+    {
+     "true": "ODE",
+     "snr": "med",
+     "ch": "prey",
+     "conf": {
+      "ODE": 87,
+      "Caputo": 10,
+      "DDE": 0,
+      "latent3": 3
+     }
+    },
+    {
+     "true": "ODE",
+     "snr": "med",
+     "ch": "both",
+     "conf": {
+      "ODE": 96,
+      "Caputo": 1,
+      "DDE": 0,
+      "latent3": 3
+     }
+    },
+    {
+     "true": "Caputo",
+     "snr": "hi",
+     "ch": "prey",
+     "conf": {
+      "ODE": 0,
+      "Caputo": 100,
+      "DDE": 0,
+      "latent3": 0
+     }
+    },
+    {
+     "true": "Caputo",
+     "snr": "hi",
+     "ch": "both",
+     "conf": {
+      "ODE": 0,
+      "Caputo": 100,
+      "DDE": 0,
+      "latent3": 0
+     }
+    },
+    {
+     "true": "Caputo",
+     "snr": "med",
+     "ch": "prey",
+     "conf": {
+      "ODE": 26,
+      "Caputo": 70,
+      "DDE": 0,
+      "latent3": 4
+     }
+    },
+    {
+     "true": "Caputo",
+     "snr": "med",
+     "ch": "both",
+     "conf": {
+      "ODE": 2,
+      "Caputo": 98,
+      "DDE": 0,
+      "latent3": 0
+     }
+    },
+    {
+     "true": "DDE",
+     "snr": "hi",
+     "ch": "prey",
+     "conf": {
+      "ODE": 86,
+      "Caputo": 5,
+      "DDE": 1,
+      "latent3": 8
+     }
+    },
+    {
+     "true": "DDE",
+     "snr": "hi",
+     "ch": "both",
+     "conf": {
+      "ODE": 93,
+      "Caputo": 2,
+      "DDE": 0,
+      "latent3": 5
+     }
+    },
+    {
+     "true": "DDE",
+     "snr": "med",
+     "ch": "prey",
+     "conf": {
+      "ODE": 96,
+      "Caputo": 3,
+      "DDE": 0,
+      "latent3": 1
+     }
+    },
+    {
+     "true": "DDE",
+     "snr": "med",
+     "ch": "both",
+     "conf": {
+      "ODE": 91,
+      "Caputo": 8,
+      "DDE": 0,
+      "latent3": 1
+     }
+    },
+    {
+     "true": "latent3",
+     "snr": "hi",
+     "ch": "prey",
+     "conf": {
+      "ODE": 37,
+      "Caputo": 0,
+      "DDE": 0,
+      "latent3": 63
+     }
+    },
+    {
+     "true": "latent3",
+     "snr": "hi",
+     "ch": "both",
+     "conf": {
+      "ODE": 12,
+      "Caputo": 0,
+      "DDE": 0,
+      "latent3": 88
+     }
+    },
+    {
+     "true": "latent3",
+     "snr": "med",
+     "ch": "prey",
+     "conf": {
+      "ODE": 85,
+      "Caputo": 3,
+      "DDE": 0,
+      "latent3": 12
+     }
+    },
+    {
+     "true": "latent3",
+     "snr": "med",
+     "ch": "both",
+     "conf": {
+      "ODE": 83,
+      "Caputo": 2,
+      "DDE": 0,
+      "latent3": 15
+     }
+    }
+   ],
+   "recall": {
+    "ODE": 0.93,
+    "Caputo": 0.92,
+    "DDE": 0.0025,
+    "latent3": 0.445
+   },
+   "macro": 0.574375,
+   "min_margin": 16.503783647670858
+  }
+ }
+}

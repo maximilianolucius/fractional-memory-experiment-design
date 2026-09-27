@@ -17,6 +17,8 @@
 | CERT-SAFETY4 | | | | | ✔ 4 named trajectories | |
 | CERT-M2 / U_NL | | | | | ✔ (cond. on Γ_B,Γ_R numeric) | |
 | pooled-latent recall remark | | | | ✔ | | ✔ |
+| CERT-CASE-FLOOR | | | | | ✔ vole-weasel cell, m≤128 | |
+| EMP-CASE (inversion, transfer, delay unobservability) | | | | ✔ anchored cell, scenario mechanisms | | ✔ |
 
 Promotion guard: nothing in row "benchmark only" appears in the abstract without its
 qualifier; the abstract's only unconditional claims are THM-FLOOR + CERT rows and the

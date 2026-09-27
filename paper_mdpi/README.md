@@ -8,7 +8,7 @@ Build (no shell-escape, no bibtex needed — manual thebibliography):
 
     pdflatex mathematics-fmed.tex && pdflatex mathematics-fmed.tex
 
-State: 17 pages (ceiling 25), 10 figure environments / 15 panels, 2 tables,
+State: 20 pages (ceiling 25), 12 figure environments / 19 panels, 2 tables,
 0 errors, 0 undefined references, 0 overfull boxes, 0 AI references.
 
 Companion artifacts required by the directives: `../research/CLAIMS.md`,
