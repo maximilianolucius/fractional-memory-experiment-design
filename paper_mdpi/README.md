@@ -22,8 +22,11 @@ Companion artifacts required by the directives: `../research/CLAIMS.md`,
 2. **Preprint disclosure moved out of the body.** The Zenodo preprint
    (10.5281/zenodo.21809908) is not cited in this version; disclose it in the MDPI
    submission form / cover letter. The record's creator republish is still pending.
-3. **Companion cited as Alraddadi & Alharthi, Mathematics 2026, in press** — per the
-   accepted reference paper. Fill the DOI when it is assigned.
+3. **Companion NOT cited** (directive: no unpublished references; it is accepted but has
+   no DOI yet). Backbone attributed to Wang–Shi–Wei (J. Math. Biol. 2011); stability facts
+   re-derived from the exact invariants. Re-cite the companion once its DOI exists.
+   Two arXiv references replaced by published sources (Sui et al. ICML 2015; Harirchi & Ozay
+   Automatica 2018).
 4. **Data availability statement removed on operator instruction (2026-09-27).**
    The manuscript carries no data statement; if MDPI requires one at submission,
    supply it in the submission form or reinstate the paragraph.
