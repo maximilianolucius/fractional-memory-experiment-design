@@ -90,3 +90,21 @@ OPEN-2: certified global optimum over the PWC class
 OPEN-3: enclosures for delayed/Caputo headline trajectories
 OPEN-4: penalty-free decision layer separating floor from BIC dimension preference
 ```
+
+CLAIM: CERT-CASE-FLOOR
+statement: at the vole-weasel cell (T=16/53, D=25/636, alpha=2/5, rho=(96+-2i sqrt(1671))/25):
+           certified E <= 1.2609 / 0.2151 / 0.04535 / 5.821e-3 / 1.809e-4 / 3.141e-6 at m=4..128,
+           certified floors 0.2247 .. 0.4999992; all surrogate poles Re<0 at every m
+           (positive SOE surrogate inherits stability in the fractional-stabilization regime)
+status: CERTIFIED (rescue_compute/r6b_case_floor.py + .json; near-zero bound needed t0=2^-64
+        because a near-double root pair has huge individual residues that cancel pointwise)
+machine_audit: r6b_case_floor.json
+
+CLAIM: EMP-CASE
+statement: case cell is fractional-stabilization (alpha*=0.4491, ODE unstable); safety ranking
+           INVERTS (multiscale margins -38..-39 under non-Caputo laws, prbs +54.9); transferred
+           S0 safe under all four laws (+16.5) and best among all-law-safe designs (macro 0.574
+           vs multiscale 0.627 which crosses); delayed recall <= 0.01 for every design
+           (Holling saturation x*/(D0+x*)=0.943 -> delay channel unobservable)
+status: CORROBORATION (rescue_compute/case_study_vole.py, out_*.json, 100 reps, crc32 seeds)
+scope: anchored (Turchin-Hanski parameters), NOT calibrated; r-net, A, alpha, tau, latent = scenario

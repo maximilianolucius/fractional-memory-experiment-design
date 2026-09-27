@@ -68,12 +68,21 @@ action.**
 **C4. "Pooled latent class."** Documented in Proposition 1(v), the confusion-figure caption,
 and the benchmark text; raw files keep per-generator labels so the pooling is reversible.
 
+**B5. "The whole paper is one rational benchmark."** Now answered twice: the held-out control
+within the benchmark, and Section 7's empirically anchored vole--weasel cell, where the exact
+invariants (16/53, 25/636), the certified floor, the safety-inversion experiment, and the
+transferred design all re-run at a literature-anchored operating point. Scenario elements
+(net r, Allee threshold, memory mechanisms) are declared in-text and in Proposition 1(vi).
+
+**C5. "Case-study seeds."** Deterministic: base seed + crc32 of the (design, law, SNR, channel)
+tuple; the earlier python-hash seeding was caught and replaced before the production run.
+
 ## Directive-compliance checks (§28, §30)
 
-- pages: 17 ≤ 25 ✔ (buffer 8 pp)
+- pages: 20 ≤ 25 ✔ (buffer 5 pp)
 - AI/LLM/drafting references in manuscript: `grep -ci "artificial intelligence\|language model\|AI-assisted\|GPT\|LLM"` = 0 ✔
 - supplementary material: none; all load-bearing content in main text ✔
-- figures: 10 environments / 15 panels, all vector, all discussed, captions state
+- figures: 12 environments / 19 panels, all vector, all discussed, captions state
   analytic vs certified vs corroboration ✔
 - title foregrounds strongest theorem ✔; abstract states the general result before the
   benchmark numbers ✔; abstract/conclusion sentences all trace to CLAIMS.md ✔
