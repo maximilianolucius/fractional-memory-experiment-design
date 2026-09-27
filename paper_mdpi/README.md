@@ -24,6 +24,6 @@ Companion artifacts required by the directives: `../research/CLAIMS.md`,
    submission form / cover letter. The record's creator republish is still pending.
 3. **Companion cited as Alraddadi & Alharthi, Mathematics 2026, in press** — per the
    accepted reference paper. Fill the DOI when it is assigned.
-4. **Data statement cites the existing deposit** (10.5281/zenodo.22087770), which
-   predates the m=64/128 certificate script; publish a new deposit version before
-   submitting so the citation covers Table 1.
+4. **Data availability statement removed on operator instruction (2026-09-27).**
+   The manuscript carries no data statement; if MDPI requires one at submission,
+   supply it in the submission form or reinstate the paragraph.
