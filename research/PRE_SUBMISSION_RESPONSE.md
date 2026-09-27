@@ -36,10 +36,12 @@ parts certified. The double-precision seeding failure at m = 32 is reported, not
 McLean, Beylkin–Monzón, Jiang et al., Trefethen–Weideman, Stahl, and claims only the
 endpoint-inclusive L¹(0,T) form with exact horizon scaling.
 
-**B2. "Isn't this the companion paper again?"** The companion certifies stability regimes of
-one Caputo model; this paper asks whether that model can be *distinguished* from delayed and
-latent rivals under safety. Provenance is a single neutral paragraph; nothing is re-certified;
-only the integer and Caputo laws even share the Jacobian.
+**B2. "Isn't this the companion paper again?"** The companion study (accepted, no DOI yet) is
+**not cited**, per the directive forbidding unpublished references. The backbone is attributed to
+the published strong-Allee/Holling-II literature (Wang–Shi–Wei 2011), its stability facts are
+re-derived in-text from the exact invariants via Matignon's criterion, and the question posed —
+distinguishability under safety — is disjoint from stability certification. Re-cite the companion
+only once its DOI is assigned.
 
 **B3. "The benchmark is one parameter point."** Stated: locked rationals are an instance, not
 a calibration (Discussion), the search is existence-only at one amplitude and one α
@@ -80,6 +82,11 @@ tuple; the earlier python-hash seeding was caught and replaced before the produc
 ## Directive-compliance checks (§28, §30)
 
 - pages: 20 ≤ 25 ✔ (buffer 5 pp)
+- unpublished references (arXiv / preprint / in press / submitted / personal comm.): **0** in the
+  bibliography — two arXiv items replaced by Sui et al. (ICML 2015, PMLR 37) and Harirchi & Ozay
+  (Automatica 2018, DOI 10.1016/j.automatica.2018.03.040); the accepted-but-DOI-less companion
+  removed and replaced by Wang–Shi–Wei (J. Math. Biol. 2011, DOI 10.1007/s00285-010-0332-1);
+  all metadata verified against publisher/PMLR pages ✔
 - AI/LLM/drafting references in manuscript: `grep -ci "artificial intelligence\|language model\|AI-assisted\|GPT\|LLM"` = 0 ✔
 - supplementary material: none; all load-bearing content in main text ✔
 - figures: 12 environments / 19 panels, all vector, all discussed, captions state
